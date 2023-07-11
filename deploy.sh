@@ -1,5 +1,5 @@
 #!/bin/bash
-ssh ssh commlabs-do-shared-server <<EOF
+ssh commlabs-do-shared-server <<EOF
  sudo su -
  cd /Code/corplabs-frontend
  git pull
