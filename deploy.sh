@@ -1,7 +1,7 @@
 #!/bin/bash
-ssh dayrlism@206.189.150.29 <<EOF
+ssh ssh commlabs-do-shared-server <<EOF
  sudo su -
- cd /Code/im90s-frontend
+ cd /Code/corplabs-frontend
  git pull
  exit
 EOF

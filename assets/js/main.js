@@ -52,7 +52,7 @@ function renderHeaderDetails(headerType) {
     } ${headerType.isOverlay ? "data-overlay" : ""}>
             <div class="container">
                 <a class="navbar-brand navbar-brand-dynamic-color fade-page" href="index.html">
-                    <img alt="Commlabs" data-inject-svg src="assets/img/logos/im90s.svg">
+                    <img alt="Corplabs" data-inject-svg src="assets/img/logos/im90s.svg">
                 </a>
                 <div class="d-flex align-items-center order-lg-3">
                 <!-- <a href="#" class="btn btn-primary ml-lg-4 mr-3 mr-md-4 mr-lg-0 d-none d-sm-block order-lg-3">SIGN IN</a> -->
@@ -228,7 +228,7 @@ function renderFooter() {
 
                 <div class="col-auto">
                 <div class="d-flex flex-column flex-sm-row align-items-center text-small">
-                    <div class="text-muted">&copy; 2020 Page protected by reCAPTCHA and subject to Google's <a
+                    <div class="text-muted">&copy; 2023 Page protected by reCAPTCHA and subject to Google's <a
                         href="https://www.google.com/policies/privacy/" target="_blank">Privacy Policy</a> and <a
                         href="https://policies.google.com/terms" target="_blank">Terms of Service</a>
                     </div>
