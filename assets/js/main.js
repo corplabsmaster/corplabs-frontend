@@ -253,18 +253,18 @@ function renderFooter() {
                         <div class="fb-like" data-href="https://facebook.com/im90s.org" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="false"></div>
                     </li>
                     <li class="mx-3">
-                    <a href="https://www.facebook.com/im90s.org" class="hover-fade-out">
+                    <a href="https://www.facebook.com/corplabs.co/" class="hover-fade-out">
                         <img src="assets/img/icons/social/facebook.svg" alt="Facebook" class="icon icon-xs bg-white"
                         data-inject-svg>
                     </a>
                     </li>
                     <li class="mx-3">
-                    <a href="https://www.instagram.com/im90s_org/" class="hover-fade-out">
+                    <a href="https://www.instagram.com/corplabs_co/" class="hover-fade-out">
                         <img src="assets/img/icons/social/ig.svg" alt="Instagram" class="icon icon-xs bg-white" data-inject-svg>
                     </a>
                     </li>
                     <li class="mx-3">
-                    <a href="linkedin.com/company/im90s" class="hover-fade-out">
+                    <a href="linkedin.com/company/corplabsco" class="hover-fade-out">
                         <img src="assets/img/icons/social/linkedin.svg" alt="Linkedin" class="icon icon-xs bg-white"
                         data-inject-svg>
                     </a>
