@@ -264,7 +264,7 @@ function renderFooter() {
                     </a>
                     </li>
                     <li class="mx-3">
-                    <a href="linkedin.com/company/corplabsco" class="hover-fade-out">
+                    <a href="https://linkedin.com/company/corplabsco" class="hover-fade-out">
                         <img src="assets/img/icons/social/linkedin.svg" alt="Linkedin" class="icon icon-xs bg-white"
                         data-inject-svg>
                     </a>
