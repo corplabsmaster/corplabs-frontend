@@ -1,14 +1,10 @@
 import React from "react";
-import { Dropdown, Menu } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import { DrowIcon } from "@components/common/drowIcon";
 import { Link } from "gatsby";
-import logo from "@images/logo.png";
-import langIcon from "@images/lang.png";
+import logo from "@images/logos/logo.png";
 import useBreakpoints from "@helpers/hooks/breakPoints";
 import {
   headerGameMenu,
-  headerTourMenu,
   headerPagesMenu,
   headerLangMenu,
   headerHomeMenu,
@@ -78,28 +74,28 @@ const Header: React.FC<HeaderProps> = props => {
                 <DrowIcon />
               </div> */}
                 <Link
-                  to="/cricket-betting"
+                  to="/page1"
                   className="mr-10 cursor-pointer hover:text-jb-orange-400"
                 >
-                  SPORTS BETTING
+                  lorem-1
                 </Link>
                 <Link
-                  to="/online-betting"
+                  to="/page1"
                   className="mr-10 cursor-pointer hover:text-jb-orange-400"
                 >
-                  LIVE CASINO
+                  lorem-2
                 </Link>
                 <Link
-                  to="/live-casino"
+                  to="/page1"
                   className="mr-10 cursor-pointer hover:text-jb-orange-400"
                 >
-                  CRICKET BETTING
+                  lorem-3
                 </Link>
                 <Link
-                  to="/sports-betting"
+                  to="/page1"
                   className="mr-10 cursor-pointer hover:text-jb-orange-400"
                 >
-                  ONLINE CASINO
+                  lorem-4
                 </Link>
               </div>
             </div>

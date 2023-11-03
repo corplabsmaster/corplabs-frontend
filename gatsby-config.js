@@ -2,11 +2,11 @@
 
 module.exports = {
   siteMetadata: {
-    title: "JeetBuzz",
+    title: "Corplabs",
     description:
-      "JeetBuzz offers the best online gaming experience in Asia. At JeetBuzz, you experience the very best casino games the industry offers including Slots, Arcade Games, Table Games and Video Poker to begin with. We also offer Betting Exchange which will enhance your sporting enjoyment, be it cricket, basketball or football!",
-    author: "JeetBuzz",
-    siteUrl: `https://jeetbuzzcasino.com`,
+      "lorem ipsum",
+    author: "lorem",
+    siteUrl: `https://www.corplabs.co`,
   },
   flags: {
     DEV_SSR: false,

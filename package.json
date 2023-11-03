@@ -1,16 +1,16 @@
 {
-  "name": "@commlabs/jb-frontend",
+  "name": "@corplabs/advocado-club-landing",
   "private": true,
   "version": "0.1.0",
-  "author": "Commlabs Engineering Force",
+  "author": " Corplabs Engineering Force",
   "dependencies": {
     "@ant-design/icons": "^4.0.5",
     "@apollo/client": "^3.5.9",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@headlessui/react": "^1.7.1",
-    "@lottiefiles/lottie-interactivity": "^1.0.0",
-    "@lottiefiles/react-lottie-player": "^3.4.1",
+    "@lottiefiles/lottie-interactivity": "^1.6.2",
+    "@lottiefiles/lottie-player": "^2.0.2",
     "@mui/icons-material": "^5.4.1",
     "@mui/material": "^5.4.1",
     "@mui/styled-engine-sc": "^5.4.1",
@@ -29,6 +29,7 @@
     "gatsby-plugin-canonical-urls": "^4.20.0",
     "gatsby-plugin-gatsby-cloud": "^4.7.0",
     "gatsby-plugin-google-analytics": "^4.21.0",
+    "gatsby-plugin-google-gtag": "^5.2.0",
     "gatsby-plugin-image": "^2.7.0",
     "gatsby-plugin-less": "^4.0.3",
     "gatsby-plugin-manifest": "^4.7.0",
@@ -67,7 +68,6 @@
     "redux": "^4.0.1",
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.3.3",
-    "gatsby-plugin-google-gtag": "^5.2.0",
     "tw-elements": "^1.0.0-alpha12"
   },
   "devDependencies": {
@@ -105,7 +105,7 @@
   "keywords": [
     "gatsby"
   ],
-  "license": "MIT",
+  "license": "corplabs.co all rights reserved",
   "scripts": {
     "build": "NODE_OPTIONS=--max-old-space-size=8192 gatsby build",
     "develop": "gatsby develop",
@@ -122,10 +122,7 @@
     "add:page": "./src/tools/scripts/addPage.sh",
     "add:component": "./src/tools/scripts/addComponent.sh"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
+  "repository": "https://github.com/corplabs-co/advocado-club-landing",
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
@@ -138,5 +135,7 @@
     "*.{js,ts,tsx}": [
       "eslint --fix"
     ]
-  }
+  },
+  "description": "loyalty-app-landing",
+  "main": "index.js"
 }

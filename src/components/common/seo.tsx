@@ -52,7 +52,7 @@ const SEO: React.FC<Props> = ({
               },
               {
                 property: `og:url`,
-                content: `https://jeetbuzzcasino.com`,
+                content: `https://www.google.com`,
               },
               {
                 name: `keywords`,
@@ -64,7 +64,7 @@ const SEO: React.FC<Props> = ({
               },
               {
                 property: `og:description`,
-                content: `JeetBuzz is the top cricket betting online casino in Bangladesh. Enjoy better odds at betting exchange with various live cricket betting markets.`,
+                content: `lorem ipsum`,
               },
               {
                 name: `twitter:card`,
@@ -84,7 +84,7 @@ const SEO: React.FC<Props> = ({
               },
               {
                 name: "google-site-verification",
-                content: "JyEH82ANp4IWIGL-B-I5TPxSLxykA9bs1cmfsAfkKQE",
+                content: "JyEH",
               },
             ]
               .concat(

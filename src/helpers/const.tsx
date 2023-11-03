@@ -1,45 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
 
-const whiteColor = "#fff";
-const blueGrey = "#F7F9FB";
-export const color = {
-  primary: "#003E6F",
-  secondary: "#000000",
-  tertiary: "#fff3ab",
-  navMenu: whiteColor,
-  navSideMenuText: "#9a9fbf",
-  containerBackground: whiteColor,
-  navTextColor: whiteColor,
-  communityTimeStamp: "#ccc",
-  communityStar: "rgba(0, 0, 0, 0.45)",
-  primaryTransparentColor: "rgba(77, 105, 136, 0.95)",
-  newletterCard: "#F4F4F4",
-  whiteColor,
-  footerBack: blueGrey,
-  loginBack: blueGrey,
-  cartCardBack: blueGrey,
-  blackColor100: "#282828",
-};
-
-export const font = {
-  primary: '"Roboto", "Helvetica", "Arial", sans-serif',
-};
-
-export const messages = {
-  errors: {
-    login: "ID or password mismatch",
-    network: "Network Error",
-  },
-  success: {
-    addCart: "Succesfully Added to Cart!",
-    addWishlist: "Succesfully Added to Wishlist!",
-  },
-  others: {
-    adding: "Adding..",
-  },
-};
-
 export const PREFIXED_URI = "";
 
 export const authSelection = {
@@ -58,57 +19,40 @@ export const providersQuery = {
 };
 
 export const paths = {
-  about: `/about`,
-  faq: `/faq`,
+  
   home: `/home`,
-  home2: `/index-2`,
-  gaming: `/gaming`,
-  gaming2: `/gaming-2`,
-  index2: `/index-2`,
-  index3: `/index-3`,
-  tournamentDetails: `/tournament-details`,
-  tournaments: `/tournaments`,
-  winners: `/winners`,
+  page1: `/page1`,
+  
 };
 
 export const URLS = {
   home: `/`,
-  home2: `${PREFIXED_URI}${paths.index2}`,
-  home3: `${PREFIXED_URI}${paths.index3}`,
-  about: `${PREFIXED_URI}${paths.about}`,
-  faq: `${PREFIXED_URI}${paths.faq}`,
-  gaming: `${PREFIXED_URI}${paths.gaming}`,
-  gaming2: `${PREFIXED_URI}${paths.gaming2}`,
-  index2: `${PREFIXED_URI}${paths.index2}`,
-  index3: `${PREFIXED_URI}${paths.index3}`,
-  tournamentDetails: `${PREFIXED_URI}${paths.tournamentDetails}`,
-  tournaments: `${PREFIXED_URI}${paths.tournaments}`,
-  winners: `${PREFIXED_URI}${paths.winners}`,
+  home1: `${PREFIXED_URI}${paths.home}`,
+  page1: `${PREFIXED_URI}${paths.page1}`,
+  
 };
 
 export const menu: Array<any> = [
-  { text: "Casino", url: paths.gaming },
-  { text: "Slot", url: paths.slot },
-  { text: "Table", url: paths.table },
+  { text: "item", url: paths.page1 },
+  
   {
-    text: "Lottery",
-    url: "https://jwin7.live/guest/viewGame?t=sport&v=Saba&act=161",
+    text: "item1",
+    url: "https://www.google.com",
     external: true,
   },
-  { text: "Fishing", url: paths.fishing },
-  { text: "Promotions", url: paths.promotion },
+ 
 ];
 
 export const sideMenu: Array<any> = [
-  { label: "About us", url: paths.about, key: paths.about },
-  { label: "Privacy Policy", url: paths.privacy, key: paths.privacy },
-  { label: "Term and Conditions", url: paths.term, key: paths.term },
+  { label: "About us", url: paths.page1, key: paths.about },
+  { label: "Privacy Policy", url: paths.page1, key: paths.page1 },
+  { label: "Term and Conditions", url: paths.page1, key: paths.page1 },
   {
-    label: "Responsible Gaming",
-    url: paths.responsible,
-    key: paths.responsible,
+    label: "lorem ipsum",
+    url: paths.page1,
+    key: paths.page1,
   },
-  { label: "18+", url: paths.eighteen, key: paths.eighteen },
+  { label: "lorem", url: paths.page1, key: paths.page1 },
 ];
 
 export const keywords = {
@@ -156,7 +100,7 @@ export const headerHomeMenu = [
     key: "1",
     label: (
       <Link
-        to={URLS.home2}
+        to={URLS.page1}
         className="py-[15px] px-[20px] text-white font-bold text-lg hover:text-jb-orange-400 uppercase"
       >
         HOME 2
@@ -167,7 +111,7 @@ export const headerHomeMenu = [
     key: "2",
     label: (
       <Link
-        to={URLS.home3}
+        to={URLS.page1}
         className="py-[15px] px-[20px] text-white font-bold text-lg hover:text-jb-orange-400 uppercase"
       >
         HOME 3
@@ -181,7 +125,7 @@ export const headerGameMenu = [
     key: "1",
     label: (
       <Link
-        to={URLS.gaming}
+        to={URLS.page1}
         className="py-[15px] px-[20px] text-white font-bold text-lg hover:text-jb-orange-400 uppercase"
       >
         GAMES 1
@@ -192,7 +136,7 @@ export const headerGameMenu = [
     key: "2",
     label: (
       <Link
-        to={URLS.gaming2}
+        to={URLS.page1}
         className="py-[15px] px-[20px] text-white font-bold text-lg hover:text-jb-orange-400 uppercase"
       >
         GAMES 2
@@ -248,36 +192,13 @@ export const headerGameMenu = [
   //   ),
   // },
 ];
-export const headerTourMenu = [
-  {
-    key: "1",
-    label: (
-      <Link
-        to={URLS.tournaments}
-        className="py-[15px] px-[20px] text-white font-bold text-lg hover:text-jb-orange-400 uppercase"
-      >
-        TOURNAMENTS
-      </Link>
-    ),
-  },
-  {
-    key: "2",
-    label: (
-      <Link
-        to={URLS.tournamentDetails}
-        className="py-[15px] px-[20px] text-white font-bold text-lg hover:text-jb-orange-400 uppercase "
-      >
-        TOURNAMENTS DETAILS
-      </Link>
-    ),
-  },
-];
+
 export const headerPagesMenu = [
   {
     key: "1",
     label: (
       <Link
-        to={URLS.about}
+        to={URLS.page1}
         className="py-[15px] px-[20px] text-white font-bold text-lg hover:text-jb-orange-400 uppercase"
       >
         ABOUT US
@@ -288,7 +209,7 @@ export const headerPagesMenu = [
     key: "2",
     label: (
       <Link
-        to={URLS.winners}
+        to={URLS.page1}
         className="py-[15px] px-[20px] text-white font-bold text-lg hover:text-jb-orange-400 uppercase"
       >
         WINNERS
@@ -299,7 +220,7 @@ export const headerPagesMenu = [
     key: "3",
     label: (
       <Link
-        to={URLS.faq}
+        to={URLS.page1}
         className="py-[15px] px-[20px] text-white font-bold text-lg hover:text-jb-orange-400 uppercase"
       >
         FAQ
@@ -342,52 +263,24 @@ export const headerLangMenu = [
   },
 ];
 
-import game1 from "@components/images/game-1.png";
-import game2 from "@components/images/game-2.png";
-import game3 from "@components/images/game-3.png";
-import game4 from "@components/images/game-4.png";
-import game5 from "@components/images/game-5.png";
-import game6 from "@components/images/game-6.png";
-import game7 from "@components/images/game-7.png";
-import jackpotImg1 from "@components/images/jackpot-img-1.png";
-import jackpotImg2 from "@components/images/jackpot-img-2.png";
-import tournamentsGames1 from "@components/images/tournaments-games-1.png";
-import tournamentsGames2 from "@components/images/tournaments-games-2.png";
-import tournamentsGames3 from "@components/images/tournaments-games-3.png";
-import tournamentsGames4 from "@components/images/tournaments-games-4.png";
+import blank1 from "@components/images/blank.png";
 
 export const homeCarousels = [
-  { img: game1 },
-  { img: game2 },
-  { img: game3 },
-  { img: game4 },
-  { img: game5 },
-  { img: game6 },
-  { img: game7 },
+  { img: blank1 },
+  { img: blank1 },
+  { img: blank1 },
+
 ];
 
-export const home3Carousels = [
-  { img: jackpotImg1, amount: "€3,601,509.79" },
-  { img: jackpotImg2, amount: "€3,601,509.79" },
-  { img: jackpotImg1, amount: "€3,601,509.79" },
-];
-
-export const tournamentDetailsCarousels = [
-  { img: tournamentsGames1 },
-  { img: tournamentsGames2 },
-  { img: tournamentsGames3 },
-  { img: tournamentsGames4 },
-  { img: tournamentsGames1 },
-];
 
 export const settings = {
   autoPlay: true,
   // infinite: true,
 };
 
-import testimo1 from "@components/images/testimo-1.png";
-import testimo2 from "@components/images/testimo-2.png";
-import testimo3 from "@components/images/testimo-3.png";
+import testimo1 from "@components/images/blank.png";
+import testimo2 from "@components/images/blank.png";
+import testimo3 from "@components/images/blank.png";
 
 export const gameCarousels = [
   {

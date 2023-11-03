@@ -1,0 +1,10 @@
+{
+  "name": "advocado-club-landing",
+  "version": "1.0.0",
+  "description": "loyalty-app-landing",
+  "main": "index.tsx",
+  "repository": "https://github.com/corplabs-co/advocado-club-landing",
+  "author": "Corplabs Engineering Force",
+  "license": "corplabs.co",
+  "private": true
+}
