@@ -1,0 +1,11 @@
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+
+import WithThisUser from "./withThisUser";
+
+describe("WithThisUser", () => {
+  it("renders correctly", () => {
+    const tree = renderer.create(<WithThisUser />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});

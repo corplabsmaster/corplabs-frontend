@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "Baskerville";
+  src: url("./fonts/baskervville/baskervville-regular.ttf");
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("./fonts/gotham/gotham-black.otf");
+}
+@font-face {
+  font-family: "ArialMT";
+  src: url("./fonts/arial-mt/arialmt.woff");
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&amp;family=Roboto:wght@100;300;400;500;700;900&amp;display=swap");
