@@ -3,8 +3,7 @@
 module.exports = {
   siteMetadata: {
     title: "Corplabs",
-    description:
-      "lorem ipsum",
+    description: "lorem ipsum",
     author: "lorem",
     siteUrl: `https://www.corplabs.co`,
   },
@@ -57,7 +56,7 @@ module.exports = {
         lessOptions: {
           javascriptEnabled: true,
           modifyVars: {
-            "font-family": "ArialMT, Baskerville, Gotham, sans-serif",
+            // "font-family": "ArialMT, Baskerville, Gotham, sans-serif",
             "primary-color": "#ffa200",
             // "layout-header-background": "#FFFFFF",
             // "layout-header-height": "88px",
