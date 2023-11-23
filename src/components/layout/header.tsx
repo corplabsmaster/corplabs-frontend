@@ -1,15 +1,6 @@
-import React from "react";
-import { MenuOutlined } from "@ant-design/icons";
-import { Link } from "gatsby";
-import logo from "@images/logos/logo.png";
 import useBreakpoints from "@helpers/hooks/breakPoints";
-import {
-  headerGameMenu,
-  headerPagesMenu,
-  headerLangMenu,
-  headerHomeMenu,
-  paths,
-} from "@helpers/const";
+import logo from "@images/corplabs-logo.svg";
+import React from "react";
 
 type WithThisUser<T = {}> = T & {
   children?: React.ReactNode;
@@ -28,89 +19,25 @@ const Header: React.FC<HeaderProps> = props => {
 
   return (
     <>
-      {breakMDBelow ? (
-        <>
-          <div className="w-full bg-jb-black-200 z-100">
-            <div
-              className="relative flex justify-between h-full px-2 m-auto text-lg font-bold text-white border-b border-black z-100"
-              style={{ zIndex: 100 }}
-            >
-              <div className="inline-flex items-center ">
-                <Link to="/index-2">
-                  <img src={logo} className="w-[116px] h-[32px] mb-0 mr-8" />
-                </Link>
-              </div>
-              <div className="inline-flex items-center py-6">
-                <button className="jb-btn-green mr-[10px]">REGISTER</button>
-                <button className="jb-btn-red">SIGN IN</button>
-              </div>
-            </div>
-          </div>
-          <div className="w-full py-2 bg-jb-black-200 z-100">
-            <div
-              className="relative flex justify-center h-full px-2 m-auto text-lg font-bold text-white z-100"
-              style={{ zIndex: 100 }}
-            >
-              <div className="inline-flex items-center ">
-                <Link
-                  to="/"
-                  className="mr-10 cursor-pointer hover:text-jb-orange-400"
-                >
-                  HOME
-                </Link>
-                {/* <div className="relative mr-10 cursor-pointer hover:text-jb-orange-400">
-                <Dropdown
-                  overlay={
-                    <Menu
-                      className="w-[230px] bg-black mt-10 hover:bg-black"
-                      theme="dark"
-                      items={headerHomeMenu}
-                    />
-                  }
-                  placement="bottomLeft"
-                >
-                  <span className="mr-2">HOME</span>
-                </Dropdown>
-                <DrowIcon />
-              </div> */}
-                <Link
-                  to="/page1"
-                  className="mr-10 cursor-pointer hover:text-jb-orange-400"
-                >
-                  lorem-1
-                </Link>
-                <Link
-                  to="/page1"
-                  className="mr-10 cursor-pointer hover:text-jb-orange-400"
-                >
-                  lorem-2
-                </Link>
-                <Link
-                  to="/page1"
-                  className="mr-10 cursor-pointer hover:text-jb-orange-400"
-                >
-                  lorem-3
-                </Link>
-                <Link
-                  to="/page1"
-                  className="mr-10 cursor-pointer hover:text-jb-orange-400"
-                >
-                  lorem-4
-                </Link>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className="h-[62px] bg-black flex justify-between p-4">
-          <div className="inline-flex items-center ">
-            <img src={logo} className="w-[116px] h-[32px] mb-0 mr-8" />
-          </div>
-          <div className="inline-flex items-center ">
-            <MenuOutlined className="text-xl text-white" />
-          </div>
+      <header className="text-white body-font bg-purple-100 font-interlight">
+        <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+          <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <img src={logo} alt="corplabs-logo" className="w-10 h-10" />
+          </a>
+          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+            <a className="mr-5 hover:text-purple-200 font-interlight">Home</a>
+            <a className="mr-5 hover:text-purple-200 font-interlight">About</a>
+            <a className="mr-5 hover:text-purple-200 font-interlight">
+              Solution
+            </a>
+            <a className="mr-5 hover:text-purple-200 font-interlight">Career</a>
+          </nav>
+          <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 font-interlight">
+            Contact
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </button>
         </div>
-      )}
+      </header>
     </>
   );
 };
