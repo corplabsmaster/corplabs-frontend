@@ -1,24 +1,152 @@
-import React from "react";
-import { Link } from "gatsby";
-
 import SEO from "@components/common/seo";
-import withLocation from "@helpers/hoc/withLocation";
 import Layout from "@components/layout";
-import Blank from "@components/images/blank.png";
+import Footer from "@components/layout/footer";
+import Header from "@components/layout/header";
+import React from "react";
 
-
-const Home = ({ location }: any) => {
+const Home = () => {
   return (
     <Layout location={location.pathname}>
-      <SEO
-        title="lorem ipsum"
-        description="lorem ipsum"
-      />
-      <section className="pt-[40px] md:pt-[60px] pb-[80px] px-3 relative bg-no-repeat">
-        <div className="max-w-[1200px] m-auto">
-          
-        </div>
-      </section>
+      <SEO title="lorem ipsum" description="lorem ipsum" />
+      <Header /> {/* Use Header component here */}
+      <div className="bg-purple-100 min-h-screen">
+        <section className="text-gray-600 body-font">
+          <div className="container px-5 py-24 mx-auto">
+            <div className="flex flex-col text-center w-full mb-20">
+              <h1 className="mb-4 font-intersemibold text-white text-xl">
+                Our Services
+              </h1>
+              {/* <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
+                Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
+                gentrify, subway tile poke farm-to-table. Franzen you probably
+                havent heard of them man bun deep jianbing selfies heirloom
+                prism food truck ugh squid celiac humblebrag.
+              </p> */}
+            </div>
+            <div className="flex flex-wrap">
+              <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                  Shooting Stars
+                </h2>
+                <p className="leading-relaxed text-base mb-4">
+                  Fingerstache flexitarian street art 8-bit waistcoat.
+                  Distillery hexagon disrupt edison bulbche.
+                </p>
+                <a className="text-indigo-500 inline-flex items-center">
+                  Learn More
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="w-4 h-4 ml-2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+              <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                  The Catalyzer
+                </h2>
+                <p className="leading-relaxed text-base mb-4">
+                  Fingerstache flexitarian street art 8-bit waistcoat.
+                  Distillery hexagon disrupt edison bulbche.
+                </p>
+                <a className="text-indigo-500 inline-flex items-center">
+                  Learn More
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="w-4 h-4 ml-2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+              <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                  Neptune
+                </h2>
+                <p className="leading-relaxed text-base mb-4">
+                  Fingerstache flexitarian street art 8-bit waistcoat.
+                  Distillery hexagon disrupt edison bulbche.
+                </p>
+                <a className="text-indigo-500 inline-flex items-center">
+                  Learn More
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="w-4 h-4 ml-2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+              <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                  Melanchole
+                </h2>
+                <p className="leading-relaxed text-base mb-4">
+                  Fingerstache flexitarian street art 8-bit waistcoat.
+                  Distillery hexagon disrupt edison bulbche.
+                </p>
+                <a className="text-indigo-500 inline-flex items-center">
+                  Learn More
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="w-4 h-4 ml-2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                Neptune
+              </h2>
+              <p className="leading-relaxed text-base mb-4">
+                Fingerstache flexitarian street art 8-bit waistcoat. Distillery
+                hexagon disrupt edison bulbche.
+              </p>
+              <a className="text-indigo-500 inline-flex items-center">
+                Learn More
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-4 h-4 ml-2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+            <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+              Button
+            </button>
+          </div>
+        </section>
+      </div>
+      <Footer />
     </Layout>
   );
 };

@@ -1,14 +1,19 @@
 @font-face {
-  font-family: "Baskerville";
-  src: url("./fonts/baskervville/baskervville-regular.ttf");
-}
-@font-face {
-  font-family: "Gotham";
-  src: url("./fonts/gotham/gotham-black.otf");
-}
-@font-face {
-  font-family: "ArialMT";
-  src: url("./fonts/arial-mt/arialmt.woff");
+  font-family: "Inter-Light";
+  src: url("./fonts/inter/Inter-Light.ttf");
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&amp;family=Roboto:wght@100;300;400;500;700;900&amp;display=swap");
+@font-face {
+  font-family: "Inter-Medium";
+  src: url("./fonts/inter/Inter-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Inter-SemiBold";
+  src: url("./fonts/inter/Inter-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "WorkSans-Light";
+  src: url("./fonts/worksans/WorkSans-Light.ttf");
+}

@@ -1,5 +1,5 @@
-import React from "react";
 import { Link } from "gatsby";
+import React from "react";
 
 export const PREFIXED_URI = "";
 
@@ -278,9 +278,7 @@ export const settings = {
   // infinite: true,
 };
 
-import testimo1 from "@components/images/blank.png";
-import testimo2 from "@components/images/blank.png";
-import testimo3 from "@components/images/blank.png";
+import { default as testimo1, default as testimo2, default as testimo3 } from "@components/images/blank.png";
 
 export const gameCarousels = [
   {
