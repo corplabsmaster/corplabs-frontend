@@ -31,6 +31,10 @@ module.exports = {
         purple: {
           100: "#060226",
           200: "#7857F8",
+          300: "#12076B",
+          400: "#080433",
+          500: "#000044",
+          600: "#E0AEFF",
 
           // ...more shades if needed
         },
@@ -38,9 +42,18 @@ module.exports = {
           100: "#E3F2FD",
           200: "#BBDEFB",
           300: "#64B5F6",
+          400: "#8AD5FF",
           // ...more shades if needed
         },
-        // Add more colors as needed
+
+        white: {
+          100: "#FFFFFF",
+          200: "#C8C3DC",
+
+          // ...more shades if needed
+        },
+
+        // ...more shades if needed
       },
 
       backgroundSize: {
@@ -48,6 +61,28 @@ module.exports = {
       },
       fontFamily: {
         interlight: ["Inter-Light"],
+        intermedium: ["Inter-Medium"],
+        intersemibold: ["Inter-SemiBold"],
+        worksanslight: ["WorkSans-Light"],
+      },
+
+      fontSize: {
+        xs: "12px", // Extra Small
+        sm: "14px", // Small
+        base: "16px", // Default/Base
+        lg: "20px", // Large
+        xl: "38px", // Extra Large
+        // "2xl": "1.5rem", // 2 Extra Large
+        // "3xl": "1.875rem", // 3 Extra Large
+        // Add more sizes as needed
+      },
+
+      letterSpacing: {
+        // Define your letter-spacing values here
+        // tight: "-0.0em",
+        // normal: "0",
+        wide: "0.03em",
+        // ...more values if needed
       },
     },
   },
