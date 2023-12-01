@@ -35,6 +35,8 @@ module.exports = {
           400: "#080433",
           500: "#000044",
           600: "#E0AEFF",
+          700: "#34195F",
+          800: "#774BC0",
 
           // ...more shades if needed
         },
@@ -49,6 +51,7 @@ module.exports = {
         white: {
           100: "#FFFFFF",
           200: "#C8C3DC",
+          300: "#E5DEFF",
 
           // ...more shades if needed
         },
@@ -64,14 +67,17 @@ module.exports = {
         intermedium: ["Inter-Medium"],
         intersemibold: ["Inter-SemiBold"],
         worksanslight: ["WorkSans-Light"],
+        worksanssemibold: ["WorkSans-Semibold"],
       },
 
       fontSize: {
         xs: "12px", // Extra Small
         sm: "14px", // Small
         base: "16px", // Default/Base
-        lg: "20px", // Large
+        lg: "20px",
+        lg2: "25px", // Large
         xl: "38px", // Extra Large
+        xl2: "90px",
         // "2xl": "1.5rem", // 2 Extra Large
         // "3xl": "1.875rem", // 3 Extra Large
         // Add more sizes as needed
