@@ -33,8 +33,9 @@ module.exports = {
           200: "#7857F8",
           300: "#12076B",
           400: "#080433",
-          500: "#000044",
+          500: "#220066",
           600: "#E0AEFF",
+          700: "#00003B",
 
           // ...more shades if needed
         },
@@ -63,6 +64,7 @@ module.exports = {
         interlight: ["Inter-Light"],
         intermedium: ["Inter-Medium"],
         intersemibold: ["Inter-SemiBold"],
+        interbold: ["Inter-Bold"],
         worksanslight: ["WorkSans-Light"],
       },
 
@@ -83,6 +85,10 @@ module.exports = {
         // normal: "0",
         wide: "0.03em",
         // ...more values if needed
+      },
+
+      borderWidth: {
+        1: "0.12em",
       },
     },
   },
