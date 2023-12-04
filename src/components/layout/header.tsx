@@ -116,7 +116,7 @@ const Header: React.FC<HeaderProps> = props => {
               onClick={() => setMobileMenuOpen(true)}
             >
               <span className="sr-only">Open main menu</span>
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+              <Bars3Icon className="h-6 w-6 text-white" aria-hidden="true" />
             </button>
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">

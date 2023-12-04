@@ -1,0 +1,5 @@
+.border-gradient {
+    background: linear-gradient(90deg, #00003B, #00003B), linear-gradient(to bottom right, #8AD5FF, #E0AEFF);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+}
