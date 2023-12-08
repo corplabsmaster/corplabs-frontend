@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = props => {
 
   return (
     <>
-      <header className="fixed top-0 body-font bg-purple-100 font-interlight w-full">
+      <header className="fixed top-0 body-font bg-black-950 font-interlight w-full">
         <nav
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
           aria-label="Global"
@@ -82,28 +82,28 @@ const Header: React.FC<HeaderProps> = props => {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-center items-center ">
             {/* Center align the desktop navigation */}
-            <div className="border-[1.5px] w-[30vw] h-[6vh] rounded-full border-purple-300 bg-purple-400 flex flex-wrap items-center text-base justify-center">
+            <div className="border-[1.5px] w-[30vw] h-[6vh] rounded-full border-primary-600 bg-black-900 flex flex-wrap items-center text-base justify-center">
               <a
                 href="#"
-                className="mr-[3vw] text-white-100 hover:text-purple-200"
+                className="mr-[3vw] text-white-100 hover:text-primary-600"
               >
                 Home
               </a>
               <a
                 href="#"
-                className="mr-[3vw] text-white-100 hover:text-purple-200"
+                className="mr-[3vw] text-white-100 hover:text-primary-600"
               >
                 About
               </a>
               <a
                 href="#"
-                className="mr-[3vw] text-white-100 hover:text-purple-200"
+                className="mr-[3vw] text-white-100 hover:text-primary-600"
               >
                 Solution
               </a>
               <a
                 href="#"
-                className="mr-[0vw] text-white-100 hover:text-purple-200"
+                className="mr-[0vw] text-white-100 hover:text-primary-600"
               >
                 Career
               </a>
@@ -122,7 +122,7 @@ const Header: React.FC<HeaderProps> = props => {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
               href="#"
-              className="inline-flex items-center text-base text-white-100 font-interlight leading-6 hover:text-purple-200"
+              className="inline-flex items-center text-base text-white-100 font-interlight leading-6 hover:text-primary-600"
             >
               Contact
             </a>
@@ -135,7 +135,7 @@ const Header: React.FC<HeaderProps> = props => {
           onClose={() => setMobileMenuOpen(false)}
         >
           <div className="fixed inset-0 z-10" />
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-purple-100 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-black-950 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
@@ -181,7 +181,7 @@ const Header: React.FC<HeaderProps> = props => {
                 <div className="py-6">
                   <a
                     href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-interlight leading-7 text-white hover:text-purple-200"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-interlight leading-7 text-white hover:text-primary-600"
                   >
                     Contact
                   </a>

@@ -9,7 +9,7 @@ import "../layout/footer.css";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-purple-500">
+    <footer className="bg-primary-950">
       <div className="container p-6 mx-auto">
         <div className="lg:flex mt-6">
           <div className="w-full -mx-6 lg:w-2/6">
@@ -42,19 +42,19 @@ const Footer: React.FC = () => {
                 </h3>
                 <a
                   href="#"
-                  className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Company
                 </a>
                 <a
                   href="#"
-                  className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
                 </a>
                 <a
                   href="#"
-                  className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
                 </a>
@@ -66,31 +66,31 @@ const Footer: React.FC = () => {
                 </h3>
                 <a
                   href="#"
-                  className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   App Development
                 </a>
                 <a
                   href="#"
-                  className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Web Solution
                 </a>
                 <a
                   href="#"
-                  className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Cybersecurity
                 </a>
                 <a
                   href="#"
-                  className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Design
                 </a>
                 <a
                   href="#"
-                  className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Marketing
                 </a>
@@ -102,19 +102,19 @@ const Footer: React.FC = () => {
                 </h3>
                 <a
                   href="#"
-                  className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
                 </a>
                 <a
                   href="#"
-                  className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
                 </a>
                 <a
                   href="#"
-                  className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
                 </a>
@@ -124,10 +124,10 @@ const Footer: React.FC = () => {
                 <h3 className="font-intersemibold text-left text-white tracking-wide text-sm">
                   Contact
                 </h3>
-                <span className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200">
+                <span className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500">
                   +12 3456 7890
                 </span>
-                <span className="block mt-3 text-white-200 font-worksanslight hover:text-purple-200">
+                <span className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500">
                   example@email.com
                 </span>
               </div>
@@ -135,27 +135,29 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <hr className="h-px my-[5vh] bg-purple-200 border-none" />
+        <hr className="h-[1.5px] my-[5vh] bg-primary-500 border-none" />
 
-        <div className="md:flex md:-mx-3 md:items-center md:justify-between ">
-          <h1 className="inline-block bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent font-intermedium tracking-wide text-lg md:mx-3">
-            Need Some Ideas? Access Them Here!
-            <p className="text-white-200 font-worksanslight text-sm md:mt-0 mt-3 mr-2">
+        <div className="md:flex md:-mx-0 md:items-center md:justify-between">
+          <h1 className="">
+            <span className="bg-gradient-to-r from-gradient-1 to-gradient-2 bg-clip-text text-transparent font-intermedium tracking-wide text-lg">
+              Need Some Ideas? Access Them Here!
+            </span>
+            <p className="text-gray-200 font-worksanslight text-sm md:mt-0 mt-3 mr-2">
               We offer a variety of resources to help you brainstorm and develop
               your software concept, including case studies, industry reports,
-              and whitepapers. Our team of experts is also available to provide
-              guidance and feedback throughout the ideation process. Contact us
-              today to learn more.
+              and gray-200papers. Our team of experts is also available to
+              provide guidance and feedback throughout the ideation process.
+              Contact us today to learn more.
             </p>
           </h1>
 
-          <div className="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
+          <div className="">
             <div className="mt-[3vh] md:mx-3 shrink-0 md:mt-0 md:w-auto">
               <input
                 type="text"
                 id="footer-field-1"
                 name="footer-field-1"
-                className="w-full md:w-[25vw] bg-purple-700 rounded border-2 border-purple-300 focus:ring-1 focus:bg-transparent focus:ring-purple-200 focus:border-purple-300 text-xs outline-none text-white-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full md:w-[25vw] bg-black-1000 rounded border-2 border-primary-500 focus:ring-0.5 focus:bg-transparent focus:ring-primary-500 focus:border-primary-200 text-xs outline-none text-gray-200-50 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
             <div className="mt-[2vh] md:mx-3 shrink-0 md:mt-[1.5vh] md:w-auto ">
@@ -163,33 +165,33 @@ const Footer: React.FC = () => {
                 type="text"
                 id="footer-field-2"
                 name="footer-field-2"
-                className="w-full md:w-[25vw] bg-purple-700 rounded border-2 border-purple-300 focus:ring-1 focus:bg-transparent focus:ring-purple-200 focus:border-purple-300 text-xs outline-none text-white-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full md:w-[25vw] bg-black-1000 rounded border-2 border-primary-500 focus:ring-0.5 focus:bg-transparent focus:ring-primary-500 focus:border-primary-200 text-xs outline-none text-gray-200 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
             <div className="mt-[2vh] md:mx-3 shrink-0 md:mt-[1.5vh] md:w-auto">
-              <button className="border-transparent border-1 w-full md:w-[25vw] block text-white py-2 px-6 focus:outline-none hover:bg-purple-400 rounded border-gradient">
+              <button className="border-transparent border-1 w-full md:w-[25vw] block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
                 SUBMIT
               </button>
             </div>
           </div>
         </div>
-        <hr className="h-px my-[5vh] bg-purple-200 border-none" />
+        <hr className="h-[1.5px] my-[5vh] bg-primary-500 border-none" />
 
         <div className="flex flex-col items-center justify-between md:flex-row mb-[2vh]">
-          <p className="text-white-200 text-xs font-worksanslight">
+          <p className="text-gray-200 text-xs font-worksanslight">
             © 2023 Corplabs - All rights reserved
           </p>
 
           <div className="-mx-4">
             <a
               href="#"
-              className="px-4 text-white-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-purple-200"
+              className="px-4 text-gray-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-primary-500"
             >
               Privacy Policy
             </a>
             <a
               href="#"
-              className="px-4 text-white-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-purple-200"
+              className="px-4 text-gray-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-primary-500"
             >
               Terms of Conditions
             </a>

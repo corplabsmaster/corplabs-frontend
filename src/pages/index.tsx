@@ -4,17 +4,32 @@ import Footer from "@components/layout/footer";
 import Header from "@components/layout/header";
 import App from "@images/app-icon.svg";
 import Astronaut from "@images/astronaut.svg";
+import Backend from "@images/backend.png";
+import Collab2 from "@images/collab-icon.svg";
+import Collab from "@images/collab.svg";
+import Compre from "@images/compre-icon.svg";
+import Consult from "@images/consult-icon.svg";
+import Culture from "@images/culture-bg.svg";
 import Cybersecurity from "@images/cybersecurity-icon.svg";
 import Design from "@images/design-icon.svg";
+import Execute from "@images/execute.svg";
+import Frontend from "@images/frontend.png";
+import GameDev from "@images/game-dev.png";
+import GameDev2 from "@images/game-dev2.png";
+import Idea from "@images/idea-icon.svg";
+import Maintain from "@images/maintain.svg";
 import Marketing from "@images/marketing-icon.svg";
 import Plan from "@images/plan.svg";
+import ProductLead from "@images/product-lead.png";
+import Support from "@images/support-icon.svg";
+import TechLead from "@images/tech-lead.png";
 import Web from "@images/web-icon.svg";
 import React, { useState } from "react";
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const images = [Plan, Cybersecurity, Design]; // Replace with your actual image sources
+  const images = [Plan, Execute, Maintain]; // Replace with your actual image sources
 
   const nextSlide = () => {
     setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
@@ -29,7 +44,7 @@ const Home = () => {
     <Layout location={location.pathname}>
       <SEO title="lorem ipsum" description="lorem ipsum" />
       <Header /> {/* Use Header component here */}
-      <div className="bg-purple-100 min-h-screen">
+      <div className="bg-black-950 min-h-screen">
         <section className="text-gray-600 body-font">
           <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
             <img
@@ -38,7 +53,7 @@ const Home = () => {
               src={Astronaut}
             />
             <div className="text-center lg:w-4/5 w-full">
-              <p className="mb-8 leading-relaxed font-worksanslight text-lg text-white-200 tracking-wide">
+              <p className="mb-8 leading-relaxed font-worksanslight text-lg text-gray-200 tracking-wide">
                 Bringing Your Ideas to Life, One Line of Code at a Time
               </p>
             </div>
@@ -47,7 +62,7 @@ const Home = () => {
         <section className="text-gray-600 body-font">
           <div className="container px-[8vh] py-[10vh] mx-auto">
             <div className="flex flex-col text-center w-full mb-20">
-              <h1 className="font-interbold text-white text-xl">
+              <h1 className="font-interbold text-white text-xl tracking-wide">
                 Our Services
               </h1>
               {/* <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
@@ -66,7 +81,7 @@ const Home = () => {
                   App
                 </h1>
 
-                <p className="mt-2 font-worksanslight text-base text-white-200 tracking-wide">
+                <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
                   We specialize in designing and developing engaging,
                   user-centered apps.
                 </p>
@@ -79,7 +94,7 @@ const Home = () => {
                   Web
                 </h1>
 
-                <p className="mt-2 font-worksanslight text-base text-white-200 tracking-wide">
+                <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
                   We provide website creation, SEO, e-commerce, and maintenance.
                 </p>
               </div>
@@ -91,7 +106,7 @@ const Home = () => {
                   Cybersecurity
                 </h1>
 
-                <p className="mt-2 font-worksanslight text-base text-white-200 tracking-wide">
+                <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
                   We offer comprehensive cybersecurity solutions to protect your
                   digital assets.
                 </p>
@@ -107,7 +122,7 @@ const Home = () => {
                     Design
                   </h1>
 
-                  <p className="mt-2 font-worksanslight text-base text-white-200 tracking-wide">
+                  <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
                     We offer inclusive, accessible digital design services.
                   </p>
                 </div>
@@ -120,7 +135,7 @@ const Home = () => {
                   Marketing
                 </h1>
 
-                <p className="mt-2 font-worksanslight text-base text-white-200 tracking-wide">
+                <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
                   We offer strategic marketing services to elevate your brand.
                 </p>
               </div>
@@ -128,15 +143,15 @@ const Home = () => {
           </div>
         </section>
       </div>
-      <section className="bg-purple-100">
-        <div className="container px-6 py-10 mx-auto overflow-x-hidden ">
-          <h1 className="text-2xl font-interbold text-center text-white-100 lg:text-4xl">
+      <section className="bg-black-950">
+        <div className="container px-6 py-[20vh] mx-auto overflow-x-hidden ">
+          <h1 className="text-2xl font-interbold text-center text-white-100 lg:text-4xl tracking-wide">
             Helping Your Business <br /> Grow & Succeed
           </h1>
           <div className="flex justify-center items-center">
             <button
               title="left arrow"
-              className="p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100 mr-[5vw]"
+              className="p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 hover:bg-black-900 mr-[5vw]"
               onClick={prevSlide}
             >
               <svg
@@ -164,7 +179,7 @@ const Home = () => {
 
             <button
               title="right arrow"
-              className="p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100 ml-[5vw]"
+              className="p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 hover:bg-black-900 ml-[5vw]"
               onClick={nextSlide}
             >
               <svg
@@ -183,6 +198,298 @@ const Home = () => {
               </svg>
               {/* Right arrow icon */}
             </button>
+          </div>
+          <h1 className="font-worksanslight text-base text-gray-200 tracking-wide text-center">
+            Corplabs offers professional consultation services to help turn your
+            ideas into reality. <br />
+            We work with you to develop a detailed plan that outlines the
+            project scope, timeline, and budget.
+          </h1>
+        </div>
+      </section>
+      <section className="text-gray-200 bg-black-950">
+        <div className="container px-5 py-24 mx-auto flex flex-wrap justify-center items-center">
+          <div className="lg:w-2/5 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
+            <img
+              alt="collaboration"
+              className="object-cover object-center w-[90%]"
+              src={Collab}
+            />
+          </div>
+          <div className="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-3/5 lg:pl-12 lg:text-left text-center">
+            <div className="flex flex-col mb-10 lg:items-start items-center">
+              <div className="flex-grow">
+                <h2 className="text-white-100 text-xl font-interbold mb-[2vh] text-left tracking-wide">
+                  Collaborating with Corpians
+                </h2>
+                <p className="leading-relaxed text-base font-worksanslight text-gray-200 text-left">
+                  Corplabs values collaboration for project success. They work
+                  with clients and partners to deliver the best solutions,
+                  staying current with technology trends. Contact Corplabs to
+                  explore collaborations.
+                </p>
+                <div className="grid grid-cols-1 mt-[2vh] xl:gap-[2vh] md:grid-cols-2 ">
+                  <div className="flex items-center mt-[2vh]">
+                    <img
+                      className="w-10 object-cover mr-[1.2vw] "
+                      alt="consultation"
+                      src={Consult}
+                    />
+                    <p className="leading-relaxed text-base font-intermedium text-white-100 text-left">
+                      Expert Consultation
+                    </p>
+                  </div>
+
+                  <div className="flex items-center mt-[2vh]">
+                    <img
+                      className="w-10 object-cover mr-[1.2vw]"
+                      alt="collaboration"
+                      src={Compre}
+                    />
+                    <p className="leading-relaxed text-base font-intermedium text-white-100 text-left">
+                      Comprehensive Approach
+                    </p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 xl:gap-[2vh] md:grid-cols-2">
+                  <div className="flex items-center mt-[2vh]">
+                    <img
+                      className="w-10 object-cover mr-[1.2vw]"
+                      alt="consultation"
+                      src={Collab2}
+                    />
+                    <p className="leading-relaxed text-base font-intermedium text-white-100 text-left">
+                      Collaboration
+                    </p>
+                  </div>
+
+                  <div className="flex items-center mt-[2vh]">
+                    <img
+                      className="w-10 object-cover mr-[1.2vw]"
+                      alt="collaboration"
+                      src={Idea}
+                    />
+                    <p className="leading-relaxed text-base font-intermedium text-white-100 text-left">
+                      Idea to Reality
+                    </p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 xl:gap-[2vh] md:grid-cols-2">
+                  <div className="flex items-center mt-[2vh]">
+                    <img
+                      className="w-10 object-cover mr-[1.2vw]"
+                      alt="consultation"
+                      src={Support}
+                    />
+                    <p className="leading-relaxed text-base font-intermedium text-white-100 text-left">
+                      Continued Support
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="relative bg-black-950">
+        <div className="container px-[8vh] py-[20vh] mx-auto relative ">
+          <div className="flex flex-col text-center w-full relative z-10 mb-[9vh] ">
+            <h1 className="font-interbold text-white tracking-wide text-xl mb-[2vh]">
+              We Look Small,{" "}
+              <span className="bg-gradient-to-r from-gradient-1 to-gradient-2 bg-clip-text text-transparent">
+                But Think Big
+              </span>
+            </h1>
+            <p className="leading-relaxed text-center text-base font-worksanslight text-gray-200 text-left ">
+              At Corplabs, we foster a collaborative and inclusive culture. We
+              believe in empowering our employees, valuing diversity, <br />
+              and promoting work-life balance. Join a team that encourages
+              growth, creativity, and personal development.
+            </p>
+            <img
+              className="w-full h-auto mt-[18vh] object-cover object-center absolute inset-0 z-0"
+              alt="intro"
+              src={Culture}
+            />
+          </div>
+
+          <div className="flex flex-wrap relative z-20 ">
+            <div className="xl:w-1/2 md:w-full px-20 py-6">
+              <h1 className="mt-4 text-lg font-semibold text-white-100 tracking-wide">
+                Work With Us
+              </h1>
+
+              <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
+                Corplabs offers a supportive workplace with challenging
+                projects. Join us for growth opportunities and a vibrant
+                professional community.
+              </p>
+            </div>
+
+            <div className="xl:w-1/2 md:w-full px-20 py-6">
+              <h1 className="mt-4 text-lg font-semibold text-white-100 tracking-wide">
+                Benefits and Perks
+              </h1>
+
+              <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
+                We value our team, offering competitive pay, health coverage,
+                flexible hours, and events to foster professional and personal
+                well-being.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap relative z-20 mt-[8vh]">
+            <div className="xl:w-1/2 md:w-full px-20 py-6">
+              <div>
+                <h1 className="mt-4 text-lg font-semibold text-white-100">
+                  Career Growth
+                </h1>
+
+                <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
+                  At Corplabs, we foster your growth through learning
+                  opportunities, mentorship, and challenges.
+                </p>
+              </div>
+            </div>
+
+            <div className="xl:w-1/2 md:w-full px-20 py-6">
+              <h1 className="mt-4 text-lg font-semibold text-white-100">
+                Equal Opportunity Employer Statement
+              </h1>
+
+              <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
+                We are an equal opportunity employer who values diversity. We
+                accept applicants of all backgrounds without discrimination.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="text-gray-200 bg-black-900">
+        <div className="container px-0 py-[4vh] mx-auto">
+          <div className="w-full mt-[18vh]">
+            <h1 className="text-white-100 text-xl font-interbold text-center tracking-wide mb-[2vh]">
+              Job Vacancies
+            </h1>
+          </div>
+
+          <p className="w-full leading-relaxed text-base font-worksanslight text-center text-gray-200 mb-[4vh]">
+            Exciting job opportunities await! Join our team today and be part of
+            something amazing.
+          </p>
+          <div className="flex flex-wrap justify-center item-center xl:m-[10vw] xl:mt-[5vh]">
+            <div className="flex items-center justify-center xl:w-1/3 md:w-1/2 sm:w-2/3 p-4">
+              <div className="md:w-[38vw] sm:w-[15vw] xl:w-[18vw] h-auto bg-primary-950 border-1 border-primary-500 p-6 rounded-lg">
+                <img
+                  className="h-30 w-30 rounded w-full object-cover object-center mb-6"
+                  src={Backend}
+                  alt="backend-engineer"
+                />
+                <h3 className="tracking-wide text-primary-300 text-base font-worksanslight mb-2">
+                  Engineering
+                </h3>
+                <h2 className="text-lg text-gray-50 font-intermedium mb-4">
+                  Senior NodeJS Full Stack Engineer (Backend Heavy)
+                </h2>
+                <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+                  LEARN MORE
+                </button>
+              </div>
+            </div>
+            <div className="flex items-center justify-center xl:w-1/3 md:w-1/2 sm:w-2/3 p-4">
+              <div className="md:w-[38vw] sm:w-[15vw] xl:w-[18vw] h-auto bg-primary-950 border-1 border-primary-500 p-6 rounded-lg">
+                <img
+                  className="h-30 w-30 rounded w-full object-cover object-center mb-6"
+                  src={Frontend}
+                  alt="frontend-engineer"
+                />
+                <h3 className="tracking-wide text-primary-300 text-base font-worksanslight mb-2">
+                  Engineering
+                </h3>
+                <h2 className="text-lg text-gray-50 font-intermedium mb-4">
+                  Senior NodeJS Full Stack Engineer (Frontend Heavy)
+                </h2>
+                <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+                  LEARN MORE
+                </button>
+              </div>
+            </div>
+
+            <div className="flex justify-center xl:w-1/3 md:w-1/2 sm:w-2/3 p-4">
+              <div className="md:w-[38vw] sm:w-[15vw] xl:w-[18vw] h-auto bg-primary-950 border-1 border-primary-500 p-6 rounded-lg">
+                <img
+                  className="h-30 w-30 rounded w-full object-cover object-center mb-6"
+                  src={TechLead}
+                  alt="tech-lead"
+                />
+                <h3 className="tracking-wide text-primary-300 text-base font-worksanslight mb-2">
+                  Engineering
+                </h3>
+                <h2 className="text-lg text-gray-50 font-intermedium mb-4">
+                  Tech Lead (NodeJS)
+                </h2>
+                <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+                  LEARN MORE
+                </button>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center xl:w-1/3 md:w-1/2 sm:w-2/3 p-4">
+              <div className="md:w-[38vw] sm:w-[15vw] xl:w-[18vw] h-auto bg-primary-950 border-1 border-primary-500 p-6 rounded-lg">
+                <img
+                  className="h-30 w-30 rounded w-full object-cover object-center mb-6"
+                  src={GameDev}
+                  alt="game-dev"
+                />
+                <h3 className="tracking-wide text-primary-300 text-base font-worksanslight mb-2">
+                  Engineering
+                </h3>
+                <h2 className="text-lg text-gray-50 font-intermedium mb-4">
+                  Junior Game Developer
+                </h2>
+                <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+                  LEARN MORE
+                </button>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center xl:w-1/3 md:w-1/2 sm:w-2/3 p-4">
+              <div className="md:w-[38vw] sm:w-[15vw] xl:w-[18vw] h-auto bg-primary-950 border-1 border-primary-500 p-6 rounded-lg">
+                <img
+                  className="h-30 w-30 rounded w-full object-cover object-center mb-6"
+                  src={GameDev2}
+                  alt="game-dev2"
+                />
+                <h3 className="tracking-wide text-primary-300 text-base font-worksanslight mb-2">
+                  Engineering
+                </h3>
+                <h2 className="text-lg text-gray-50 font-intermedium mb-4">
+                  Senior Game Developer
+                </h2>
+                <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+                  LEARN MORE
+                </button>
+              </div>
+            </div>
+            <div className="flex items-center justify-center xl:w-1/3 md:w-1/2 sm:w-2/3 p-4">
+              <div className="md:w-[38vw] sm:w-[15vw] xl:w-[18vw] h-auto bg-primary-950 border-1 border-primary-500 p-6 rounded-lg">
+                <img
+                  className="h-30 w-30 rounded w-full object-cover object-center mb-6"
+                  src={ProductLead}
+                  alt="product-lead"
+                />
+                <h3 className="tracking-wide text-primary-300 text-base font-worksanslight mb-2">
+                  Product
+                </h3>
+                <h2 className="text-lg text-gray-50 font-intermedium mb-4">
+                  Product Lead Manager
+                </h2>
+                <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+                  LEARN MORE
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
