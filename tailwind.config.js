@@ -9,14 +9,16 @@ module.exports = {
   ],
   theme: {
     screens: {
-      sm: "480px",
+      xs: "320px",
+
+      sm: "640px",
       // => @media (min-width: 640px) { ... }
 
       md: "768px",
       // => @media (min-width: 768px) { ... }
-      "2md": "991px",
+      "2md": "912px",
 
-      lg: "1199px",
+      lg: "1024px",
       // => @media (min-width: 1024px) { ... }
 
       xl: "1280px",
@@ -96,6 +98,7 @@ module.exports = {
         intersemibold: ["Inter-SemiBold"],
         interbold: ["Inter-Bold"],
         worksanslight: ["WorkSans-Light"],
+        gothamlight: ["Gotham-Light"],
       },
 
       fontSize: {
@@ -114,6 +117,7 @@ module.exports = {
         // tight: "-0.0em",
         // normal: "0",
         wide: "0.03em",
+        wider: "0.06em",
         // ...more values if needed
       },
 

@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = props => {
 
   return (
     <>
-      <header className="fixed top-0 body-font bg-black-950 font-interlight w-full">
+      <header className="fixed top-0 body-font bg-black-950 font-interlight w-full z-50">
         <nav
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
           aria-label="Global"
@@ -134,8 +134,8 @@ const Header: React.FC<HeaderProps> = props => {
           open={mobileMenuOpen}
           onClose={() => setMobileMenuOpen(false)}
         >
-          <div className="fixed inset-0 z-10" />
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-black-950 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="fixed inset-0 z-50" />
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-black-950 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
