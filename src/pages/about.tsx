@@ -1,7 +1,7 @@
 import SEO from "@components/common/seo";
-import Explore from "@components/images/explore.png";
+import Explore from "@components/images/explore1.png";
 import Innovative from "@components/images/innovative.png";
-import Maintainability from "@components/images/maintainability.png";
+import Maintainability from "@components/images/maintain.png";
 import Milestone from "@components/images/milestone.png";
 import Mission from "@components/images/mission.png";
 import Motivated from "@components/images/motivated.png";
@@ -19,7 +19,7 @@ const about = () => {
     <Layout location={location.pathname}>
       <SEO title="lorem ipsum" description="lorem ipsum" />
       <Header /> {/* Use Header component here */}
-      <div className="bg-purple-100 min-h-screen">
+      <div className="bg-black-950 min-h-screen">
         <section className="text-gray-600 body-font">
           <div className="container mx-auto flex px-5 lg:py-24 sm:py-0 items-center justify-center flex-col">
             <img
@@ -28,7 +28,7 @@ const about = () => {
               src={Explore}
             />
             <div className="text-center lg:w-4/5 w-full">
-              <p className="mb-8 leading-relaxed font-worksanslight text-base text-white-200">
+              <p className="mb-8 leading-relaxed font-worksanslight lg:text-base md:text-xs text-gray-200">
                 Corplabs is a dynamic technology company founded by a team of
                 highly motivated and experienced technological enthusiasts. With
                 a shared passion for delivering exceptional products, the team
@@ -43,7 +43,7 @@ const about = () => {
           <div className="container px-0 py-0 mx-auto flex flex-wrap">
             <div className="flex flex-wrap -m-0 w-full">
               <div className="p-4 lg:w-1/2 md:w-full flex">
-                <div className="flex border-2 rounded-lg border-gray-200 border-opacity-50 bg-purple-400 bg-opacity-50 lg:p-12 p-10 sm:flex-row flex-col w-full">
+                <div className="flex border-2 rounded-lg border-gray-200 border-opacity-50 bg-black-900 bg-opacity-50 lg:p-12 p-10 sm:flex-row flex-col w-full">
                   <div className="flex-grow">
                     <div className="flex items-center">
                       <h2 className="text-white-100 tracking-wide text-xl font-intersemibold">
@@ -56,7 +56,7 @@ const about = () => {
                         src={Mission}
                       />
                     </div>
-                    <p className="leading-relaxed font-worksanslight text-white-200 text-base mt-2">
+                    <p className="leading-relaxed font-worksanslight text-gray-200 lg:text-base md:text-xs mt-2">
                       Always driven by innovation, self-motivated, and ready to
                       surpass the competition in the global arena.
                     </p>
@@ -64,7 +64,7 @@ const about = () => {
                 </div>
               </div>
               <div className="p-4 lg:w-1/2 md:w-full flex">
-                <div className="flex border-2 rounded-lg border-gray-200 border-opacity-50 bg-purple-400 bg-opacity-50 lg:p-12 p-10 sm:flex-row flex-col w-full">
+                <div className="flex border-2 rounded-lg border-gray-200 border-opacity-50 bg-black-900 bg-opacity-50 lg:p-12 p-10 sm:flex-row flex-col w-full">
                   <div className="flex-grow">
                     <div className="flex items-center">
                       <h2 className="text-white-100 tracking-wide text-xl font-intersemibold">
@@ -76,7 +76,7 @@ const about = () => {
                         src={Vision}
                       />
                     </div>
-                    <p className="leading-relaxed font-worksanslight text-white-200 text-base mt-2">
+                    <p className="leading-relaxed font-worksanslight text-gray-200 lg:text-base md:text-xs mt-2">
                       Corplabs aspires to be a globally recognized leader,
                       driven by innovation, self-motivation, and a commitment to
                       outperform competitors. They aim to deliver captivating
@@ -93,9 +93,9 @@ const about = () => {
                 <h1 className="text-xl text-white-100 tracking-wide font-intersemibold">
                   Value
                 </h1>
-                <div className="h-1 w-28 bg-gradient-to-r from-blue-400 to-purple-600 rounded"></div>
+                <div className="h-1 w-28 bg-gradient-to-r from-gradient-1 to-gradient-2 rounded"></div>
               </div>
-              <p className="lg:w-1/2 w-full leading-relaxed font-worksanslight text-white-200 text-base">
+              <p className="lg:w-1/2 w-full leading-relaxed font-worksanslight text-gray-200 lg:text-base md:text-xs">
                 Through these values, we strive to provide exceptional products
                 and services that make a meaningful difference in the world,
                 leaving a lasting legacy for years to come.
@@ -110,10 +110,10 @@ const about = () => {
               <div className="p-0 sm:w-full w-full">
                 <div className="bg-purple-700 bg-opacity-50 rounded flex p-12 h-full  items-center justify-center">
                   <div>
-                    <h1 className="font-worksanssemibold text-white-300 text-lg2 sm:text-lg2 lg:text-xl2">
+                    <h1 className="font-worksanssemibold text-primary-100 text-lg2 sm:text-lg2 lg:text-xl2">
                       Maintainability
                     </h1>
-                    <p className="leading-relaxed font-worksanslight text-white-200 text-base">
+                    <p className="leading-relaxed font-worksanslight text-gray-200 lg:text-base md:text-xs">
                       ensuring ease of future maintenance and support.
                     </p>
                   </div>
@@ -132,10 +132,10 @@ const about = () => {
                     src={Sustainability}
                   />
                   <div>
-                    <h2 className="font-worksanssemibold text-white-300 text-lg2 sm:text-lg2 lg:text-xl2">
+                    <h2 className="font-worksanssemibold text-primary-100 text-lg2 sm:text-lg2 lg:text-xl2">
                       Sustainability
                     </h2>
-                    <p className="leading-relaxed font-worksanslight text-white-200 text-base">
+                    <p className="leading-relaxed font-worksanslight text-gray-200 lg:text-base md:text-xs">
                       driving competitive pace and efficiency.
                     </p>
                   </div>
@@ -144,15 +144,15 @@ const about = () => {
               <div className="p-0 sm:w-2/2 w-full">
                 <div className="bg-purple-700 bg-opacity-50 rounded flex p-12 h-full items-center justify-center">
                   <div>
-                    <h3 className="font-worksanssemibold text-white-300 text-lg2 sm:text-lg2 lg:text-xl2">
+                    <h3 className="font-worksanssemibold text-primary-100 text-lg2 sm:text-lg2 lg:text-xl2">
                       Productivity
                     </h3>
-                    <p className="leading-relaxed font-worksanslight text-white-200 text-base">
+                    <p className="leading-relaxed font-worksanslight text-gray-200 lg:text-base md:text-xs">
                       embracing everlasting impact & longevity.
                     </p>
                   </div>
                   <img
-                    className="lg:w-20 md:w-1/7 w-1/5 lg:ml-20 md:ml-10 object-cover object-center"
+                    className="lg:w-20 md:w-1/6 w-1/4 lg:ml-20 md:ml-10 object-cover object-center"
                     alt="hero"
                     src={Productivity}
                   />
@@ -166,10 +166,10 @@ const about = () => {
                     src={Motivated}
                   />
                   <div>
-                    <h4 className="font-worksanssemibold text-white-300 text-lg2 sm:text-lg2 lg:text-xl2 ">
+                    <h4 className="font-worksanssemibold text-primary-100 text-lg2 sm:text-lg2 lg:text-xl2 ">
                       Motivated
                     </h4>
-                    <p className="leading-relaxed font-worksanslight text-white-200 text-base ">
+                    <p className="leading-relaxed font-worksanslight text-gray-200 lg:text-base md:text-xs">
                       perpetually fueled by boundless energy and enthusiasm.
                     </p>
                   </div>
@@ -178,15 +178,15 @@ const about = () => {
               <div className="p-0 sm:w-2/2 w-full">
                 <div className="bg-purple-700 bg-opacity-50 rounded flex p-12 h-full items-center justify-center">
                   <div>
-                    <h5 className="font-worksanssemibold text-white-300 text-lg2 sm:text-lg2 lg:text-xl2">
+                    <h5 className="font-worksanssemibold text-primary-100 text-lg2 sm:text-lg2 lg:text-xl2">
                       Innovative
                     </h5>
-                    <p className="leading-relaxed font-worksanslight text-white-200 text-base">
+                    <p className="leading-relaxed font-worksanslight text-gray-200 lg:text-base md:text-xs">
                       constantly pushing boundaries, avoiding stagnation.
                     </p>
                   </div>
                   <img
-                    className="lg:w-20 md:w-1/6 w-1/5 lg:ml-20 md:ml-10 object-cover object-center"
+                    className="lg:w-28 md:w-1/6 w-1/3 lg:ml-20 md:ml-10 object-cover object-center"
                     alt="hero"
                     src={Innovative}
                   />
@@ -208,7 +208,7 @@ const about = () => {
               src={Milestone}
             />
             <div className="text-center lg:w-4/5 w-full">
-              <p className="mb-0 px-5 leading-relaxed font-worksanslight text-base text-white-200">
+              <p className="mb-0 px-5 leading-relaxed font-worksanslight lg:text-base md:text-xs text-gray-200">
                 Corplabs, founded in 2015 as a research group, became a private
                 community in 2017 to pursue ambitious future plans, supported by
                 a generous sponsor for open development initiatives.
@@ -221,7 +221,7 @@ const about = () => {
           <div className="container px-5 py-0 mx-auto flex flex-wrap">
             <div className="container mx-auto flex px-0 lg:py-10 py-4 items-center justify-center flex-col">
               <h1 className="lg:text-xl text-lg2 tracking-wide font-intersemibold text-white-100">
-                Corpians Life
+                Corpian&apos;s Life
               </h1>
             </div>
             <div className="flex flex-wrap md:-m-2 -m-1">
