@@ -46,7 +46,7 @@ const Home = () => {
       <Header /> {/* Use Header component here */}
       <div className="bg-black-950 min-h-screen">
         <section className="text-gray-600 body-font">
-          <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+          <div className="container mx-auto flex px-0 py-24 items-center justify-center flex-col">
             <img
               className="w-full h-auto lg:w-2/3 xl:w-3/5 mt-[10vh] mb-[2vh] object-cover object-center"
               alt="intro"
@@ -60,7 +60,7 @@ const Home = () => {
           </div>
         </section>
         <section className="text-gray-600 body-font">
-          <div className="container px-[8vh] py-[10vh] mx-auto">
+          <div className="container sm:px-[0vw] xl:px-[5vw] py-[10vh] mx-auto">
             <div className="flex flex-col text-center w-full mb-20">
               <h1 className="font-interbold text-white text-xl tracking-wide">
                 Our Services
@@ -74,77 +74,78 @@ const Home = () => {
             </div>
 
             <div className="flex flex-wrap">
-              <div className=" xl:w-1/3 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
-                <img className="" src={App} alt="app-icon" />
-
-                <h1 className="mt-4 text-lg font-semibold text-white-100">
-                  App
-                </h1>
-
-                <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
-                  We specialize in designing and developing engaging,
-                  user-centered apps.
-                </p>
-              </div>
-
-              <div className="xl:w-1/3 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
-                <img className="" src={Web} alt="web-icon" />
-
-                <h1 className="mt-4 text-lg font-semibold text-white-100">
-                  Web
-                </h1>
-
-                <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
-                  We provide website creation, SEO, e-commerce, and maintenance.
-                </p>
-              </div>
-
-              <div className="xl:w-1/3 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
-                <img className="" src={Cybersecurity} alt="app-icon" />
-
-                <h1 className="mt-4 text-lg font-semibold text-white-100">
-                  Cybersecurity
-                </h1>
-
-                <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
-                  We offer comprehensive cybersecurity solutions to protect your
-                  digital assets.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap">
-              <div className="xl:w-1/3 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
-                <div>
-                  <img className="" src={Design} alt="design-icon" />
+              <dl className="grid grid-cols-1 gap-0 sm:grid-cols-3 sm:divide-x sm:divide-white-100/40">
+                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw]">
+                  <img className="" src={App} alt="app-icon" />
 
                   <h1 className="mt-4 text-lg font-semibold text-white-100">
-                    Design
+                    App
                   </h1>
 
                   <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
-                    We offer inclusive, accessible digital design services.
+                    We specialize in designing and developing engaging,
+                    user-centered apps.
                   </p>
                 </div>
-              </div>
 
-              <div className="xl:w-1/3 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
-                <img className="" src={Marketing} alt="marketing-icon" />
+                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw]">
+                  <img className="" src={Web} alt="web-icon" />
 
-                <h1 className="mt-4 text-lg font-semibold text-white-100">
-                  Marketing
-                </h1>
+                  <h1 className="mt-4 text-lg font-semibold text-white-100">
+                    Web
+                  </h1>
 
-                <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
-                  We offer strategic marketing services to elevate your brand.
-                </p>
-              </div>
+                  <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
+                    We provide website creation, SEO, e-commerce, and
+                    maintenance.
+                  </p>
+                </div>
+
+                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw]">
+                  <img className="" src={Cybersecurity} alt="app-icon" />
+                  <h1 className="mt-4 text-lg font-semibold text-white-100">
+                    Cybersecurity
+                  </h1>
+                  <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
+                    We offer comprehensive cybersecurity solutions to protect
+                    your digital assets.
+                  </p>
+                </div>
+              </dl>
+            </div>
+
+            <div className="flex flex-wrap sm:mt-[4vh] md:mt-[4vh] lg:mt-[8vh]">
+              <dl className="grid grid-cols-1 gap-0 sm:grid-cols-3 sm:divide-x sm:divide-white-100/40">
+                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw]">
+                  <div>
+                    <img className="" src={Design} alt="design-icon" />
+
+                    <h1 className="mt-4 text-lg font-semibold text-white-100">
+                      Design
+                    </h1>
+
+                    <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
+                      We offer inclusive, accessible digital design services.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw]">
+                  <img className="" src={Marketing} alt="marketing-icon" />
+                  <h1 className="mt-4 text-lg font-semibold text-white-100">
+                    Marketing
+                  </h1>
+                  <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
+                    We offer strategic marketing services to elevate your brand.
+                  </p>
+                </div>
+              </dl>
             </div>
           </div>
         </section>
       </div>
       <section className="bg-black-950">
-        <div className="container px-6 py-[20vh] mx-auto overflow-x-hidden ">
+        <div className="container px-6 py-[20vh] mx-auto ">
           <h1 className="font-interbold text-2xl text-center text-white-100 lg:text-4xl tracking-wider">
             Helping Your Business <br />{" "}
             <span className="bg-gradient-to-r from-gradient-1 to-gradient-2 bg-clip-text text-transparent">
@@ -204,16 +205,15 @@ const Home = () => {
               {/* Right arrow icon */}
             </button>
           </div>
-          <h1 className="font-worksanslight text-base text-gray-200 tracking-wide text-center">
+          <h1 className="font-worksanslight md:text-base text-gray-200 tracking-wide text-center">
             Corplabs offers professional consultation services to help turn your
-            ideas into reality. <br />
-            We work with you to develop a detailed plan that outlines the
-            project scope, timeline, and budget.
+            ideas into reality. We work with you to develop a detailed plan that
+            outlines the project scope, timeline, and budget.
           </h1>
         </div>
       </section>
       <section className="text-gray-200 bg-black-950">
-        <div className="xs:px-[8vw] sm:px-[2vw] md:px-[4vw] lg:px-[4vw] xl:px-[10vw] py-24 mx-auto flex flex-wrap justify-center items-center">
+        <div className="xs:px-[8vw] sm:px-[2vw] md:px-[4vw] lg:px-[4vw] xl:px-[12vw] py-24 mx-auto flex flex-wrap justify-center items-center">
           <div className="lg:w-2/5 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
             <img
               alt="collaboration"
