@@ -14,11 +14,11 @@
 }
 
 @font-face {
-  font-family: "WorkSans-Light";
-  src: url("./fonts/worksans/WorkSans-Light.ttf");
+  font-family: "Inter-Bold";
+  src: url("./fonts/inter/Inter-Bold.ttf");
 }
 
 @font-face {
-  font-family: "WorkSans-Semibold";
-  src: url("./fonts/worksans/WorkSans-SemiBold.ttf");
+  font-family: "WorkSans-Light";
+  src: url("./fonts/worksans/WorkSans-Light.ttf");
 }
