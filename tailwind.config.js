@@ -9,14 +9,16 @@ module.exports = {
   ],
   theme: {
     screens: {
-      sm: "480px",
+      xs: "320px",
+
+      sm: "640px",
       // => @media (min-width: 640px) { ... }
 
       md: "768px",
       // => @media (min-width: 768px) { ... }
-      "2md": "991px",
+      "2md": "912px",
 
-      lg: "1199px",
+      lg: "1024px",
       // => @media (min-width: 1024px) { ... }
 
       xl: "1280px",
@@ -27,6 +29,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        // Define your colors here
         primary: {
           50: "#EBE7FF",
           100: "#DFD6FF",
@@ -93,9 +96,21 @@ module.exports = {
         interlight: ["Inter-Light"],
         intermedium: ["Inter-Medium"],
         intersemibold: ["Inter-SemiBold"],
+        interbold: ["Inter-Bold"],
         worksanslight: ["WorkSans-Light"],
         worksanssemibold: ["WorkSans-Semibold"],
+        gothamlight: ["Gotham-Light"],
       },
+
+      typography: theme => ({
+        DEFAULT: {
+          css: {
+            color: theme("colors.primary.900"),
+            fontFamily: "WorkSans-Light",
+            // Add other custom styles as needed
+          },
+        },
+      }),
 
       fontSize: {
         xs: "12px", // Extra Small
@@ -115,8 +130,17 @@ module.exports = {
         // tight: "-0.0em",
         // normal: "0",
         wide: "0.03em",
+        wider: "0.06em",
         // ...more values if needed
+      },
+
+      borderWidth: {
+        1: "0.12em",
       },
     },
   },
+  plugins: [
+    require("@tailwindcss/typography"),
+    // ... other plugins
+  ],
 };

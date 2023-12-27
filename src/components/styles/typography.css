@@ -14,8 +14,18 @@
 }
 
 @font-face {
+  font-family: "Inter-Bold";
+  src: url("./fonts/inter/Inter-Bold.ttf");
+}
+
+@font-face {
   font-family: "WorkSans-Light";
   src: url("./fonts/worksans/WorkSans-Light.ttf");
+}
+
+@font-face {
+  font-family: "Gotham-Light";
+  src: url("./fonts/gotham-light.ttf");
 }
 
 @font-face {
