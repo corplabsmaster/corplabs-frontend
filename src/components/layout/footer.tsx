@@ -10,7 +10,7 @@ import "../layout/footer.css";
 const Footer: React.FC = () => {
   return (
     <footer className="bg-primary-950">
-      <div className="container p-6 mx-auto">
+      <div className="container p-6 xs:px-2 sm:px-9">
         <div className="lg:flex mt-6">
           <div className="w-full -mx-6 lg:w-2/6">
             <div className="px-6">
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt- lg:mt-0 lg:flex-1">
+          <div className="mt-0 lg:mt-0 lg:flex-1">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               <div>
                 <h3 className="font-intersemibold text-left text-white tracking-wide text-sm">
@@ -177,22 +177,22 @@ const Footer: React.FC = () => {
         </div>
         <hr className="h-[1.5px] my-[5vh] bg-primary-500 border-none" />
 
-        <div className="flex flex-col items-center justify-between md:flex-row mb-[2vh]">
+        <div className="flex flex-col justify-between md:flex-row mb-[2vh]">
           <p className="text-gray-200 text-xs font-worksanslight">
             D-U-N-S® Certified : 44-791-6777 • © 2024 Corplabs - All rights
             reserved
           </p>
 
-          <div className="-mx-4">
+          <div className="flex justify-between">
             <a
               href="#"
-              className="px-4 text-gray-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-primary-500"
+              className="text-gray-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-primary-500 mr-4"
             >
               Privacy Policy
             </a>
             <a
               href="#"
-              className="px-4 text-gray-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-primary-500"
+              className="text-gray-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-primary-500 ml-4"
             >
               Terms of Conditions
             </a>

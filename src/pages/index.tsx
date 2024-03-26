@@ -46,24 +46,28 @@ const Home = () => {
       <Header /> {/* Use Header component here */}
       <div className="bg-black-950 min-h-screen">
         <section className="text-gray-600 body-font">
-          <div className="container mx-auto flex px-0 py-24 items-center justify-center flex-col">
+          <div className="container mx-auto flex px-0 xs:pt-[10vh] sm:pt-[8vh] xs:pb-16 sm:pb-40 items-center justify-center flex-col">
             <img
-              className="w-full h-auto lg:w-2/3 xl:w-3/5 mt-[10vh] mb-[2vh] object-cover object-center"
+              className="w-full h-auto lg:w-2/3 xl:w-3/5 xs:mt-[2vh] sm:mt-[8vh] mb-[2vh] object-cover object-center"
               alt="intro"
               src={Astronaut}
             />
             <div className="text-center lg:w-4/5 w-full">
-              <p className="mb-8 leading-relaxed font-worksanslight text-lg text-gray-200 tracking-wide">
-                Bringing Your Ideas to Life, One Line of Code at a Time
+              <p className="mb-8 leading-relaxed font-worksanslight sm:text-lg text-gray-200 tracking-wide">
+                Bringing Your Ideas to Life,
+                <span className="block sm:inline">
+                  {" "}
+                  One Line of Code at a Time
+                </span>
               </p>
             </div>
           </div>
         </section>
         <section className="text-gray-600 body-font">
-          <div className="container sm:px-[0vw] xl:px-[5vw] py-[10vh] mx-auto">
-            <div className="flex flex-col text-center w-full mb-20">
-              <h1 className="font-interbold text-white text-xl tracking-wide">
-                Our Services test
+          <div className="container xs:px-[0vw] sm:px-[0vw] xl:px-[5vw] xs:pb-14 sm:pb-40 mx-auto">
+            <div className="flex flex-col text-center w-full mb-20 xs:mb-[4vh] md:mb-[6vh]">
+              <h1 className="font-interbold text-2xl text-center text-white-100 lg:text-4xl tracking-wider">
+                Our Services
               </h1>
               {/* <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
                 Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
@@ -145,7 +149,7 @@ const Home = () => {
         </section>
       </div>
       <section className="bg-black-950">
-        <div className="container px-6 py-[20vh] mx-auto ">
+        <div className="container px-2 xs:pb-20 sm:pb-40 mx-auto ">
           <h1 className="font-interbold text-2xl text-center text-white-100 lg:text-4xl tracking-wider">
             Helping Your Business <br />{" "}
             <span className="bg-gradient-to-r from-gradient-1 to-gradient-2 bg-clip-text text-transparent">
@@ -157,12 +161,13 @@ const Home = () => {
           <div className="flex justify-center items-center">
             <button
               title="left arrow"
-              className="p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 hover:bg-black-900 mr-[5vw]"
+              className="p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 bg-black-950 hover:bg-black-900 xs:mr-[-6vw] sm:mr-[7vw]"
               onClick={prevSlide}
+              style={{ zIndex: 2 }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
+                className="w-4 h-4 lg:w-8 lg:h-8"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -181,16 +186,18 @@ const Home = () => {
               className="w-full h-auto lg:w-2/3 xl:w-3/5 object-cover object-center"
               alt="plan"
               src={images[currentIndex]}
+              style={{ zIndex: 1 }}
             />
 
             <button
               title="right arrow"
-              className="p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 hover:bg-black-900 ml-[5vw]"
+              className="p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 bg-black-950 hover:bg-black-900 xs:ml-[-6vw] sm:ml-[7vw]"
               onClick={nextSlide}
+              style={{ zIndex: 2 }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
+                className="w-4 h-4 lg:w-8 lg:h-8"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -205,7 +212,7 @@ const Home = () => {
               {/* Right arrow icon */}
             </button>
           </div>
-          <h1 className="font-worksanslight md:text-base text-gray-200 tracking-wide text-center">
+          <h1 className="leading-relaxed font-worksanslight text-base text-gray-200 tracking-wide text-center sm:pl-[20vw] sm:pr-[20vw]">
             Corplabs offers professional consultation services to help turn your
             ideas into reality. We work with you to develop a detailed plan that
             outlines the project scope, timeline, and budget.
@@ -213,7 +220,7 @@ const Home = () => {
         </div>
       </section>
       <section className="text-gray-200 bg-black-950">
-        <div className="xs:px-[8vw] sm:px-[2vw] md:px-[4vw] lg:px-[4vw] xl:px-[12vw] py-24 mx-auto flex flex-wrap justify-center items-center">
+        <div className="xs:px-[8vw] sm:px-[2vw] md:px-[4vw] lg:px-[4vw] xl:px-[12vw] xs:pb-20 sm:pb-40 mx-auto flex flex-wrap justify-center items-center">
           <div className="lg:w-2/5 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
             <img
               alt="collaboration"
@@ -224,7 +231,7 @@ const Home = () => {
           <div className="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-3/5 lg:pl-12 lg:text-left text-center">
             <div className="flex flex-col mb-10 lg:items-start items-center">
               <div className="flex-grow">
-                <h2 className="text-white-100 text-xl font-interbold mb-[2vh] text-left tracking-wide">
+                <h2 className="text-white-100 text-2xl lg:text-4xl font-interbold mb-[2vh] text-left tracking-wide">
                   Collaborating with Corpians
                 </h2>
                 <p className="leading-relaxed text-base font-worksanslight text-gray-200 text-left">
@@ -297,15 +304,15 @@ const Home = () => {
         </div>
       </section>
       <section className="relative bg-black-950">
-        <div className="lg:container px-[8vw] py-[10vh] mx-auto relative ">
-          <div className="flex flex-col text-center w-full relative z-10 mb-[6vh]">
-            <h1 className="font-interbold text-white tracking-wide text-xl mb-[2vh]">
+        <div className="lg:container px-[8vw] xs:pb-[1vh] sm:pb-24 mx-auto relative ">
+          <div className="flex flex-col text-center w-full relative z-10">
+            <h1 className="text-2xl lg:text-4xl font-interbold text-white tracking-wide mb-[2vh]">
               We Look Small,{" "}
-              <span className="bg-gradient-to-r from-gradient-1 to-gradient-2 bg-clip-text text-transparent">
+              <span className="block lg:inline bg-gradient-to-r from-gradient-1 to-gradient-2 bg-clip-text text-transparent">
                 But Think Big
               </span>
             </h1>
-            <p className="leading-relaxed text-center text-base font-worksanslight text-gray-200 text-left xs:px-[0vw] px-[8vw]">
+            <p className="leading-relaxed text-center text-base xs:pb-4 sm:pb-0 font-worksanslight text-gray-200 text-left xs:px-[0vw] px-[8vw]">
               At Corplabs, we foster a collaborative and inclusive culture. We
               believe in empowering our employees, valuing diversity, and
               promoting work-life balance. Join a team that encourages growth,
@@ -377,9 +384,9 @@ const Home = () => {
         </div>
       </section>
       <section className="bg-black-900 flex items-center justify-center text-white">
-        <div className="mx-auto max-w-screen-2xl px-12 py-24 sm:px-6 sm:py-24 lg:px-8 lg:py-24 ">
-          <div className="flex flex-col text-center w-full relative z-10 mb-[8vh] ">
-            <h1 className="font-interbold text-white tracking-wide text-xl mb-[2vh]">
+        <div className="mx-auto max-w-screen-2xl px-8 pt-16 pb-24 sm:px-6 sm:py-24 lg:px-8 lg:py-24 ">
+          <div className="flex flex-col text-center w-full relative z-10 mb-[6vh] ">
+            <h1 className="text-2xl lg:text-4xl font-interbold text-white tracking-wide mb-[2vh]">
               Job Vacancies
             </h1>
             <p className="leading-relaxed text-center text-base font-worksanslight text-gray-200 text-left ">
