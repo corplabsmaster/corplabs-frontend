@@ -63,7 +63,7 @@ const Home = () => {
           <div className="container sm:px-[0vw] xl:px-[5vw] py-[10vh] mx-auto">
             <div className="flex flex-col text-center w-full mb-20">
               <h1 className="font-interbold text-white text-xl tracking-wide">
-                Our Services
+                Our Services test
               </h1>
               {/* <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
                 Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
