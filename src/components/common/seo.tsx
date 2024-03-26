@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Helmet from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
+import PropTypes from "prop-types";
+import React from "react";
+import Helmet from "react-helmet";
 
 type Props = {
   description?: string;
@@ -35,7 +35,7 @@ const SEO: React.FC<Props> = ({
             titleTemplate={`${data.site.siteMetadata.title} | %s`}
             meta={[
               {
-                name: `description`,
+                name: `Corplabs`,
                 content: metaDescription,
               },
               {
@@ -67,24 +67,24 @@ const SEO: React.FC<Props> = ({
                 content: `lorem ipsum`,
               },
               {
-                name: `twitter:card`,
+                name: `Corplabs`,
                 content: `summary`,
               },
               {
-                name: `twitter:creator`,
+                name: `Corplabs`,
                 content: data.site.siteMetadata.author,
               },
               {
-                name: `twitter:title`,
+                name: `Corplabs`,
                 content: title,
               },
               {
-                name: `twitter:description`,
+                name: `Corplabs`,
                 content: metaDescription,
               },
               {
-                name: "google-site-verification",
-                content: "JyEH",
+                name: "Corplabs",
+                content: "Idea To Reality",
               },
             ]
               .concat(
