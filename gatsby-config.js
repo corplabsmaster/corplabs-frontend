@@ -3,7 +3,7 @@
 module.exports = {
   siteMetadata: {
     title: "Corplabs",
-    description: "lorem ipsum",
+    description: "Idea To Reality",
     author: "lorem",
     siteUrl: `https://www.corplabs.co`,
   },
