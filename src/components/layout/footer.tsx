@@ -64,32 +64,29 @@ const Footer: React.FC = () => {
                 <h3 className="font-intersemibold text-left text-white tracking-wide text-sm">
                   Solution
                 </h3>
-                <a
-                  href="#"
-                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
-                >
+                <a className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500">
                   App Development
                 </a>
                 <a
-                  href="#"
+                  // href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Web Solution
                 </a>
                 <a
-                  href="#"
+                  // href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Cybersecurity
                 </a>
                 <a
-                  href="#"
+                  // href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Design
                 </a>
                 <a
-                  href="#"
+                  // href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Marketing
@@ -100,24 +97,24 @@ const Footer: React.FC = () => {
                 <h3 className="font-intersemibold text-left text-white tracking-wide text-sm">
                   Career
                 </h3>
-                {/* <a
-                  href="#"
+                <a
+                  href="https://corplabs.notion.site/Senior-Java-Backend-e8dc9233206842ab9048106bbcc2d833"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
-                  Lorem Ipsum
-                </a> */}
-                {/* <a
-                  href="#"
+                  Senior Java Backend
+                </a>
+                <a
+                  href="https://corplabs.notion.site/Vue-Frontend-Developer-0e30c07cf217405abda0db1f7f3f43f7"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
-                  Lorem Ipsum
-                </a> */}
-                {/* <a
-                  href="#"
+                  Vue Frontend Developer
+                </a>
+                <a
+                  href="https://corplabs.notion.site/PHP-Backend-Developer-42b1e15ee8124da8b5250d153aec761e"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
-                  Lorem Ipsum
-                </a> */}
+                  PHP Backend Developer
+                </a>
               </div>
 
               <div>

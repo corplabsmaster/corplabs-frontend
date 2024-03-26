@@ -63,7 +63,7 @@ const Home = () => {
           <div className="container sm:px-[0vw] xl:px-[5vw] py-[10vh] mx-auto">
             <div className="flex flex-col text-center w-full mb-20">
               <h1 className="font-interbold text-white text-xl tracking-wide">
-                Our Services test
+                Our Services
               </h1>
               {/* <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
                 Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
@@ -335,7 +335,7 @@ const Home = () => {
 
                 <div className="xl:w-1/2 md:w-1/2 md:px-[6vw] md:py-0 2md:px-[5vw] 2md:py-10 lg:px-[6vw] lg:py-14 xl:px-[4vw] xl:py-20 2xl:px-[4vw] 2xl:py-32">
                   <h1 className="mt-4 text-lg font-semibold text-white-100 tracking-wide">
-                    Benefits and Perks
+                    Benefits & Perks
                   </h1>
 
                   <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
@@ -406,7 +406,7 @@ const Home = () => {
               <button
                 onClick={() =>
                   (window.location.href =
-                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                    "https://corplabs.notion.site/Senior-Java-Backend-e8dc9233206842ab9048106bbcc2d833")
                 }
                 className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
               >
@@ -432,7 +432,7 @@ const Home = () => {
               <button
                 onClick={() =>
                   (window.location.href =
-                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                    "https://corplabs.notion.site/NodeJS-Backend-Developer-2e46d7dcb2664f379f8acb37f7a4f67a")
                 }
                 className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
               >
@@ -453,12 +453,12 @@ const Home = () => {
                 Engineering
               </h3>
               <h2 className="text-lg text-gray-50 font-intermedium mb-4">
-                Tech Lead (NodeJS)
+                IT Assistant
               </h2>
               <button
                 onClick={() =>
                   (window.location.href =
-                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                    "https://corplabs.notion.site/IT-Assistant-86819bd1b2b046e4bd721417df6efd5b")
                 }
                 className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
               >
@@ -479,12 +479,12 @@ const Home = () => {
                 Engineering
               </h3>
               <h2 className="text-lg text-gray-50 font-intermedium mb-4">
-                Junior Game Developer
+                Vue Frontend Developer
               </h2>
               <button
                 onClick={() =>
                   (window.location.href =
-                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                    "https://corplabs.notion.site/Vue-Frontend-Developer-0e30c07cf217405abda0db1f7f3f43f7")
                 }
                 className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
               >
@@ -505,12 +505,12 @@ const Home = () => {
                 Engineering
               </h3>
               <h2 className="text-lg text-gray-50 font-intermedium mb-4">
-                Senior Game Developer
+                PHP Backend Developer
               </h2>
               <button
                 onClick={() =>
                   (window.location.href =
-                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                    "https://corplabs.notion.site/PHP-Backend-Developer-42b1e15ee8124da8b5250d153aec761e")
                 }
                 className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
               >
@@ -528,15 +528,15 @@ const Home = () => {
                 alt="product-lead"
               />
               <h3 className="tracking-wide text-primary-300 text-base font-worksanslight mb-2">
-                Product
+                Engineering
               </h3>
               <h2 className="text-lg text-gray-50 font-intermedium mb-4">
-                Product Lead Manager
+                Java Backend (Part time)
               </h2>
               <button
                 onClick={() =>
                   (window.location.href =
-                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                    "https://corplabs.notion.site/Java-backend-Part-time-a8ebfcba47c84fdc8437ffeebc278f45")
                 }
                 className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
               >

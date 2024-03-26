@@ -121,7 +121,7 @@ const Header: React.FC<HeaderProps> = props => {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
-              href="#"
+              href="https://www.facebook.com/corplabs.co"
               className="inline-flex items-center text-base text-white-100 font-interlight leading-6 hover:text-primary-600"
             >
               Contact
@@ -175,12 +175,12 @@ const Header: React.FC<HeaderProps> = props => {
                     href="#"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-interlight leading-7 text-white"
                   >
-                    Career
+                    Careers
                   </a>
                 </div>
                 <div className="py-6">
                   <a
-                    href="#"
+                    href="https://www.facebook.com/corplabs.co"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-interlight leading-7 text-white hover:text-primary-600"
                   >
                     Contact

@@ -9,7 +9,7 @@ beforeEach(() => {
     render({
       site: {
         siteMetadata: {
-          title: `Default Starter`,
+          title: `Corplabs`,
         },
       },
     })
