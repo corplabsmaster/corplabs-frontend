@@ -401,9 +401,15 @@ const Home = () => {
                 Engineering
               </h3>
               <h2 className="text-lg text-gray-50 font-intermedium mb-4">
-                Senior NodeJS Full Stack Engineer (Backend Heavy)
+                Senior Java Backend
               </h2>
-              <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                }
+                className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
+              >
                 LEARN MORE
               </button>
             </a>
@@ -421,9 +427,15 @@ const Home = () => {
                 Engineering
               </h3>
               <h2 className="text-lg text-gray-50 font-intermedium mb-4">
-                Senior NodeJS Full Stack Engineer (Frontend Heavy)
+                NodeJS Backend Developer
               </h2>
-              <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                }
+                className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
+              >
                 LEARN MORE
               </button>
             </a>
@@ -443,7 +455,13 @@ const Home = () => {
               <h2 className="text-lg text-gray-50 font-intermedium mb-4">
                 Tech Lead (NodeJS)
               </h2>
-              <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                }
+                className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
+              >
                 LEARN MORE
               </button>
             </a>
@@ -463,7 +481,13 @@ const Home = () => {
               <h2 className="text-lg text-gray-50 font-intermedium mb-4">
                 Junior Game Developer
               </h2>
-              <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                }
+                className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
+              >
                 LEARN MORE
               </button>
             </a>
@@ -483,7 +507,13 @@ const Home = () => {
               <h2 className="text-lg text-gray-50 font-intermedium mb-4">
                 Senior Game Developer
               </h2>
-              <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                }
+                className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
+              >
                 LEARN MORE
               </button>
             </a>
@@ -503,7 +533,13 @@ const Home = () => {
               <h2 className="text-lg text-gray-50 font-intermedium mb-4">
                 Product Lead Manager
               </h2>
-              <button className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient">
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    "/https://www.notion.so/corplabs/Senior-NodeJS-Full-Stack-Engineer-Backend-Heavy-a2d9521d6bf04f228d114fdec06a2a3f?pvs=4")
+                }
+                className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
+              >
                 LEARN MORE
               </button>
             </a>

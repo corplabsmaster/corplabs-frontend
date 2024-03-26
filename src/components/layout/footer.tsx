@@ -19,15 +19,15 @@ const Footer: React.FC = () => {
               </a>
 
               <div className="flex mt-4 mb-16 ">
-                <a href="#">
+                <a href="https://www.facebook.com/corplabs.co">
                   <img src={fb} alt="fb-icon" className="mr-5" />
                 </a>
 
-                <a href="#">
+                <a href="https://www.instagram.com/corplabs_co/">
                   <img src={ig} alt="ig-icon" className="mr-5" />
                 </a>
 
-                <a href="#">
+                <a href="https://www.linkedin.com/company/corplabsco/">
                   <img src={linkedin} alt="linkedin-icon" className="mr-5" />
                 </a>
               </div>
@@ -46,18 +46,18 @@ const Footer: React.FC = () => {
                 >
                   Company
                 </a>
-                <a
+                {/* <a
                   href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
-                </a>
-                <a
+                </a> */}
+                {/* <a
                   href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
-                </a>
+                </a> */}
               </div>
 
               <div>
@@ -100,24 +100,24 @@ const Footer: React.FC = () => {
                 <h3 className="font-intersemibold text-left text-white tracking-wide text-sm">
                   Career
                 </h3>
-                <a
+                {/* <a
                   href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
-                </a>
-                <a
+                </a> */}
+                {/* <a
                   href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
-                </a>
-                <a
+                </a> */}
+                {/* <a
                   href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
-                </a>
+                </a> */}
               </div>
 
               <div>
@@ -125,10 +125,10 @@ const Footer: React.FC = () => {
                   Contact
                 </h3>
                 <span className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500">
-                  +12 3456 7890
+                  016-672 7208
                 </span>
                 <span className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500">
-                  example@email.com
+                  contact@corplabs.co
                 </span>
               </div>
             </div>
@@ -179,7 +179,8 @@ const Footer: React.FC = () => {
 
         <div className="flex flex-col items-center justify-between md:flex-row mb-[2vh]">
           <p className="text-gray-200 text-xs font-worksanslight">
-            © 2023 Corplabs - All rights reserved
+            D-U-N-S® Certified : 44-791-6777 • © 2024 Corplabs - All rights
+            reserved
           </p>
 
           <div className="-mx-4">
