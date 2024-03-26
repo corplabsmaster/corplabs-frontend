@@ -154,7 +154,7 @@ const Footer: React.FC = () => {
                 type="text"
                 id="footer-field-1"
                 name="footer-field-1"
-                className="w-full md:w-[25vw] bg-black-1000 rounded border-2 border-primary-500 focus:ring-0.5 focus:bg-transparent focus:ring-primary-500 focus:border-primary-200 text-xs outline-none text-gray-200-50 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full md:w-[25vw] bg-primary-1000 rounded border-2 border-primary-500 focus:ring-0.5 focus:bg-transparent focus:ring-primary-500 focus:border-primary-200 text-xs outline-none text-gray-200 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
             <div className="mt-[2vh] md:mx-3 shrink-0 md:mt-[1.5vh] md:w-auto ">
@@ -162,7 +162,7 @@ const Footer: React.FC = () => {
                 type="text"
                 id="footer-field-2"
                 name="footer-field-2"
-                className="w-full md:w-[25vw] bg-black-1000 rounded border-2 border-primary-500 focus:ring-0.5 focus:bg-transparent focus:ring-primary-500 focus:border-primary-200 text-xs outline-none text-gray-200 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full md:w-[25vw] bg-primary-1000 rounded border-2 border-primary-500 focus:ring-0.5 focus:bg-transparent focus:ring-primary-500 focus:border-primary-200 text-xs outline-none text-gray-200 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
             <div className="mt-[2vh] md:mx-3 shrink-0 md:mt-[1.5vh] md:w-auto">

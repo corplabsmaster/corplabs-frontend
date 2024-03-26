@@ -77,10 +77,14 @@ const Home = () => {
               </p> */}
             </div>
 
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap flex-col">
               <dl className="grid grid-cols-1 gap-0 sm:grid-cols-3 sm:divide-x sm:divide-white-100/40">
-                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw]">
-                  <img className="" src={App} alt="app-icon" />
+                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw] items-center md:text-left xs:text-center">
+                  <img
+                    className="md:mx-0 xs:mx-auto"
+                    src={App}
+                    alt="app-icon"
+                  />
 
                   <h1 className="mt-4 text-lg font-semibold text-white-100">
                     App
@@ -92,8 +96,12 @@ const Home = () => {
                   </p>
                 </div>
 
-                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw]">
-                  <img className="" src={Web} alt="web-icon" />
+                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw] items-center md:text-left xs:text-center">
+                  <img
+                    className="md:mx-0 xs:mx-auto"
+                    src={Web}
+                    alt="web-icon"
+                  />
 
                   <h1 className="mt-4 text-lg font-semibold text-white-100">
                     Web
@@ -105,8 +113,12 @@ const Home = () => {
                   </p>
                 </div>
 
-                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw]">
-                  <img className="" src={Cybersecurity} alt="app-icon" />
+                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw] items-center md:text-left xs:text-center">
+                  <img
+                    className="md:mx-0 xs:mx-auto"
+                    src={Cybersecurity}
+                    alt="app-icon"
+                  />
                   <h1 className="mt-4 text-lg font-semibold text-white-100">
                     Cybersecurity
                   </h1>
@@ -120,9 +132,13 @@ const Home = () => {
 
             <div className="flex flex-wrap sm:mt-[4vh] md:mt-[4vh] lg:mt-[8vh]">
               <dl className="grid grid-cols-1 gap-0 sm:grid-cols-3 sm:divide-x sm:divide-white-100/40">
-                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw]">
+                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw] items-center md:text-left xs:text-center">
                   <div>
-                    <img className="" src={Design} alt="design-icon" />
+                    <img
+                      className="md:mx-0 xs:mx-auto"
+                      src={Design}
+                      alt="design-icon"
+                    />
 
                     <h1 className="mt-4 text-lg font-semibold text-white-100">
                       Design
@@ -134,8 +150,12 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw]">
-                  <img className="" src={Marketing} alt="marketing-icon" />
+                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw] items-center md:text-left xs:text-center">
+                  <img
+                    className="md:mx-0 xs:mx-auto"
+                    src={Marketing}
+                    alt="marketing-icon"
+                  />
                   <h1 className="mt-4 text-lg font-semibold text-white-100">
                     Marketing
                   </h1>
