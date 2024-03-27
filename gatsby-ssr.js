@@ -1,1 +1,1 @@
-// export { wrapRootElement } from "./src/helpers/providers";
+export { wrapRootElement } from "./src/helpers/providers";

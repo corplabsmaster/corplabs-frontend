@@ -14,7 +14,13 @@ import Footer from "@components/layout/footer";
 import Header from "@components/layout/header";
 import React from "react";
 
-const About: React.FC<PromoCardProps> = () => {
+type Props = {
+  location?: {
+    pathname: string;
+  };
+};
+
+const About: React.FC<PromoCardProps> = ({ location }: Props) => {
   return (
     <Layout location={location.pathname}>
       <SEO title="lorem ipsum" description="lorem ipsum" />

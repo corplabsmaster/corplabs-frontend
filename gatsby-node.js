@@ -52,10 +52,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
             use: loaders.null(),
           },
           {
-            test: "/@lottiefiles/lottie-interactivity/",
-            use: loaders.null(),
-          },
-          {
             test: "/@ant-design/react-slick/",
             use: loaders.null(),
           },
