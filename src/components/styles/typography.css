@@ -22,3 +22,13 @@
   font-family: "WorkSans-Light";
   src: url("./fonts/worksans/WorkSans-Light.ttf");
 }
+
+@font-face {
+  font-family: "Gotham-Light";
+  src: url("./fonts/gotham-light.ttf");
+}
+
+@font-face {
+  font-family: "WorkSans-Semibold";
+  src: url("./fonts/worksans/WorkSans-SemiBold.ttf");
+}

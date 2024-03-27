@@ -100,7 +100,18 @@ module.exports = {
         interbold: ["Inter-Bold"],
         worksanslight: ["WorkSans-Light"],
         worksanssemibold: ["WorkSans-Semibold"],
+        gothamlight: ["Gotham-Light"],
       },
+
+      typography: theme => ({
+        DEFAULT: {
+          css: {
+            color: theme("colors.primary.900"),
+            fontFamily: "WorkSans-Light",
+            // Add other custom styles as needed
+          },
+        },
+      }),
 
       fontSize: {
         xs: "12px", // Extra Small
