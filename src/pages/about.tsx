@@ -23,7 +23,14 @@ type Props = {
 const About: React.FC<PromoCardProps> = ({ location }: Props) => {
   return (
     <Layout location={location.pathname}>
-      <SEO title="lorem ipsum" description="lorem ipsum" />
+      <SEO
+        title="About"
+        description="Corplabs is a dynamic technology company founded by a team of
+                highly motivated and experienced technological enthusiasts. With
+                a shared passion for delivering exceptional products, the team
+                at Corplabs is dedicated to transforming the technology industry
+                through innovation and cutting-edge solutions."
+      />
       <Header /> {/* Use Header component here */}
       <div className="min-h-screen bg-black-950">
         <section className="text-gray-600 body-font">

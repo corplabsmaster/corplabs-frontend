@@ -52,7 +52,7 @@ const SEO: React.FC<Props> = ({
               },
               {
                 property: `og:url`,
-                content: `https://www.google.com`,
+                content: `https://www.corplabs.co`,
               },
               {
                 name: `keywords`,
@@ -60,15 +60,15 @@ const SEO: React.FC<Props> = ({
               },
               {
                 property: `og:site_name`,
-                content: `Jeetbuzz Casino - Live Cricket Betting | ${title}`,
+                content: `Corplabs | ${title}`,
               },
               {
                 property: `og:description`,
-                content: `lorem ipsum`,
+                content: `Corplabs is a software company that specializes in bringing your ideas to life with our 'Idea to reality' approach. Our team of experts can turn your software concepts into tangible solutions that meet your business needs. Contact us today to learn more.`,
               },
               {
                 name: `Corplabs`,
-                content: `summary`,
+                content: `Corplabs is a software company that specializes in bringing your ideas to life with our 'Idea to reality' approach. Our team of experts can turn your software concepts into tangible solutions that meet your business needs. Contact us today to learn more.`,
               },
               {
                 name: `Corplabs`,
@@ -84,7 +84,8 @@ const SEO: React.FC<Props> = ({
               },
               {
                 name: "Corplabs",
-                content: "Idea To Reality",
+                content:
+                  "Corplabs is a software company that specializes in bringing your ideas to life with our 'Idea to reality' approach. Our team of experts can turn your software concepts into tangible solutions that meet your business needs. Contact us today to learn more.",
               },
             ]
               .concat(

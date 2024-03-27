@@ -7,7 +7,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
-import withThisUser from "@helpers/hoc/withThisUser";
 
 // import logoWhiteImg from "@images/logos/logo.png";
 import logoWhiteImg from "../images/logos/logo.png";
@@ -43,10 +42,9 @@ const SideBar: React.FC<Props> = ({ menuExpand, triggerMenu, role }: Props) => {
             height: "40px",
             margin: "0 15px 0 0",
           }}
-          alt={"lottie-logo"}
+          alt={"logo"}
           src={logoWhiteImg}
         />
-        LottieFiles
       </Logo>
       <List>
         {menu.map(({ text, Icon, url, view }: any, index: any) => {
@@ -83,7 +81,7 @@ const SideBar: React.FC<Props> = ({ menuExpand, triggerMenu, role }: Props) => {
   );
 };
 
-export default withThisUser(SideBar);
+export default SideBar;
 
 const Logo = styled.div`
   width: 100%;
