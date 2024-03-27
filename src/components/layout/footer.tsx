@@ -10,7 +10,7 @@ import "../layout/footer.css";
 const Footer: React.FC = () => {
   return (
     <footer className="bg-primary-950">
-      <div className="container p-6 mx-auto">
+      <div className="container p-6 xs:px-2 sm:px-9">
         <div className="lg:flex mt-6">
           <div className="w-full -mx-6 lg:w-2/6">
             <div className="px-6">
@@ -19,22 +19,22 @@ const Footer: React.FC = () => {
               </a>
 
               <div className="flex mt-4 mb-16 ">
-                <a href="#">
+                <a href="https://www.facebook.com/corplabs.co">
                   <img src={fb} alt="fb-icon" className="mr-5" />
                 </a>
 
-                <a href="#">
+                <a href="https://www.instagram.com/corplabs_co/">
                   <img src={ig} alt="ig-icon" className="mr-5" />
                 </a>
 
-                <a href="#">
+                <a href="https://www.linkedin.com/company/corplabsco/">
                   <img src={linkedin} alt="linkedin-icon" className="mr-5" />
                 </a>
               </div>
             </div>
           </div>
 
-          <div className="mt- lg:mt-0 lg:flex-1">
+          <div className="mt-0 lg:mt-0 lg:flex-1">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               <div>
                 <h3 className="font-intersemibold text-left text-white tracking-wide text-sm">
@@ -46,50 +46,47 @@ const Footer: React.FC = () => {
                 >
                   Company
                 </a>
-                <a
+                {/* <a
                   href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
-                </a>
-                <a
+                </a> */}
+                {/* <a
                   href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Lorem Ipsum
-                </a>
+                </a> */}
               </div>
 
               <div>
                 <h3 className="font-intersemibold text-left text-white tracking-wide text-sm">
                   Solution
                 </h3>
-                <a
-                  href="#"
-                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
-                >
+                <a className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500">
                   App Development
                 </a>
                 <a
-                  href="#"
+                  // href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Web Solution
                 </a>
                 <a
-                  href="#"
+                  // href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Cybersecurity
                 </a>
                 <a
-                  href="#"
+                  // href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Design
                 </a>
                 <a
-                  href="#"
+                  // href="#"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Marketing
@@ -101,22 +98,22 @@ const Footer: React.FC = () => {
                   Career
                 </h3>
                 <a
-                  href="#"
+                  href="https://corplabs.notion.site/Senior-Java-Backend-e8dc9233206842ab9048106bbcc2d833"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
-                  Lorem Ipsum
+                  Senior Java Backend
                 </a>
                 <a
-                  href="#"
+                  href="https://corplabs.notion.site/Vue-Frontend-Developer-0e30c07cf217405abda0db1f7f3f43f7"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
-                  Lorem Ipsum
+                  Vue Frontend Developer
                 </a>
                 <a
-                  href="#"
+                  href="https://corplabs.notion.site/PHP-Backend-Developer-42b1e15ee8124da8b5250d153aec761e"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
-                  Lorem Ipsum
+                  PHP Backend Developer
                 </a>
               </div>
 
@@ -125,10 +122,10 @@ const Footer: React.FC = () => {
                   Contact
                 </h3>
                 <span className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500">
-                  +12 3456 7890
+                  016-672 7208
                 </span>
                 <span className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500">
-                  example@email.com
+                  contact@corplabs.co
                 </span>
               </div>
             </div>
@@ -157,7 +154,7 @@ const Footer: React.FC = () => {
                 type="text"
                 id="footer-field-1"
                 name="footer-field-1"
-                className="w-full md:w-[25vw] bg-black-1000 rounded border-2 border-primary-500 focus:ring-0.5 focus:bg-transparent focus:ring-primary-500 focus:border-primary-200 text-xs outline-none text-gray-200-50 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full md:w-[25vw] bg-primary-1000 rounded border-2 border-primary-500 focus:ring-0.5 focus:bg-transparent focus:ring-primary-500 focus:border-primary-200 text-xs outline-none text-gray-200 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
             <div className="mt-[2vh] md:mx-3 shrink-0 md:mt-[1.5vh] md:w-auto ">
@@ -165,7 +162,7 @@ const Footer: React.FC = () => {
                 type="text"
                 id="footer-field-2"
                 name="footer-field-2"
-                className="w-full md:w-[25vw] bg-black-1000 rounded border-2 border-primary-500 focus:ring-0.5 focus:bg-transparent focus:ring-primary-500 focus:border-primary-200 text-xs outline-none text-gray-200 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full md:w-[25vw] bg-primary-1000 rounded border-2 border-primary-500 focus:ring-0.5 focus:bg-transparent focus:ring-primary-500 focus:border-primary-200 text-xs outline-none text-gray-200 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
             <div className="mt-[2vh] md:mx-3 shrink-0 md:mt-[1.5vh] md:w-auto">
@@ -177,21 +174,22 @@ const Footer: React.FC = () => {
         </div>
         <hr className="h-[1.5px] my-[5vh] bg-primary-500 border-none" />
 
-        <div className="flex flex-col items-center justify-between md:flex-row mb-[2vh]">
+        <div className="flex flex-col justify-between md:flex-row mb-[2vh]">
           <p className="text-gray-200 text-xs font-worksanslight">
-            © 2023 Corplabs - All rights reserved
+            D-U-N-S® Certified : 44-791-6777 • © 2024 Corplabs - All rights
+            reserved
           </p>
 
-          <div className="-mx-4">
+          <div className="flex justify-between">
             <a
               href="#"
-              className="px-4 text-gray-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-primary-500"
+              className="text-gray-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-primary-500 mr-4"
             >
               Privacy Policy
             </a>
             <a
               href="#"
-              className="px-4 text-gray-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-primary-500"
+              className="text-gray-200 font-worksanslight text-xs tracking-wide transition-colors duration-300 hover:text-primary-500 ml-4"
             >
               Terms of Conditions
             </a>
