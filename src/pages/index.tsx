@@ -26,7 +26,7 @@ import TechLead from "@images/tech-lead.png";
 import Web from "@images/web-icon.svg";
 import React, { useState } from "react";
 
-const Home = () => {
+const Home: React.FC<PromoCardProps> = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [Plan, Execute, Maintain]; // Replace with your actual image sources
