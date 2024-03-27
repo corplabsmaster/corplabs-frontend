@@ -21,13 +21,13 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "JeetBuzz App",
-        short_name: "JeetBuzz",
+        name: "Corplabs",
+        short_name: "Corplabs",
         start_url: "/index",
         background_color: "#ffffff ",
         theme_color: "#ffffff ",
         display: "fullscreen",
-        icon: "src/components/images/logo.png",
+        icon: "src/components/images/corplabs-logo.svg",
       },
     },
     {
