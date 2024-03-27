@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "@commlabs/jb-frontend",
+      "script": "npm",
+      "args": "run serve"
+    }
+  ]
+}
