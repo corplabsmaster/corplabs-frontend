@@ -4,7 +4,7 @@ import Footer from "@components/layout/footer";
 import Header from "@components/layout/header";
 import App from "@images/app-icon.svg";
 import Astronaut from "@images/astronaut.svg";
-import Backend from "@images/backend.png";
+import Backend from "@images/backend.webp";
 import Collab2 from "@images/collab-icon.svg";
 import Collab from "@images/collab.svg";
 import Compre from "@images/compre-icon.svg";
@@ -13,17 +13,17 @@ import Culture from "@images/culture-bg.svg";
 import Cybersecurity from "@images/cybersecurity-icon.svg";
 import Design from "@images/design-icon.svg";
 import Execute from "@images/execute.svg";
-import Frontend from "@images/frontend.png";
-import GameDev from "@images/game-dev.png";
-import GameDev2 from "@images/game-dev2.png";
+import Frontend from "@images/frontend.webp";
+import GameDev from "@images/game-dev.webp";
+import GameDev2 from "@images/game-dev2.webp";
 import GameFi from "@images/gamefi-icon.svg";
 import Idea from "@images/idea-icon.svg";
 import Maintain from "@images/maintain.svg";
 import Marketing from "@images/marketing-icon.svg";
 import Plan from "@images/plan.svg";
-import ProductLead from "@images/product-lead.png";
+import ProductLead from "@images/product-lead.webp";
 import Support from "@images/support-icon.svg";
-import TechLead from "@images/tech-lead.png";
+import TechLead from "@images/tech-lead.webp";
 import Web from "@images/web-icon.svg";
 import React, { useState } from "react";
 
@@ -181,11 +181,11 @@ const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
                     alt="gamefi-icon"
                   />
 
-                  <h1 className="mt-4 text-lg font-semibold text-white-100">
+                  <h1 className="mt-[3vh] text-lg font-semibold text-white-100">
                     GameFi
                   </h1>
 
-                  <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
+                  <p className="mt-[0.8vh] font-worksanslight text-base text-gray-200 tracking-wide">
                     We provide GameFi services, combining gaming with finance
                     and blockchain.
                   </p>
