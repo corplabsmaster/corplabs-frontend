@@ -16,6 +16,7 @@ import Execute from "@images/execute.svg";
 import Frontend from "@images/frontend.png";
 import GameDev from "@images/game-dev.png";
 import GameDev2 from "@images/game-dev2.png";
+import GameFi from "@images/gamefi-icon.svg";
 import Idea from "@images/idea-icon.svg";
 import Maintain from "@images/maintain.svg";
 import Marketing from "@images/marketing-icon.svg";
@@ -161,6 +162,23 @@ const Home = () => {
                   </h1>
                   <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
                     We offer strategic marketing services to elevate your brand.
+                  </p>
+                </div>
+
+                <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw] items-center md:text-left xs:text-center">
+                  <img
+                    className="md:mx-0 xs:mx-auto"
+                    src={GameFi}
+                    alt="gamefi-icon"
+                  />
+
+                  <h1 className="mt-4 text-lg font-semibold text-white-100">
+                    GameFi
+                  </h1>
+
+                  <p className="mt-2 font-worksanslight text-base text-gray-200 tracking-wide">
+                    We provide GameFi services, combining gaming with finance
+                    and blockchain.
                   </p>
                 </div>
               </dl>
