@@ -64,7 +64,7 @@ const SEO: React.FC<Props> = ({
               },
               {
                 property: `og:image`,
-                content: `https://www.betvisas365.com/static/5-aa82028058ba35de7f749aba19ea5ca4.jpeg`,
+                content: `https://www.corplabs.co/static/tech-lead-e2960110eda7be2a4c94576816b47b79.png`,
               },
               {
                 property: `og:description`,
