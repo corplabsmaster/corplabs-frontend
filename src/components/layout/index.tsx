@@ -1,4 +1,4 @@
-import "@lottiefiles/lottie-player";
+// import "@lottiefiles/lottie-player";
 import "@styles/global.styles.css";
 import React, { useEffect } from "react";
 import ReactGA from "react-ga";
