@@ -35,10 +35,10 @@ const SEO: React.FC<Props> = ({
             titleTemplate={`${data.site.siteMetadata.title} | %s`}
             meta={[
               {
-                name: `Corplabs`,
+                name: `description`,
                 content: metaDescription,
               },
-              {
+                 {
                 property: `og:title`,
                 content: title,
               },
@@ -52,40 +52,39 @@ const SEO: React.FC<Props> = ({
               },
               {
                 property: `og:url`,
-                content: `https://www.corplabs.co`,
-              },
-              {
-                name: `keywords`,
-                content: keywords.join(","),
+                content: `https://corplabs.co`,
               },
               {
                 property: `og:site_name`,
-                content: `Corplabs | ${title}`,
+                content: `Corplabs | ${data.site.siteMetadata.description}`,
+              },
+              {
+                property: `og:local`,
+                content: `en-BD`,
+              },
+              {
+                property: `og:image`,
+                content: `https://www.betvisas365.com/static/5-aa82028058ba35de7f749aba19ea5ca4.jpeg`,
               },
               {
                 property: `og:description`,
-                content: `Corplabs is a software company that specializes in bringing your ideas to life with our 'Idea to reality' approach. Our team of experts can turn your software concepts into tangible solutions that meet your business needs. Contact us today to learn more.`,
-              },
-              {
-                name: `Corplabs`,
-                content: `Corplabs is a software company that specializes in bringing your ideas to life with our 'Idea to reality' approach. Our team of experts can turn your software concepts into tangible solutions that meet your business needs. Contact us today to learn more.`,
-              },
-              {
-                name: `Corplabs`,
-                content: data.site.siteMetadata.author,
-              },
-              {
-                name: `Corplabs`,
-                content: title,
-              },
-              {
-                name: `Corplabs`,
                 content: metaDescription,
               },
               {
-                name: "Corplabs",
-                content:
-                  "Corplabs is a software company that specializes in bringing your ideas to life with our 'Idea to reality' approach. Our team of experts can turn your software concepts into tangible solutions that meet your business needs. Contact us today to learn more.",
+                name: `twitter:card`,
+                content: metaDescription,
+              },
+              {
+                name: `twitter:creator`,
+                content: data.site.siteMetadata.author,
+              },
+              {
+                name: `twitter:title`,
+                content: title,
+              },
+              {
+                name: `twitter:description`,
+                content: metaDescription,
               },
             ]
               .concat(
