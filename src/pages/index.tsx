@@ -576,7 +576,7 @@ const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
               <button
                 onClick={() =>
                   (window.location.href =
-                    "https://corplabs.notion.site/Java-backend-Part-time-a8ebfcba47c84fdc8437ffeebc278f45")
+                    "https://corplabs.notion.site/Flutter-Frontend-Developer-f83a171fd77c413fbe598afc8cc53573?pvs=74")
                 }
                 className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
               >
