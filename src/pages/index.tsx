@@ -209,8 +209,8 @@ const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
                   </h1>
 
                   <p className="mt-[0.8vh] font-worksanslight text-base text-gray-200 tracking-wide">
-                    We provide GameFi services, combining gaming with finance
-                    and blockchain.
+                    We built GameFi project, combining gaming with finance and
+                    blockchain technology.
                   </p>
                 </div>
               </dl>
