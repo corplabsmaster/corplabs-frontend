@@ -52,6 +52,29 @@ const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
       <SEO
         title="Idea to reality"
         description="Corplabs is a software company that specializes in bringing your ideas to life with our 'Idea to reality' approach. Our team of experts can turn your software concepts into tangible solutions that meet your business needs. Contact us today to learn more."
+        schemaMarkup={{
+          type: "Organization",
+          name: "Corplabs",
+          alternateName: "Cplabs",
+          description:
+            "Bringing Your Ideas to Life, One Line of Code at a Time",
+          url: "https://corplabs.co",
+          logo: "https://corplabs.co/assets/img/logos/im90s.svg",
+          contactPoint: {
+            type: "ContactPoint",
+            telephone: "+6583937108",
+            contactType: "",
+            areaServed: ["MY", "SG"],
+            availableLanguage: ["en", "Chinese"],
+          },
+          sameAs: [
+            "https://twitter.com/coprlabs_co",
+            "https://www.instagram.com/corplabs_co/",
+            "https://www.linkedin.com/company/corplabsco",
+            "https://corplabs.co",
+            "https://www.facebook.com/corplabs.co/",
+          ],
+        }}
       />
       <Header />
       <div className="min-h-screen bg-black-950">
