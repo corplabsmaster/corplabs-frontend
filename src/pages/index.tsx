@@ -26,14 +26,18 @@ import Support from "@images/support-icon.svg";
 import TechLead from "@images/tech-lead.webp";
 import Web from "@images/web-icon.svg";
 import React, { useState } from "react";
+import { withNotionData } from "@helpers/hoc/withQueries";
 
 type Props = {
   location?: {
     pathname: string;
   };
+  notionData: {
+    notionJob: any;
+  };
 };
 
-const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
+const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [Plan, Execute, Maintain]; // Replace with your actual image sources
@@ -47,6 +51,8 @@ const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
       prevIndex => (prevIndex - 1 + images.length) % images.length
     );
   };
+  console.log(notionData?.notionJob?.data?.results);
+
   return (
     <Layout location={location.pathname}>
       <SEO
@@ -468,7 +474,38 @@ const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
             </p>
           </div>
           <div className="mt-8 mx-auto grid grid-cols-1 gap-10 md:grid-cols-2 sm:w-[80vw] md:w-[80vw] lg:grid-cols-3 lg:w-[85vw] xl:w-[70vw] 2xl:w-[60vw]">
-            <a
+            {notionData?.notionJob?.data?.results?.map(res => {
+              const isProd = res?.properties?.Team?.select?.name === "Product";
+              const isEngineer =
+                res?.properties?.Team?.select?.name === "Engineering";
+              // const isDesign = res?.properties?.Team?.select?.name === 'Design';
+
+              return (
+                <a
+                  key={res?.id}
+                  className="block p-8 transition shadow-xl rounded-xl bg-primary-950 border-1 border-primary-500 hover:border-primary-500 hover:shadow-primary-500/20"
+                  href={res?.public_url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    className="object-cover object-center w-full mb-6 rounded h-30 w-30"
+                    src={isEngineer ? Backend : isProd ? ProductLead : Frontend}
+                    alt={res?.properties?.Team?.select?.name}
+                  />
+                  <h3 className="mb-2 text-base tracking-wide text-primary-300 font-worksanslight">
+                    {res?.properties?.Team?.select?.name}
+                  </h3>
+                  <h2 className="mb-4 text-lg text-gray-50 font-intermedium">
+                    {res?.properties?.Name?.title?.[0]?.plain_text}
+                  </h2>
+                  <button className="block w-full px-6 py-2 text-gray-200 border-transparent rounded border-1 md:w-auto focus:outline-none hover:bg-primary-500 border-gradient">
+                    LEARN MORE
+                  </button>
+                </a>
+              );
+            })}
+            {/* <a
               className="block p-8 transition shadow-xl rounded-xl bg-primary-950 border-1 border-primary-500 hover:border-primary-500 hover:shadow-primary-500/20"
               href="https://corplabs.notion.site/Senior-Java-Backend-e8dc9233206842ab9048106bbcc2d833"
               target="_blank"
@@ -593,7 +630,7 @@ const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
               <h3 className="mb-2 text-base tracking-wide text-primary-300 font-worksanslight">
                 Engineering
               </h3>
-              <h2 className="text-lg text-gray-50 font-intermedium mb-4">
+              <h2 className="mb-4 text-lg text-gray-50 font-intermedium">
                 Flutter Frontend Developer
               </h2>
               <button
@@ -601,11 +638,11 @@ const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
                   (window.location.href =
                     "https://corplabs.notion.site/Flutter-Frontend-Developer-f83a171fd77c413fbe598afc8cc53573?pvs=74")
                 }
-                className="border-transparent border-1 w-full md:w-auto block text-gray-200 py-2 px-6 focus:outline-none hover:bg-primary-500 rounded border-gradient"
+                className="block w-full px-6 py-2 text-gray-200 border-transparent rounded border-1 md:w-auto focus:outline-none hover:bg-primary-500 border-gradient"
               >
                 LEARN MORE
               </button>
-            </a>
+            </a> */}
           </div>
         </div>
       </section>
@@ -614,4 +651,4 @@ const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
   );
 };
 
-export default Home;
+export default withNotionData(Home);
