@@ -78,7 +78,7 @@ const Header: React.FC<HeaderProps> = () => {
               Home
             </a>
             <a
-              href="/#about"
+              href="/about"
               className="mr-[3vw] text-white-100 hover:text-primary-600"
             >
               About

@@ -230,7 +230,7 @@ const About: React.FC<PromoCardProps> = ({ location }: Props) => {
           </div>
         </section>
 
-        <section className="text-gray-600 body-font">
+        {/* <section className="text-gray-600 body-font">
           <div className="container flex flex-wrap px-5 py-0 mx-auto">
             <div className="container flex flex-col items-center justify-center px-0 py-4 mx-auto lg:py-10">
               <h1 className="tracking-wide lg:text-xl text-lg2 font-intersemibold text-white-100">
@@ -286,7 +286,7 @@ const About: React.FC<PromoCardProps> = ({ location }: Props) => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
       <Footer />
     </Layout>
