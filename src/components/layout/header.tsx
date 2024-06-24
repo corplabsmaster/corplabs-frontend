@@ -64,7 +64,7 @@ const Header: React.FC<HeaderProps> = () => {
       >
         <div className="flex items-center lg:flex-1">
           {/* Added items-center class */}
-          <a href="./#" className="-m-1.5 p-1.5">
+          <a href="/#" className="-m-1.5 p-1.5">
             <img className="w-10 h-10" src={logo} alt="corplabs-logo" />
           </a>
         </div>
@@ -72,25 +72,25 @@ const Header: React.FC<HeaderProps> = () => {
           {/* Center align the desktop navigation */}
           <div className="border-[1.5px] w-[30vw] h-[6vh] rounded-full border-primary-600 bg-black-900 flex flex-wrap items-center text-base justify-center">
             <a
-              href="./#"
+              href="/#"
               className="mr-[3vw] text-white-100 hover:text-primary-600"
             >
               Home
             </a>
             <a
-              href="./#about"
+              href="/#about"
               className="mr-[3vw] text-white-100 hover:text-primary-600"
             >
               About
             </a>
             <a
-              href="./#services"
+              href="/#services"
               className="mr-[3vw] text-white-100 hover:text-primary-600"
             >
               Solution
             </a>
             <a
-              href="./#careers"
+              href="/#careers"
               className="mr-[0vw] text-white-100 hover:text-primary-600"
             >
               Career
