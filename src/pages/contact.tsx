@@ -20,11 +20,11 @@ type Props = {
   };
 };
 
-const About: React.FC<PromoCardProps> = ({ location }: Props) => {
+const Contact: React.FC<PromoCardProps> = ({ location }: Props) => {
   return (
     <Layout location={location.pathname}>
       <SEO
-        title="About"
+        title="Contact"
         description="Corplabs is a dynamic technology company founded by a team of
                 highly motivated and experienced technological enthusiasts. With
                 a shared passion for delivering exceptional products, the team
@@ -36,11 +36,6 @@ const About: React.FC<PromoCardProps> = ({ location }: Props) => {
         <iframe
           src="https://docs.google.com/forms/d/e/1FAIpQLScNRlXBEVeDMM_eqom0DSK5SupQXX141ARHX36icbODbdBLWA/viewform?embedded=true"
           className="w-[100vw] h-[115vh]"
-          // width="640"
-          // height="1142"
-          // frameborder="0"
-          // marginheight="0"
-          // marginwidth="0"
         >
           Loading…
         </iframe>
@@ -50,4 +45,4 @@ const About: React.FC<PromoCardProps> = ({ location }: Props) => {
   );
 };
 
-export default About;
+export default Contact;

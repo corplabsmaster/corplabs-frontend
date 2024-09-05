@@ -23,7 +23,7 @@ module.exports = {
       options: {
         name: "Corplabs",
         short_name: "Corplabs",
-        start_url: "/index",
+        start_url: "/",
         background_color: "#ffffff ",
         theme_color: "#ffffff ",
         display: "fullscreen",
