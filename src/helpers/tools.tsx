@@ -88,3 +88,9 @@ export const getBase64: any = (url: string) => {
 export const capitalizeFirstLetter = (string: string): string => {
   return string && string.charAt(0).toUpperCase() + string.slice(1);
 };
+
+export const filterOpenStatus = (results: any): any => {
+  return results.filter(page => {
+    return page.properties.Status.status.name === "open";
+  });
+};

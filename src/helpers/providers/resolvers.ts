@@ -61,6 +61,36 @@ export const createResolvers: CreateResolversFn = () => {
           console.log(err);
         }
       },
+      notionJob: async () => {
+        try {
+          const response = await fetch(
+            `https://jobs.corplabs.co/databases/5d1bdd35676d4c7aaa78d0e29a17dcde/query`,
+            {
+              method: "POST",
+              body: JSON.stringify({
+                sorts: [
+                  {
+                    property: "Job Posted",
+                    direction: "ascending",
+                  },
+                ],
+                filter: {
+                  property: "Status",
+                  status: {
+                    equals: "complete",
+                  },
+                },
+              }),
+            }
+          );
+
+          const data = await response.json();
+
+          return { data };
+        } catch (err) {
+          console.log(err);
+        }
+      },
       couponValidity: async (
         _: any,
         { code, grandTotal }: { code: string; grandTotal: number }

@@ -78,3 +78,18 @@ export const withQueryPurchases =
       />
     );
   };
+
+export const withNotionData =
+  (ComponentToWrap: any) =>
+  (props: any): Promise<void> => {
+    const { data, loading, refetch } = useQuery(queries.notionJob);
+
+    return (
+      <ComponentToWrap
+        {...props}
+        notionData={data && data}
+        loading={loading}
+        refetchPurchasesQuery={refetch}
+      />
+    );
+  };
