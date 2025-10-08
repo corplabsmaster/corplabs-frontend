@@ -100,7 +100,7 @@ const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
           <div className="container xs:px-[0vw] sm:px-[0vw] xl:px-[5vw] xs:pb-14 sm:pb-40 mx-auto">
             <div className="flex flex-col text-center w-full mb-20 xs:mb-[4vh] md:mb-[6vh]">
               <h1 className="text-2xl tracking-wider text-center font-interbold text-white-100 lg:text-4xl">
-                Our Services
+                Our Projects
               </h1>
               {/* <p className="mx-auto text-base leading-relaxed lg:w-2/3">
                 Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
@@ -109,9 +109,392 @@ const Home: React.FC<PromoCardProps> = ({ location }: Props) => {
                 prism food truck ugh squid celiac humblebrag.
               </p> */}
             </div>
+          </div>
+        </section>
 
-            <div className="flex flex-col flex-wrap">
-              <dl className="grid grid-cols-1 gap-0 sm:grid-cols-3 sm:divide-x sm:divide-white-100/40">
+        {/* HiTerra Products Section */}
+        <section
+          className="text-gray-200 body-font bg-black-950 py-20"
+          id="products"
+        >
+          <div className="container mx-auto px-5">
+            {/* Section Header */}
+            <div className="flex flex-col text-center w-full mb-12">
+              <span className="inline-block px-4 py-1 mb-4 text-xs font-semibold tracking-widest text-[#00FF94] uppercase rounded-full bg-[#00FF94]/10 w-fit mx-auto">
+                Our Flagship Project
+              </span>
+              <h2 className="text-3xl lg:text-5xl font-interbold text-white-100 mb-4">
+                HiTerra™ AI Platform
+              </h2>
+              <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-200 font-worksanslight">
+                A revolutionary AI-powered platform that helps farmers and
+                agricultural companies become more profitable and sustainable.
+                HiTerra combines smart farming recommendations, automated
+                agricultural cycles, and a comprehensive marketplace to
+                transform modern agriculture.
+              </p>
+            </div>
+
+            {/* Website Embed - Full Width */}
+            <div className="w-full mb-12">
+              <div
+                className="relative w-full rounded-xl overflow-hidden shadow-2xl"
+                style={{ height: "600px" }}
+              >
+                <iframe
+                  src="https://www.hiterra.co"
+                  className="absolute inset-0 w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title="HiTerra Website Preview"
+                ></iframe>
+              </div>
+            </div>
+
+            {/* Features and Overview Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+              {/* Left side - Features */}
+              <div className="bg-gradient-to-br from-[#000B42] to-[#001F52] border border-[#00FF94]/20 rounded-lg p-8">
+                <h3 className="text-2xl font-interbold text-white-100 mb-6">
+                  Key Features
+                </h3>
+
+                <div className="space-y-6">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 bg-green-500 rounded-lg p-2 mr-4">
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-intermedium text-white-100 mb-1">
+                        AI Recommendations
+                      </h4>
+                      <p className="text-gray-200 font-worksanslight">
+                        Get actionable insights powered by TerraMind AI to
+                        optimize farm practices, improve yield, and reduce costs
+                        with data-driven guidance.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 bg-green-500 rounded-lg p-2 mr-4">
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-intermedium text-white-100 mb-1">
+                        TerraLink System
+                      </h4>
+                      <p className="text-gray-200 font-worksanslight">
+                        Connect every aspect of your operations through an
+                        ecosystem that integrates product providers, farmers,
+                        and service providers seamlessly.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 bg-green-500 rounded-lg p-2 mr-4">
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-intermedium text-white-100 mb-1">
+                        Proven Results
+                      </h4>
+                      <p className="text-gray-200 font-worksanslight">
+                        Reduce more than 85% labour and achieve 70% time-saving
+                        with our research-backed platform validated by lab tests
+                        and field reports.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 bg-green-500 rounded-lg p-2 mr-4">
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-intermedium text-white-100 mb-1">
+                        Carbon Compliance
+                      </h4>
+                      <p className="text-gray-200 font-worksanslight">
+                        Align with global carbon credit and sustainability
+                        standards, unlocking new opportunities and long-term
+                        value for your farm.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right side - Platform Overview */}
+              <div className="bg-gradient-to-br from-[#000B42] to-[#001F52] border border-[#00FF94]/20 rounded-lg p-8">
+                <h3 className="text-2xl font-interbold text-white-100 mb-6">
+                  Platform Overview
+                </h3>
+
+                {/* Platform Components */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-[#000B42]/50 rounded-lg p-4 border border-[#00FF94]/20 hover:border-[#00FF94]/40 transition-colors">
+                    <div className="text-[#00FF94] mb-2">
+                      <svg
+                        className="w-8 h-8"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <h4 className="font-intermedium text-white-100 mb-1">
+                      Mobile App
+                    </h4>
+                    <p className="text-sm text-gray-200 font-worksanslight">
+                      Farm management on the go
+                    </p>
+                  </div>
+
+                  <div className="bg-[#000B42]/50 rounded-lg p-4 border border-[#00FF94]/20 hover:border-[#00FF94]/40 transition-colors">
+                    <div className="text-[#00FF94] mb-2">
+                      <svg
+                        className="w-8 h-8"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <h4 className="font-intermedium text-white-100 mb-1">
+                      Dashboard Web
+                    </h4>
+                    <p className="text-sm text-gray-200 font-worksanslight">
+                      Comprehensive analytics & insights
+                    </p>
+                  </div>
+
+                  <div className="bg-[#000B42]/50 rounded-lg p-4 border border-[#00FF94]/20 hover:border-[#00FF94]/40 transition-colors">
+                    <div className="text-[#00FF94] mb-2">
+                      <svg
+                        className="w-8 h-8"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"
+                        ></path>
+                      </svg>
+                    </div>
+                    <h4 className="font-intermedium text-white-100 mb-1">
+                      AI Data Platform
+                    </h4>
+                    <p className="text-sm text-gray-200 font-worksanslight">
+                      Intelligent data processing
+                    </p>
+                  </div>
+
+                  <div className="bg-[#000B42]/50 rounded-lg p-4 border border-[#00FF94]/20 hover:border-[#00FF94]/40 transition-colors">
+                    <div className="text-[#00FF94] mb-2">
+                      <svg
+                        className="w-8 h-8"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <h4 className="font-intermedium text-white-100 mb-1">
+                      Marketplace
+                    </h4>
+                    <p className="text-sm text-gray-200 font-worksanslight">
+                      Products & services hub
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Who It's For Section */}
+            <div className="bg-black-900 border border-green-500/20 rounded-2xl p-8 lg:p-12 mb-12">
+              <h3 className="text-2xl lg:text-3xl font-interbold text-white-100 text-center mb-8">
+                Designed For Everyone in Agriculture
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="bg-black-950 border border-green-500/20 rounded-lg p-6 hover:border-green-500/40 transition-colors">
+                  <div className="text-4xl mb-3">🌱</div>
+                  <h4 className="text-lg font-intermedium text-white-100 mb-2">
+                    For Beginners
+                  </h4>
+                  <p className="text-gray-200 text-sm font-worksanslight">
+                    Step-by-step AI recommendations and practical tips to
+                    optimize harvest from day one.
+                  </p>
+                </div>
+                <div className="bg-black-950 border border-green-500/20 rounded-lg p-6 hover:border-green-500/40 transition-colors">
+                  <div className="text-4xl mb-3">🌾</div>
+                  <h4 className="text-lg font-intermedium text-white-100 mb-2">
+                    For Farmers
+                  </h4>
+                  <p className="text-gray-200 text-sm font-worksanslight">
+                    Practical tools to manage schedules, receive notifications,
+                    and access marketplace.
+                  </p>
+                </div>
+                <div className="bg-black-950 border border-green-500/20 rounded-lg p-6 hover:border-green-500/40 transition-colors">
+                  <div className="text-4xl mb-3">🏢</div>
+                  <h4 className="text-lg font-intermedium text-white-100 mb-2">
+                    For Enterprises
+                  </h4>
+                  <p className="text-gray-200 text-sm font-worksanslight">
+                    AI-driven analytics and resource optimization for
+                    large-scale farmland management.
+                  </p>
+                </div>
+                <div className="bg-black-950 border border-green-500/20 rounded-lg p-6 hover:border-green-500/40 transition-colors">
+                  <div className="text-4xl mb-3">🛒</div>
+                  <h4 className="text-lg font-intermedium text-white-100 mb-2">
+                    For Product Providers
+                  </h4>
+                  <p className="text-gray-200 text-sm font-worksanslight">
+                    Monitor product usage and gain valuable insights into
+                    performance and customer needs.
+                  </p>
+                </div>
+                <div className="bg-black-950 border border-green-500/20 rounded-lg p-6 hover:border-green-500/40 transition-colors">
+                  <div className="text-4xl mb-3">🔧</div>
+                  <h4 className="text-lg font-intermedium text-white-100 mb-2">
+                    For Service Providers
+                  </h4>
+                  <p className="text-gray-200 text-sm font-worksanslight">
+                    Manage operations with real-time task tracking to enhance
+                    service delivery.
+                  </p>
+                </div>
+                <div className="bg-black-950 border border-green-500/20 rounded-lg p-6 hover:border-green-500/40 transition-colors">
+                  <div className="text-4xl mb-3">👥</div>
+                  <h4 className="text-lg font-intermedium text-white-100 mb-2">
+                    Community Forum
+                  </h4>
+                  <p className="text-gray-200 text-sm font-worksanslight">
+                    Share knowledge, connect with peers, and learn from
+                    experienced farmers.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Section */}
+            <div className="text-center bg-[#000B42] rounded-2xl p-12 border border-[#00FF94]/20">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a
+                  href="https://www.hiterra.co"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-8 py-4 text-lg font-intermedium text-[#000B42] bg-[#00FF94] rounded-lg hover:bg-[#00FF94]/90 transition-colors duration-300 shadow-lg hover:shadow-[#00FF94]/20"
+                >
+                  Visit HiTerra Website
+                  <svg
+                    className="w-5 h-5 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    ></path>
+                  </svg>
+                </a>
+                <a
+                  href="https://www.hiterra.co/product"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-8 py-4 text-lg font-intermedium text-[#00FF94] border-2 border-[#00FF94] rounded-lg hover:bg-[#00FF94]/10 transition-colors duration-300"
+                >
+                  Explore Features
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section className="text-gray-600 body-font bg-black-950 py-20">
+          <div className="container mx-auto px-5">
+            <h1 className="text-2xl pb-8 tracking-wider text-center font-interbold text-white-100 lg:text-4xl">
+              Our Services
+            </h1>
+            <div className="flex flex-wrap -m-4">
+              <dl className="grid grid-cols-1 gap-0 sm:grid-cols-3 sm:divide-x sm:divide-white-100/40 w-full">
                 <div className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw] items-center md:text-left xs:text-center">
                   <img
                     className="md:mx-0 xs:mx-auto"

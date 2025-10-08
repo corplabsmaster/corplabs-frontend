@@ -131,10 +131,8 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-
-        <hr className="h-[1.5px] my-[5vh] bg-primary-500 border-none" />
-
-        <div className="md:flex md:-mx-0 md:items-center md:justify-between">
+        {/* <hr className="h-[1.5px] my-[5vh] bg-primary-500 border-none" /> */}
+        {/* <div className="md:flex md:-mx-0 md:items-center md:justify-between">
           <h1 className="">
             <span className="text-lg tracking-wide text-transparent bg-gradient-to-r from-gradient-1 to-gradient-2 bg-clip-text font-intermedium">
               Need Some Ideas? Access Them Here!
@@ -176,9 +174,8 @@ const Footer: React.FC = () => {
               </button>
             </div>
           </div>
-        </div>
-        <hr className="h-[1.5px] my-[5vh] bg-primary-500 border-none" />
-
+        </div> */}
+        ?
         <div className="flex flex-col justify-between md:flex-row mb-[2vh]">
           <p className="text-xs text-gray-200 font-worksanslight">
             D-U-N-S® Certified : 44-791-6777 • © 2024 Corplabs - All rights
@@ -192,12 +189,12 @@ const Footer: React.FC = () => {
             >
               Privacy Policy
             </a>
-            <a
+            {/* <a
               href="#"
               className="ml-4 text-xs tracking-wide text-gray-200 transition-colors duration-300 font-worksanslight hover:text-primary-500"
             >
               Terms of Conditions
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
