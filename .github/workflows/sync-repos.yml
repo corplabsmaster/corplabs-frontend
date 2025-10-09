@@ -33,7 +33,7 @@ jobs:
           echo "Current branch: $CURRENT_BRANCH"
 
           # Configure git to use the token for authentication
-          git config --global url."https://x-access-token:${TARGET_REPO_TOKEN}@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/".insteadOf "https://github.com/"
           
           # Add target repository as a remote
           git remote add target https://github.com/corplabsmaster/corplabs-frontend.git
