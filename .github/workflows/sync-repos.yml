@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Fetch all history for all branches and tags
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TARGET_REPO_TOKEN }}
 
       - name: Sync to target repository
         env:
@@ -33,10 +33,11 @@ jobs:
           echo "Current branch: $CURRENT_BRANCH"
 
           # Configure git to use the token for authentication
-          git config --global url."https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git config --global credential.helper store
+          echo "https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com" > ~/.git-credentials
           
-          # Add target repository as a remote
-          git remote add target https://github.com/corplabsmaster/corplabs-frontend.git
+          # Add target repository as a remote with token authentication
+          git remote add target https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/corplabsmaster/corplabs-frontend.git
 
           # Fetch the current state from target repository for the current branch
           echo "Fetching from target repository..."
