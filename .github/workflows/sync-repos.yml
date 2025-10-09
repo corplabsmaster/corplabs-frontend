@@ -5,7 +5,7 @@ on:
     branches:
       - master # Trigger when pushing to master branch
       # - develop  # Trigger when pushing to develop branch
-      - ui/3.0 # Trigger when pushing to ui/3.0 branch
+      # - ui/3.0 # Trigger when pushing to ui/3.0 branch
 
 jobs:
   sync:
