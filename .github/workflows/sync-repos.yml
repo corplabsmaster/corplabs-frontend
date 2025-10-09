@@ -1,0 +1,75 @@
+name: Sync to Target Repository
+
+on:
+  push:
+    branches:
+      - master # Trigger when pushing to master branch
+      # - develop  # Trigger when pushing to develop branch
+      # - ui/3.0 # Trigger when pushing to ui/3.0 branch
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all branches and tags
+          token: ${{ secrets.TARGET_REPO_TOKEN }}
+
+      - name: Sync to target repository
+        env:
+          # Store your target repository access token as a GitHub secret
+          TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
+          # Update this URL to your target GitHub repository
+          TARGET_REPO_URL: "https://github.com/corplabsmaster/corplabs-frontend"
+        run: |
+          # Configure Git with proper credentials
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "action@github.com"
+
+          # Get the current branch name
+          CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          echo "Current branch: $CURRENT_BRANCH"
+
+          # Configure git to use the token for authentication
+          git config --global credential.helper store
+          echo "https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com" > ~/.git-credentials
+          
+          # Add target repository as a remote with token authentication
+          git remote add target https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/corplabsmaster/corplabs-frontend.git
+
+          # Fetch the current state from target repository for the current branch
+          echo "Fetching from target repository..."
+          git fetch target $CURRENT_BRANCH || echo "Branch $CURRENT_BRANCH does not exist on target repository yet"
+
+          # Check if the branch exists on target repository and handle accordingly
+          if git ls-remote --heads target $CURRENT_BRANCH | grep -q $CURRENT_BRANCH; then
+            echo "Branch $CURRENT_BRANCH exists on target repository"
+            
+            # Check if branches have diverged
+            if git merge-base --is-ancestor target/$CURRENT_BRANCH HEAD; then
+              # Target's branch is an ancestor of our current HEAD - safe to push
+              echo "Fast-forward push to target repository"
+              git push target $CURRENT_BRANCH:$CURRENT_BRANCH
+            else
+              # Branches have diverged - you may want to handle this differently
+              echo "Warning: Branches have diverged!"
+              echo "Current HEAD: $(git rev-parse HEAD)"
+              echo "Target HEAD: $(git rev-parse target/$CURRENT_BRANCH)"
+              
+              # Option 1: Force push (overwrites target repository)
+              echo "Force pushing to target repository to overwrite remote $CURRENT_BRANCH branch"
+              git push -f target $CURRENT_BRANCH:$CURRENT_BRANCH
+              
+              # Option 2: Skip push and report (uncomment below and comment force push above)
+              # echo "Skipping push due to diverged branches. Manual intervention required."
+              # exit 1
+            fi
+          else
+            # Branch doesn't exist on target repository, create it
+            echo "Creating new branch $CURRENT_BRANCH on target repository"
+            git push target $CURRENT_BRANCH:$CURRENT_BRANCH
+          fi
+
+          echo "Sync completed successfully!"
