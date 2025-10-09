@@ -3,7 +3,8 @@ name: Sync to Target Repository
 on:
   push:
     branches:
-      - develop # Trigger when pushing to develop branch
+      - master # Trigger when pushing to master branch
+      # - develop  # Trigger when pushing to develop branch
       - ui/3.0 # Trigger when pushing to ui/3.0 branch
 
 jobs:
