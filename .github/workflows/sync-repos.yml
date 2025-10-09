@@ -33,7 +33,7 @@ jobs:
           echo "Current branch: $CURRENT_BRANCH"
 
           # Add target repository as a remote
-          git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@${TARGET_REPO_URL#https://}
+          git remote add target https://x-access-token:${TARGET_REPO_TOKEN}@github.com/corplabsmaster/corplabs-frontend.git
 
           # Fetch the current state from target repository for the current branch
           echo "Fetching from target repository..."
