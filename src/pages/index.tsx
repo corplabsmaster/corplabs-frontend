@@ -83,7 +83,7 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
         }}
       />
       <Header />
-      <div className="min-h-screen bg-black-950">
+      <div className="min-h-screen bg-black-950 ">
         <section className="text-gray-600 body-font">
           <div className=" mx-auto flex px-0 xs:pt-[10vh] sm:pt-[8vh] xs:pb-16 sm:pb-40 items-center justify-center flex-col">
             <img
@@ -120,7 +120,7 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
 
         {/* HiTerra Products Section */}
         <section
-          className="text-gray-200 body-font bg-black-950 py-4 px-1"
+          className="text-gray-200 body-font bg-black-950 py-4 px-2 md:px-4"
           id="products"
         >
           <div className=" px-2">
@@ -142,14 +142,14 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
             </div>
 
             {/* Website Embed - Full Width */}
-            <div className="w-full mb-12">
+            <div className="w-full mb-12 px-2 md:px-16">
               <div
-                className="relative w-full px-1 border-box rounded-xl overflow-hidden shadow-2xl"
+                className="relative w-full px-2 md:px-16 border-box rounded-2xl overflow-hidden shadow-2xl"
                 style={{ height: "600px" }}
               >
                 <iframe
                   src="https://www.hiterra.co"
-                  className="absolute inset-0 w-full h-full border-0"
+                  className="absolute top-0 left-0 w-full h-full border-0"
                   allow="accelerometer, autoplay, clipboard-write, encrypted-media, gyroscope, picture-in-picture"
                   allowFullScreen
                   title="HiTerra Website Preview"
@@ -160,7 +160,7 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
             {/* Features and Overview Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
               {/* Left side - Features */}
-              <div className="bg-gradient-to-br from-[#000B42] to-[#001F52] border border-[#00FF94]/20 rounded-lg p-8">
+              <div className="bg-gradient-to-br from-[#000B42] to-[#001F52] border-[#00FF94]/20 rounded-lg p-8">
                 <h3 className="text-2xl font-interbold text-white-100 mb-6">
                   Key Features
                 </h3>
@@ -281,7 +281,7 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
               </div>
 
               {/* Right side - Platform Overview */}
-              <div className="bg-gradient-to-br from-[#000B42] to-[#001F52] border border-[#00FF94]/20 rounded-lg p-8">
+              <div className="bg-gradient-to-br from-[#000B42] to-[#001F52]  border-[#00FF94]/20 rounded-lg p-8">
                 <h3 className="text-2xl font-interbold text-white-100 mb-6">
                   Platform Overview
                 </h3>
@@ -388,7 +388,7 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
             </div>
 
             {/* Who It's For Section */}
-            <div className="bg-black-900 border border-green-500/20 rounded-2xl p-8 lg:p-12 mb-12">
+            <div className="bg-black-900  border-green-500/20 rounded-2xl p-8 lg:p-12 mb-4">
               <h3 className="text-2xl lg:text-3xl font-interbold text-white-100 text-center mb-8">
                 Designed For Everyone in Agriculture
               </h3>
@@ -457,13 +457,13 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
             </div>
 
             {/* CTA Section */}
-            <div className="text-center bg-[#000B42] rounded-2xl p-12 border border-[#00FF94]/20">
+            <div className="text-center bg-[#000B42] rounded-2xl p-4 border-[#00FF94]/20">
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <a
                   href="https://www.hiterra.co"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-8 py-4 text-lg font-intermedium text-[#000B42] bg-[#00FF94] rounded-lg hover:bg-[#00FF94]/90 transition-colors duration-300 shadow-lg hover:shadow-[#00FF94]/20"
+                  className="inline-flex items-center px-8 py-4 text-sm font-intermedium text-[#000B42] bg-[#00FF94] rounded-lg hover:bg-[#00FF94]/90 transition-colors duration-300 shadow-lg hover:shadow-[#00FF94]/20"
                 >
                   Visit HiTerra Website
                   <svg
@@ -479,14 +479,6 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
                       d="M17 8l4 4m0 0l-4 4m4-4H3"
                     ></path>
                   </svg>
-                </a>
-                <a
-                  href="https://www.hiterra.co/product"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-8 py-4 text-lg font-intermedium text-[#00FF94] border-2 border-[#00FF94] rounded-lg hover:bg-[#00FF94]/10 transition-colors duration-300"
-                >
-                  Explore Features
                 </a>
               </div>
             </div>
@@ -851,7 +843,7 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
             <h1 className="text-2xl lg:text-4xl font-interbold text-white tracking-wide mb-[2vh]">
               Job Vacancies
             </h1>
-            <p className="text-base leading-relaxed text-left text-center text-gray-200 font-worksanslight ">
+            <p className="text-base leading-relaxed text-left text-gray-200 font-worksanslight ">
               Exciting job opportunities await! Join our team today and be part
               of something amazing.
             </p>
@@ -867,9 +859,7 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
                 <a
                   key={res?.id}
                   className="block p-8 transition shadow-xl rounded-xl bg-primary-950 border-1 border-primary-500 hover:border-primary-500 hover:shadow-primary-500/20"
-                  href={res?.public_url}
-                  target="_blank"
-                  rel="noreferrer"
+                  href="/maintence"
                 >
                   <img
                     className="object-cover object-center w-full mb-6 rounded h-30 w-30"

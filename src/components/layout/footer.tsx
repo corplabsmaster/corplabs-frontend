@@ -64,29 +64,32 @@ const Footer: React.FC = () => {
                 <h3 className="text-sm tracking-wide text-left text-white font-intersemibold">
                   Solution
                 </h3>
-                <a className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500">
+                <a
+                  href="/coming-soon"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                >
                   App Development
                 </a>
                 <a
-                  // href="#"
+                  href="/coming-soon"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Web Solution
                 </a>
                 <a
-                  // href="#"
+                  href="/coming-soon"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Cybersecurity
                 </a>
                 <a
-                  // href="#"
+                  href="/coming-soon"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Design
                 </a>
                 <a
-                  // href="#"
+                  href="/coming-soon"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Marketing
@@ -98,19 +101,19 @@ const Footer: React.FC = () => {
                   Career
                 </h3>
                 <a
-                  href="https://corplabs.notion.site/Senior-Java-Backend-e8dc9233206842ab9048106bbcc2d833"
+                  href="/maintence"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Senior Java Backend
                 </a>
                 <a
-                  href="https://corplabs.notion.site/Vue-Frontend-Developer-0e30c07cf217405abda0db1f7f3f43f7"
+                  href="/maintence"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Vue Frontend Developer
                 </a>
                 <a
-                  href="https://corplabs.notion.site/PHP-Backend-Developer-42b1e15ee8124da8b5250d153aec761e"
+                  href="/maintence"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   PHP Backend Developer
