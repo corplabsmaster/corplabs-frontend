@@ -148,7 +148,7 @@ const Header: React.FC<HeaderProps> = () => {
                   Home
                 </a>
                 <a
-                  href="#"
+                  href="/about"
                   className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight"
                 >
                   About

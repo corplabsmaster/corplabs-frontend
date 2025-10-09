@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
                   About
                 </h3>
                 <a
-                  href="#"
+                  href="/about"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Company
@@ -127,6 +127,14 @@ const Footer: React.FC = () => {
                 <span className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500">
                   contact@corplabs.co
                 </span>
+                <span className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500">
+                  <a
+                    href="/contact"
+                    className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                  >
+                    Inquiry
+                  </a>
+                </span>
               </div>
             </div>
           </div>
@@ -184,7 +192,7 @@ const Footer: React.FC = () => {
 
           <div className="flex justify-between">
             <a
-              href="#"
+              href="/privacy"
               className="mr-4 text-xs tracking-wide text-gray-200 transition-colors duration-300 font-worksanslight hover:text-primary-500"
             >
               Privacy Policy

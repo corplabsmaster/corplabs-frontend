@@ -85,7 +85,7 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
       <Header />
       <div className="min-h-screen bg-black-950">
         <section className="text-gray-600 body-font">
-          <div className="container mx-auto flex px-0 xs:pt-[10vh] sm:pt-[8vh] xs:pb-16 sm:pb-40 items-center justify-center flex-col">
+          <div className=" mx-auto flex px-0 xs:pt-[10vh] sm:pt-[8vh] xs:pb-16 sm:pb-40 items-center justify-center flex-col">
             <img
               className="w-full h-auto lg:w-2/3 xl:w-3/5 xs:mt-[2vh] sm:mt-[8vh] mb-[2vh] object-cover object-center"
               alt="intro"
@@ -103,8 +103,8 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
           </div>
         </section>
         <section className="text-gray-600 body-font" id="services">
-          <div className="container xs:px-[0vw] sm:px-[0vw] xl:px-[5vw] xs:pb-14 sm:pb-40 mx-auto">
-            <div className="flex flex-col text-center w-full mb-20 xs:mb-[4vh] md:mb-[6vh]">
+          <div className=" xs:px-[0vw] sm:px-[0vw] xl:px-[5vw] mx-auto">
+            <div className="flex flex-col text-center w-full mb-4">
               <h1 className="text-2xl tracking-wider text-center font-interbold text-white-100 lg:text-4xl">
                 Our Projects
               </h1>
@@ -120,10 +120,10 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
 
         {/* HiTerra Products Section */}
         <section
-          className="text-gray-200 body-font bg-black-950 py-20"
+          className="text-gray-200 body-font bg-black-950 py-4 px-1"
           id="products"
         >
-          <div className="container mx-auto px-5">
+          <div className=" px-2">
             {/* Section Header */}
             <div className="flex flex-col text-center w-full mb-12">
               <span className="inline-block px-4 py-1 mb-4 text-xs font-semibold tracking-widest text-[#00FF94] uppercase rounded-full bg-[#00FF94]/10 w-fit mx-auto">
@@ -144,13 +144,13 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
             {/* Website Embed - Full Width */}
             <div className="w-full mb-12">
               <div
-                className="relative w-full rounded-xl overflow-hidden shadow-2xl"
+                className="relative w-full px-1 border-box rounded-xl overflow-hidden shadow-2xl"
                 style={{ height: "600px" }}
               >
                 <iframe
                   src="https://www.hiterra.co"
                   className="absolute inset-0 w-full h-full border-0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer, autoplay, clipboard-write, encrypted-media, gyroscope, picture-in-picture"
                   allowFullScreen
                   title="HiTerra Website Preview"
                 ></iframe>

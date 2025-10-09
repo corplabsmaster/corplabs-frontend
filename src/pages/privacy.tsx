@@ -21,17 +21,26 @@ const Privacy: React.FC<Props> = ({ location }: Props) => {
       <div className="py-16 bg-black-950">
         <div className="max-w-4xl mx-auto px-4 text-gray-300">
           <h1 className="text-3xl font-bold mb-8 text-white">Privacy Policy</h1>
-          
+
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 text-white">Introduction</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-white">
+              Introduction
+            </h2>
             <p className="mb-4">
-              Corplabs ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+              Corplabs (&apos;we&apos;, &apos;our&apos;, or &apos;us&apos;) is
+              committed to protecting your privacy. This Privacy Policy explains
+              how we collect, use, disclose, and safeguard your information when
+              you visit our website or use our services.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 text-white">Information We Collect</h2>
-            <p className="mb-4">We collect information that you provide directly to us, including:</p>
+            <h2 className="text-2xl font-semibold mb-4 text-white">
+              Information We Collect
+            </h2>
+            <p className="mb-4">
+              We collect information that you provide directly to us, including:
+            </p>
             <ul className="list-disc pl-6 mb-4">
               <li>Contact information (name, email address, phone number)</li>
               <li>Company information</li>
@@ -41,7 +50,9 @@ const Privacy: React.FC<Props> = ({ location }: Props) => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 text-white">How We Use Your Information</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-white">
+              How We Use Your Information
+            </h2>
             <p className="mb-4">We use the information we collect to:</p>
             <ul className="list-disc pl-6 mb-4">
               <li>Provide and maintain our services</li>
@@ -53,14 +64,20 @@ const Privacy: React.FC<Props> = ({ location }: Props) => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 text-white">Data Security</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-white">
+              Data Security
+            </h2>
             <p className="mb-4">
-              We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
+              We implement appropriate technical and organizational measures to
+              protect your personal information against unauthorized access,
+              alteration, disclosure, or destruction.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 text-white">Your Rights</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-white">
+              Your Rights
+            </h2>
             <p className="mb-4">You have the right to:</p>
             <ul className="list-disc pl-6 mb-4">
               <li>Access your personal information</li>
@@ -72,15 +89,20 @@ const Privacy: React.FC<Props> = ({ location }: Props) => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 text-white">Contact Us</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-white">
+              Contact Us
+            </h2>
             <p className="mb-4">
-              If you have any questions about this Privacy Policy, please contact us at:
+              If you have any questions about this Privacy Policy, please
+              contact us at:
               <br />
               Email: privacy@corplabs.com
             </p>
           </section>
 
-          <p className="text-sm text-gray-400">Last updated: {new Date().toLocaleDateString()}</p>
+          <p className="text-sm text-gray-400">
+            Last updated: {new Date().toLocaleDateString()}
+          </p>
         </div>
       </div>
       <Footer />
