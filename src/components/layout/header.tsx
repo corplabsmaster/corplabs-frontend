@@ -70,24 +70,33 @@ const Header: React.FC<HeaderProps> = () => {
         </div>
         <div className="items-center hidden lg:flex lg:flex-1 lg:justify-center ">
           {/* Center align the desktop navigation */}
-          <div className="border-[1.5px] w-[30vw] h-[6vh] rounded-full border-primary-600 bg-black-900 flex flex-wrap items-center text-base justify-center">
+          <div className="border-[1.5px] w-[42vw] h-[6vh] rounded-full border-primary-600 bg-black-900 flex flex-wrap items-center text-base justify-center">
             <a
               href="/#"
-              className="mr-[3vw] text-white-100 hover:text-primary-600"
+              className="mr-[2vw] text-white-100 hover:text-primary-600"
             >
               Home
             </a>
             <a
               href="/about"
-              className="mr-[3vw] text-white-100 hover:text-primary-600"
+              className="mr-[2vw] text-white-100 hover:text-primary-600"
             >
               About
             </a>
             <a
               href="/#services"
-              className="mr-[3vw] text-white-100 hover:text-primary-600"
+              className="mr-[2vw] text-white-100 hover:text-primary-600"
             >
               Solution
+            </a>
+            <a
+              href="/corpi"
+              className="mr-[2vw] text-white-100 hover:text-primary-600 inline-flex items-center gap-1"
+            >
+              Corpi
+              <span className="px-1.5 py-0.5 text-xs font-intersemibold bg-[#424DE2] text-white rounded-full leading-none">
+                New
+              </span>
             </a>
             <a
               href="/#careers"
@@ -154,13 +163,22 @@ const Header: React.FC<HeaderProps> = () => {
                   About
                 </a>
                 <a
-                  href="#"
+                  href="/#services"
                   className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight"
                 >
                   Solution
                 </a>
                 <a
-                  href="#"
+                  href="/corpi"
+                  className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight inline-flex items-center gap-2"
+                >
+                  Corpi
+                  <span className="px-1.5 py-0.5 text-xs font-intersemibold bg-[#424DE2] text-white rounded-full leading-none">
+                    New
+                  </span>
+                </a>
+                <a
+                  href="/#careers"
                   className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight"
                 >
                   Careers
