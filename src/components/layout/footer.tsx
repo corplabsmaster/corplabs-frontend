@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="mt-0 lg:mt-0 lg:flex-1">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
               <div>
                 <h3 className="text-sm tracking-wide text-left text-white font-intersemibold">
                   About
@@ -93,6 +93,18 @@ const Footer: React.FC = () => {
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Marketing
+                </a>
+              </div>
+
+              <div>
+                <h3 className="text-sm tracking-wide text-left text-white font-intersemibold">
+                  Products
+                </h3>
+                <a
+                  href="/corpi"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                >
+                  Corpi Intelligence
                 </a>
               </div>
 

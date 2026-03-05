@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "develop",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["develop"],
+      "port": 8000
+    },
+    {
+      "name": "develop:prod",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["develop:prod"],
+      "port": 8000
+    },
+    {
+      "name": "serve",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["serve"],
+      "port": 9000
+    }
+  ]
+}
