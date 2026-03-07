@@ -2,3 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 @import "./typography.css";
+
+/* ── Corpi Intelligence page animations ── */
+@keyframes phoneFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+.phone-float {
+  animation: phoneFloat 4s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0px); }
+}
+.fade-in {
+  opacity: 0;
+}
+.fade-in.visible {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
