@@ -70,28 +70,28 @@ const Header: React.FC<HeaderProps> = () => {
         </div>
         <div className="items-center hidden lg:flex lg:flex-1 lg:justify-center ">
           {/* Center align the desktop navigation */}
-          <div className="border-[1.5px] w-[42vw] h-[6vh] rounded-full border-primary-600 bg-black-900 flex flex-wrap items-center text-base justify-center">
+          <div className="border-[1.5px] w-auto px-6 h-[6vh] rounded-full border-primary-600 bg-black-900 flex flex-nowrap items-center text-sm xl:text-base justify-center gap-x-4 xl:gap-x-5 whitespace-nowrap">
             <a
               href="/#"
-              className="mr-[2vw] text-white-100 hover:text-primary-600"
+              className="text-white-100 hover:text-primary-600"
             >
               Home
             </a>
             <a
               href="/about"
-              className="mr-[2vw] text-white-100 hover:text-primary-600"
+              className="text-white-100 hover:text-primary-600"
             >
               About
             </a>
             <a
               href="/#services"
-              className="mr-[2vw] text-white-100 hover:text-primary-600"
+              className="text-white-100 hover:text-primary-600"
             >
               Solution
             </a>
             <a
               href="/corpi"
-              className="mr-[2vw] text-white-100 hover:text-primary-600 inline-flex items-center gap-1"
+              className="text-white-100 hover:text-primary-600 inline-flex items-center gap-1"
             >
               Corpi
               <span className="px-1.5 py-0.5 text-xs font-intersemibold bg-[#424DE2] text-white rounded-full leading-none">
@@ -99,8 +99,20 @@ const Header: React.FC<HeaderProps> = () => {
               </span>
             </a>
             <a
+              href="/corpcode"
+              className="text-white-100 hover:text-primary-600"
+            >
+              Corpcode
+            </a>
+            <a
+              href="/corprise"
+              className="text-white-100 hover:text-primary-600"
+            >
+              Corprise
+            </a>
+            <a
               href="/#careers"
-              className="mr-[0vw] text-white-100 hover:text-primary-600"
+              className="text-white-100 hover:text-primary-600"
             >
               Career
             </a>
@@ -176,6 +188,18 @@ const Header: React.FC<HeaderProps> = () => {
                   <span className="px-1.5 py-0.5 text-xs font-intersemibold bg-[#424DE2] text-white rounded-full leading-none">
                     New
                   </span>
+                </a>
+                <a
+                  href="/corpcode"
+                  className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight"
+                >
+                  Corpcode
+                </a>
+                <a
+                  href="/corprise"
+                  className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight"
+                >
+                  Corprise
                 </a>
                 <a
                   href="/#careers"

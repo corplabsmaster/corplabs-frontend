@@ -107,6 +107,12 @@ const Footer: React.FC = () => {
                   Corpi Intelligence
                 </a>
                 <a
+                  href="/corpcode"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                >
+                  Corpcode
+                </a>
+                <a
                   href="/corprise"
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
