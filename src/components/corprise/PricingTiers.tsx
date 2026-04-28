@@ -10,7 +10,7 @@ const PricingTiers: React.FC = () => {
       className="bg-black-950 py-20 px-5"
       aria-labelledby="corprise-pricing-heading"
     >
-      <div className="container mx-auto max-w-7xl">
+      <div className="container mx-auto max-w-6xl">
         <div className="max-w-3xl mx-auto text-center mb-14">
           <span className="inline-block px-3 py-1 mb-4 text-xs font-intersemibold tracking-widest text-[#AEE0FC] uppercase rounded-full border border-[#424DE2]/40 bg-[#424DE2]/10">
             Pricing
@@ -26,7 +26,7 @@ const PricingTiers: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {tiers.map((tier) => (
             <PricingCard key={tier.id} tier={tier} />
           ))}

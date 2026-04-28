@@ -17,7 +17,7 @@ const PricingCard: React.FC<Props> = ({ tier, highlighted = false }) => {
   const isPopular = tier.popular || highlighted;
   return (
     <article
-      className={`relative flex flex-col p-8 rounded-lg border h-full ${
+      className={`relative flex flex-col p-6 sm:p-7 rounded-lg border h-full min-w-0 ${
         isPopular
           ? "border-[#424DE2] bg-[#424DE2]/10 ring-2 ring-[#424DE2]"
           : "border-white-100/10 bg-black-900"
@@ -25,7 +25,7 @@ const PricingCard: React.FC<Props> = ({ tier, highlighted = false }) => {
       aria-label={`${tier.name} tier`}
     >
       {tier.popular && (
-        <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-intersemibold bg-[#424DE2] text-white rounded-full whitespace-nowrap uppercase tracking-widest">
+        <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-[10px] font-intersemibold bg-[#424DE2] text-white rounded-full whitespace-nowrap uppercase tracking-widest">
           Most Popular
         </span>
       )}
@@ -35,12 +35,12 @@ const PricingCard: React.FC<Props> = ({ tier, highlighted = false }) => {
         {tier.tagline}
       </p>
 
-      <div className="flex items-baseline gap-1 mb-5">
-        <span className="text-2xl lg:text-4xl font-interbold text-white-100">
+      <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-1 mb-5 min-w-0">
+        <span className="text-2xl lg:text-3xl font-interbold text-white-100 leading-none break-words">
           {tier.price}
         </span>
         {tier.period && (
-          <span className="text-base font-worksanslight text-gray-200">
+          <span className="text-sm font-worksanslight text-gray-200">
             {tier.period}
           </span>
         )}
@@ -54,7 +54,7 @@ const PricingCard: React.FC<Props> = ({ tier, highlighted = false }) => {
         {tier.includedModules.map((mod) => (
           <li key={mod} className="flex gap-2 text-sm font-worksanslight text-gray-200 leading-snug">
             {checkIcon}
-            <span>{mod}</span>
+            <span className="min-w-0 break-words">{mod}</span>
           </li>
         ))}
       </ul>
@@ -63,12 +63,12 @@ const PricingCard: React.FC<Props> = ({ tier, highlighted = false }) => {
         <p className="text-xs font-worksanslight text-gray-200/80 mb-1">
           {tier.users}
         </p>
-        <p className="text-xs font-worksanslight text-gray-200/80 mb-4">
+        <p className="text-xs font-worksanslight text-gray-200/80 mb-4 leading-snug">
           {tier.supportSla}
         </p>
         <a
           href={tier.ctaHref}
-          className={`inline-flex w-full items-center justify-center px-6 py-3 rounded-full font-intersemibold text-base transition-colors ${
+          className={`inline-flex w-full items-center justify-center px-4 py-2.5 rounded-full font-intersemibold text-sm transition-colors ${
             isPopular
               ? "bg-[#424DE2] text-white hover:bg-[#3340c4]"
               : "border border-white-100/30 text-white-100 hover:border-[#424DE2] hover:text-[#AEE0FC]"
