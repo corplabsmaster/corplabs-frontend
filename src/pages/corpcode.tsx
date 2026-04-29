@@ -8,6 +8,7 @@ import CorpcodeHero from "../components/corpcode/CorpcodeHero";
 import FaqSection from "../components/corpcode/FaqSection";
 import FinalCta from "../components/corpcode/FinalCta";
 import ProcessSteps from "../components/corpcode/ProcessSteps";
+import TechStack from "../components/corpcode/TechStack";
 import ThreePillars from "../components/corpcode/ThreePillars";
 import TierFinder from "../components/corpcode/TierFinder";
 import TierTable from "../components/corpcode/TierTable";
@@ -58,6 +59,7 @@ const CorpcodePage: React.FC<Props> = ({ location }: Props) => {
         <TierTable />
         <TierFinder />
         <ProcessSteps />
+        <TechStack />
         <ThreePillars variant="page" currentId="corpcode" />
         <FaqSection />
         <FinalCta />

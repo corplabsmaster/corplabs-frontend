@@ -324,3 +324,88 @@ export const tierFinder = {
   tierLabels: tierFinderTierLabels,
 };
 
+export interface TechStackCategory {
+  id: string;
+  title: string;
+  items: string[];
+}
+
+const techStackCategories: TechStackCategory[] = [
+  {
+    id: "frontend",
+    title: "Frontend",
+    items: [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "TanStack Start",
+      "Tailwind CSS",
+      "shadcn/ui",
+    ],
+  },
+  {
+    id: "mobile",
+    title: "Mobile",
+    items: ["React Native", "Expo", "native iOS / Android when required"],
+  },
+  {
+    id: "backend",
+    title: "Backend",
+    items: ["Node.js", "NestJS", "TypeScript", "REST", "GraphQL", "tRPC"],
+  },
+  {
+    id: "databases",
+    title: "Databases",
+    items: [
+      "PostgreSQL",
+      "MySQL",
+      "Redis (caching)",
+      "time-series stores for IoT workloads",
+    ],
+  },
+  {
+    id: "cms",
+    title: "Content & CMS",
+    items: ["Payload CMS v3", "headless content modelling"],
+  },
+  {
+    id: "cloud",
+    title: "Cloud & infrastructure",
+    items: [
+      "Google Cloud Platform",
+      "Cloudflare (Workers, R2, Tunnels)",
+      "Docker",
+      "PM2",
+      "Nginx",
+      "GitHub Actions",
+    ],
+  },
+  {
+    id: "ai",
+    title: "AI & automation",
+    items: [
+      "Anthropic Claude API",
+      "OpenAI Whisper",
+      "custom agents and integrations (e.g., WhatsApp via Baileys)",
+    ],
+  },
+  {
+    id: "iot",
+    title: "IoT & specialty",
+    items: [
+      "MQTT",
+      "LoRaWAN",
+      "sensor integration (proven in production by our HiTerra smart-farming platform)",
+    ],
+  },
+];
+
+export const techStack = {
+  heading: "Technologies we use",
+  intro:
+    "Stack-agnostic by default. Final choices depend on your team's capability for long-term ownership, your existing infrastructure, and the project's specific demands.",
+  categories: techStackCategories,
+  outro:
+    "We don't lock you into our defaults. If your team needs to maintain the system in PHP, .NET, or Python — we'll discuss it during discovery.",
+};
+
