@@ -203,3 +203,124 @@ export const finalCta = {
     href: "/contact?intent=corpcode",
   },
 };
+
+export type TierSlug = "lite" | "standard" | "advanced" | "enterprise";
+
+export interface TierFinderOption {
+  label: string;
+  tier: TierSlug;
+}
+
+export interface TierFinderQuestion {
+  id: string;
+  prompt: string;
+  options: TierFinderOption[];
+}
+
+const tierFinderQuestions: TierFinderQuestion[] = [
+  {
+    id: "users",
+    prompt: "Who will use the system?",
+    options: [
+      { label: "Just my internal team (5–50 people)", tier: "lite" },
+      { label: "My team plus selected partners or clients", tier: "standard" },
+      {
+        label: "Public users or customers (hundreds to thousands)",
+        tier: "advanced",
+      },
+      { label: "Multiple business units or tenants", tier: "enterprise" },
+    ],
+  },
+  {
+    id: "function",
+    prompt: "What's the core function?",
+    options: [
+      {
+        label:
+          "A single tool that does one job well (track leads, manage inventory)",
+        tier: "lite",
+      },
+      {
+        label:
+          "A multi-module platform (booking + payments + reports + roles)",
+        tier: "standard",
+      },
+      {
+        label: "Real-time, AI-driven, or mobile-first system",
+        tier: "advanced",
+      },
+      {
+        label: "Replaces or integrates with existing ERP/legacy systems",
+        tier: "enterprise",
+      },
+    ],
+  },
+  {
+    id: "integrations",
+    prompt: "How many external integrations?",
+    options: [
+      { label: "One or two (email, basic auth)", tier: "lite" },
+      {
+        label: "Three to five (payment gateway, SMS, CRM, etc.)",
+        tier: "standard",
+      },
+      {
+        label: "Six or more, or includes IoT/hardware/ML services",
+        tier: "advanced",
+      },
+      {
+        label: "Deep legacy integration (SAP, Oracle, custom protocols)",
+        tier: "enterprise",
+      },
+    ],
+  },
+  {
+    id: "timeline",
+    prompt: "What's your target timeline?",
+    options: [
+      { label: "Six to ten weeks", tier: "lite" },
+      { label: "Three to five months", tier: "standard" },
+      { label: "Five to nine months", tier: "advanced" },
+      { label: "Nine months or more, phased rollout", tier: "enterprise" },
+    ],
+  },
+  {
+    id: "compliance",
+    prompt: "Compliance / audit requirements?",
+    options: [
+      { label: "None or minimal", tier: "lite" },
+      { label: "Industry-standard (PDPA, basic logging)", tier: "standard" },
+      {
+        label: "Regulated industry (finance, healthcare, government)",
+        tier: "advanced",
+      },
+      { label: "ISO / SOC2 / audit-grade required", tier: "enterprise" },
+    ],
+  },
+];
+
+const tierFinderTierDescriptions: Record<TierSlug, string> = {
+  lite: "A focused build, typically 6–10 weeks, starting at RM30k.",
+  standard:
+    "A multi-module web application, typically 3–5 months, starting at RM60k.",
+  advanced:
+    "A real-time or AI-driven system, typically 5–9 months, starting at RM150k.",
+  enterprise:
+    "An ERP-class platform, typically 9–18 months, starting at RM300k+.",
+};
+
+const tierFinderTierLabels: Record<TierSlug, string> = {
+  lite: "Lite",
+  standard: "Standard",
+  advanced: "Advanced",
+  enterprise: "Enterprise",
+};
+
+export const tierFinder = {
+  heading: "Not sure which tier fits? Take 60 seconds.",
+  subheading: "Five questions. Highest-tier answer wins.",
+  questions: tierFinderQuestions,
+  tierDescriptions: tierFinderTierDescriptions,
+  tierLabels: tierFinderTierLabels,
+};
+

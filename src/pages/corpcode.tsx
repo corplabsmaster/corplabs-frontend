@@ -9,6 +9,7 @@ import FaqSection from "../components/corpcode/FaqSection";
 import FinalCta from "../components/corpcode/FinalCta";
 import ProcessSteps from "../components/corpcode/ProcessSteps";
 import ThreePillars from "../components/corpcode/ThreePillars";
+import TierFinder from "../components/corpcode/TierFinder";
 import TierTable from "../components/corpcode/TierTable";
 import ValueProps from "../components/corpcode/ValueProps";
 
@@ -55,6 +56,7 @@ const CorpcodePage: React.FC<Props> = ({ location }: Props) => {
         <CorpcodeHero />
         <ValueProps />
         <TierTable />
+        <TierFinder />
         <ProcessSteps />
         <ThreePillars variant="page" currentId="corpcode" />
         <FaqSection />
