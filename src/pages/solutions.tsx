@@ -5,7 +5,10 @@ import Header from "@components/layout/header";
 import React, { useEffect } from "react";
 
 import AddonsGrid from "../components/corpsite/AddonsGrid";
+import CorpsiteHero from "../components/corpsite/CorpsiteHero";
+import FooterCta from "../components/corpsite/FooterCta";
 import NgoProgramme from "../components/corpsite/NgoProgramme";
+import PillarStrip from "../components/corpsite/PillarStrip";
 import TierDetailCards from "../components/corpsite/TierDetailCards";
 import TierTable from "../components/corpsite/TierTable";
 
@@ -49,14 +52,15 @@ const SolutionsPage: React.FC<Props> = ({ location }: Props) => {
       />
       <Header />
       <main className="min-h-screen bg-black-950">
-        {/* Hero — coming in PR5 */}
+        <CorpsiteHero />
+        <PillarStrip />
         <TierTable />
         <TierDetailCards />
         <AddonsGrid />
         <NgoProgramme />
         {/* Plan Selector — coming in PR6 */}
         {/* FAQ — coming in PR7 */}
-        {/* Footer CTA — coming in PR5 */}
+        <FooterCta />
       </main>
       <Footer />
     </Layout>
