@@ -4,6 +4,8 @@ import Footer from "@components/layout/footer";
 import Header from "@components/layout/header";
 import React, { useEffect } from "react";
 
+import AddonsGrid from "../components/corpsite/AddonsGrid";
+import TierDetailCards from "../components/corpsite/TierDetailCards";
 import TierTable from "../components/corpsite/TierTable";
 
 type Props = {
@@ -48,8 +50,8 @@ const SolutionsPage: React.FC<Props> = ({ location }: Props) => {
       <main className="min-h-screen bg-black-950">
         {/* Hero — coming in PR5 */}
         <TierTable />
-        {/* Tier detail cards — coming in PR3 */}
-        {/* Add-ons grid — coming in PR3 */}
+        <TierDetailCards />
+        <AddonsGrid />
         {/* Corpsite for Good — coming in PR4 */}
         {/* Plan Selector — coming in PR6 */}
         {/* FAQ — coming in PR7 */}
