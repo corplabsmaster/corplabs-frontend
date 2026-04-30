@@ -25,7 +25,7 @@ import ProductLead from "@images/product-lead.webp";
 import Support from "@images/support-icon.svg";
 import TechLead from "@images/tech-lead.webp";
 import Web from "@images/web-icon.svg";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withNotionData } from "@helpers/hoc/withQueries";
 
 import ThreePillars from "../components/corpcode/ThreePillars";
@@ -41,6 +41,25 @@ type Props = {
 
 const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Reveal `.fade-in` elements once they enter the viewport. Mirrors the
+  // observer used by /corpi /corpcode /corprise /corpsite — without it
+  // any component that uses .fade-in (e.g. ThreePillars) stays at
+  // opacity: 0 because the global stylesheet hides them by default.
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            observer.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const images = [Plan, Execute, Maintain]; // Replace with your actual image sources
 
