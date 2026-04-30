@@ -154,6 +154,12 @@ export const pillars: PillarLink[] = [
     href: "/corprise",
     blurb: "Subscription-priced ERP for Malaysian SMEs. MyInvois-ready.",
   },
+  {
+    id: "corpsite",
+    name: "Corpsite",
+    href: "/corpsite",
+    blurb: "Websites — design, build, and ongoing care, software-house grade.",
+  },
 ];
 
 export const faqs: CorpcodeFAQ[] = [

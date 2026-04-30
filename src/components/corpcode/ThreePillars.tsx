@@ -95,6 +95,38 @@ const PILLAR_ICONS: Record<string, React.ReactNode> = {
       />
     </svg>
   ),
+  corpsite: (
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="pillar-corpsite" x1="0" y1="0" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#AEE0FC" />
+          <stop offset="50%" stopColor="#BFD8FA" />
+          <stop offset="100%" stopColor="#E4D9FB" />
+        </linearGradient>
+      </defs>
+      {/* Browser window */}
+      <rect
+        x="8"
+        y="12"
+        width="40"
+        height="32"
+        rx="3"
+        stroke="url(#pillar-corpsite)"
+        strokeWidth="2.5"
+      />
+      <path d="M8 20H48" stroke="url(#pillar-corpsite)" strokeWidth="2.5" />
+      <circle cx="13" cy="16" r="1.2" fill="url(#pillar-corpsite)" />
+      <circle cx="17" cy="16" r="1.2" fill="url(#pillar-corpsite)" />
+      <circle cx="21" cy="16" r="1.2" fill="url(#pillar-corpsite)" />
+      {/* Content lines inside */}
+      <path
+        d="M14 28H30M14 33H38M14 38H26"
+        stroke="url(#pillar-corpsite)"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  ),
 };
 
 const ThreePillars: React.FC<Props> = ({ variant = "page", currentId }) => {
@@ -117,7 +149,7 @@ const ThreePillars: React.FC<Props> = ({ variant = "page", currentId }) => {
           >
             {isHomepage ? (
               <>
-                Three pillars,{" "}
+                Four pillars,{" "}
                 <span className="text-transparent bg-gradient-to-r from-gradient-1 to-gradient-2 bg-clip-text">
                   one playbook
                 </span>
@@ -129,11 +161,11 @@ const ThreePillars: React.FC<Props> = ({ variant = "page", currentId }) => {
           <p className="text-base font-worksanslight text-gray-200 leading-relaxed fade-in">
             {isHomepage
               ? "Pick the surface that solves your problem. Each pillar is built, deployed, and supported by the same Corplabs team."
-              : "Three products, one team. Pick what solves the problem in front of you — and call us when the next one comes up."}
+              : "Four products, one team. Pick what solves the problem in front of you — and call us when the next one comes up."}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {pillars.map((pillar) => {
             const isActiveOnPage = !isHomepage && pillar.id === currentId;
             return (
