@@ -36,7 +36,51 @@ const CompetitorComparison: React.FC = () => {
           </p>
         </div>
 
-        <div className="overflow-x-auto rounded-xl border border-white-100/10 bg-black-900">
+        {/* Mobile: stacked cards (< md) */}
+        <div className="md:hidden flex flex-col gap-3">
+          {comparisonRows.map((row) => (
+            <article
+              key={`mobile-${row.attribute}`}
+              className="rounded-xl border border-white-100/10 bg-black-900 overflow-hidden"
+            >
+              <h3 className="px-5 py-3 text-xs font-intersemibold text-[#AEE0FC] tracking-widest uppercase border-b border-white-100/10">
+                {row.attribute}
+              </h3>
+              <div className="flex flex-col">
+                {/* Corprise — pinned to the top, accent treatment */}
+                <div className="flex flex-col gap-1 px-5 py-3 bg-[#424DE2]/10 border-b border-[#424DE2]/30">
+                  <span className="text-[10px] font-intersemibold tracking-widest uppercase text-[#AEE0FC]">
+                    {competitorLabels.corprise}
+                  </span>
+                  <span className="text-sm font-intersemibold text-white-100 leading-snug">
+                    {row.values.corprise}
+                  </span>
+                </div>
+                {/* Other competitors */}
+                {competitors
+                  .filter((c) => c !== "corprise")
+                  .map((c, idx, arr) => (
+                    <div
+                      key={`mobile-${row.attribute}-${c}`}
+                      className={`flex flex-col gap-1 px-5 py-3 ${
+                        idx < arr.length - 1 ? "border-b border-white-100/5" : ""
+                      }`}
+                    >
+                      <span className="text-[10px] font-intersemibold tracking-widest uppercase text-gray-200/70">
+                        {competitorLabels[c]}
+                      </span>
+                      <span className="text-sm font-worksanslight text-gray-200/80 leading-snug">
+                        {row.values[c]}
+                      </span>
+                    </div>
+                  ))}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Tablet & desktop: full table (md+) */}
+        <div className="hidden md:block overflow-x-auto rounded-xl border border-white-100/10 bg-black-900">
           <table className="min-w-full text-left">
             <thead>
               <tr className="border-b border-white-100/10">

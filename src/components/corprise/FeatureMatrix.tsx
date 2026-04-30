@@ -28,6 +28,29 @@ const renderCell = (value: boolean | string): React.ReactNode => {
   );
 };
 
+const renderMobileValue = (value: boolean | string): React.ReactNode => {
+  if (value === true) {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-xs font-intersemibold text-[#AEE0FC]">
+        <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M4 9l3 3 7-8" stroke="#AEE0FC" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        Included
+      </span>
+    );
+  }
+  if (value === false) {
+    return (
+      <span className="text-xs font-worksanslight text-gray-200/40">
+        Not included
+      </span>
+    );
+  }
+  return (
+    <span className="text-xs font-worksanslight text-white-100">{value}</span>
+  );
+};
+
 const FeatureMatrix: React.FC = () => {
   const categories = Array.from(new Set(featureMatrix.map((row) => row.category)));
 
@@ -52,7 +75,55 @@ const FeatureMatrix: React.FC = () => {
           </p>
         </div>
 
-        <div className="overflow-x-auto rounded-xl border border-white-100/10 bg-black-900">
+        {/* Mobile: stacked cards (< md) */}
+        <div className="md:hidden flex flex-col gap-8">
+          {categories.map((category) => (
+            <div key={category}>
+              <h3 className="text-xs font-intersemibold text-[#AEE0FC] tracking-widest uppercase mb-3 px-1">
+                {category}
+              </h3>
+              <div className="flex flex-col gap-3">
+                {featureMatrix
+                  .filter((row) => row.category === category)
+                  .map((row) => (
+                    <article
+                      key={`mobile-${row.category}-${row.feature}`}
+                      className="rounded-xl border border-white-100/10 bg-black-900 p-5"
+                    >
+                      <h4 className="text-base font-intersemibold text-white-100 mb-1 leading-snug">
+                        {row.feature}
+                      </h4>
+                      {row.description && (
+                        <p className="text-xs font-worksanslight text-gray-200/60 mb-4 leading-relaxed">
+                          {row.description}
+                        </p>
+                      )}
+                      <dl className="grid grid-cols-2 gap-x-3 gap-y-2.5">
+                        {tiers.map((tier) => (
+                          <div
+                            key={`mobile-${row.feature}-${tier.id}`}
+                            className={`flex flex-col gap-0.5 px-2.5 py-2 rounded-md ${
+                              tier.popular
+                                ? "bg-[#424DE2]/15 border border-[#424DE2]/40"
+                                : "bg-black-950"
+                            }`}
+                          >
+                            <dt className="text-[10px] font-intersemibold tracking-widest uppercase text-gray-200/70">
+                              {tier.name}
+                            </dt>
+                            <dd>{renderMobileValue(row.availability[tier.id])}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    </article>
+                  ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Tablet & desktop: full table (md+) */}
+        <div className="hidden md:block overflow-x-auto rounded-xl border border-white-100/10 bg-black-900">
           <table className="min-w-full text-left">
             <thead className="sticky top-0 z-10 bg-black-900">
               <tr className="border-b border-white-100/10">
