@@ -9,6 +9,7 @@ import CorpsiteHero from "../components/corpsite/CorpsiteHero";
 import FooterCta from "../components/corpsite/FooterCta";
 import NgoProgramme from "../components/corpsite/NgoProgramme";
 import PillarStrip from "../components/corpsite/PillarStrip";
+import PlanSelector from "../components/corpsite/PlanSelector";
 import TierDetailCards from "../components/corpsite/TierDetailCards";
 import TierTable from "../components/corpsite/TierTable";
 
@@ -58,7 +59,7 @@ const SolutionsPage: React.FC<Props> = ({ location }: Props) => {
         <TierDetailCards />
         <AddonsGrid />
         <NgoProgramme />
-        {/* Plan Selector — coming in PR6 */}
+        <PlanSelector />
         {/* FAQ — coming in PR7 */}
         <FooterCta />
       </main>
