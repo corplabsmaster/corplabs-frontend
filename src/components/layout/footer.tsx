@@ -118,6 +118,12 @@ const Footer: React.FC = () => {
                 >
                   Corprise
                 </a>
+                <a
+                  href="/solutions"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                >
+                  Corpsite
+                </a>
               </div>
 
               <div>

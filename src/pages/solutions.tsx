@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 
 import AddonsGrid from "../components/corpsite/AddonsGrid";
 import CorpsiteHero from "../components/corpsite/CorpsiteHero";
+import FaqSection from "../components/corpsite/FaqSection";
 import FooterCta from "../components/corpsite/FooterCta";
 import NgoProgramme from "../components/corpsite/NgoProgramme";
 import PillarStrip from "../components/corpsite/PillarStrip";
@@ -60,7 +61,7 @@ const SolutionsPage: React.FC<Props> = ({ location }: Props) => {
         <AddonsGrid />
         <NgoProgramme />
         <PlanSelector />
-        {/* FAQ — coming in PR7 */}
+        <FaqSection />
         <FooterCta />
       </main>
       <Footer />
