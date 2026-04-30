@@ -20,7 +20,7 @@ type Props = {
   };
 };
 
-const SolutionsPage: React.FC<Props> = ({ location }: Props) => {
+const CorpsitePage: React.FC<Props> = ({ location }: Props) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) =>
@@ -37,9 +37,9 @@ const SolutionsPage: React.FC<Props> = ({ location }: Props) => {
   }, []);
 
   return (
-    <Layout location={location?.pathname ?? "/solutions"}>
+    <Layout location={location?.pathname ?? "/corpsite"}>
       <SEO
-        title="Corpsite — Solutions & Pricing | Corplabs"
+        title="Corpsite — Websites Built Like Software | Corplabs"
         description="Corpsite is the Corplabs pillar for websites — design, build, and ongoing care. Six tiers from RM 2,000 starter sites to enterprise platforms. Every plan includes a transparent monthly retainer."
         keywords={[
           "Corpsite",
@@ -69,4 +69,4 @@ const SolutionsPage: React.FC<Props> = ({ location }: Props) => {
   );
 };
 
-export default SolutionsPage;
+export default CorpsitePage;

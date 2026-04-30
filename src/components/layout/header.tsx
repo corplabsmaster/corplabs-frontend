@@ -32,7 +32,7 @@ const products = [
   },
   {
     name: "Corpsite",
-    href: "/solutions",
+    href: "/corpsite",
     description: "Websites — design, build, ongoing care.",
   },
 ];
@@ -246,7 +246,7 @@ const Header: React.FC<HeaderProps> = () => {
                   Corprise
                 </a>
                 <a
-                  href="/solutions"
+                  href="/corpsite"
                   className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight"
                 >
                   Corpsite

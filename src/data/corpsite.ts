@@ -366,7 +366,7 @@ export const pillars: Pillar[] = [
     id: "corpsite",
     name: "Corpsite",
     blurb: "Websites — design, build, ongoing care.",
-    href: "/solutions",
+    href: "/corpsite",
     isCurrent: true,
   },
 ];
