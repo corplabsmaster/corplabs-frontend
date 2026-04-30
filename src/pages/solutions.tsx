@@ -5,6 +5,7 @@ import Header from "@components/layout/header";
 import React, { useEffect } from "react";
 
 import AddonsGrid from "../components/corpsite/AddonsGrid";
+import NgoProgramme from "../components/corpsite/NgoProgramme";
 import TierDetailCards from "../components/corpsite/TierDetailCards";
 import TierTable from "../components/corpsite/TierTable";
 
@@ -52,7 +53,7 @@ const SolutionsPage: React.FC<Props> = ({ location }: Props) => {
         <TierTable />
         <TierDetailCards />
         <AddonsGrid />
-        {/* Corpsite for Good — coming in PR4 */}
+        <NgoProgramme />
         {/* Plan Selector — coming in PR6 */}
         {/* FAQ — coming in PR7 */}
         {/* Footer CTA — coming in PR5 */}
