@@ -32,9 +32,9 @@ subtle motion.
 - [x] **Phase 1 — Foundation.** Move Gatsby app to `legacy/`, scaffold
       Next.js + Tailwind v4, design tokens, base header/footer, placeholder
       homepage, port data layer + scorecard tests, green build.
-- [ ] **Phase 2 — Design system.** `components/ui` primitives (Button,
-      Card, SectionHeading, FaqAccordion, CtaBand, Reveal), full header with
-      mobile nav + Solutions dropdown, polished footer.
+- [x] **Phase 2 — Design system.** `components/ui` primitives (Button,
+      Card/LinkCard, SectionHeading, FaqAccordion, CtaBand, Reveal), header
+      with mobile nav + active-link state, homepage rebuilt on the primitives.
 - [ ] **Phase 3 — Pages.** Home, /solutions, /corpi, /corpcode, /corprise,
       /corpsite, then about/contact/privacy/404. One PR per page or pillar.
 - [ ] **Phase 4 — Wizards.** Corprise ScorecardWidget, Corpsite 6-step

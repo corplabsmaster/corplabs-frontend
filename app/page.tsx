@@ -1,4 +1,8 @@
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { LinkCard } from "@/components/ui/card";
+import { CtaBand } from "@/components/ui/cta-band";
+import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { pillars, site } from "@/data/site";
 
 export default function HomePage() {
@@ -9,7 +13,7 @@ export default function HomePage() {
           aria-hidden
           className="pointer-events-none absolute inset-x-0 -top-40 mx-auto h-96 max-w-3xl rounded-full bg-brand-600/25 blur-3xl"
         />
-        <div className="mx-auto max-w-6xl px-4 pb-20 pt-24 text-center sm:px-6 sm:pt-32">
+        <Reveal className="mx-auto max-w-6xl px-4 pb-20 pt-24 text-center sm:px-6 sm:pt-32">
           <p className="text-sm font-medium uppercase tracking-widest text-brand-300">
             {site.tagline}
           </p>
@@ -21,47 +25,52 @@ export default function HomePage() {
             Malaysia and Singapore — from AI sales agents to full ERPs.
           </p>
           <div className="mt-10 flex items-center justify-center gap-4">
-            <Link
-              href="/solutions"
-              className="rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-500"
-            >
-              Explore the lineup
-            </Link>
-            <Link
-              href="/contact"
-              className="rounded-full border border-line px-6 py-3 text-sm font-semibold text-zinc-200 transition-colors hover:border-brand-500 hover:text-white"
-            >
+            <Button href="/solutions">Explore the lineup</Button>
+            <Button href="/contact" variant="secondary">
               Talk to us
-            </Link>
+            </Button>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
-        <h2 className="sr-only">The Corplabs lineup</h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {pillars.map(pillar => (
-            <Link
-              key={pillar.id}
-              href={pillar.href}
-              className="group rounded-2xl border border-line bg-surface-raised p-6 transition-colors hover:border-brand-500"
-            >
-              <p className="font-display text-xl font-semibold text-white">
-                {pillar.name}
-              </p>
-              <p className="mt-1 text-sm font-medium text-brand-300">
-                {pillar.tagline}
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-400">
-                {pillar.blurb}
-              </p>
-              <p className="mt-4 text-sm font-medium text-zinc-500 transition-colors group-hover:text-brand-300">
-                Learn more →
-              </p>
-            </Link>
+        <Reveal>
+          <SectionHeading
+            eyebrow="The lineup"
+            title="Four products. One team."
+            lede="Every pillar is run by the same senior team, on the same playbook — pick one, or combine them."
+          />
+        </Reveal>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2">
+          {pillars.map((pillar, i) => (
+            <Reveal key={pillar.id} delay={i * 0.08}>
+              <LinkCard href={pillar.href} className="h-full">
+                <p className="font-display text-xl font-semibold text-white">
+                  {pillar.name}
+                </p>
+                <p className="mt-1 text-sm font-medium text-brand-300">
+                  {pillar.tagline}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+                  {pillar.blurb}
+                </p>
+                <p className="mt-4 text-sm font-medium text-zinc-500 transition-colors group-hover:text-brand-300">
+                  Learn more →
+                </p>
+              </LinkCard>
+            </Reveal>
           ))}
         </div>
       </section>
+
+      <Reveal>
+        <CtaBand
+          title="Have an idea? Let's make it real."
+          lede="Tell us what you're building — we'll tell you the fastest way to ship it."
+          primary={{ label: "Talk to us", href: "/contact" }}
+          secondary={{ label: "See all solutions", href: "/solutions" }}
+        />
+      </Reveal>
     </>
   );
 }
