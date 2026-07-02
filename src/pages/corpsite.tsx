@@ -1,0 +1,72 @@
+import SEO from "@components/common/seo";
+import Layout from "@components/layout";
+import Footer from "@components/layout/footer";
+import Header from "@components/layout/header";
+import React, { useEffect } from "react";
+
+import AddonsGrid from "../components/corpsite/AddonsGrid";
+import CorpsiteHero from "../components/corpsite/CorpsiteHero";
+import FaqSection from "../components/corpsite/FaqSection";
+import FooterCta from "../components/corpsite/FooterCta";
+import NgoProgramme from "../components/corpsite/NgoProgramme";
+import PillarStrip from "../components/corpsite/PillarStrip";
+import PlanSelector from "../components/corpsite/PlanSelector";
+import TierDetailCards from "../components/corpsite/TierDetailCards";
+import TierTable from "../components/corpsite/TierTable";
+
+type Props = {
+  location?: {
+    pathname: string;
+  };
+};
+
+const CorpsitePage: React.FC<Props> = ({ location }: Props) => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            observer.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <Layout location={location?.pathname ?? "/corpsite"}>
+      <SEO
+        title="Corpsite — Websites Built Like Software | Corplabs"
+        description="Corpsite is the Corplabs pillar for websites — design, build, and ongoing care. Six tiers from RM 2,000 starter sites to enterprise platforms. Every plan includes a transparent monthly retainer."
+        keywords={[
+          "Corpsite",
+          "Corplabs",
+          "website design Malaysia",
+          "Next.js websites",
+          "Payload CMS",
+          "Cloudflare Pages",
+          "NGO website Malaysia",
+          "WhatsApp AI agent",
+        ]}
+      />
+      <Header />
+      <main className="min-h-screen bg-black-950">
+        <CorpsiteHero />
+        <PillarStrip />
+        <TierTable />
+        <TierDetailCards />
+        <AddonsGrid />
+        <NgoProgramme />
+        <PlanSelector />
+        <FaqSection />
+        <FooterCta />
+      </main>
+      <Footer />
+    </Layout>
+  );
+};
+
+export default CorpsitePage;

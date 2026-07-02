@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="mt-0 lg:mt-0 lg:flex-1">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
               <div>
                 <h3 className="text-sm tracking-wide text-left text-white font-intersemibold">
                   About
@@ -105,6 +105,54 @@ const Footer: React.FC = () => {
                   className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
                 >
                   Corpi Intelligence
+                </a>
+                <a
+                  href="/corpcode"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                >
+                  Corpcode
+                </a>
+                <a
+                  href="/corprise"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                >
+                  Corprise
+                </a>
+                <a
+                  href="/corpsite"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                >
+                  Corpsite
+                </a>
+              </div>
+
+              <div>
+                <h3 className="text-sm tracking-wide text-left text-white font-intersemibold">
+                  Corprise
+                </h3>
+                <a
+                  href="/corprise#pricing"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                >
+                  Pricing
+                </a>
+                <a
+                  href="/corprise#scorecard"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                >
+                  Scorecard
+                </a>
+                <a
+                  href="/corprise#pricing"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                >
+                  Features
+                </a>
+                <a
+                  href="/contact?product=corprise"
+                  className="block mt-3 text-gray-200 font-worksanslight hover:text-primary-500"
+                >
+                  Book a Call
                 </a>
               </div>
 
@@ -198,7 +246,13 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div> */}
-        ?
+        <p className="text-xs text-gray-200/70 font-worksanslight mb-4 max-w-4xl">
+          Corprise is a product of Corplabs Sdn Bhd, built on the open-source
+          Odoo Community platform. Odoo® is a registered trademark of Odoo S.A.
+          Corprise is not affiliated with, endorsed by, or an official partner
+          of Odoo S.A. MyInvois and LHDN are trademarks of Lembaga Hasil Dalam
+          Negeri Malaysia.
+        </p>
         <div className="flex flex-col justify-between md:flex-row mb-[2vh]">
           <p className="text-xs text-gray-200 font-worksanslight">
             D-U-N-S® Certified : 44-791-6777 • © 2024 Corplabs - All rights

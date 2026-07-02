@@ -25,8 +25,10 @@ import ProductLead from "@images/product-lead.webp";
 import Support from "@images/support-icon.svg";
 import TechLead from "@images/tech-lead.webp";
 import Web from "@images/web-icon.svg";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withNotionData } from "@helpers/hoc/withQueries";
+
+import ThreePillars from "../components/corpcode/ThreePillars";
 
 type Props = {
   location?: {
@@ -39,6 +41,25 @@ type Props = {
 
 const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Reveal `.fade-in` elements once they enter the viewport. Mirrors the
+  // observer used by /corpi /corpcode /corprise /corpsite — without it
+  // any component that uses .fade-in (e.g. ThreePillars) stays at
+  // opacity: 0 because the global stylesheet hides them by default.
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            observer.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const images = [Plan, Execute, Maintain]; // Replace with your actual image sources
 
@@ -225,62 +246,10 @@ const Home: React.FC<PromoCardProps> = ({ location, notionData }: Props) => {
               </dl>
             </div>
 
-            {/* Corpi Intelligence — 7th service card */}
-            <div className="flex flex-wrap sm:mt-[4vh] md:mt-[4vh] lg:mt-[8vh]">
-              <dl className="grid grid-cols-1 gap-0 sm:grid-cols-3 w-full border-t border-white-100/40 sm:border-t-0">
-                <div className="hidden sm:block" />
-                <a
-                  href="/corpi"
-                  className="px-16 py-6 xs:px-[0vw] sm:px-[4vw] md:px-[4vw] items-center md:text-left xs:text-center sm:border-x sm:border-white-100/40 block hover:bg-white-100/5 transition-colors"
-                >
-                  <svg
-                    className="md:mx-0 xs:mx-auto"
-                    width="56"
-                    height="56"
-                    viewBox="0 0 56 56"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <defs>
-                      <linearGradient id="corpiGrad" x1="0" y1="0" x2="56" y2="56" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stopColor="#AEE0FC" />
-                        <stop offset="50%" stopColor="#BFD8FA" />
-                        <stop offset="100%" stopColor="#E4D9FB" />
-                      </linearGradient>
-                    </defs>
-                    {/* Chat bubble */}
-                    <path
-                      d="M8 12C8 9.79 9.79 8 12 8H44C46.21 8 48 9.79 48 12V34C48 36.21 46.21 38 44 38H22L14 46V38H12C9.79 38 8 36.21 8 34V12Z"
-                      stroke="url(#corpiGrad)"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    {/* Sparkle */}
-                    <path
-                      d="M38 14L39.5 17.5L43 19L39.5 20.5L38 24L36.5 20.5L33 19L36.5 17.5L38 14Z"
-                      stroke="url(#corpiGrad)"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    {/* Chat dots */}
-                    <circle cx="20" cy="25" r="1.5" fill="url(#corpiGrad)" />
-                    <circle cx="28" cy="25" r="1.5" fill="url(#corpiGrad)" />
-                  </svg>
-                  <h1 className="mt-4 text-lg font-semibold text-white-100">
-                    Corpi Intelligence
-                  </h1>
-                  <p className="mt-2 text-base tracking-wide text-gray-200 font-worksanslight">
-                    AI-powered WhatsApp sales agent that captures leads 24/7 —
-                    fully set up and managed for you.
-                  </p>
-                </a>
-                <div className="hidden sm:block" />
-              </dl>
-            </div>
           </div>
         </section>
+
+        <ThreePillars variant="homepage" />
       </div>
       <section className="bg-black-950" id="about">
         <div className="container px-2 mx-auto xs:pb-20 sm:pb-40 ">

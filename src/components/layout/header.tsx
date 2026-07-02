@@ -1,4 +1,5 @@
-import { Dialog } from "@headlessui/react";
+import { Dialog, Popover, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 // import { PhoneIcon, PlayCircleIcon } from "@heroicons/react/20/solid";
 import {
   // ArrowPathIcon,
@@ -10,7 +11,31 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import logo from "@images/corplabs-logo.svg";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
+
+const products = [
+  {
+    name: "Corpi",
+    href: "/corpi",
+    description: "AI WhatsApp sales agents.",
+    badge: "New",
+  },
+  {
+    name: "Corpcode",
+    href: "/corpcode",
+    description: "Custom software builds.",
+  },
+  {
+    name: "Corprise",
+    href: "/corprise",
+    description: "Subscription-priced ERP for SMEs.",
+  },
+  {
+    name: "Corpsite",
+    href: "/corpsite",
+    description: "Websites — design, build, ongoing care.",
+  },
+];
 
 // const products = [
 //   {
@@ -70,37 +95,65 @@ const Header: React.FC<HeaderProps> = () => {
         </div>
         <div className="items-center hidden lg:flex lg:flex-1 lg:justify-center ">
           {/* Center align the desktop navigation */}
-          <div className="border-[1.5px] w-[42vw] h-[6vh] rounded-full border-primary-600 bg-black-900 flex flex-wrap items-center text-base justify-center">
+          <div className="border-[1.5px] w-auto px-6 h-[6vh] rounded-full border-primary-600 bg-black-900 flex flex-nowrap items-center text-sm xl:text-base justify-center gap-x-4 xl:gap-x-5 whitespace-nowrap">
             <a
               href="/#"
-              className="mr-[2vw] text-white-100 hover:text-primary-600"
+              className="text-white-100 hover:text-primary-600"
             >
               Home
             </a>
             <a
               href="/about"
-              className="mr-[2vw] text-white-100 hover:text-primary-600"
+              className="text-white-100 hover:text-primary-600"
             >
               About
             </a>
             <a
-              href="/#services"
-              className="mr-[2vw] text-white-100 hover:text-primary-600"
+              href="/solutions"
+              className="text-white-100 hover:text-primary-600"
             >
-              Solution
+              Solutions
             </a>
-            <a
-              href="/corpi"
-              className="mr-[2vw] text-white-100 hover:text-primary-600 inline-flex items-center gap-1"
-            >
-              Corpi
-              <span className="px-1.5 py-0.5 text-xs font-intersemibold bg-[#424DE2] text-white rounded-full leading-none">
-                New
-              </span>
-            </a>
+            <Popover className="relative">
+              <Popover.Button className="inline-flex items-center gap-1 text-white-100 hover:text-primary-600 outline-none focus-visible:text-primary-600">
+                Products
+                <ChevronDownIcon className="w-4 h-4" aria-hidden="true" />
+              </Popover.Button>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-150"
+                enterFrom="opacity-0 translate-y-1"
+                enterTo="opacity-100 translate-y-0"
+                leave="transition ease-in duration-100"
+                leaveFrom="opacity-100 translate-y-0"
+                leaveTo="opacity-0 translate-y-1"
+              >
+                <Popover.Panel className="absolute left-1/2 top-full z-30 mt-3 w-72 -translate-x-1/2 rounded-xl border border-white-100/10 bg-black-900 p-2 shadow-xl">
+                  {products.map((p) => (
+                    <a
+                      key={p.name}
+                      href={p.href}
+                      className="block rounded-lg px-3 py-2 hover:bg-white-100/5"
+                    >
+                      <span className="inline-flex items-center gap-2 text-sm font-intersemibold text-white-100">
+                        {p.name}
+                        {p.badge && (
+                          <span className="px-1.5 py-0.5 text-[10px] font-intersemibold bg-[#424DE2] text-white rounded-full leading-none">
+                            {p.badge}
+                          </span>
+                        )}
+                      </span>
+                      <span className="block mt-0.5 text-xs font-worksanslight text-gray-200/80 leading-snug">
+                        {p.description}
+                      </span>
+                    </a>
+                  ))}
+                </Popover.Panel>
+              </Transition>
+            </Popover>
             <a
               href="/#careers"
-              className="mr-[0vw] text-white-100 hover:text-primary-600"
+              className="text-white-100 hover:text-primary-600"
             >
               Career
             </a>
@@ -163,11 +216,14 @@ const Header: React.FC<HeaderProps> = () => {
                   About
                 </a>
                 <a
-                  href="/#services"
+                  href="/solutions"
                   className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight"
                 >
-                  Solution
+                  Solutions
                 </a>
+                <p className="px-3 pt-4 -mx-3 text-[10px] font-intersemibold tracking-widest uppercase text-gray-200/60">
+                  Products
+                </p>
                 <a
                   href="/corpi"
                   className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight inline-flex items-center gap-2"
@@ -176,6 +232,24 @@ const Header: React.FC<HeaderProps> = () => {
                   <span className="px-1.5 py-0.5 text-xs font-intersemibold bg-[#424DE2] text-white rounded-full leading-none">
                     New
                   </span>
+                </a>
+                <a
+                  href="/corpcode"
+                  className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight"
+                >
+                  Corpcode
+                </a>
+                <a
+                  href="/corprise"
+                  className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight"
+                >
+                  Corprise
+                </a>
+                <a
+                  href="/corpsite"
+                  className="block px-3 py-2 -mx-3 text-base leading-7 text-white rounded-lg font-interlight"
+                >
+                  Corpsite
                 </a>
                 <a
                   href="/#careers"
