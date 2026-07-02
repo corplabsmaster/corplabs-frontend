@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/*
+ * Corplabs design tokens — single source of truth for the revamp.
+ * Brand purple is #5300EA (carried over from the previous site); the
+ * scale below is built around it as brand-600.
+ */
+@theme {
+  --color-brand-50: #f4edff;
+  --color-brand-100: #e8daff;
+  --color-brand-200: #d0b5ff;
+  --color-brand-300: #b28aff;
+  --color-brand-400: #9155ff;
+  --color-brand-500: #722bf7;
+  --color-brand-600: #5300ea;
+  --color-brand-700: #4500c2;
+  --color-brand-800: #380499;
+  --color-brand-900: #2b0a70;
+  --color-brand-950: #1b0547;
+
+  /* Dark surfaces — page background, raised cards, hairline borders. */
+  --color-surface: #07070c;
+  --color-surface-raised: #0e0e17;
+  --color-surface-overlay: #161624;
+  --color-line: #26263a;
+
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-work-sans), ui-sans-serif, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-zinc-200);
+  }
+
+  ::selection {
+    background-color: var(--color-brand-600);
+    color: white;
+  }
+}
