@@ -3,13 +3,14 @@ import { PillarStrip } from "@/components/pillar-strip";
 import ProcessSteps from "@/components/corpcode/ProcessSteps";
 import TechStack from "@/components/corpcode/TechStack";
 import TierCards from "@/components/corpcode/TierCards";
+import TierFinder from "@/components/corpcode/TierFinder";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CtaBand } from "@/components/ui/cta-band";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { faqs, finalCta, hero, pillars, valueProps } from "@/data/corpcode-content";
+import { faqs, finalCta, hero, pillars, tierFinder, valueProps } from "@/data/corpcode-content";
 
 export const metadata: Metadata = {
   title: "Corpcode — Custom Software Builds",
@@ -79,7 +80,18 @@ export default function CorpcodePage() {
         </div>
       </section>
 
-      {/* TODO Phase 4: TierFinder (step-by-step wizard) */}
+      <section id="find-tier" className="mx-auto max-w-3xl scroll-mt-24 px-4 pt-20 sm:px-6">
+        <Reveal>
+          <SectionHeading
+            eyebrow="Tier finder"
+            title={tierFinder.heading}
+            lede={tierFinder.subheading}
+          />
+        </Reveal>
+        <Reveal className="mt-10">
+          <TierFinder />
+        </Reveal>
+      </section>
 
       <section id="process" className="mx-auto max-w-4xl scroll-mt-24 px-4 pt-20 sm:px-6">
         <Reveal>

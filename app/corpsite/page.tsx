@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PillarStrip } from "@/components/pillar-strip";
 import AddonsGrid from "@/components/corpsite/AddonsGrid";
 import NgoProgramme from "@/components/corpsite/NgoProgramme";
+import PlanSelector from "@/components/corpsite/PlanSelector";
 import TierDetailCards from "@/components/corpsite/TierDetailCards";
 import TierTable from "@/components/corpsite/TierTable";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,7 @@ import { CtaBand } from "@/components/ui/cta-band";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { faqs, footerCta, hero, pillars } from "@/data/corpsite";
+import { faqs, footerCta, hero, pillars, sectionCopy } from "@/data/corpsite";
 
 export const metadata: Metadata = {
   title: "Corpsite — Websites, Built Like Software",
@@ -63,8 +64,18 @@ export default function CorpsitePage() {
         </div>
       </section>
 
-      {/* TODO Phase 4: PlanSelector (6-step wizard with URL state) */}
-      <div id="plan-selector" className="scroll-mt-24" />
+      <section id="plan-selector" className="mx-auto max-w-3xl scroll-mt-24 px-4 pt-20 sm:px-6">
+        <Reveal>
+          <SectionHeading
+            eyebrow={sectionCopy.planSelector.eyebrow}
+            title={sectionCopy.planSelector.heading}
+            lede={sectionCopy.planSelector.subheading}
+          />
+        </Reveal>
+        <Reveal className="mt-10">
+          <PlanSelector />
+        </Reveal>
+      </section>
 
       <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
         <Reveal>

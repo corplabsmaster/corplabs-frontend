@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CompetitorComparison from "@/components/corprise/CompetitorComparison";
 import FeatureMatrix from "@/components/corprise/FeatureMatrix";
 import PricingTiers from "@/components/corprise/PricingTiers";
+import ScorecardWidget from "@/components/corprise/ScorecardWidget";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
@@ -15,6 +16,7 @@ import {
   myInvois,
   problems,
   processSteps,
+  scorecardIntro,
   sectionHeadings,
   solutions,
   trustItems,
@@ -196,8 +198,14 @@ export default function CorprisePage() {
         </div>
       </section>
 
-      {/* TODO Phase 4: ScorecardWidget (interactive tier-recommendation quiz) */}
-      <div id="scorecard" className="scroll-mt-24" />
+      <section id="scorecard" className="mx-auto max-w-3xl scroll-mt-24 px-4 pt-20 sm:px-6">
+        <Reveal>
+          <SectionHeading {...scorecardIntro} />
+        </Reveal>
+        <Reveal className="mt-10">
+          <ScorecardWidget />
+        </Reveal>
+      </section>
 
       <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
         <Reveal>
