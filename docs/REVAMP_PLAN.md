@@ -4,6 +4,14 @@ Objective: rebuild corplabs.co on a modern, single-system stack and clean up
 the design. The old Gatsby app lives in `legacy/` as a porting reference and
 is deleted at cutover.
 
+## Branch strategy
+
+- **`master`** — revamp PRs target `master` directly (Phases 3+). Phases 1–2
+  already landed there via PR #3.
+- **`claude/codebase-overview-bkj4m9`** — the working feature branch.
+- `develop` exists but is a stale pre-revamp Gatsby branch; it is **not** used
+  for the revamp.
+
 ## Stack decisions
 
 | Concern    | Old (Gatsby site)                                   | New                              |
@@ -35,8 +43,12 @@ subtle motion.
 - [x] **Phase 2 — Design system.** `components/ui` primitives (Button,
       Card/LinkCard, SectionHeading, FaqAccordion, CtaBand, Reveal), header
       with mobile nav + active-link state, homepage rebuilt on the primitives.
-- [ ] **Phase 3 — Pages.** Home, /solutions, /corpi, /corpcode, /corprise,
-      /corpsite, then about/contact/privacy/404. One PR per page or pillar.
+- [x] **Phase 3 — Pages.** /solutions, /corpi, /corpcode, /corprise,
+      /corpsite, about, contact, privacy, 404 — all ported to the new design
+      system with copy in `data/*.ts`. `/blogs` was intentionally dropped: the
+      old page was a single stale job posting, not a blog (revisit in Phase 5
+      if a real blog is wanted). Decorative SVG illustrations from the old
+      hero sections (Corpi phone mock, Corprise dashboard) were not ported.
 - [ ] **Phase 4 — Wizards.** Corprise ScorecardWidget, Corpsite 6-step
       PlanSelector (URL state), Corpcode TierFinder — as client components.
 - [ ] **Phase 5 — Launch.** SEO parity (JSON-LD, sitemap, robots,
