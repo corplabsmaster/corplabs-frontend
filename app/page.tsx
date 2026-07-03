@@ -3,11 +3,21 @@ import { LinkCard } from "@/components/ui/card";
 import { CtaBand } from "@/components/ui/cta-band";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
+import type { Metadata } from "next";
 import { pillars, site } from "@/data/site";
+import { organizationJsonLd } from "@/lib/structured-data";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
+      />
       <section className="relative overflow-hidden">
         <div
           aria-hidden

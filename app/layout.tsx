@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Space_Grotesk, Work_Sans } from "next/font/google";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import { site } from "@/data/site";
 import "./globals.css";
+
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -22,6 +25,29 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  keywords: [
+    "Corplabs",
+    "software company Malaysia",
+    "AI WhatsApp agent",
+    "custom software Malaysia",
+    "Odoo ERP Malaysia",
+    "MyInvois",
+    "website design Malaysia",
+  ],
+  // og/twitter title + description are intentionally omitted so each page's
+  // own title/description flow into them automatically. Canonical is set
+  // per-page (a layout-level canonical would point every page at "/").
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    url: site.url,
+    locale: "en_MY",
+    // TODO: replace with a 1200×630 raster OG image when one is available.
+    images: [{ url: "/logo.svg", alt: site.name }],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
@@ -34,6 +60,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
       </body>
+      {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   );
 }

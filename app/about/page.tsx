@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Corplabs is a dynamic technology company founded by a team of highly motivated and experienced technological enthusiasts, dedicated to transforming the technology industry through innovation and cutting-edge solutions.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

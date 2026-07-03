@@ -51,8 +51,14 @@ subtle motion.
       hero sections (Corpi phone mock, Corprise dashboard) were not ported.
 - [ ] **Phase 4 — Wizards.** Corprise ScorecardWidget, Corpsite 6-step
       PlanSelector (URL state), Corpcode TierFinder — as client components.
-- [ ] **Phase 5 — Launch.** SEO parity (JSON-LD, sitemap, robots,
-      canonicals), GA4, redirect audit, production deploy, delete `legacy/`.
+- [~] **Phase 5 — Launch.** SEO parity done: per-page canonicals, homepage
+      Organization JSON-LD, `sitemap.ts`, `robots.ts`, `manifest.ts`,
+      OpenGraph/Twitter metadata. GA4 wired via `@next/third-parties`, gated
+      on `NEXT_PUBLIC_GA_ID` (set the env var to enable). **Remaining, pending
+      explicit go:** delete `legacy/` at cutover (preserved in git history and
+      on the pre-revamp `develop` branch). Optional follow-ups: a 1200×630
+      raster OG image (currently the SVG logo); a real blog if `/blogs` is
+      wanted back.
 
 ## URL parity checklist (from the old site)
 
