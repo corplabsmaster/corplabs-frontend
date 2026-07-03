@@ -4,6 +4,14 @@ Objective: rebuild corplabs.co on a modern, single-system stack and clean up
 the design. The old Gatsby app lives in `legacy/` as a porting reference and
 is deleted at cutover.
 
+## Branch strategy
+
+- **`master`** — revamp PRs target `master` directly (Phases 3+). Phases 1–2
+  already landed there via PR #3.
+- **`claude/codebase-overview-bkj4m9`** — the working feature branch.
+- `develop` exists but is a stale pre-revamp Gatsby branch; it is **not** used
+  for the revamp.
+
 ## Stack decisions
 
 | Concern    | Old (Gatsby site)                                   | New                              |
