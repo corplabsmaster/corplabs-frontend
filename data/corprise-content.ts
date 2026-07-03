@@ -248,3 +248,11 @@ export const finalCta = {
   secondaryCta: { label: "Book a Discovery Call", href: "/contact?product=corprise" },
   contactLine: "corplabs.co · contact@corplabs.co · 016-672 7208",
 };
+
+// ─── Scorecard ──────────────────────────────────────────────────────────────
+
+export const scorecardIntro = {
+  eyebrow: "Tier scorecard",
+  title: "Find your tier in 10 minutes.",
+  lede: "Seven questions about your team, revenue, and operations. We map your answers to the Corprise tier that fits — no email required.",
+};

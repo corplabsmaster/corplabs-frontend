@@ -31,6 +31,7 @@ type ButtonProps = VariantProps<typeof buttonVariants> & {
   /** Renders a Link (internal) or anchor (external) instead of a button. */
   href?: string;
   onClick?: () => void;
+  disabled?: boolean;
   type?: "button" | "submit";
   target?: string;
   rel?: string;
