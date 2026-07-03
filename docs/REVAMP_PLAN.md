@@ -1,8 +1,9 @@
 # Site revamp plan
 
 Objective: rebuild corplabs.co on a modern, single-system stack and clean up
-the design. The old Gatsby app lives in `legacy/` as a porting reference and
-is deleted at cutover.
+the design. **Status: complete** — all five phases merged to `master` and the
+old Gatsby app under `legacy/` has been removed at cutover (preserved in git
+history and on the pre-revamp `develop` branch).
 
 ## Branch strategy
 
@@ -51,14 +52,12 @@ subtle motion.
       hero sections (Corpi phone mock, Corprise dashboard) were not ported.
 - [ ] **Phase 4 — Wizards.** Corprise ScorecardWidget, Corpsite 6-step
       PlanSelector (URL state), Corpcode TierFinder — as client components.
-- [~] **Phase 5 — Launch.** SEO parity done: per-page canonicals, homepage
+- [x] **Phase 5 — Launch.** SEO parity: per-page canonicals, homepage
       Organization JSON-LD, `sitemap.ts`, `robots.ts`, `manifest.ts`,
-      OpenGraph/Twitter metadata. GA4 wired via `@next/third-parties`, gated
-      on `NEXT_PUBLIC_GA_ID` (set the env var to enable). **Remaining, pending
-      explicit go:** delete `legacy/` at cutover (preserved in git history and
-      on the pre-revamp `develop` branch). Optional follow-ups: a 1200×630
-      raster OG image (currently the SVG logo); a real blog if `/blogs` is
-      wanted back.
+      OpenGraph/Twitter metadata + a build-time generated OG image
+      (`app/opengraph-image.tsx`). GA4 via `@next/third-parties`, gated on
+      `NEXT_PUBLIC_GA_ID`. Cutover: `legacy/` deleted. Optional follow-up: a
+      real blog if `/blogs` is ever wanted back.
 
 ## URL parity checklist (from the old site)
 

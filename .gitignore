@@ -20,8 +20,4 @@ npm-debug.log*
 # OS / editor
 .DS_Store
 
-# Legacy Gatsby app (kept as porting reference — has its own ignores)
-legacy/.cache/
-legacy/public/
-legacy/node_modules/
 *.tsbuildinfo
