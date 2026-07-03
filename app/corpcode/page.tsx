@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Corpcode — Custom Software Builds",
   description:
     "From internal tools to full ERPs — Corpcode designs, builds, and maintains the systems off-the-shelf software can't touch. Paid discovery, fixed milestones, senior craft.",
+  alternates: { canonical: "/corpcode" },
 };
 
 export default function CorpcodePage() {

@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   title: "Corprise — Subscription-Priced Odoo ERP for Malaysian SMEs",
   description:
     "Corprise replaces RM 80,000+ Odoo implementations with a predictable monthly subscription from RM 1,000. Go live in weeks, MyInvois and Claude-powered AI automation included.",
+  alternates: { canonical: "/corprise" },
 };
 
 export default function CorprisePage() {

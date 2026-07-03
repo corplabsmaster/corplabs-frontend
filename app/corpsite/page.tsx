@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Corpsite — Websites, Built Like Software",
   description:
     "Corpsite is how Corplabs delivers websites — modern stack, Cloudflare-native infra, optional AI via Corpi. Six tiers from RM 2,000 starter sites to enterprise platforms, every plan with a transparent monthly retainer.",
+  alternates: { canonical: "/corpsite" },
 };
 
 export default function CorpsitePage() {

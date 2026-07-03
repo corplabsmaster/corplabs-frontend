@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Solutions — The Corplabs Lineup",
   description:
     "Corplabs delivers four pillars: Corpi (AI WhatsApp agents), Corpcode (custom software builds), Corprise (subscription-priced ERP), and Corpsite (websites). One team, one playbook.",
+  alternates: { canonical: "/solutions" },
 };
 
 export default function SolutionsPage() {
