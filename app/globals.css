@@ -1,31 +1,64 @@
 @import "tailwindcss";
 
 /*
- * Corplabs design tokens — single source of truth for the revamp.
- * Brand purple is #5300EA (carried over from the previous site); the
- * scale below is built around it as brand-600.
+ * Corplabs design tokens — mirrors the Corplabs Design System handoff
+ * (corplabs-design-system/colors_and_type.css). Brand purple #5300EA is
+ * brand-600; the signature accent is brand-500 #5605FF.
  */
 @theme {
-  --color-brand-50: #f4edff;
-  --color-brand-100: #e8daff;
-  --color-brand-200: #d0b5ff;
-  --color-brand-300: #b28aff;
-  --color-brand-400: #9155ff;
-  --color-brand-500: #722bf7;
+  --color-brand-50: #ebe7ff;
+  --color-brand-100: #dfd6ff;
+  --color-brand-200: #aa97ff;
+  --color-brand-300: #9273ff;
+  --color-brand-400: #733fff;
+  --color-brand-500: #5605ff;
   --color-brand-600: #5300ea;
-  --color-brand-700: #4500c2;
-  --color-brand-800: #380499;
-  --color-brand-900: #2b0a70;
-  --color-brand-950: #1b0547;
+  --color-brand-700: #4b00cc;
+  --color-brand-800: #3c01a2;
+  --color-brand-900: #2f027e;
+  --color-brand-950: #220066;
 
-  /* Dark surfaces — page background, raised cards, hairline borders. */
-  --color-surface: #07070c;
-  --color-surface-raised: #0e0e17;
-  --color-surface-overlay: #161624;
-  --color-line: #26263a;
+  /* Deep navy-black surfaces (never pure black) + hairline borders. */
+  --color-surface: #060226;
+  --color-surface-raised: #0b0b20;
+  --color-surface-overlay: #151238;
+  --color-line: rgba(255, 255, 255, 0.14);
+
+  /* Cyan → lilac accent gradient endpoints (use sparingly). */
+  --color-gradient-1: #8ad5ff;
+  --color-gradient-2: #e0aeff;
+
+  /* HiTerra-only semantic green. Do not use elsewhere on the brand surface. */
+  --color-hiterra: #00ff94;
+
+  /*
+   * Indigo-tinted neutral scale from the DS, mapped onto the zinc utility
+   * names the codebase already uses — retheming every page in one place.
+   */
+  --color-zinc-200: #a6acd1; /* gray-200 — body copy on dark */
+  --color-zinc-300: #c9cce4; /* gray-100 */
+  --color-zinc-400: #858bbe; /* gray-300 */
+  --color-zinc-500: #6c71b1; /* gray-400 */
+  --color-zinc-600: #4e519a; /* gray-600 */
 
   --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), var(--font-work-sans), ui-sans-serif, sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Gradient text flourish — the <Grow> / <Succeed> accent. */
+@utility gradient-text {
+  background: linear-gradient(90deg, var(--color-gradient-1), var(--color-gradient-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient hairline border (violet fill + cyan→lilac border). */
+@utility gradient-border {
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--color-surface-raised), var(--color-surface-raised)) padding-box,
+    linear-gradient(135deg, var(--color-gradient-1), var(--color-gradient-2)) border-box;
 }
 
 @layer base {
@@ -35,11 +68,44 @@
 
   body {
     background-color: var(--color-surface);
-    color: var(--color-zinc-200);
+    color: var(--color-zinc-300);
+    font-weight: 300; /* Work Sans Light is the DS body default */
   }
 
   ::selection {
     background-color: var(--color-brand-600);
     color: white;
+  }
+}
+
+/* Gentle idle float (hero illustration) — DS canonical motion. */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes msg-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
   }
 }

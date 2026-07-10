@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Space_Grotesk, Work_Sans } from "next/font/google";
+import { Inter, Work_Sans } from "next/font/google";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import { site } from "@/data/site";
@@ -13,9 +13,9 @@ const workSans = Work_Sans({
   variable: "--font-work-sans",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -53,7 +53,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${workSans.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${workSans.variable} ${inter.variable}`}>
       <body className="bg-surface font-sans text-zinc-200 antialiased">
         <Header />
         <main>{children}</main>

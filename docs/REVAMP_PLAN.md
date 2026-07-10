@@ -64,3 +64,19 @@ subtle motion.
 `/` `/solutions` `/corpi` `/corpcode` `/corprise` `/corpsite` `/about`
 `/contact` `/blogs` `/privacy` `/404` — plus `/coming-soon` and `/maintence`
 (intentionally dropped; the misspelled route was unlinked).
+
+## Phase 6 — Homepage redesign (Claude Design handoff)
+
+Implemented the "Corplabs Landing" prototype on the attached Corplabs Design
+System: global token retheme (deep navy-black surfaces, indigo-tinted
+neutrals mapped over the zinc utilities, Inter display, cyan→lilac gradient
+accent), capsule nav header, violet footer with D-U-N-S line, and a new
+homepage — hero with floating planet, tabbed product showcase (live Corpi
+chat simulation + three 3-question mini finders that link to the full
+wizards), services grid, process steps, HiTerra flagship band (green is
+HiTerra-only per the DS), collab/culture, job vacancies, and a native
+contact form. Corpi pricing follows the live site, not the prototype.
+
+Contact form → Notion: POST /api/contact writes to the "Website Inquiries"
+database via the Notion REST API (honeypot + rate limit; graceful
+email-fallback 503 until NOTION_API_KEY / NOTION_INQUIRIES_DB_ID are set).
