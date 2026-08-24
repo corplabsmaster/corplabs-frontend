@@ -32,13 +32,17 @@ export default function Hero() {
         </div>
         <Link
           href="/corpi"
-          className="inline-flex items-center gap-2.5 rounded-full border border-brand-500/60 bg-brand-500/10 px-4 py-2 text-sm text-white transition-colors hover:bg-brand-500/20"
+          className="flex flex-col items-start gap-2 rounded-2xl border border-brand-500/60 bg-brand-500/10 px-4 py-3 text-sm text-white transition-colors hover:bg-brand-500/20 sm:flex-row sm:items-center sm:gap-2.5 sm:rounded-full sm:py-2"
         >
-          <span className="rounded-full bg-brand-500 px-2 py-0.5 font-display text-[10px] font-semibold tracking-[0.08em]">
-            {hero.corpiRibbon.pill}
+          <span className="flex items-center gap-2.5">
+            <span className="shrink-0 rounded-full bg-brand-500 px-2 py-0.5 font-display text-[10px] font-semibold tracking-[0.08em]">
+              {hero.corpiRibbon.pill}
+            </span>
+            <span className="text-zinc-300">{hero.corpiRibbon.text}</span>
           </span>
-          <span className="text-zinc-300">{hero.corpiRibbon.text}</span>
-          <span className="font-display font-semibold">{hero.corpiRibbon.cta}</span>
+          <span className="whitespace-nowrap font-display font-semibold">
+            {hero.corpiRibbon.cta}
+          </span>
         </Link>
       </Reveal>
       <div className="flex min-w-0 items-center justify-center">
