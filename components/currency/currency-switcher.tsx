@@ -6,6 +6,47 @@ import { CURRENCIES, CURRENCY_ORDER } from "@/lib/currency";
 import { cn } from "@/lib/utils";
 
 /**
+ * Full-width one-tap currency selector for the mobile menu — no nested
+ * dropdown, thumb-sized targets.
+ */
+export function CurrencySegments({ className }: { className?: string }) {
+  const { currency, setCurrency } = useCurrency();
+  return (
+    <div className={cn(className)}>
+      <div
+        role="radiogroup"
+        aria-label="Display currency"
+        className="grid grid-cols-4 gap-1 rounded-full border border-line bg-surface-raised p-1"
+      >
+        {CURRENCY_ORDER.map(code => {
+          const active = code === currency;
+          return (
+            <button
+              key={code}
+              type="button"
+              role="radio"
+              aria-checked={active}
+              onClick={() => setCurrency(code)}
+              className={cn(
+                "min-h-11 rounded-full font-mono text-[13px] transition-colors",
+                active
+                  ? "bg-brand-500 font-medium text-white"
+                  : "text-zinc-200 active:bg-surface"
+              )}
+            >
+              {code}
+            </button>
+          );
+        })}
+      </div>
+      <p className="mt-2 text-center text-[11px] leading-snug text-zinc-500">
+        Prices are indicative — projects are invoiced in MYR.
+      </p>
+    </div>
+  );
+}
+
+/**
  * Compact currency selector. Prices are indicative and invoiced in MYR — the
  * switcher exists to signal that Corplabs takes overseas work.
  */

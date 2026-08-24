@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
-import { CurrencySwitcher } from "@/components/currency/currency-switcher";
+import { CurrencySegments, CurrencySwitcher } from "@/components/currency/currency-switcher";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
@@ -101,11 +101,11 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          <div className="mt-3 flex items-center gap-2 border-t border-line px-3 pt-3">
-            <span className="font-display text-[11px] uppercase tracking-[0.08em] text-zinc-500">
+          <div className="mt-3 border-t border-line px-3 pt-4 pb-1">
+            <p className="mb-2 font-display text-[11px] uppercase tracking-[0.08em] text-zinc-500">
               Currency
-            </span>
-            <CurrencySwitcher />
+            </p>
+            <CurrencySegments />
           </div>
         </nav>
       )}
