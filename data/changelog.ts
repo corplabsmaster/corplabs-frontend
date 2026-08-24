@@ -98,5 +98,8 @@ export const changelog: ChangelogEntry[] = [
       "Deployed with a single deploy.sh",
       "Source frozen on the protected/v1 branch",
     ],
+    image: "/changelog/v1.webp",
+    imageAlt: "The first hand-built Corplabs.co homepage",
+    link: { label: "Browse the archived site →", href: "/archive/v1/", external: true },
   },
 ];
