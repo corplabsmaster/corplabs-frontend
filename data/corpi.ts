@@ -52,6 +52,10 @@ export const hero = {
     { stat: "< 2 wks", label: "From discovery call to live agent" },
   ],
   chatCaption: "A real Corpi conversation, replayed. Language switches mid-thread.",
+  microsite: {
+    label: "Visit the Corpi microsite",
+    href: "https://corpi.corplabs.co",
+  },
 };
 
 // ─── Features ────────────────────────────────────────────────────────────────
@@ -236,6 +240,11 @@ export const finalCta = {
   body: "Book a discovery call and we'll have your agent live in under two weeks.",
   primaryCta: { label: "WhatsApp us", href: "https://wa.me/60166727208" },
   secondaryCta: { label: "Email us", href: "mailto:contact@corplabs.co" },
+  micrositeNote: {
+    pre: "Prefer the full product experience? ",
+    label: "corpi.corplabs.co",
+    href: "https://corpi.corplabs.co",
+  },
 };
 
 // ─── Cross-pillar strip ──────────────────────────────────────────────────────

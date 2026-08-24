@@ -63,6 +63,14 @@ export default function CorpiPage() {
               >
                 {hero.secondaryCta.label}
               </Button>
+              <a
+                href={hero.microsite.href}
+                target="_blank"
+                rel="noreferrer"
+                className="font-display text-[13px] font-medium text-brand-300 transition-colors hover:text-white"
+              >
+                {hero.microsite.label} ↗
+              </a>
             </div>
             <dl className="mt-9 grid grid-cols-3 gap-4 border-t border-line pt-7 sm:gap-8">
               {hero.stats.map((s) => (
@@ -246,6 +254,17 @@ export default function CorpiPage() {
               >
                 {finalCta.secondaryCta.label}
               </Button>
+              <p className="w-full text-[13px] text-zinc-500">
+                {finalCta.micrositeNote.pre}
+                <a
+                  href={finalCta.micrositeNote.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-mono text-brand-300 underline underline-offset-4 transition-colors hover:text-white"
+                >
+                  {finalCta.micrositeNote.label}
+                </a>
+              </p>
             </div>
           </div>
         </Reveal>

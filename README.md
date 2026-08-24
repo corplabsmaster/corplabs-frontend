@@ -66,3 +66,13 @@ notion.so/profile/integrations, share each database with it, set the env vars):
   database (`NOTION_JOBS_DB_ID`), rows where `Status = Open`, refreshed
   hourly. Post or close a role in Notion — no deploy. Falls back to the
   static list in `data/home.ts` until configured.
+
+## Blog (Keystatic)
+
+Posts live in `content/posts/` as Markdoc files — every edit is a commit, and
+posts ship as fully static pages. To write: `npm run dev`, open
+`http://localhost:3000/keystatic`, and use the editor (local mode writes to
+the filesystem). To let teammates edit from the deployed site, switch
+`keystatic.config.ts` to GitHub mode (see the comment there). The blog
+surfaces at `/blog`, with per-post Article JSON-LD, RSS at `/blog/rss.xml`,
+and sitemap entries generated automatically.
