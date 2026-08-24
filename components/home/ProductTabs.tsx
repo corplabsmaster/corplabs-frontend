@@ -1,104 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { ChatDemo } from "@/components/corpi/ChatDemo";
+import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
+import { corpiChat } from "@/data/corpi";
 import {
-  corpiChat,
   homePillars,
   miniFinders,
   productsHeading,
   type PillarKind,
 } from "@/data/home";
 import { cn } from "@/lib/utils";
-
-/* ── Corpi chat simulation ─────────────────────────────────────────────── */
-
-function CorpiChat() {
-  const [shown, setShown] = useState(0);
-  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const start = useCallback(() => {
-    if (timer.current) clearInterval(timer.current);
-    setShown(0);
-    timer.current = setInterval(() => {
-      setShown((s) => {
-        if (s >= corpiChat.script.length) {
-          if (timer.current) clearInterval(timer.current);
-          return s;
-        }
-        return s + 1;
-      });
-    }, 1100);
-  }, []);
-
-  useEffect(() => {
-    start();
-    return () => {
-      if (timer.current) clearInterval(timer.current);
-    };
-  }, [start]);
-
-  const visible = corpiChat.script.slice(0, shown);
-  const next = corpiChat.script[shown];
-  const typing = next?.from === "corpi";
-
-  return (
-    <div className="max-w-sm overflow-hidden rounded-2xl border border-line bg-surface-raised shadow-2xl">
-      <div className="flex items-center gap-3 border-b border-white/10 bg-brand-950 px-4 py-3.5">
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-500 font-display text-sm font-semibold text-white">
-          C
-        </span>
-        <div className="flex-1">
-          <p className="font-display text-sm font-semibold text-white">{corpiChat.shopName}</p>
-          <p className="text-[11px] text-gradient-1">{corpiChat.status}</p>
-        </div>
-        <button
-          type="button"
-          onClick={start}
-          className="rounded-full border border-line px-3 py-1.5 font-display text-[11px] tracking-wide text-zinc-300 transition-colors hover:border-brand-500"
-        >
-          Replay
-        </button>
-      </div>
-      <div className="flex min-h-[360px] flex-col gap-2.5 p-4">
-        {visible.map((m, i) =>
-          m.from === "system" ? (
-            <p
-              key={i}
-              className="self-center px-1 py-2 font-mono text-[10.5px] tracking-wide text-gradient-1 [animation:msg-in_.3s_ease-out]"
-            >
-              {m.text}
-            </p>
-          ) : (
-            <p
-              key={i}
-              className={cn(
-                "max-w-[82%] px-3.5 py-2.5 text-[13.5px] leading-relaxed text-white [animation:msg-in_.3s_ease-out]",
-                m.from === "corpi"
-                  ? "self-end rounded-[14px_14px_4px_14px] border border-brand-700 bg-brand-800"
-                  : "self-start rounded-[14px_14px_14px_4px] border border-line bg-surface"
-              )}
-            >
-              {m.text}
-            </p>
-          )
-        )}
-        {typing && (
-          <span className="flex gap-1 self-end rounded-[14px_14px_4px_14px] bg-brand-800 px-4 py-3">
-            {[0, 0.2, 0.4].map((delay) => (
-              <span
-                key={delay}
-                className="h-1.5 w-1.5 rounded-full bg-white"
-                style={{ animation: `pulse-dot 1s ${delay}s infinite` }}
-              />
-            ))}
-          </span>
-        )}
-      </div>
-    </div>
-  );
-}
 
 /* ── Mini finder (3-question teaser) ───────────────────────────────────── */
 
@@ -156,7 +70,7 @@ function MiniFinder({ kind }: { kind: Exclude<PillarKind, "corpi"> }) {
         </div>
         <p className="font-display text-2xl font-bold text-white">{rec.name}</p>
         <p className="mb-2.5 mt-0.5 font-display text-lg font-semibold text-brand-300">
-          {rec.price}
+          <Price rm={rec.price} />
         </p>
         <p className="mb-4 text-[13px] leading-normal text-zinc-200">{rec.detail}</p>
         <div className="flex flex-wrap items-center gap-4">
@@ -187,9 +101,12 @@ export default function ProductTabs() {
         <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
           {productsHeading.title}
         </h2>
-        <span className="font-display text-xs font-semibold uppercase tracking-[0.08em] text-brand-300">
+        <Link
+          href={productsHeading.hintHref}
+          className="font-display text-xs font-semibold uppercase tracking-[0.08em] text-brand-300 transition-colors hover:text-brand-200"
+        >
           {productsHeading.hint}
-        </span>
+        </Link>
       </div>
 
       <div className="flex gap-2 overflow-x-auto border-b border-line" role="tablist">
@@ -222,7 +139,7 @@ export default function ProductTabs() {
           <h3 className="mb-1.5 font-display text-2xl font-bold text-white sm:text-3xl">
             {pillar.title}
           </h3>
-          <p className="mb-4 font-mono text-[12.5px] text-brand-300">{pillar.price}</p>
+          <p className="mb-4 font-mono text-[12.5px] text-brand-300"><Price rm={pillar.price} /></p>
           <p className="mb-6 max-w-md text-[15px] leading-relaxed text-zinc-200">
             {pillar.blurb}
           </p>
@@ -237,14 +154,22 @@ export default function ProductTabs() {
               </li>
             ))}
           </ul>
-          <Button href={pillar.cta.href} className="font-display uppercase tracking-[0.08em]">
-            {pillar.cta.label}
-          </Button>
+          <div className="flex flex-wrap items-center gap-5">
+            <Button href="#contact" className="font-display uppercase tracking-[0.08em]">
+              {pillar.cta.label}
+            </Button>
+            <Link
+              href={pillar.pageHref}
+              className="font-display text-[13px] font-medium text-brand-300 transition-colors hover:text-white"
+            >
+              Full details →
+            </Link>
+          </div>
         </div>
 
         <div className="min-h-[420px]">
           {pillar.kind === "corpi" ? (
-            <CorpiChat key={tab} />
+            <ChatDemo key={tab} chat={corpiChat} className="max-w-sm" />
           ) : (
             <MiniFinder key={pillar.kind} kind={pillar.kind} />
           )}

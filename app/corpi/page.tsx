@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
+import { ChatDemo } from "@/components/corpi/ChatDemo";
+import { Price } from "@/components/currency/price";
+import { PillarStrip } from "@/components/pillar-strip";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { Reveal } from "@/components/ui/reveal";
-import { SectionHeading } from "@/components/ui/section-heading";
 import {
+  corpiChat,
+  faqHeading,
+  faqLede,
   faqs,
-  faqsHeading,
   features,
   featuresHeading,
+  featuresHint,
   finalCta,
   hero,
   onboarding,
+  pillars,
   pricing,
-  problem,
-  whatYouGet,
-  whatYouGetHeading,
 } from "@/data/corpi";
 import { cn } from "@/lib/utils";
 
@@ -29,206 +31,228 @@ export const metadata: Metadata = {
 export default function CorpiPage() {
   return (
     <>
+      {/* 1 · Hero split ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-40 mx-auto h-96 max-w-3xl rounded-full bg-brand-600/25 blur-3xl"
+          className="pointer-events-none absolute -top-40 left-0 h-96 w-96 rounded-full bg-brand-600/20 blur-3xl"
         />
-        <Reveal className="mx-auto max-w-5xl px-4 pb-16 pt-24 text-center sm:px-6 sm:pt-28">
-          <p className="text-sm font-medium uppercase tracking-widest text-brand-300">
-            {hero.eyebrow}
-          </p>
-          <h1 className="mx-auto mt-4 max-w-3xl font-display text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            {hero.headline}
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-400">
-            {hero.subheadline}
-          </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button href={hero.primaryCta.href}>{hero.primaryCta.label}</Button>
-            <Button href={hero.secondaryCta.href} variant="secondary">
-              {hero.secondaryCta.label}
-            </Button>
-          </div>
-        </Reveal>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-4 pt-12 sm:px-6">
-        <Reveal>
-          <SectionHeading title={problem.title} />
-        </Reveal>
-        {problem.paragraphs.map(paragraph => (
-          <Reveal key={paragraph.slice(0, 24)}>
-            <p className="mx-auto mt-6 max-w-3xl text-center leading-relaxed text-zinc-400">
-              {paragraph}
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-12 pt-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 lg:pt-24">
+          <Reveal>
+            <p className="font-display text-xs font-semibold uppercase tracking-widest text-brand-300">
+              {hero.eyebrow}
             </p>
-          </Reveal>
-        ))}
-        <div className="mt-12 grid gap-4 sm:grid-cols-3">
-          {problem.stats.map((item, i) => (
-            <Reveal key={item.stat} delay={i * 0.06} className="h-full">
-              <Card className="flex h-full flex-col items-center p-10 text-center">
-                <p className="font-display text-4xl font-bold text-brand-300">
-                  {item.stat}
-                </p>
-                <p className="mt-2 text-sm tracking-wide text-zinc-400">{item.label}</p>
-              </Card>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
-        <Reveal>
-          <SectionHeading title={featuresHeading} />
-        </Reveal>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, i) => (
-            <Reveal key={feature.title} delay={i * 0.05} className="h-full">
-              <Card className="h-full p-8">
-                <h3 className="font-display text-lg font-semibold text-white">
-                  {feature.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                  {feature.description}
-                </p>
-              </Card>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-4xl px-4 pt-20 sm:px-6">
-        <Reveal>
-          <SectionHeading title={whatYouGetHeading} />
-        </Reveal>
-        <Reveal className="mt-12">
-          <div className="overflow-hidden rounded-2xl border border-line">
-            {whatYouGet.map((item, i) => (
-              <div
-                key={item.label}
-                className={cn(
-                  "flex flex-col px-8 py-5 sm:flex-row sm:items-center",
-                  i !== whatYouGet.length - 1 && "border-b border-line",
-                  i % 2 === 0 ? "bg-surface-raised" : "bg-surface"
-                )}
+            <h1 className="mt-4 font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl">
+              {hero.headline.plain}
+              <span className="gradient-text">{hero.headline.gradient}</span>
+            </h1>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-zinc-200">
+              {hero.lede}
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Button
+                href={hero.primaryCta.href}
+                className="font-display uppercase tracking-widest"
               >
-                <p className="font-medium text-white sm:w-1/3">{item.label}</p>
-                <p className="mt-1 text-sm text-zinc-400 sm:mt-0 sm:w-2/3">{item.desc}</p>
+                {hero.primaryCta.label}
+              </Button>
+              <Button
+                href={hero.secondaryCta.href}
+                variant="secondary"
+                className="font-display uppercase tracking-widest"
+              >
+                {hero.secondaryCta.label}
+              </Button>
+            </div>
+            <dl className="mt-9 grid grid-cols-3 gap-4 border-t border-line pt-7 sm:gap-8">
+              {hero.stats.map((s) => (
+                <div key={s.stat}>
+                  <dt className="font-display text-2xl font-bold tracking-tight text-gradient-1 sm:text-3xl">
+                    {s.stat}
+                  </dt>
+                  <dd className="mt-1 max-w-[180px] text-xs leading-snug text-zinc-200">
+                    {s.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+
+          <Reveal delay={0.1} className="flex flex-col gap-3.5">
+            <ChatDemo chat={corpiChat} bodyMinHeight="min-h-[430px]" />
+            <p className="text-center text-xs text-zinc-500">{hero.chatCaption}</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 2 · What Corpi Does ────────────────────────────────────────── */}
+      <section id="features" className="mx-auto max-w-6xl scroll-mt-24 px-4 pt-20 sm:px-6">
+        <Reveal className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            {featuresHeading}
+          </h2>
+          <span className="font-display text-xs font-semibold uppercase tracking-widest text-brand-300">
+            {featuresHint}
+          </span>
+        </Reveal>
+        <Reveal className="mt-8">
+          <div className="grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+            {features.map((f) => (
+              <div
+                key={f.n}
+                className="bg-surface p-8 transition-colors hover:bg-surface-raised"
+              >
+                <p className="font-mono text-[11.5px] text-gradient-1">{f.n}</p>
+                <h3 className="mt-4 font-display text-base font-semibold text-white">
+                  {f.title}
+                </h3>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-zinc-200">{f.desc}</p>
               </div>
             ))}
           </div>
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-4xl px-4 pt-20 sm:px-6">
+      {/* 3 · Live in Under Two Weeks ────────────────────────────────── */}
+      <section id="onboarding" className="mx-auto max-w-6xl scroll-mt-24 px-4 pt-20 sm:px-6">
         <Reveal>
-          <SectionHeading title={onboarding.title} lede={onboarding.lede} />
+          <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            {onboarding.title}
+          </h2>
+          <p className="mt-3 max-w-xl text-base leading-relaxed text-zinc-200">
+            {onboarding.lede}
+          </p>
         </Reveal>
-        <ol className="mt-12 space-y-4">
-          {onboarding.steps.map((step, i) => (
-            <Reveal key={step.day} delay={i * 0.05}>
-              <li className="flex gap-5 rounded-2xl border border-line bg-surface-raised p-6">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-600 font-display text-sm font-bold text-white">
-                  {i + 1}
-                </span>
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-widest text-brand-300">
-                    {step.day}
-                  </p>
-                  <h3 className="mt-1 font-display text-lg font-semibold text-white">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">{step.desc}</p>
-                </div>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
-      </section>
-
-      <section id="pricing" className="mx-auto max-w-5xl scroll-mt-24 px-4 pt-20 sm:px-6">
-        <Reveal>
-          <SectionHeading title={pricing.title} />
-        </Reveal>
-        <Reveal className="mt-10">
-          <div className="rounded-2xl border border-brand-500/50 bg-brand-600/10 p-6 text-center">
-            <p className="font-display text-lg font-semibold text-white">
-              {pricing.setupFee.title}
-            </p>
-            <p className="mt-1 text-sm text-zinc-400">{pricing.setupFee.body}</p>
-          </div>
-        </Reveal>
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          {pricing.plans.map((plan, i) => (
-            <Reveal key={plan.name} delay={i * 0.06} className="h-full">
-              <div
-                className={cn(
-                  "relative flex h-full flex-col rounded-2xl border p-8",
-                  plan.recommended
-                    ? "border-brand-500 bg-brand-600/10"
-                    : "border-line bg-surface-raised"
-                )}
-              >
-                {plan.recommended && (
-                  <p className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-brand-600 px-3 py-1 text-xs font-semibold text-white">
-                    Most Popular
-                  </p>
-                )}
-                <p className="font-display text-lg font-semibold text-white">{plan.name}</p>
-                <p className="mt-2">
-                  <span className="font-display text-3xl font-bold text-white">
-                    {plan.price}
-                  </span>
-                  <span className="text-sm text-zinc-400">{plan.period}</span>
-                </p>
-                <p className="mt-3 flex-1 text-sm text-zinc-400">{plan.desc}</p>
-                <p className="mt-4 text-xs text-zinc-500">{pricing.includesLine}</p>
-                <Button
-                  href={pricing.ctaHref}
-                  variant={plan.recommended ? "primary" : "secondary"}
-                  size="sm"
-                  className="mt-6 self-start"
-                >
-                  {pricing.ctaLabel}
-                </Button>
+        <div className="relative mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+          <div
+            aria-hidden
+            className="absolute left-[8%] right-[8%] top-4 hidden h-px bg-[linear-gradient(90deg,var(--color-gradient-1),var(--color-gradient-2))] opacity-45 lg:block"
+          />
+          {onboarding.steps.map((o, i) => (
+            <Reveal key={o.n} delay={i * 0.08} className="relative">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full border-[1.5px] border-transparent bg-[linear-gradient(var(--color-surface),var(--color-surface))_padding-box,linear-gradient(135deg,var(--color-gradient-1),var(--color-gradient-2))_border-box] font-mono text-xs text-white">
+                {o.n}
               </div>
+              <p className="mt-5 font-mono text-[11.5px] tracking-wide text-brand-300">
+                {o.day}
+              </p>
+              <h3 className="mt-1.5 font-display text-base font-semibold text-white">
+                {o.title}
+              </h3>
+              <p className="mt-2 text-[13px] leading-normal text-zinc-200">{o.desc}</p>
             </Reveal>
           ))}
         </div>
-        <p className="mt-6 text-center text-xs text-zinc-500">{pricing.footnote}</p>
       </section>
 
-      <section className="mx-auto max-w-3xl px-4 pt-20 sm:px-6">
-        <Reveal>
-          <SectionHeading title={faqsHeading} />
-        </Reveal>
-        <Reveal className="mt-10">
-          <FaqAccordion items={faqs} />
-        </Reveal>
+      {/* 4 · Pricing ────────────────────────────────────────────────── */}
+      <section id="pricing" className="mt-20 scroll-mt-24 bg-surface-raised">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 sm:py-24 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:items-start lg:gap-16">
+          <Reveal>
+            <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              {pricing.title}
+            </h2>
+            <p className="mt-3.5 text-base leading-relaxed text-zinc-200">{pricing.lede}</p>
+            <div className="mt-7 rounded-xl border border-line bg-surface p-6">
+              <p className="font-display text-lg font-semibold text-white">
+                <Price rm={pricing.setupCard.title} />
+              </p>
+              <p className="mt-2 text-[13.5px] leading-relaxed text-zinc-200">
+                {pricing.setupCard.body}
+              </p>
+            </div>
+            <p className="mt-4 text-xs leading-normal text-zinc-500">{pricing.finePrint}</p>
+          </Reveal>
+
+          <div className="grid gap-5 sm:grid-cols-3">
+            {pricing.plans.map((plan, i) => (
+              <Reveal key={plan.name} delay={i * 0.08} className="h-full">
+                <div
+                  className={cn(
+                    "flex h-full flex-col rounded-xl bg-surface p-6",
+                    plan.recommended
+                      ? "border-[1.5px] border-brand-500 shadow-[0_0_50px_-12px_var(--color-brand-500)]"
+                      : "border border-line"
+                  )}
+                >
+                  {plan.recommended && (
+                    <span className="mb-3 self-start rounded-full bg-[linear-gradient(90deg,var(--color-gradient-1),var(--color-gradient-2))] px-2.5 py-1 font-display text-[10px] font-semibold uppercase tracking-wide text-surface">
+                      Most Popular
+                    </span>
+                  )}
+                  <p className="font-display text-lg font-semibold text-white">{plan.name}</p>
+                  <p className="mb-3 mt-2.5 flex items-baseline gap-1">
+                    <span className="font-display text-4xl font-bold tracking-tight text-white">
+                      <Price rm={plan.price} />
+                    </span>
+                    <span className="text-[13px] text-zinc-200">{plan.period}</span>
+                  </p>
+                  <p className="mb-5 flex-1 text-[13.5px] leading-relaxed text-zinc-200">
+                    {plan.desc}
+                  </p>
+                  <Button
+                    href={pricing.ctaHref}
+                    variant={plan.recommended ? "primary" : "secondary"}
+                    size="sm"
+                    className="w-full font-display uppercase tracking-widest"
+                  >
+                    {pricing.ctaLabel}
+                  </Button>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </section>
 
+      {/* 5 · FAQ ────────────────────────────────────────────────────── */}
+      <section id="faq" className="mx-auto max-w-6xl scroll-mt-24 px-4 pt-20 sm:px-6">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:items-start lg:gap-16">
+          <Reveal>
+            <h2 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              {faqHeading}
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-zinc-200">{faqLede}</p>
+          </Reveal>
+          <Reveal>
+            <FaqAccordion items={faqs} />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 6 · Closing CTA ────────────────────────────────────────────── */}
       <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-line bg-surface-raised px-6 py-16 text-center sm:px-16">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 -bottom-24 mx-auto h-48 max-w-lg rounded-full bg-brand-600/30 blur-3xl"
-            />
-            <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              {finalCta.title}
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-lg text-zinc-400">{finalCta.body}</p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button href={finalCta.primaryCta.href}>{finalCta.primaryCta.label}</Button>
-              <Button href={finalCta.secondaryCta.href} variant="secondary">
+          <div className="gradient-border flex flex-col gap-8 rounded-2xl p-8 sm:p-14 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                {finalCta.title}
+              </h2>
+              <p className="mt-3 max-w-xl text-base leading-relaxed text-zinc-200">
+                {finalCta.body}
+              </p>
+            </div>
+            <div className="flex flex-none flex-wrap gap-3">
+              <Button
+                href={finalCta.primaryCta.href}
+                className="font-display uppercase tracking-widest"
+              >
+                {finalCta.primaryCta.label}
+              </Button>
+              <Button
+                href={finalCta.secondaryCta.href}
+                variant="secondary"
+                className="font-display uppercase tracking-widest"
+              >
                 {finalCta.secondaryCta.label}
               </Button>
             </div>
-            <p className="mt-6 text-sm text-zinc-500">{finalCta.contactLine}</p>
           </div>
         </Reveal>
       </section>
+
+      {/* 7 · Cross-pillar strip ─────────────────────────────────────── */}
+      <PillarStrip items={pillars} />
     </>
   );
 }

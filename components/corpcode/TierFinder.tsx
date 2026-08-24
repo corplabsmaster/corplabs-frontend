@@ -1,119 +1,116 @@
 "use client";
 
 import { useState } from "react";
+import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
-import { ChoiceOption, WizardProgress } from "@/components/ui/wizard";
-import { tierFinder, type TierSlug } from "@/data/corpcode-content";
+import { finder, finderQuestions, tiers } from "@/data/corpcode-content";
+import { cn } from "@/lib/utils";
 
-const TIER_ORDER: TierSlug[] = ["lite", "standard", "advanced", "enterprise"];
-const tierIndex = (t: TierSlug | null): number =>
-  t === null ? -1 : TIER_ORDER.indexOf(t);
-
-const initialAnswers = (): (TierSlug | null)[] =>
-  Array.from({ length: tierFinder.questions.length }, () => null);
+/** Default: every question answered at its lowest option (index 0). */
+const initialAnswers = (): number[] => finderQuestions.map(() => 0);
 
 export default function TierFinder() {
-  const [answers, setAnswers] = useState<(TierSlug | null)[]>(initialAnswers);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showResult, setShowResult] = useState(false);
+  const [answers, setAnswers] = useState<number[]>(initialAnswers);
 
-  const total = tierFinder.questions.length;
-  const question = tierFinder.questions[currentIndex];
-  const selected = answers[currentIndex];
-  const isLast = currentIndex === total - 1;
-  const allAnswered = answers.every((a) => a !== null);
-  const pct = Math.round((answers.filter((a) => a !== null).length / total) * 100);
+  // Highest answer wins — the recommended tier is the max option index.
+  const recommended = tiers[Math.max(...answers)];
 
-  const result: TierSlug | null =
-    showResult && allAnswered ? TIER_ORDER[Math.max(...answers.map(tierIndex))] : null;
-
-  const select = (tier: TierSlug) =>
-    setAnswers((prev) => {
-      const next = [...prev];
-      next[currentIndex] = tier;
-      return next;
-    });
-
-  const goNext = () =>
-    isLast ? setShowResult(true) : setCurrentIndex((i) => Math.min(i + 1, total - 1));
-  const goPrevious = () => setCurrentIndex((i) => Math.max(i - 1, 0));
-  const reset = () => {
-    setAnswers(initialAnswers());
-    setCurrentIndex(0);
-    setShowResult(false);
-  };
+  const select = (questionIndex: number, optionIndex: number) =>
+    setAnswers((prev) =>
+      prev.map((value, i) => (i === questionIndex ? optionIndex : value)),
+    );
 
   return (
-    <div className="rounded-2xl border border-line bg-surface-raised p-6 sm:p-10">
-      {result ? (
-        <div role="status" aria-live="polite" className="text-center">
-          <p className="inline-flex rounded-full border border-brand-500/40 bg-brand-600/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-300">
-            Recommended tier
-          </p>
-          <h3 className="mt-4 font-display text-3xl font-bold text-white">
-            {tierFinder.tierLabels[result]}
-          </h3>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-zinc-400">
-            Based on your answers, {tierFinder.tierLabels[result]} looks like the right
-            starting point. {tierFinder.tierDescriptions[result]}
-          </p>
-          <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-zinc-500">
-            A discovery call will confirm fit and produce a fixed quote.
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button href={`/contact?intent=corpcode&tier=${result}`}>
-              Book a discovery call
-            </Button>
-            <Button href="/contact" variant="secondary">
-              Not sure? Talk to us anyway
-            </Button>
+    <div className="gradient-border overflow-hidden rounded-2xl">
+      <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,420px)]">
+        {/* Questions */}
+        <div className="p-6 sm:p-10">
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 className="font-display text-xl font-bold text-white sm:text-2xl">
+              {finder.heading}
+            </h2>
+            <span className="shrink-0 font-mono text-xs text-zinc-500">
+              {finder.answeredLabel}
+            </span>
           </div>
-          <button
-            type="button"
-            onClick={reset}
-            className="mt-6 text-sm font-medium text-zinc-400 underline underline-offset-4 transition-colors hover:text-brand-300"
-          >
-            Start over
-          </button>
-        </div>
-      ) : (
-        <>
-          <WizardProgress
-            label="Question"
-            current={currentIndex + 1}
-            total={total}
-            pct={pct}
-          />
-          <h3 className="font-display text-xl font-semibold leading-snug text-white">
-            {question.prompt}
-          </h3>
-          <fieldset className="mt-6 flex flex-col gap-3">
-            <legend className="sr-only">{question.prompt}</legend>
-            {question.options.map((opt) => (
-              <ChoiceOption
-                key={opt.label}
-                name={`tierfinder-${question.id}`}
-                label={opt.label}
-                selected={selected === opt.tier}
-                onSelect={() => select(opt.tier)}
-              />
+          <p className="mt-1.5 text-sm text-zinc-200">{finder.subline}</p>
+
+          <div className="mt-7 flex flex-col gap-6">
+            {finderQuestions.map((q, qi) => (
+              <div key={q.id}>
+                <div className="mb-2.5 flex items-center gap-2.5">
+                  <span className="font-mono text-[11px] text-gradient-1">
+                    Q{qi + 1}
+                  </span>
+                  <span className="font-display text-[13.5px] font-medium text-zinc-300">
+                    {q.prompt}
+                  </span>
+                </div>
+                <div
+                  role="group"
+                  aria-label={q.prompt}
+                  className="flex flex-wrap gap-2"
+                >
+                  {q.options.map((label, oi) => {
+                    const active = answers[qi] === oi;
+                    return (
+                      <button
+                        key={label}
+                        type="button"
+                        aria-pressed={active}
+                        onClick={() => select(qi, oi)}
+                        className={cn(
+                          "rounded-full border px-3.5 py-2 font-display text-[12.5px] transition-colors",
+                          active
+                            ? "border-brand-500 bg-brand-500 font-medium text-white"
+                            : "border-line bg-surface font-light text-zinc-200 hover:border-brand-500/60",
+                        )}
+                      >
+                        {label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             ))}
-          </fieldset>
-          <div className="mt-8 flex flex-col justify-between gap-3 sm:flex-row">
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={goPrevious}
-              disabled={currentIndex === 0}
-            >
-              Previous
-            </Button>
-            <Button size="sm" onClick={goNext} disabled={selected === null}>
-              {isLast ? "See my tier" : "Next"}
-            </Button>
           </div>
-        </>
-      )}
+        </div>
+
+        {/* Recommendation */}
+        <div className="flex flex-col justify-center gap-3 border-t border-line bg-surface p-6 sm:p-10 lg:border-l lg:border-t-0">
+          <p className="font-mono text-[11px] tracking-wide text-zinc-500">
+            {finder.resultLabel}
+          </p>
+          <p
+            aria-live="polite"
+            className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl"
+          >
+            {recommended.name}
+          </p>
+          <p className="font-mono text-sm text-brand-300">
+            <Price rm={recommended.startsFrom} /> · {recommended.duration}
+          </p>
+          <p className="text-sm leading-relaxed text-zinc-200">
+            {recommended.bestFor}
+          </p>
+
+          <div className="my-4 h-px bg-line" />
+
+          <p className="font-mono text-[11px] tracking-wide text-zinc-500">
+            {finder.nextStepLabel}
+          </p>
+          <p className="text-[13.5px] leading-relaxed text-zinc-200">
+            <Price rm={finder.nextStep} />
+          </p>
+          <Button
+            href={finder.cta.href}
+            size="sm"
+            className="mt-2 self-start font-display uppercase tracking-[0.08em]"
+          >
+            {finder.cta.label}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

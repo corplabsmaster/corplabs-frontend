@@ -1,308 +1,208 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
-import { ChoiceOption, WizardProgress } from "@/components/ui/wizard";
+import { WizardProgress } from "@/components/ui/wizard";
+import { cn } from "@/lib/utils";
 import {
-  budgetOptions,
-  cmsOptions,
-  computeRecommendation,
-  emptyAnswers,
-  featureOptions,
-  findTier,
-  goalOptions,
-  ngoProgramme,
-  pageOptions,
-  parseAnswersFromSearch,
-  selectorSteps,
-  serializeAnswersToSearch,
-  trafficOptions,
-  type Budget,
-  type CmsNeed,
-  type FeatureFlag,
-  type Goal,
-  type PageCount,
-  type SelectorAnswers,
-  type Traffic,
+  NGO_GOAL_INDEX,
+  emptySiteAnswers,
+  recommendSiteTier,
+  selectorCopy,
+  siteSteps,
 } from "@/data/corpsite";
 
-const LAST = selectorSteps.length - 1;
+const LAST = siteSteps.length - 1;
 
-function RecommendedTierCard({ tierId }: { tierId: Parameters<typeof findTier>[0] }) {
-  const tier = findTier(tierId);
+/** A single full-width, radio-dot option row. */
+function OptionRow({
+  label,
+  selected,
+  onSelect,
+}: {
+  label: string;
+  selected: boolean;
+  onSelect: () => void;
+}) {
   return (
-    <div className="rounded-2xl border border-brand-500 bg-brand-600/10 p-6 text-left">
-      <p className="font-display text-lg font-semibold text-white">
-        <span aria-hidden className="mr-1.5">{tier.emoji}</span>
-        {tier.name}
-      </p>
-      <p className="mt-2 text-sm text-zinc-200">
-        <span className="font-semibold text-white">{tier.oneTime}</span> one-time ·{" "}
-        {tier.monthly}
-      </p>
-      <p className="mt-3 text-sm leading-relaxed text-zinc-400">{tier.description}</p>
-      <ul className="mt-4 space-y-2">
-        {tier.features.slice(0, 5).map((f) => (
-          <li key={f} className="flex gap-2 text-sm text-zinc-400">
-            <span aria-hidden className="text-brand-300">✓</span>
-            {f}
-          </li>
-        ))}
-      </ul>
-      <Button href={tier.ctaHref} size="sm" className="mt-6">
-        {tier.ctaLabel}
-      </Button>
-    </div>
+    <button
+      type="button"
+      role="radio"
+      aria-checked={selected}
+      onClick={onSelect}
+      className={cn(
+        "flex w-full items-center gap-3.5 rounded-xl border px-5 py-3.5 text-left text-sm font-light transition-colors",
+        selected
+          ? "border-brand-500 bg-brand-500/15 text-white"
+          : "border-line bg-surface text-zinc-200 hover:border-brand-500/60"
+      )}
+    >
+      <span
+        aria-hidden
+        className={cn(
+          "h-3.5 w-3.5 flex-none rounded-full",
+          selected ? "border-4 border-brand-400" : "border-[1.5px] border-zinc-500"
+        )}
+      />
+      <span>{label}</span>
+    </button>
   );
 }
 
 export default function PlanSelector() {
-  const [answers, setAnswers] = useState<SelectorAnswers>(emptyAnswers);
+  const [answers, setAnswers] = useState<(number | null)[]>(emptySiteAnswers);
   const [step, setStep] = useState(0);
-  const [showResult, setShowResult] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
+  const [result, setResult] = useState(false);
 
-  // Restore from the query string once, on mount.
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const parsed = parseAnswersFromSearch(window.location.search);
-    setAnswers(parsed);
-    const stepRaw = new URLSearchParams(window.location.search).get("step");
-    if (stepRaw === "result" || stepRaw === "ngo") {
-      setShowResult(true);
-      setStep(LAST);
-    } else if (stepRaw !== null) {
-      const n = Number(stepRaw);
-      if (Number.isInteger(n) && n >= 0 && n <= LAST) setStep(n);
-    }
-    setHydrated(true);
-  }, []);
+  const current = siteSteps[step];
+  const answered = answers[step] !== null;
+  const isNgoGoal = answers[0] === NGO_GOAL_INDEX;
+  const pct = Math.round(((step + 1) / siteSteps.length) * 100);
 
-  // Mirror state into the URL (shareable / reloadable).
-  useEffect(() => {
-    if (!hydrated || typeof window === "undefined") return;
-    const stepParam = showResult ? (answers.goal === "ngo" ? "ngo" : "result") : step;
-    const search = serializeAnswersToSearch(answers, stepParam);
-    window.history.replaceState(
-      null,
-      "",
-      `${window.location.pathname}${search}#plan-selector`
-    );
-  }, [answers, step, showResult, hydrated]);
-
-  const current = selectorSteps[step];
-
-  const setSingle = <K extends keyof SelectorAnswers>(field: K, value: SelectorAnswers[K]) =>
-    setAnswers((a) => ({ ...a, [field]: value }));
-
-  const toggleFeature = (value: FeatureFlag) =>
-    setAnswers((a) => ({
-      ...a,
-      features: a.features.includes(value)
-        ? a.features.filter((f) => f !== value)
-        : [...a.features, value],
-    }));
-
-  const canAdvance = (() => {
-    switch (current.id) {
-      case "goal":
-        return answers.goal !== null;
-      case "pages":
-        return answers.pages !== null;
-      case "cms":
-        return answers.cms !== null;
-      case "features":
-        return true;
-      case "traffic":
-        return answers.traffic !== null;
-      case "budget":
-        return answers.budget !== null;
-    }
-  })();
+  const select = (optionIndex: number) =>
+    setAnswers((prev) => {
+      const next = prev.slice();
+      next[step] = optionIndex;
+      return next;
+    });
 
   const goNext = () => {
-    if (step === 0 && answers.goal === "ngo") return setShowResult(true);
-    if (step === LAST) return setShowResult(true);
+    if (!answered) return;
+    if (step === 0 && isNgoGoal) return setResult(true);
+    if (step === LAST) return setResult(true);
     setStep((s) => Math.min(s + 1, LAST));
   };
-  const goPrevious = () => {
-    if (showResult) return setShowResult(false);
+  const goBack = () => {
+    if (result) return setResult(false);
     setStep((s) => Math.max(s - 1, 0));
   };
   const reset = () => {
-    setAnswers(emptyAnswers());
+    setAnswers(emptySiteAnswers());
     setStep(0);
-    setShowResult(false);
+    setResult(false);
   };
 
-  const rec = computeRecommendation(answers);
-  const pct = Math.round(((step + 1) / selectorSteps.length) * 100);
+  const nextLabel =
+    step === LAST || (step === 0 && isNgoGoal)
+      ? selectorCopy.seePlanLabel
+      : selectorCopy.nextLabel;
 
-  const renderOptions = () => {
-    switch (current.id) {
-      case "goal":
-        return goalOptions.map((o) => (
-          <ChoiceOption
-            key={o.value}
-            name="ps-goal"
-            label={o.label}
-            selected={answers.goal === o.value}
-            onSelect={() => setSingle("goal", o.value as Goal)}
-          />
-        ));
-      case "pages":
-        return pageOptions.map((o) => (
-          <ChoiceOption
-            key={o.value}
-            name="ps-pages"
-            label={o.label}
-            selected={answers.pages === o.value}
-            onSelect={() => setSingle("pages", o.value as PageCount)}
-          />
-        ));
-      case "cms":
-        return cmsOptions.map((o) => (
-          <ChoiceOption
-            key={o.value}
-            name="ps-cms"
-            label={o.label}
-            selected={answers.cms === o.value}
-            onSelect={() => setSingle("cms", o.value as CmsNeed)}
-          />
-        ));
-      case "features":
-        return featureOptions.map((o) => (
-          <ChoiceOption
-            key={o.value}
-            multi
-            name="ps-features"
-            label={o.label}
-            selected={answers.features.includes(o.value)}
-            onSelect={() => toggleFeature(o.value)}
-          />
-        ));
-      case "traffic":
-        return trafficOptions.map((o) => (
-          <ChoiceOption
-            key={o.value}
-            name="ps-traffic"
-            label={o.label}
-            selected={answers.traffic === o.value}
-            onSelect={() => setSingle("traffic", o.value as Traffic)}
-          />
-        ));
-      case "budget":
-        return budgetOptions.map((o) => (
-          <ChoiceOption
-            key={o.value}
-            name="ps-budget"
-            label={o.label}
-            selected={answers.budget === o.value}
-            onSelect={() => setSingle("budget", o.value as Budget)}
-          />
-        ));
-    }
-  };
+  const { tier, note } = recommendSiteTier(answers);
 
   return (
-    <div className="rounded-2xl border border-line bg-surface-raised p-6 sm:p-10">
-      {showResult && rec ? (
+    <div className="gradient-border rounded-2xl p-6 sm:p-10">
+      {result ? (
         <div role="status" aria-live="polite">
-          {rec.ngoBranch ? (
-            <div className="text-center">
-              <p className="inline-flex rounded-full border border-brand-500/40 bg-brand-600/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-300">
-                {ngoProgramme.badge}
-              </p>
-              <h3 className="mt-4 font-display text-2xl font-bold text-white">
-                You&apos;re a fit for {ngoProgramme.heading}
+          <p className="text-center text-xs font-medium uppercase tracking-widest text-brand-300">
+            {selectorCopy.resultEyebrow}
+          </p>
+
+          <div className="mt-6 rounded-xl border border-brand-500 bg-surface p-6 sm:p-8">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+              <h3 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                {tier.name}
               </h3>
-              <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-zinc-400">
-                {ngoProgramme.intro}
-              </p>
-              <div className="mt-8 flex justify-center">
-                <Button href={ngoProgramme.cta.href}>{ngoProgramme.cta.label}</Button>
+              <div className="flex-none sm:text-right">
+                <p className="font-display text-lg font-bold text-white">
+                  <Price rm={tier.oneTime} />
+                </p>
+                <p className="font-mono text-xs text-zinc-500">
+                  + <Price rm={tier.monthly} /> {selectorCopy.monthlySuffix}
+                </p>
               </div>
             </div>
-          ) : (
-            <>
-              <p className="text-center text-xs font-semibold uppercase tracking-widest text-brand-300">
-                Your recommended plan
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-200">
+              {tier.what}
+            </p>
+            <ul className="mt-5 flex flex-col gap-2.5">
+              {tier.features.map((feature) => (
+                <li
+                  key={feature}
+                  className="flex items-start gap-2.5 text-sm text-zinc-300"
+                >
+                  <span aria-hidden className="text-gradient-1">
+                    ✓
+                  </span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <Button href="/contact" size="sm" className="mt-6">
+              {tier.cta}
+            </Button>
+          </div>
+
+          {note && (
+            <div className="mt-4 rounded-xl border border-line bg-surface p-5 sm:px-6">
+              <p className="font-display text-sm font-medium text-white">
+                {note.title}
               </p>
-              <div className="mx-auto mt-6 max-w-md">
-                <RecommendedTierCard tierId={rec.recommended} />
-              </div>
-
-              {rec.budgetFit && (
-                <div className="mx-auto mt-4 max-w-md rounded-2xl border border-line bg-surface p-5">
-                  <p className="text-sm font-medium text-white">
-                    Budget-fit alternative: {findTier(rec.budgetFit).name}
-                  </p>
-                  {rec.diffNote && (
-                    <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                      {rec.diffNote}
-                    </p>
-                  )}
-                </div>
-              )}
-
-              {rec.addCorpi && (
-                <p className="mx-auto mt-4 max-w-md text-center text-sm text-zinc-400">
-                  You flagged WhatsApp / sales automation — pair this with{" "}
-                  <a href="/corpi" className="text-brand-300 underline underline-offset-4">
-                    Corpi
-                  </a>
-                  .
-                </p>
-              )}
-            </>
+              <p className="mt-1.5 text-sm leading-relaxed text-zinc-200">
+                {note.body}
+              </p>
+            </div>
           )}
 
-          <div className="mt-8 flex items-center justify-center gap-6">
+          <div className="mt-7 flex items-center justify-center gap-6">
             <button
               type="button"
-              onClick={goPrevious}
-              className="text-sm font-medium text-zinc-400 underline underline-offset-4 transition-colors hover:text-brand-300"
+              onClick={goBack}
+              className="text-sm text-zinc-300 underline underline-offset-4 transition-colors hover:text-brand-300"
             >
-              Back
+              {selectorCopy.backLabel}
             </button>
             <button
               type="button"
               onClick={reset}
-              className="text-sm font-medium text-zinc-400 underline underline-offset-4 transition-colors hover:text-brand-300"
+              className="text-sm text-zinc-300 underline underline-offset-4 transition-colors hover:text-brand-300"
             >
-              Start over
+              {selectorCopy.startOverLabel}
             </button>
           </div>
         </div>
       ) : (
-        <>
+        <div>
           <WizardProgress
-            label="Question"
+            label={selectorCopy.progressLabel}
             current={step + 1}
-            total={selectorSteps.length}
+            total={siteSteps.length}
             pct={pct}
           />
-          <h3 className="font-display text-xl font-semibold leading-snug text-white">
+          <h3 className="font-display text-2xl font-bold leading-snug text-white">
             {current.prompt}
           </h3>
-          {current.helpText && (
-            <p className="mt-2 text-sm text-zinc-500">{current.helpText}</p>
-          )}
-          <fieldset className="mt-6 flex flex-col gap-3">
-            <legend className="sr-only">{current.prompt}</legend>
-            {renderOptions()}
-          </fieldset>
-          <div className="mt-8 flex flex-col justify-between gap-3 sm:flex-row">
-            <Button variant="secondary" size="sm" onClick={goPrevious} disabled={step === 0}>
-              Previous
+          <p className="mt-1.5 text-sm text-zinc-500">{current.help}</p>
+
+          <div
+            role="radiogroup"
+            aria-label={current.prompt}
+            className="mt-6 flex flex-col gap-2.5"
+          >
+            {current.options.map((option, i) => (
+              <OptionRow
+                key={option.label}
+                label={option.label}
+                selected={answers[step] === i}
+                onSelect={() => select(i)}
+              />
+            ))}
+          </div>
+
+          <div className="mt-8 flex items-center justify-between gap-3">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={goBack}
+              disabled={step === 0}
+            >
+              {selectorCopy.previousLabel}
             </Button>
-            <Button size="sm" onClick={goNext} disabled={!canAdvance}>
-              {step === LAST || (step === 0 && answers.goal === "ngo")
-                ? "See my plan"
-                : "Next"}
+            <Button size="sm" onClick={goNext} disabled={!answered}>
+              {nextLabel}
             </Button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Inter, Work_Sans } from "next/font/google";
+import { CurrencyProvider } from "@/components/currency/currency-context";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import { site } from "@/data/site";
@@ -55,9 +56,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${workSans.variable} ${inter.variable}`}>
       <body className="bg-surface font-sans text-zinc-200 antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <CurrencyProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </CurrencyProvider>
       </body>
       {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>

@@ -5,53 +5,33 @@ export interface FAQ {
 
 export const faqs: FAQ[] = [
   {
-    question: "Is Corprise an Odoo Partner?",
+    question: "Why a subscription instead of a one-off implementation?",
     answer:
-      "Corprise is built on Odoo Community by Corplabs Sdn Bhd. We are not an official Odoo Gold or Silver partner — that is deliberate. Partner status requires revenue commitments that we believe push implementation costs up for SMEs. Odoo® is a registered trademark of Odoo S.A.",
+      "Because ERP is never finished. A subscription puts the implementation, the hosting, and the ongoing refinements on one line — so improving the system doesn't require a change request and a new PO.",
   },
   {
-    question: "What's actually included in the monthly subscription?",
+    question: "Is this real Odoo, or a Corplabs product?",
     answer:
-      "Managed Odoo hosting on a dedicated Malaysian VPS, MyInvois e-Invoice integration, discovery workshop, team training, and a fixed number of refinement hours per month (2 to 24 depending on tier). Everything you need to go live and keep improving, in one predictable invoice.",
+      "It's real Odoo. You get standard Odoo modules, configured and hosted by us, so nothing is locked to a proprietary platform. Your data and configuration are exportable.",
   },
   {
-    question: "How fast can we go live?",
+    question: "What happens if we outgrow a tier?",
     answer:
-      "Four to eight weeks for Starter through Scale tiers. Week 1 is discovery, weeks 2–7 are configuration, data migration, and training, and week 8 is go-live. Bespoke timelines depend on scope.",
+      "You move up a tier mid-cycle and we pro-rate the difference. Module enablement and migration work are included — there's no re-implementation fee.",
   },
   {
-    question: "What about MyInvois / LHDN e-Invoicing?",
+    question: "Where is our data hosted?",
     answer:
-      "MyInvois integration is included in every tier — submission, validation, TIN lookup, consolidated e-invoice support, and archival. We handle the LHDN onboarding with you and stay current as the mandate phases expand through 2026.",
+      "In Malaysia, on infrastructure we manage, with daily backups. On Bespoke we'll host in the region or on-premise if compliance demands it.",
   },
   {
-    question: "Do I own my data and my Odoo instance?",
+    question: "Do you charge per user?",
     answer:
-      "Yes. Your Odoo database runs on infrastructure dedicated to you. If you ever leave, we hand over the full database, your custom configurations, and documentation. No hostage customisations, no exit fees.",
+      "No. Each tier includes a user ceiling and the monthly price doesn't move as you fill it. If you exceed it, you move up a tier — that's the only change.",
   },
   {
-    question: "Is there a contract lock-in?",
+    question: "What if we want to leave?",
     answer:
-      "Three months minimum to protect the implementation investment, then you're month-to-month. Cancel with 30 days notice any time after.",
-  },
-  {
-    question: "How does this compare to an Odoo Gold Partner?",
-    answer:
-      "Gold partners are excellent for enterprises that need deep customisation and have budget for RM 80k–300k implementations plus hourly billing afterwards. Corprise is built for SMEs who want the same ERP with predictable subscription pricing, pre-built Malaysian workflows, and implementation in weeks instead of quarters.",
-  },
-  {
-    question: "Can I upgrade, downgrade, or change tiers?",
-    answer:
-      "Yes. Use the scorecard any time to re-evaluate, or just email us. Upgrades activate on your next billing cycle with the new modules added to your instance. Downgrades require 30 days notice.",
-  },
-  {
-    question: "What AI features are included?",
-    answer:
-      "Every tier includes Corpi — our Claude-powered assistant that handles WhatsApp enquiries, drafts invoices, summarises reports, and answers your team's questions about their own Odoo data. Higher tiers get more Corpi usage and custom workflows.",
-  },
-  {
-    question: "What happens after the first 8 weeks?",
-    answer:
-      "Your subscription continues and your monthly refinement hours reset. Use them for new reports, workflow tweaks, new module rollouts, or training new staff. That's how Corprise keeps delivering value past go-live — the work compounds.",
+      "Three-month minimum, then month-to-month with 30 days' notice. You leave with a full database export and your Odoo configuration documented.",
   },
 ];

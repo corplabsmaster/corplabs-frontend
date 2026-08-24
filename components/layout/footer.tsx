@@ -11,23 +11,24 @@ const socials = [
 
 const columns = [
   {
-    name: "Company",
-    links: [
-      { label: "About", href: "/about" },
-      { label: "Culture", href: "/#about-strip" },
-      { label: "Career", href: "/#careers" },
-    ],
-  },
-  {
-    name: "Products",
+    name: "Solutions",
     links: pillars.map(p => ({ label: p.name, href: p.href })),
   },
   {
-    name: "Resources",
+    name: "Company",
     links: [
-      { label: "Solutions", href: "/solutions" },
-      { label: "Our Process", href: "/#process" },
+      { label: "About", href: "/about" },
+      { label: "Career", href: "/#careers" },
       { label: "HiTerra", href: "/#flagship" },
+      { label: "Changelog", href: "/changelog" },
+    ],
+  },
+  {
+    name: "Services",
+    links: [
+      { label: "Our services", href: "/#services" },
+      { label: "Our process", href: "/#process" },
+      { label: "Solutions", href: "/solutions" },
     ],
   },
   {
@@ -35,7 +36,7 @@ const columns = [
     links: [
       { label: "016-672 7208", href: "/contact" },
       { label: "contact@corplabs.co", href: "mailto:contact@corplabs.co" },
-      { label: "Inquiry", href: "/#contact" },
+      { label: "Send an inquiry", href: "/#contact" },
     ],
   },
 ];
@@ -88,9 +89,12 @@ export default function Footer() {
         <span>
           {dunsLine} · © {new Date().getFullYear()} {site.name} — All rights reserved
         </span>
-        <Link href="/privacy" className="transition-colors hover:text-brand-200">
-          Privacy Policy
-        </Link>
+        <span className="flex gap-4">
+          <Link href="/privacy" className="transition-colors hover:text-brand-200">
+            Privacy Policy
+          </Link>
+          <span className="text-zinc-400">Kuala Lumpur, Malaysia</span>
+        </span>
       </div>
     </footer>
   );

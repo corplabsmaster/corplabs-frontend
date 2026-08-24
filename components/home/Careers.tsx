@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
-import { careersHeading, jobs } from "@/data/home";
+import { careersHeading } from "@/data/home";
+import { getJobs } from "@/lib/jobs";
 
-export default function Careers() {
+export default async function Careers() {
+  const jobs = await getJobs();
   return (
     <section id="careers" className="scroll-mt-24 bg-surface-raised py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">

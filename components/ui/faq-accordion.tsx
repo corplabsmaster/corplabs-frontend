@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Price } from "@/components/currency/price";
 import { cn } from "@/lib/utils";
 
 export interface FaqItem {
@@ -48,7 +49,8 @@ export function FaqAccordion({
             >
               <div className="overflow-hidden">
                 <p className="px-6 pb-5 text-sm leading-relaxed text-zinc-400">
-                  {item.answer}
+                  {/* Answers may quote Corplabs prices; non-price text passes through. */}
+                  <Price rm={item.answer} />
                 </p>
               </div>
             </div>

@@ -4,14 +4,14 @@
  */
 
 export const hero = {
-  eyebrow: "Idea to Reality",
+  eyebrow: "Software Studio · Kuala Lumpur",
   headline: {
     plain: "Bringing Your Ideas to Life,",
     gradient: "One Line of Code at a Time",
   },
   lede: "We design, build, and maintain software for businesses across Southeast Asia — four products of our own, and yours next.",
   primaryCta: { label: "Get a Quote", href: "#contact" },
-  secondaryCta: { label: "Our Products", href: "#products" },
+  secondaryCta: { label: "Our Products", href: "/solutions" },
   corpiRibbon: {
     pill: "NEW",
     text: "Corpi Intelligence — your AI WhatsApp sales agent.",
@@ -106,37 +106,8 @@ export const homePillars: HomePillar[] = [
 
 export const productsHeading = {
   title: "Four Products, One Team",
-  hint: "Click a product — try it live",
-};
-
-// ─── Corpi demo chat ────────────────────────────────────────────────────────
-
-export interface ChatMessage {
-  from: "cust" | "corpi" | "system";
-  text: string;
-}
-
-export const corpiChat: { shopName: string; status: string; script: ChatMessage[] } = {
-  shopName: "Kedai Hardware Maju",
-  status: "Corpi · online",
-  script: [
-    { from: "cust", text: "Hi, do you have the 20L storage box? Need 50 units for my shop" },
-    {
-      from: "corpi",
-      text: "Hi! Yes — the 20L stackable is in stock. For 50 units the bulk price is RM 12.50/unit, RM 625 total. Want me to reserve them?",
-    },
-    { from: "cust", text: "boleh dapat discount tak kalau ambik 100?" },
-    {
-      from: "corpi",
-      text: "Boleh! 100 units masuk tier borong — RM 11/unit, jadi RM 1,100. Nak saya sediakan quotation sekali?",
-    },
-    { from: "cust", text: "ok send quote" },
-    {
-      from: "corpi",
-      text: "Done — quotation #Q-1042 sent to this chat. Delivery to Puchong is free above RM 800. Anything else?",
-    },
-    { from: "system", text: "→ lead qualified · handed to Sarah (Sales) with full context" },
-  ],
+  hint: "Compare all four →",
+  hintHref: "/solutions",
 };
 
 // ─── Mini finders (3-question teasers; full wizards live on pillar pages) ───
