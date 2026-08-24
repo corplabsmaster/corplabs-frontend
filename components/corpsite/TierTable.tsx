@@ -1,3 +1,4 @@
+import { Price } from "@/components/currency/price";
 import { cn } from "@/lib/utils";
 import { siteTiers, tiersSection } from "@/data/corpsite";
 
@@ -43,12 +44,12 @@ export default function TierTable() {
               </td>
               <td className="px-7 py-5">
                 <div className="font-display text-[15px] font-semibold text-white">
-                  {tier.oneTime}
+                  <Price rm={tier.oneTime} />
                 </div>
                 <div className="font-mono text-[11.5px] text-zinc-500">one-time</div>
               </td>
               <td className="whitespace-nowrap px-7 py-5 font-mono text-[13px] text-brand-300">
-                {tier.monthly} /mo
+                <Price rm={tier.monthly} /> /mo
               </td>
               <td className="whitespace-nowrap px-7 py-5 font-mono text-[13px] text-zinc-200">
                 {tier.pages}

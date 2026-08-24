@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
 import { finder, finderQuestions, tiers } from "@/data/corpcode-content";
 import { cn } from "@/lib/utils";
@@ -87,7 +88,7 @@ export default function TierFinder() {
             {recommended.name}
           </p>
           <p className="font-mono text-sm text-brand-300">
-            {recommended.startsFrom} · {recommended.duration}
+            <Price rm={recommended.startsFrom} /> · {recommended.duration}
           </p>
           <p className="text-sm leading-relaxed text-zinc-200">
             {recommended.bestFor}
@@ -99,7 +100,7 @@ export default function TierFinder() {
             {finder.nextStepLabel}
           </p>
           <p className="text-[13.5px] leading-relaxed text-zinc-200">
-            {finder.nextStep}
+            <Price rm={finder.nextStep} />
           </p>
           <Button
             href={finder.cta.href}

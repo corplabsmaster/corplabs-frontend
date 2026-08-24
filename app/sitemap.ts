@@ -11,6 +11,7 @@ const paths = [
   "/corpsite",
   "/about",
   "/contact",
+  "/changelog",
   "/privacy",
 ];
 

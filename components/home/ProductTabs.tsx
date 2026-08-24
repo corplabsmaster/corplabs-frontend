@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ChatDemo } from "@/components/corpi/ChatDemo";
+import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
 import { corpiChat } from "@/data/corpi";
 import {
@@ -69,7 +70,7 @@ function MiniFinder({ kind }: { kind: Exclude<PillarKind, "corpi"> }) {
         </div>
         <p className="font-display text-2xl font-bold text-white">{rec.name}</p>
         <p className="mb-2.5 mt-0.5 font-display text-lg font-semibold text-brand-300">
-          {rec.price}
+          <Price rm={rec.price} />
         </p>
         <p className="mb-4 text-[13px] leading-normal text-zinc-200">{rec.detail}</p>
         <div className="flex flex-wrap items-center gap-4">
@@ -138,7 +139,7 @@ export default function ProductTabs() {
           <h3 className="mb-1.5 font-display text-2xl font-bold text-white sm:text-3xl">
             {pillar.title}
           </h3>
-          <p className="mb-4 font-mono text-[12.5px] text-brand-300">{pillar.price}</p>
+          <p className="mb-4 font-mono text-[12.5px] text-brand-300"><Price rm={pillar.price} /></p>
           <p className="mb-6 max-w-md text-[15px] leading-relaxed text-zinc-200">
             {pillar.blurb}
           </p>

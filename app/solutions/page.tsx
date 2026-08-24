@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Price } from "@/components/currency/price";
 import ProblemRouter from "@/components/solutions/ProblemRouter";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -68,7 +69,7 @@ export default function SolutionsPage() {
                   >
                     {f.name}
                   </Link>
-                  <span className="font-mono text-[13px] text-brand-300">{f.floor}</span>
+                  <span className="font-mono text-[13px] text-brand-300"><Price rm={f.floor} /></span>
                 </div>
               ))}
             </div>
@@ -123,7 +124,7 @@ export default function SolutionsPage() {
                   </div>
                   <p className="text-[13.5px] leading-normal text-zinc-200">{row.what}</p>
                   <span className="whitespace-pre-line font-mono text-[13px] leading-relaxed text-white">
-                    {row.floor}
+                    <Price rm={row.floor} />
                   </span>
                   <span className="font-mono text-[13px] text-zinc-200">{row.time}</span>
                   <div className="flex flex-col items-start gap-2.5">

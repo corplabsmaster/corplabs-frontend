@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Price } from "@/components/currency/price";
 import { Reveal } from "@/components/ui/reveal";
 import { pricing } from "@/data/corprise-content";
 import { tiers } from "@/data/corprise-tiers";
@@ -53,7 +54,7 @@ export default function PricingTable() {
                   <p className="mt-0.5 text-[12.5px] font-light text-brand-300">{tier.tagline}</p>
                 </th>
                 <td className="px-7 py-6">
-                  <div className="font-display text-xl font-bold text-white">{tier.price}</div>
+                  <div className="font-display text-xl font-bold text-white"><Price rm={tier.price} /></div>
                   {tier.period && (
                     <div className="font-mono text-[11.5px] text-zinc-500">{tier.period}</div>
                   )}

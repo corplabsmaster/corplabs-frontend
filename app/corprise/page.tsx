@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PricingTable from "@/components/corprise/PricingTable";
 import TierScorecard from "@/components/corprise/TierScorecard";
+import { Price } from "@/components/currency/price";
 import { PillarStrip } from "@/components/pillar-strip";
 import { Button } from "@/components/ui/button";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
@@ -47,7 +48,7 @@ function RouteCard({ card, tone }: { card: ComparisonCard; tone: "muted" | "acce
             accent ? "text-white" : "text-zinc-400"
           )}
         >
-          {card.price}
+          <Price rm={card.price} />
         </span>
         <span className={cn("text-sm", accent ? "text-zinc-200" : "text-zinc-500")}>
           {card.priceSuffix}

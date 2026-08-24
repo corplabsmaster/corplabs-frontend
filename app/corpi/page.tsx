@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ChatDemo } from "@/components/corpi/ChatDemo";
+import { Price } from "@/components/currency/price";
 import { PillarStrip } from "@/components/pillar-strip";
 import { Button } from "@/components/ui/button";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
@@ -154,7 +155,7 @@ export default function CorpiPage() {
             <p className="mt-3.5 text-base leading-relaxed text-zinc-200">{pricing.lede}</p>
             <div className="mt-7 rounded-xl border border-line bg-surface p-6">
               <p className="font-display text-lg font-semibold text-white">
-                {pricing.setupCard.title}
+                <Price rm={pricing.setupCard.title} />
               </p>
               <p className="mt-2 text-[13.5px] leading-relaxed text-zinc-200">
                 {pricing.setupCard.body}
@@ -182,7 +183,7 @@ export default function CorpiPage() {
                   <p className="font-display text-lg font-semibold text-white">{plan.name}</p>
                   <p className="mb-3 mt-2.5 flex items-baseline gap-1">
                     <span className="font-display text-4xl font-bold tracking-tight text-white">
-                      {plan.price}
+                      <Price rm={plan.price} />
                     </span>
                     <span className="text-[13px] text-zinc-200">{plan.period}</span>
                   </p>

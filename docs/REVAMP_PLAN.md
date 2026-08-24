@@ -116,3 +116,26 @@ astronaut motif with a violet glow instead — consistent with the hero.
 Verified: tsc clean, 15/15 tests (Corprise scoring preserved), build (17 routes)
 green, zero console errors, and all four interactive widgets (problem router,
 tier finder, plan selector, scorecard) driven in headless Chromium.
+
+## Phase 8 — Multi-currency pricing + changelog with old-site archive
+
+**Currency.** All prices are authored in MYR (the invoicing currency) and
+display-converted client-side. USD is the default; edge middleware sets a geo
+cookie so Malaysian visitors see MYR; a header switcher (USD / MYR / EUR / SGD,
+persisted in localStorage) always wins. Conversions use fixed indicative rates
+in `lib/currency.ts` (labeled "indicative — invoiced in MYR"). `<Price rm=...>`
+wraps every Corplabs price render across all pages, incl. FAQ answers; the
+Corpi demo-chat roleplay prices intentionally stay in RM. The objective:
+signal clearly that Corplabs takes overseas projects.
+
+**Changelog + archive.** `/changelog` tells the site's version story
+(v1 Gatsby era → v2 Next rebuild → v3 design system → v4 full rebuild) with
+screenshots, and links to a browsable frozen snapshot of the original Gatsby
+homepage at `/archive/v1/` — reconstructed from git history (the live site was
+unreachable from the sandbox), styled by CSS compiled from the original
+tailwind.config.js so it's fully self-contained, with a slim "Archived" banner.
+The old Notion-driven job cards render as their static fallbacks.
+
+Verified: 25/25 tests (10 new currency tests), build green, and in-browser:
+default USD, live switching, cross-page persistence, geo-cookie respected,
+demo chat unconverted, FAQ conversion, archive styled with 23/23 images.

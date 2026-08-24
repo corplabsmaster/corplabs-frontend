@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { routerIntro, routerPicks } from "@/data/solutions";
@@ -58,7 +59,7 @@ export default function ProblemRouter() {
         <p className="font-display text-3xl font-bold tracking-tight text-white">
           {pick.name}
         </p>
-        <p className="font-mono text-[13px] text-brand-300">{pick.floor}</p>
+        <p className="font-mono text-[13px] text-brand-300"><Price rm={pick.floor} /></p>
         <p className="max-w-sm text-sm leading-relaxed text-zinc-200">{pick.why}</p>
         <Button href={pick.href} size="sm" className="mt-2 self-start">
           {pick.cta}

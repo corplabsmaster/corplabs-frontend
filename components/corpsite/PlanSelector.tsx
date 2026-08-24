@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
 import { WizardProgress } from "@/components/ui/wizard";
 import { cn } from "@/lib/utils";
@@ -104,10 +105,10 @@ export default function PlanSelector() {
               </h3>
               <div className="flex-none sm:text-right">
                 <p className="font-display text-lg font-bold text-white">
-                  {tier.oneTime}
+                  <Price rm={tier.oneTime} />
                 </p>
                 <p className="font-mono text-xs text-zinc-500">
-                  + {tier.monthly} {selectorCopy.monthlySuffix}
+                  + <Price rm={tier.monthly} /> {selectorCopy.monthlySuffix}
                 </p>
               </div>
             </div>

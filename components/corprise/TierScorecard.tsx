@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
 import { scorecard, shortScorecardQuestions } from "@/data/corprise-content";
 import { scoreShortScorecard, shortScorecardDefaults } from "@/lib/corpriseScore";
@@ -72,7 +73,7 @@ export default function TierScorecard() {
 
         <p className="font-display text-4xl font-bold tracking-tight text-white">{tier.name}</p>
         <p className="font-display text-xl font-semibold text-brand-300">
-          {tier.price}
+          <Price rm={tier.price} />
           {tier.period}
         </p>
         <p className="mt-1 text-sm leading-relaxed text-zinc-200">{tier.bestFor}</p>

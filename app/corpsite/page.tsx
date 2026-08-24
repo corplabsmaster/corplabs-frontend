@@ -4,6 +4,7 @@ import AddonsGrid from "@/components/corpsite/AddonsGrid";
 import NgoProgramme from "@/components/corpsite/NgoProgramme";
 import PlanSelector from "@/components/corpsite/PlanSelector";
 import TierTable from "@/components/corpsite/TierTable";
+import { Price } from "@/components/currency/price";
 import { PillarStrip } from "@/components/pillar-strip";
 import { Button } from "@/components/ui/button";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
@@ -85,10 +86,10 @@ export default function CorpsitePage() {
                   </div>
                   <div className="text-right">
                     <div className="font-mono text-[12.5px] text-white">
-                      {tier.oneTime.replace("from ", "")}
+                      <Price rm={tier.oneTime.replace("from ", "")} />
                     </div>
                     <div className="font-mono text-[11px] text-zinc-500">
-                      {tier.monthly}/mo
+                      <Price rm={tier.monthly} />/mo
                     </div>
                   </div>
                 </Link>

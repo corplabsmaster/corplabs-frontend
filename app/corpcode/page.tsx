@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import TierFinder from "@/components/corpcode/TierFinder";
+import { Price } from "@/components/currency/price";
 import { PillarStrip } from "@/components/pillar-strip";
 import { Button } from "@/components/ui/button";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
@@ -77,7 +78,7 @@ export default function CorpcodePage() {
                 >
                   <dt className="text-[13px] text-zinc-200">{row.k}</dt>
                   <dd className="text-right font-mono text-[12.5px] text-white">
-                    {row.v}
+                    <Price rm={row.v} />
                   </dd>
                 </div>
               ))}
@@ -128,7 +129,7 @@ export default function CorpcodePage() {
                   {tier.name}
                 </h3>
                 <p className="mt-1 font-mono text-sm text-brand-300">
-                  {tier.startsFrom}
+                  <Price rm={tier.startsFrom} />
                 </p>
                 <p className="mt-1.5 font-mono text-xs text-zinc-500">
                   {tier.duration}
@@ -189,7 +190,7 @@ export default function CorpcodePage() {
                   {step.title}
                 </h3>
                 <p className="mt-1.5 font-mono text-xs text-brand-300">
-                  {step.duration}
+                  <Price rm={step.duration} />
                 </p>
               </div>
               <p className="max-w-3xl text-sm leading-relaxed text-zinc-200">
@@ -259,7 +260,7 @@ export default function CorpcodePage() {
                 {finalCta.headline}
               </h2>
               <p className="mt-3 max-w-2xl text-base leading-relaxed text-zinc-200">
-                {finalCta.body}
+                <Price rm={finalCta.body} />
               </p>
             </div>
             <Button
