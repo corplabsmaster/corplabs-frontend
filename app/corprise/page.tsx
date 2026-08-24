@@ -1,27 +1,25 @@
 import type { Metadata } from "next";
-import CompetitorComparison from "@/components/corprise/CompetitorComparison";
-import FeatureMatrix from "@/components/corprise/FeatureMatrix";
-import PricingTiers from "@/components/corprise/PricingTiers";
-import ScorecardWidget from "@/components/corprise/ScorecardWidget";
+import PricingTable from "@/components/corprise/PricingTable";
+import TierScorecard from "@/components/corprise/TierScorecard";
+import { PillarStrip } from "@/components/pillar-strip";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { Reveal } from "@/components/ui/reveal";
-import { SectionHeading } from "@/components/ui/section-heading";
 import {
-  aiIntegration,
-  finalCta,
+  type ComparisonCard,
+  corpriseRoute,
+  faqHeading,
   foundingFive,
   hero,
   myInvois,
-  problems,
-  processSteps,
-  scorecardIntro,
-  sectionHeadings,
-  solutions,
+  pillarStripItems,
+  pricing,
+  processFlow,
   trustItems,
+  usualRoute,
 } from "@/data/corprise-content";
 import { faqs } from "@/data/corprise-faqs";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Corprise — Subscription-Priced Odoo ERP for Malaysian SMEs",
@@ -30,260 +28,236 @@ export const metadata: Metadata = {
   alternates: { canonical: "/corprise" },
 };
 
+function RouteCard({ card, tone }: { card: ComparisonCard; tone: "muted" | "accent" }) {
+  const accent = tone === "accent";
+  return (
+    <div className={cn("rounded-xl p-7 sm:p-9", accent ? "gradient-border" : "border border-line bg-surface-raised")}>
+      <p
+        className={cn(
+          "font-display text-[11px] font-semibold uppercase tracking-[0.12em]",
+          accent ? "text-gradient-1" : "text-zinc-500"
+        )}
+      >
+        {card.label}
+      </p>
+      <div className="mt-5 flex flex-wrap items-baseline gap-2.5">
+        <span
+          className={cn(
+            "font-display text-5xl font-bold leading-none tracking-tight sm:text-[3.5rem]",
+            accent ? "text-white" : "text-zinc-400"
+          )}
+        >
+          {card.price}
+        </span>
+        <span className={cn("text-sm", accent ? "text-zinc-200" : "text-zinc-500")}>
+          {card.priceSuffix}
+        </span>
+      </div>
+      <p className="mt-3 text-sm leading-relaxed text-zinc-200">{card.body}</p>
+      <div className="mt-6 flex flex-col gap-2.5">
+        {card.bullets.map((bullet) => (
+          <div
+            key={bullet}
+            className={cn("flex items-start gap-2.5 text-[13.5px]", accent ? "text-zinc-300" : "text-zinc-200")}
+          >
+            <span
+              aria-hidden
+              className={cn("shrink-0 leading-relaxed", accent ? "text-gradient-1" : "font-mono text-zinc-500")}
+            >
+              {accent ? "✓" : "—"}
+            </span>
+            {bullet}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function CorprisePage() {
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-40 mx-auto h-96 max-w-3xl rounded-full bg-brand-600/25 blur-3xl"
-        />
-        <Reveal className="mx-auto max-w-5xl px-4 pb-16 pt-24 text-center sm:px-6 sm:pt-28">
-          <p className="text-sm font-medium uppercase tracking-widest text-brand-300">
-            {hero.eyebrow}
-          </p>
-          <h1 className="mx-auto mt-4 max-w-3xl font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            {hero.headline.line1}{" "}
-            <span className="text-brand-300">{hero.headline.line2}</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-400">
-            {hero.subheadline}
-          </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button href={hero.primaryCta.href}>{hero.primaryCta.label}</Button>
-            <Button href={hero.secondaryCta.href} variant="secondary">
+      {/* Hero */}
+      <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
+        <Reveal>
+          <div className="max-w-3xl">
+            <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-brand-300">
+              {hero.eyebrow}
+            </p>
+            <h1 className="mt-4 font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
+              {hero.headline.plain}
+              <span className="gradient-text">{hero.headline.gradient}</span>
+            </h1>
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-200">{hero.lede}</p>
+          </div>
+        </Reveal>
+
+        <Reveal className="mt-9">
+          <div className="grid gap-5 md:grid-cols-2">
+            <RouteCard card={usualRoute} tone="muted" />
+            <RouteCard card={corpriseRoute} tone="accent" />
+          </div>
+        </Reveal>
+
+        <Reveal className="mt-8">
+          <div className="flex flex-wrap items-center gap-4">
+            <Button href={hero.primaryCta.href} className="font-display uppercase tracking-[0.08em]">
+              {hero.primaryCta.label}
+            </Button>
+            <Button
+              href={hero.secondaryCta.href}
+              variant="secondary"
+              className="font-display uppercase tracking-[0.08em]"
+            >
               {hero.secondaryCta.label}
             </Button>
+            <span className="text-[13px] text-zinc-500">{hero.noLockIn}</span>
           </div>
-          <p className="mx-auto mt-6 max-w-lg text-xs text-zinc-500">
-            {hero.reassurance}
-          </p>
         </Reveal>
       </section>
 
-      <section aria-label="Trusted by" className="border-y border-line bg-surface-raised">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 py-10 sm:grid-cols-3 sm:px-6 lg:grid-cols-5">
-          {trustItems.map(item => (
-            <div key={item.label} className="text-center">
-              <p className="text-sm font-semibold text-white">{item.label}</p>
-              <p className="mt-1 text-xs leading-snug text-zinc-500">{item.sublabel}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
+      {/* Trust strip */}
+      <section className="mx-auto max-w-6xl px-4 pt-16 sm:px-6">
         <Reveal>
-          <SectionHeading {...sectionHeadings.problem} />
-        </Reveal>
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {problems.map((problem, i) => (
-            <Reveal key={problem.id} delay={i * 0.06} className="h-full">
-              <Card className="h-full">
-                {problem.stat && (
-                  <p className="font-display text-2xl font-bold text-brand-300">
-                    {problem.stat}
-                  </p>
-                )}
-                <h3 className="mt-2 font-display text-lg font-semibold text-white">
-                  {problem.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                  {problem.description}
-                </p>
-              </Card>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
-        <Reveal>
-          <SectionHeading {...sectionHeadings.solution} />
-        </Reveal>
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {solutions.map((solution, i) => (
-            <Reveal key={solution.id} delay={i * 0.06} className="h-full">
-              <Card className="h-full border-brand-500/40">
-                <h3 className="font-display text-lg font-semibold text-white">
-                  {solution.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                  {solution.description}
-                </p>
-              </Card>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
-        <Reveal>
-          <SectionHeading eyebrow={myInvois.eyebrow} title={myInvois.title} lede={myInvois.body} />
-        </Reveal>
-        <Reveal className="mt-10">
-          <div className="mx-auto grid max-w-3xl gap-3 sm:grid-cols-2">
-            {myInvois.checklist.map(item => (
-              <p key={item} className="flex gap-2 text-sm text-zinc-300">
-                <span aria-hidden className="text-brand-300">✓</span>
-                {item}
-              </p>
+          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-4">
+            {trustItems.map((item) => (
+              <div key={item.label} className="bg-surface p-6 sm:p-7">
+                <p className="font-display text-sm font-semibold text-white">{item.label}</p>
+                <p className="mt-1 text-[12.5px] leading-normal text-zinc-200">{item.sub}</p>
+              </div>
             ))}
           </div>
-          <p className="mt-6 text-center text-xs text-zinc-600">
-            {myInvois.trademarkNote}
-          </p>
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
+      {/* Scorecard */}
+      <section id="scorecard" className="mx-auto max-w-6xl scroll-mt-24 px-4 pt-20 sm:px-6">
         <Reveal>
-          <SectionHeading
-            eyebrow={aiIntegration.eyebrow}
-            title={aiIntegration.title}
-            lede={aiIntegration.lede}
-          />
+          <TierScorecard />
         </Reveal>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2">
-          {aiIntegration.benefits.map((benefit, i) => (
-            <Reveal key={benefit.title} delay={i * 0.05} className="h-full">
-              <Card className="h-full">
-                <h3 className="font-display text-lg font-semibold text-white">
-                  {benefit.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                  {benefit.description}
-                </p>
-              </Card>
-            </Reveal>
-          ))}
-        </div>
       </section>
 
-      <section className="mx-auto max-w-4xl px-4 pt-20 sm:px-6">
-        <Reveal>
-          <SectionHeading {...sectionHeadings.process} />
-        </Reveal>
-        <ol className="mt-12 space-y-4">
-          {processSteps.map((step, i) => (
-            <Reveal key={step.step} delay={i * 0.06}>
-              <li className="flex gap-5 rounded-2xl border border-line bg-surface-raised p-6">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-600 font-display text-sm font-bold text-white">
-                  {step.step}
-                </span>
-                <div>
-                  <div className="flex flex-wrap items-baseline gap-x-3">
-                    <p className="text-xs font-medium uppercase tracking-widest text-brand-300">
-                      {step.label} · {step.duration}
-                    </p>
-                  </div>
-                  <h3 className="mt-1 font-display text-lg font-semibold text-white">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                    {step.description}
-                  </p>
-                </div>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
-      </section>
-
+      {/* Pricing */}
       <section id="pricing" className="mx-auto max-w-6xl scroll-mt-24 px-4 pt-20 sm:px-6">
         <Reveal>
-          <SectionHeading {...sectionHeadings.pricing} />
+          <div className="flex flex-wrap items-baseline justify-between gap-3">
+            <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              {pricing.title}
+            </h2>
+            <span className="font-mono text-xs text-zinc-500">{pricing.note}</span>
+          </div>
         </Reveal>
-        <div className="mt-12">
-          <PricingTiers />
+        <div className="mt-8">
+          <PricingTable />
         </div>
       </section>
 
-      <section id="scorecard" className="mx-auto max-w-3xl scroll-mt-24 px-4 pt-20 sm:px-6">
+      {/* MyInvois */}
+      <section id="myinvois" className="mx-auto max-w-6xl scroll-mt-24 px-4 pt-20 sm:px-6">
         <Reveal>
-          <SectionHeading {...scorecardIntro} />
-        </Reveal>
-        <Reveal className="mt-10">
-          <ScorecardWidget />
-        </Reveal>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
-        <Reveal>
-          <SectionHeading {...sectionHeadings.matrix} />
-        </Reveal>
-        <Reveal className="mt-12">
-          <FeatureMatrix />
-        </Reveal>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
-        <Reveal>
-          <SectionHeading {...sectionHeadings.compare} />
-        </Reveal>
-        <Reveal className="mt-12">
-          <CompetitorComparison />
-        </Reveal>
-      </section>
-
-      <section className="mx-auto max-w-4xl px-4 pt-20 sm:px-6">
-        <Reveal>
-          <div className="rounded-3xl border border-brand-500/50 bg-brand-600/10 p-8 text-center sm:p-12">
-            <p className="inline-flex rounded-full bg-brand-600/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-300">
-              {foundingFive.eyebrow}
-            </p>
-            <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-white">
-              {foundingFive.title}
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-zinc-400">
-              {foundingFive.lede}
-            </p>
-            <ul className="mx-auto mt-8 max-w-xl space-y-3 text-left">
-              {foundingFive.perks.map(perk => (
-                <li key={perk} className="flex gap-3 text-sm text-zinc-300">
-                  <span aria-hidden className="text-brand-300">✓</span>
-                  {perk}
-                </li>
-              ))}
-            </ul>
-            <Button href={foundingFive.cta.href} className="mt-8">
-              {foundingFive.cta.label}
-            </Button>
-            <p className="mt-4 text-xs text-zinc-500">{foundingFive.note}</p>
-          </div>
-        </Reveal>
-      </section>
-
-      <section className="mx-auto max-w-3xl px-4 pt-20 sm:px-6">
-        <Reveal>
-          <SectionHeading {...sectionHeadings.faq} />
-        </Reveal>
-        <Reveal className="mt-10">
-          <FaqAccordion items={faqs} />
-        </Reveal>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-line bg-surface-raised px-6 py-16 text-center sm:px-16">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 -bottom-24 mx-auto h-48 max-w-lg rounded-full bg-brand-600/30 blur-3xl"
-            />
-            <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              {finalCta.title}
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-lg text-zinc-400">{finalCta.body}</p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button href={finalCta.primaryCta.href}>{finalCta.primaryCta.label}</Button>
-              <Button href={finalCta.secondaryCta.href} variant="secondary">
-                {finalCta.secondaryCta.label}
-              </Button>
+          <div className="grid gap-10 rounded-2xl border border-line bg-surface-raised p-7 sm:p-11 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:gap-16">
+            <div>
+              <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-brand-300">
+                {myInvois.eyebrow}
+              </p>
+              <h2 className="mt-3.5 font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                {myInvois.title}
+              </h2>
+              <p className="mt-3.5 text-sm leading-relaxed text-zinc-200">{myInvois.body}</p>
+              <p className="mt-3.5 text-[11.5px] leading-normal text-zinc-500">{myInvois.trademarkNote}</p>
             </div>
-            <p className="mt-6 text-sm text-zinc-500">{finalCta.contactLine}</p>
+            <div className="grid gap-3.5 sm:grid-cols-2">
+              {myInvois.items.map((item) => (
+                <div
+                  key={item}
+                  className="flex items-start gap-3 rounded-xl border border-line bg-surface p-4"
+                >
+                  <span aria-hidden className="text-sm text-gradient-1">✓</span>
+                  <span className="text-[13.5px] leading-normal text-zinc-300">{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </Reveal>
       </section>
+
+      {/* Process */}
+      <section id="process" className="mx-auto max-w-6xl scroll-mt-24 px-4 pt-20 sm:px-6">
+        <Reveal>
+          <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            {processFlow.title}
+          </h2>
+        </Reveal>
+        <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {processFlow.steps.map((step, i) => (
+            <Reveal key={step.n} delay={i * 0.08} className="h-full">
+              <div className="flex h-full flex-col rounded-xl border border-line bg-surface-raised p-6">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-600 font-display text-[13px] font-semibold text-white">
+                    {step.n}
+                  </span>
+                  <span className="font-mono text-[11.5px] text-brand-300">{step.duration}</span>
+                </div>
+                <h3 className="font-display text-base font-semibold text-white">{step.title}</h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-zinc-200">{step.description}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Founding Five */}
+      <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
+        <Reveal>
+          <div className="gradient-border flex flex-col items-start justify-between gap-10 rounded-2xl p-8 sm:p-12 lg:flex-row lg:items-center lg:gap-12">
+            <div>
+              <span className="inline-block rounded-full bg-[linear-gradient(90deg,var(--color-gradient-1),var(--color-gradient-2))] px-3 py-1 font-display text-[10px] font-semibold uppercase tracking-[0.12em] text-surface">
+                {foundingFive.badge}
+              </span>
+              <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                {foundingFive.title}
+              </h2>
+              <p className="mt-3 max-w-xl text-base leading-relaxed text-zinc-200">{foundingFive.lede}</p>
+              <div className="mt-5 flex flex-col gap-2.5">
+                {foundingFive.perks.map((perk) => (
+                  <div key={perk} className="flex items-start gap-2.5 text-[13.5px] text-zinc-300">
+                    <span aria-hidden className="shrink-0 text-gradient-1">✓</span>
+                    {perk}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="flex w-full flex-col items-center gap-3 lg:w-auto lg:flex-none">
+              <Button
+                href={foundingFive.cta.href}
+                className="w-full justify-center font-display uppercase tracking-[0.08em] lg:w-auto"
+              >
+                {foundingFive.cta.label}
+              </Button>
+              <span className="font-mono text-[11.5px] text-zinc-500">{foundingFive.note}</span>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="mx-auto max-w-6xl scroll-mt-24 px-4 pt-20 sm:px-6">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:gap-16">
+          <Reveal>
+            <h2 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              {faqHeading.title}
+            </h2>
+          </Reveal>
+          <Reveal>
+            <FaqAccordion items={faqs} />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Cross-pillar strip */}
+      <div className="mt-20">
+        <PillarStrip items={pillarStripItems} />
+      </div>
     </>
   );
 }

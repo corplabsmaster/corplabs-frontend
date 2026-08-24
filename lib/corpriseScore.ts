@@ -114,6 +114,38 @@ export const scoreToTier = (answers: number[]): ScorecardResult => {
   };
 };
 
+/**
+ * Point weights for the 3-question quick scorecard, indexed by question then by
+ * the option index the user picks. These reproduce the discovery-call scoring
+ * and, once summed, land in the exact same 0–29+ range the full scorecard uses,
+ * so both finders resolve tiers through {@link scoreToTier} — one source of truth.
+ * Keep aligned with `shortScorecardQuestions` in data/corprise-content.ts.
+ */
+const SHORT_SCORECARD_WEIGHTS: readonly (readonly number[])[] = [
+  [1, 4, 7, 10, 13], // team size
+  [2, 5, 9, 13, 16], // modules needed
+  [2, 1, 0], // MyInvois urgency
+];
+
+/** Number of questions in the quick 3-question scorecard. */
+export const SHORT_SCORECARD_LENGTH = SHORT_SCORECARD_WEIGHTS.length;
+
+/** Default option indexes for the quick scorecard (lands on Growth). */
+export const shortScorecardDefaults: readonly number[] = [1, 1, 0];
+
+/**
+ * Score the quick 3-question finder. `answers` are option indexes; each is
+ * mapped to its point weight and delegated to {@link scoreToTier}, so the quick
+ * finder and the full 7-question wizard share one scoring path and tier table.
+ */
+export const scoreShortScorecard = (answers: number[]): ScorecardResult => {
+  const points = SHORT_SCORECARD_WEIGHTS.map((weights, i) => {
+    const choice = answers[i] ?? 0;
+    return weights[choice] ?? 0;
+  });
+  return scoreToTier(points);
+};
+
 export const answersToUrlParam = (answers: number[]): string =>
   answers.map((a) => (a === undefined || a === null ? "" : String(a))).join("-");
 

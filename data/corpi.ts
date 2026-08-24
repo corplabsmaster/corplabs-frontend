@@ -1,162 +1,269 @@
 /** /corpi — Corpi Intelligence (AI WhatsApp sales agent). All page copy. */
 
-export const hero = {
-  eyebrow: "A Corplabs Product · Powered by Claude AI",
-  headline: "Your Business, Always On.",
-  subheadline:
-    "Corpi Intelligence — AI WhatsApp sales agent, built and managed by Corplabs.",
-  primaryCta: { label: "Get Started", href: "/contact" },
-  secondaryCta: { label: "See Pricing", href: "#pricing" },
-};
+import type { PillarStripItem } from "@/components/pillar-strip";
 
-export const problem = {
-  title: "The Problem We Solve",
-  paragraphs: [
-    "Most businesses in Malaysia lose leads simply because no one replies fast enough. A customer messages at 11pm. Nobody's there. They move on. That sale is gone.",
-    "Corpi Intelligence fixes that. The moment someone messages your WhatsApp, they get an intelligent, helpful, human-like response — instantly. Your team wakes up to a CRM full of qualified leads with names, needs, budgets, and contact details already captured.",
-  ],
-  stats: [
-    { stat: "11pm", label: "When most leads message after hours" },
-    { stat: "24/7", label: "Corpi is always available" },
-    { stat: "< 2 weeks", label: "From sign-up to live bot" },
-  ],
-};
+// ─── Corpi demo chat (single source of truth; also used by the home tabs) ────
 
-export interface CorpiFeature {
-  title: string;
-  description: string;
+export interface ChatMessage {
+  from: "cust" | "corpi" | "system";
+  text: string;
 }
 
-export const featuresHeading = "What Corpi Intelligence Does";
+export interface CorpiChat {
+  shopName: string;
+  status: string;
+  script: ChatMessage[];
+}
+
+export const corpiChat: CorpiChat = {
+  shopName: "Kedai Hardware Maju",
+  status: "Corpi · online",
+  script: [
+    { from: "cust", text: "Hi, do you have the 20L storage box? Need 50 units for my shop" },
+    {
+      from: "corpi",
+      text: "Hi! Yes — the 20L stackable is in stock. For 50 units the bulk price is RM 12.50/unit, RM 625 total. Want me to reserve them?",
+    },
+    { from: "cust", text: "boleh dapat discount tak kalau ambil 100?" },
+    {
+      from: "corpi",
+      text: "Boleh! 100 units masuk tier borong — RM 11/unit, jadi RM 1,100. Nak saya sediakan quotation sekali?",
+    },
+    { from: "cust", text: "ok send quote" },
+    {
+      from: "corpi",
+      text: "Done — quotation #Q-1042 sent to this chat. Delivery to Puchong is free above RM 800. Anything else?",
+    },
+    { from: "system", text: "→ lead qualified · handed to Sarah (Sales) with full context" },
+  ],
+};
+
+// ─── Hero ────────────────────────────────────────────────────────────────────
+
+export const hero = {
+  eyebrow: "A Corplabs Product · Powered by Claude",
+  headline: { plain: "Your business, ", gradient: "always on." },
+  lede: "A customer messages at 11pm. Nobody's there. They move on — and that sale is gone. Corpi answers on your own WhatsApp number in seconds, in the language they wrote in, and files the lead before you wake up.",
+  primaryCta: { label: "See pricing", href: "#pricing" },
+  secondaryCta: { label: "Book a discovery call", href: "/contact" },
+  stats: [
+    { stat: "11pm", label: "When most Malaysian leads actually message" },
+    { stat: "24/7", label: "Corpi replies, every day of the year" },
+    { stat: "< 2 wks", label: "From discovery call to live agent" },
+  ],
+  chatCaption: "A real Corpi conversation, replayed. Language switches mid-thread.",
+};
+
+// ─── Features ────────────────────────────────────────────────────────────────
+
+export interface CorpiFeature {
+  n: string;
+  title: string;
+  desc: string;
+}
+
+export const featuresHeading = "What Corpi Does";
+export const featuresHint = "Managed end to end by Corplabs";
 
 export const features: CorpiFeature[] = [
   {
-    title: "Talks Like a Real Consultant",
-    description:
-      "Responds naturally in English, BM, Mandarin, or Manglish — in your brand's tone and voice.",
+    n: "01",
+    title: "Talks like a consultant",
+    desc: "Replies naturally in English, BM, Mandarin, or Manglish — in your brand's tone, not a chatbot's.",
   },
   {
-    title: "Qualifies Leads Naturally",
-    description:
-      "Through conversation, Corpi uncovers what the customer needs, their budget, and location — no forms, no drop-offs.",
+    n: "02",
+    title: "Qualifies without forms",
+    desc: "Through conversation it uncovers the need, the budget, and the location. No form fields, no drop-off.",
   },
   {
-    title: "Saves Leads Automatically",
-    description:
-      "Every qualified lead lands in your Notion CRM with name, phone, objectives, budget, and a conversation summary.",
+    n: "03",
+    title: "Files every lead",
+    desc: "Qualified leads land in your Notion CRM with name, phone, objectives, budget, and a conversation summary.",
   },
   {
-    title: "Knows Your Products",
-    description:
-      "Update your bot's knowledge anytime by editing a Notion page. Changes go live in 30 minutes — no code needed.",
+    n: "04",
+    title: "Knows your products",
+    desc: "Edit one Notion page to change what the agent knows. Live in 30 minutes, no deployment.",
   },
   {
-    title: "Live Dashboard",
-    description:
-      "Monitor bot status, view leads, update stages, and restart the bot — from a dashboard on your own domain.",
+    n: "05",
+    title: "Live dashboard",
+    desc: "Bot status, lead table, stage updates, and a restart button — on your own domain.",
   },
   {
-    title: "Human Escalation",
-    description:
-      "When a customer wants a real person, Corpi hands off gracefully and professionally.",
+    n: "06",
+    title: "Hands off to humans",
+    desc: "When a customer wants a real person, Corpi escalates gracefully with the full thread attached.",
   },
 ];
 
-export const whatYouGetHeading = "What You Get";
+// ─── Onboarding ──────────────────────────────────────────────────────────────
 
-export const whatYouGet = [
-  { label: "AI WhatsApp Agent", desc: "Custom-branded bot with your persona, tone, and product knowledge" },
-  { label: "Lead CRM", desc: "Notion database capturing all qualified leads automatically" },
-  { label: "Live Dashboard", desc: "Web dashboard on your domain — bot controls, lead table, QR scan" },
-  { label: "Knowledge Base", desc: "Notion page you control — update bot knowledge anytime, no code needed" },
-  { label: "Multilingual Support", desc: "English, BM, Mandarin, Manglish (or your preferred languages)" },
-  { label: "Setup & Configuration", desc: "Full deployment by Corplabs — you just scan a QR code" },
-  { label: "Ongoing Support", desc: "Monthly retainer includes monitoring, maintenance, and updates" },
-];
+export interface OnboardingStep {
+  n: string;
+  day: string;
+  title: string;
+  desc: string;
+}
 
 export const onboarding = {
-  title: "How We Onboard You",
-  lede: "From first conversation to live bot in under 2 weeks.",
+  title: "Live in Under Two Weeks",
+  lede: "You don't touch any code. You scan one QR code at the end.",
   steps: [
-    { day: "Day 1", title: "Discovery Call", desc: "We learn about your business, customers, and goals. You tell us your bot name, products, and languages." },
-    { day: "Day 2–7", title: "We Build It", desc: "Corplabs sets up your server, bot persona, Notion CRM, and branded dashboard. You don't touch any code." },
-    { day: "Day 7–10", title: "Review & Refine", desc: "You test your own bot as a customer. We refine until the tone and responses are exactly right." },
-    { day: "Day 10–14", title: "Go Live", desc: "You scan one QR code. Your bot is live on WhatsApp. We monitor the first 48 hours with you." },
-    { day: "Day 14+", title: "Handoff & Training", desc: "We walk you through your dashboard and Notion workspace. From here, your bot runs itself." },
-  ],
+    {
+      n: "1",
+      day: "Day 1",
+      title: "Discovery call",
+      desc: "We learn the business, the customers, the goals. You name the bot and list the products and languages.",
+    },
+    {
+      n: "2",
+      day: "Day 2–7",
+      title: "We build it",
+      desc: "Server, persona, Notion CRM, and branded dashboard. You touch no code.",
+    },
+    {
+      n: "3",
+      day: "Day 7–10",
+      title: "Review & refine",
+      desc: "You test your own bot as a customer. We tune tone and answers until they're right.",
+    },
+    {
+      n: "4",
+      day: "Day 10–14",
+      title: "Go live",
+      desc: "Scan one QR code. The agent is live, and we monitor the first 48 hours with you.",
+    },
+    {
+      n: "5",
+      day: "Day 14+",
+      title: "Handoff",
+      desc: "We walk you through the dashboard and Notion workspace. From here it runs itself.",
+    },
+  ] satisfies OnboardingStep[],
 };
+
+// ─── Pricing (RM 1,500 setup + RM 300/500/800 monthly — repo is source of truth) ──
+
+export interface CorpiPlan {
+  name: string;
+  price: string;
+  period: string;
+  desc: string;
+  recommended: boolean;
+}
 
 export const pricing = {
   title: "Simple, Transparent Pricing",
-  setupFee: {
-    title: "One-time Setup Fee — from RM 1,500",
-    body: "Covers discovery, bot configuration, Notion setup, VPS provisioning, domain linking, and go-live support. Final price depends on scope.",
+  lede: "One setup fee, one monthly retainer. No Meta Business API subscription, no per-message billing.",
+  setupCard: {
+    title: "One-time setup — from RM 1,500",
+    body: "Discovery, bot configuration, Notion CRM, VPS provisioning, domain linking, and go-live support. Final price depends on scope.",
   },
+  finePrint:
+    "Monthly includes VPS hosting, dashboard, Notion CRM, and Corplabs support. Claude API usage above tier limits is billed at cost + 20%. Minimum three-month commitment, month-to-month after that.",
   plans: [
-    { name: "Starter", price: "RM 300", period: "/month", desc: "Up to 500 conversations/month", recommended: false },
-    { name: "Growth", price: "RM 500", period: "/month", desc: "Up to 2,000 conversations/month", recommended: true },
-    { name: "Scale", price: "RM 800", period: "/month", desc: "Unlimited conversations", recommended: false },
-  ],
-  includesLine: "VPS hosting · Dashboard · Notion CRM · Corplabs support",
-  footnote: "Claude API usage above tier limits is billed at cost + 20% margin.",
-  ctaLabel: "Get Started",
+    {
+      name: "Starter",
+      price: "RM 300",
+      period: "/month",
+      desc: "Up to 500 conversations a month. Right for a single shop or one sales line.",
+      recommended: false,
+    },
+    {
+      name: "Growth",
+      price: "RM 500",
+      period: "/month",
+      desc: "Up to 2,000 conversations a month. The usual choice for an active SME.",
+      recommended: true,
+    },
+    {
+      name: "Scale",
+      price: "RM 800",
+      period: "/month",
+      desc: "Unlimited conversations, for multi-branch and campaign-driven volume.",
+      recommended: false,
+    },
+  ] satisfies CorpiPlan[],
+  ctaLabel: "Get started",
   ctaHref: "/contact",
 };
 
-export const faqsHeading = "Frequently Asked Questions";
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+export const faqHeading = "Questions people actually ask";
+export const faqLede =
+  "Anything not covered here, ask us on WhatsApp — you'll be talking to a human.";
 
 export const faqs = [
   {
     question: "Does this work with my existing WhatsApp number?",
     answer:
-      "Yes. Corpi links directly to your WhatsApp Business number. You just scan a QR code — similar to how WhatsApp Web works on your laptop.",
+      "Yes. Corpi links directly to your WhatsApp Business number — you scan a QR code, much like WhatsApp Web on a laptop.",
   },
   {
-    question: "Do I need WhatsApp Business API (Meta)?",
+    question: "Do I need the Meta WhatsApp Business API?",
     answer:
-      "No. Corpi uses a direct connection to WhatsApp that does not require a Meta Business API subscription, saving you the monthly fee and approval process.",
+      "No. Corpi uses a direct connection that doesn't require a Meta Business API subscription, so you skip the monthly fee and the approval process.",
   },
   {
-    question: "What happens if the bot doesn't know the answer?",
+    question: "What if the bot doesn't know the answer?",
     answer:
-      "Corpi is designed to gracefully acknowledge when it doesn't have enough information and offer to connect the customer with your team. It will never make up answers.",
+      "Corpi acknowledges the gap and offers to connect the customer with your team. It will never invent an answer.",
   },
   {
-    question: "Can I update what the bot knows without calling Corplabs?",
+    question: "Can I update what the bot knows myself?",
     answer:
-      "Yes. Your Knowledge Base is a simple Notion page. Edit it yourself and the bot picks up changes within 30 minutes — no code, no restarts, no developer needed.",
+      "Yes. Your knowledge base is a Notion page. Edit it and the bot picks up changes within 30 minutes — no code, no restart, no developer.",
   },
   {
     question: "Is my customer data safe?",
     answer:
-      "Yes. Each client has a dedicated server. Your leads and conversation data are stored only in your own Notion workspace and your private server. We do not store or share your customer data.",
+      "Each client gets a dedicated server. Leads and conversations live only in your own Notion workspace and your private server. We don't store or share your customer data.",
   },
   {
-    question: "What if my customers write in mixed languages?",
+    question: "What if customers write in mixed languages?",
     answer:
-      "Corpi detects the language your customer is using and responds accordingly — including Manglish and mixed BM-English, which is common in Malaysia.",
-  },
-  {
-    question: "Can I see what the bot said to my customers?",
-    answer:
-      "Yes. Every lead saved to your Notion CRM includes a conversation summary. Full logs are accessible from your dashboard.",
-  },
-  {
-    question: "What if I want to add more products later?",
-    answer:
-      "Just update your Knowledge Base page in Notion. For significant changes to lead fields or CRM structure, that's covered under the retainer.",
-  },
-  {
-    question: "Is there a contract?",
-    answer:
-      "We operate on a monthly retainer with a minimum 3-month commitment. After that, it's month-to-month. Setup fee is non-refundable once deployment begins.",
+      "Corpi detects the language in use and replies in kind — including Manglish and mixed BM-English, which is most of Malaysian WhatsApp.",
   },
 ];
 
+// ─── Closing CTA ─────────────────────────────────────────────────────────────
+
 export const finalCta = {
-  title: "Ready to Get Started?",
-  body: "Book a discovery call with the Corplabs team. We'll have your bot live in under 2 weeks.",
-  primaryCta: { label: "Email Us", href: "mailto:contact@corplabs.co" },
-  secondaryCta: { label: "WhatsApp Us", href: "https://wa.me/60166727208" },
-  contactLine: "corplabs.co · contact@corplabs.co",
+  title: "Ready to stop losing 11pm leads?",
+  body: "Book a discovery call and we'll have your agent live in under two weeks.",
+  primaryCta: { label: "WhatsApp us", href: "https://wa.me/60166727208" },
+  secondaryCta: { label: "Email us", href: "mailto:contact@corplabs.co" },
 };
+
+// ─── Cross-pillar strip ──────────────────────────────────────────────────────
+
+export const pillars: PillarStripItem[] = [
+  {
+    id: "corpi",
+    name: "Corpi",
+    href: "/corpi",
+    blurb: "AI WhatsApp sales agents that capture and qualify leads 24/7.",
+    isCurrent: true,
+  },
+  {
+    id: "corpcode",
+    name: "Corpcode",
+    href: "/corpcode",
+    blurb: "Custom software builds — from internal tools to full ERPs.",
+  },
+  {
+    id: "corprise",
+    name: "Corprise",
+    href: "/corprise",
+    blurb: "Subscription-priced ERP for Malaysian SMEs. MyInvois-ready.",
+  },
+  {
+    id: "corpsite",
+    name: "Corpsite",
+    href: "/corpsite",
+    blurb: "Websites — design, build, and ongoing care, software-house grade.",
+  },
+];

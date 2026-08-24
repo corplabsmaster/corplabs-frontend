@@ -80,3 +80,39 @@ contact form. Corpi pricing follows the live site, not the prototype.
 Contact form → Notion: POST /api/contact writes to the "Website Inquiries"
 database via the Notion REST API (honeypot + rate limit; graceful
 email-fallback 503 until NOTION_API_KEY / NOTION_INQUIRIES_DB_ID are set).
+
+## Phase 7 — Full-site rebuild from the latest prototype
+
+The second Claude Design handoff ("Corplabs Site.dc.html") gave every marketing
+page its own spine (not the shared card-stack) and a new animated hero. Built:
+
+- **Animated hero** (`components/home/HeroOrbit.tsx`): the Corplabs mark orbits
+  the "Idea / To / Reality" letterforms with the astronaut drifting inside the
+  ring — a self-contained rAF component that only re-renders its own subtree and
+  is skipped under `prefers-reduced-motion`. Orbit geometry and letterform paths
+  ported verbatim from the export; astronaut art optimized 2.2 MB PNG → 95 KB webp.
+- **Six rebuilt pages**, each to its prototype spine:
+  - `/solutions` — hero + price floors, interactive problem router, side-by-side
+    ledger (mobile-scrollable), one-team strip, CTA. Replaces the old card grid.
+  - `/corpi` — hero with live chat demo + stats, features, onboarding, pricing
+    (RM 300/500/800), FAQ, CTA. The chat player was extracted to a shared
+    `components/corpi/ChatDemo.tsx` used by both this page and the home tabs.
+  - `/corpcode` — spec sheet, four tiers, 5-question finder, process, tech stack, FAQ.
+  - `/corprise` — RM 80k-vs-subscription comparison, trust strip, 3-question
+    scorecard (derived from the tested `lib/corpriseScore.ts`), six-tier pricing
+    table, MyInvois, process, Founding Five, FAQ.
+  - `/corpsite` — hero ladder, 5-step plan selector (NGO + budget-fit logic),
+    six-tier table, add-ons, NGO band, FAQ.
+  - `/about` — timeline, mission/vision, values, culture band, HiTerra flagship, CTA.
+- **Header**: capsule nav now leads with Home + a divider. **Footer**: 4 columns
+  (Solutions / Company / Services / Contact) + KL line.
+- Corpi pricing follows the live site throughout (the prototype's RM 4,500 /
+  RM 1,800–3,500 numbers were stale and intentionally not used).
+
+Note: the prototype's `culture-bg.svg` shipped without its class definitions
+(the export dropped the stylesheet), so the About culture band reuses the
+astronaut motif with a violet glow instead — consistent with the hero.
+
+Verified: tsc clean, 15/15 tests (Corprise scoring preserved), build (17 routes)
+green, zero console errors, and all four interactive widgets (problem router,
+tier finder, plan selector, scorecard) driven in headless Chromium.

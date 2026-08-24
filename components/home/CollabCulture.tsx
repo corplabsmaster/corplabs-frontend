@@ -5,7 +5,7 @@ import { collab, culture } from "@/data/home";
 export default function CollabCulture() {
   return (
     <section
-      id="about-strip"
+      id="corpians"
       className="mx-auto grid max-w-6xl gap-12 px-4 pb-24 sm:px-6 lg:grid-cols-2 lg:gap-16"
     >
       <Reveal className="lg:border-r lg:border-white/10 lg:pr-16">

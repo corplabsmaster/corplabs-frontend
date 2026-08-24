@@ -1,5 +1,5 @@
 import Link from "next/link";
-import PlanetIllustration from "@/components/home/PlanetIllustration";
+import HeroOrbit from "@/components/home/HeroOrbit";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { hero } from "@/data/home";
@@ -8,10 +8,10 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 pt-16 sm:px-6 md:grid-cols-2 md:pb-24 md:pt-20"
+      className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 pt-16 sm:px-6 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] md:pb-24 md:pt-20"
     >
       <Reveal>
-        <p className="mb-4 font-medium text-xs uppercase tracking-[0.08em] text-brand-300">
+        <p className="mb-4 font-display text-xs font-semibold uppercase tracking-[0.08em] text-brand-300">
           {hero.eyebrow}
         </p>
         <h1 className="mb-5 font-display text-4xl font-bold leading-[1.15] tracking-tight text-white sm:text-[54px]">
@@ -41,8 +41,8 @@ export default function Hero() {
           <span className="font-display font-semibold">{hero.corpiRibbon.cta}</span>
         </Link>
       </Reveal>
-      <div className="flex min-w-0 justify-center [animation:float_4s_ease-in-out_infinite]">
-        <PlanetIllustration />
+      <div className="flex min-w-0 items-center justify-center">
+        <HeroOrbit />
       </div>
     </section>
   );

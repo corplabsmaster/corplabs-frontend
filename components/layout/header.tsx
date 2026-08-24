@@ -3,13 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 const capsuleNav = [
+  { label: "Home", href: "/", divider: true },
   { label: "Solutions", href: "/solutions" },
-  { label: "Corpi", href: "/corpi", isNew: true },
+  { label: "Corpi", href: "/corpi" },
   { label: "Corpcode", href: "/corpcode" },
   { label: "Corprise", href: "/corprise" },
   { label: "Corpsite", href: "/corpsite" },
@@ -37,23 +38,20 @@ export default function Header() {
         <div className="flex-1" />
 
         {/* Capsule nav (DS signature) */}
-        <nav className="hidden items-center gap-6 rounded-full border-[1.5px] border-brand-600 bg-surface-raised px-7 py-2.5 lg:flex">
+        <nav className="hidden items-center gap-[26px] rounded-full border-[1.5px] border-brand-600 bg-surface-raised px-[30px] py-3 lg:flex">
           {capsuleNav.map(item => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex items-center gap-1.5 font-display text-sm transition-colors hover:text-brand-200",
-                pathname === item.href ? "font-medium text-brand-300" : "font-light text-white"
-              )}
-            >
-              {item.label}
-              {item.isNew && (
-                <span className="rounded-full bg-[#424DE2] px-2 py-0.5 font-display text-[10px] font-semibold text-white">
-                  New
-                </span>
-              )}
-            </Link>
+            <Fragment key={item.href}>
+              <Link
+                href={item.href}
+                className={cn(
+                  "font-display text-[13.5px] font-light transition-colors hover:text-brand-200",
+                  pathname === item.href ? "text-brand-300" : "text-white"
+                )}
+              >
+                {item.label}
+              </Link>
+              {item.divider && <span aria-hidden className="h-3.5 w-px bg-white/15" />}
+            </Fragment>
           ))}
         </nav>
 
@@ -87,7 +85,7 @@ export default function Header() {
       {open && (
         <nav className="border-t border-line bg-surface px-4 py-4 sm:px-6 lg:hidden">
           <ul className="space-y-1">
-            {[...capsuleNav, { label: "Contact", href: "/contact", isNew: false }].map(item => (
+            {[...capsuleNav, { label: "Contact", href: "/contact" }].map(item => (
               <li key={item.href}>
                 <Link
                   href={item.href}
@@ -97,11 +95,6 @@ export default function Header() {
                   )}
                 >
                   {item.label}
-                  {item.isNew && (
-                    <span className="rounded-full bg-[#424DE2] px-2 py-0.5 text-[10px] font-semibold text-white">
-                      New
-                    </span>
-                  )}
                 </Link>
               </li>
             ))}
