@@ -53,3 +53,16 @@ branch).
 
 Google Analytics 4 loads only when `NEXT_PUBLIC_GA_ID` is set (see
 `.env.example`). Leave it unset for local/dev builds.
+
+## Notion integrations
+
+One internal Notion integration powers both pipelines (create it at
+notion.so/profile/integrations, share each database with it, set the env vars):
+
+- **Contact form** → `POST /api/contact` writes to the *Website Inquiries*
+  database (`NOTION_API_KEY` + `NOTION_INQUIRIES_DB_ID`). Falls back to a
+  polite "email us" message until configured.
+- **Careers** → the homepage `#careers` section pulls the *Job Vacancies*
+  database (`NOTION_JOBS_DB_ID`), rows where `Status = Open`, refreshed
+  hourly. Post or close a role in Notion — no deploy. Falls back to the
+  static list in `data/home.ts` until configured.
