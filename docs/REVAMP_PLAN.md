@@ -128,13 +128,15 @@ wraps every Corplabs price render across all pages, incl. FAQ answers; the
 Corpi demo-chat roleplay prices intentionally stay in RM. The objective:
 signal clearly that Corplabs takes overseas projects.
 
-**Changelog + archive.** `/changelog` tells the site's version story
-(v1 Gatsby era → v2 Next rebuild → v3 design system → v4 full rebuild) with
-screenshots, and links to a browsable frozen snapshot of the original Gatsby
-homepage at `/archive/v1/` — reconstructed from git history (the live site was
-unreachable from the sandbox), styled by CSS compiled from the original
-tailwind.config.js so it's fully self-contained, with a slim "Archived" banner.
-The old Notion-driven job cards render as their static fallbacks.
+**Changelog + archive.** `/changelog` tells the site's version story with
+screenshots. Numbering matches the repo's archive branches: v1 = the original
+hand-built static HTML site (2023–2024, preserved on `protected/v1` — a branch
+that predated this revamp and revealed the true first version), v2 = the
+Gatsby era (2024–2026, preserved on `protected/v2` and browsable at
+`/archive/v2/` — reconstructed from git history, styled by CSS compiled from
+the original tailwind.config.js, fully self-contained, with a slim "Archived"
+banner; the old Notion-driven job cards render as their static fallbacks),
+then v3 Next rebuild → v4 design system → v5 full rebuild (current).
 
 Verified: 25/25 tests (10 new currency tests), build green, and in-browser:
 default USD, live switching, cross-page persistence, geo-cookie respected,
