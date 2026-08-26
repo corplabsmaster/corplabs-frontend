@@ -11,7 +11,7 @@ import { getBlocks, type NotionBlock } from "@/lib/notion-blocks";
  * Works with either jobs board schema:
  *  - the original "Available Job Positions" database (5d1bdd35676d4c7aaa78d0e29a17dcde):
  *    Status (status type, "open"), Team (select), Location (multi-select),
- *    Priority (checkbox), Job Posted (date).
+ *    Priority (checkbox), Job Posted (created_time).
  *  - the newer "Job Vacancies" database: Status (select, "Open"), Type,
  *    Location (text), Tags (multi-select), Apply URL, Order.
  *
@@ -45,6 +45,14 @@ export interface Job {
 
 const NOTION_VERSION = "2022-06-28";
 const FALLBACK_HREF = "/contact?intent=careers";
+
+/**
+ * Keep in step with the `revalidate` of /careers and /careers/[slug]. A longer
+ * window here would pin those pages to stale data: they would re-render on
+ * schedule and get the same cached Notion response back, so a role closed in
+ * Notion could linger for the longer of the two windows.
+ */
+const JOBS_REVALIDATE = 1800;
 
 /** Card header gradients, cycled by row so the grid stays varied. */
 const THUMBS = [
@@ -90,7 +98,12 @@ interface NotionPage {
     Status?: { select?: { name?: string }; status?: { name?: string } };
     Priority?: { checkbox?: boolean };
     Order?: { number?: number | null };
-    "Job Posted"?: { date?: { start?: string | null } | null };
+    // created_time on the original board; a plain date on a board that
+    // defines one by hand. Both shapes are read.
+    "Job Posted"?: {
+      created_time?: string;
+      date?: { start?: string | null } | null;
+    };
   };
 }
 
@@ -114,7 +127,7 @@ export async function getJobs(): Promise<Job[]> {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ page_size: 50 }),
-      next: { revalidate: 3600 },
+      next: { revalidate: JOBS_REVALIDATE },
     });
     if (!res.ok) {
       console.error("Notion jobs fetch failed:", res.status);
@@ -167,7 +180,10 @@ export async function getJobs(): Promise<Job[]> {
           slug: slugify(title),
           pageId: page.id,
           applyUrl: p["Apply URL"]?.url ?? undefined,
-          postedAt: p["Job Posted"]?.date?.start ?? page.created_time,
+          postedAt:
+            p["Job Posted"]?.created_time ??
+            p["Job Posted"]?.date?.start ??
+            page.created_time,
           monogram: monogram(title),
           thumb: THUMBS[i % THUMBS.length],
         };
