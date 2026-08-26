@@ -22,7 +22,7 @@ function row(
       Team: { select: { name: "Engineering" } },
       Location: { multi_select: [{ name: "Malaysia" }] },
       Priority: { checkbox: false },
-      "Job Posted": { date: { start: "2024-02-20" } },
+      "Job Posted": { created_time: "2024-02-20T02:37:56.000Z" },
       ...extra,
     },
   };
@@ -63,7 +63,7 @@ describe("getJobs", () => {
       href: "/careers/senior-java-backend",
       pageId: "aaa",
       location: "Malaysia",
-      postedAt: "2024-02-20",
+      postedAt: "2024-02-20T02:37:56.000Z",
     });
   });
 
@@ -97,6 +97,25 @@ describe("getJobs", () => {
     expect(slugs[0]).toBe("senior-java-developer");
     expect(new Set(slugs).size).toBe(2);
     expect(jobs[1].href).toBe(`/careers/${slugs[1]}`);
+  });
+
+  it("reads Job Posted whether it is a created_time or a plain date", async () => {
+    stubNotion([
+      row("aaa", "Created Time Board", "open"),
+      {
+        id: "bbb",
+        created_time: "2020-01-01T00:00:00.000Z",
+        properties: {
+          Name: { title: [{ plain_text: "Date Board" }] },
+          Status: { status: { name: "open" } },
+          "Job Posted": { date: { start: "2026-08-19" } },
+        },
+      },
+    ]);
+
+    const byTitle = Object.fromEntries((await getJobs()).map(j => [j.title, j.postedAt]));
+    expect(byTitle["Created Time Board"]).toBe("2024-02-20T02:37:56.000Z");
+    expect(byTitle["Date Board"]).toBe("2026-08-19");
   });
 
   it("picks up an Apply URL column when the board has one", async () => {
