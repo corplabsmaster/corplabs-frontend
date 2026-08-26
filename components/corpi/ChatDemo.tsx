@@ -10,18 +10,24 @@ import { cn } from "@/lib/utils";
  * Replayable Corpi WhatsApp chat simulation. Single player used by both the
  * home-page product tabs (compact, `max-w-sm`) and the /corpi hero (taller,
  * fills its column). Remount with a `key` to restart the animation.
+ *
+ * The message area is a fixed height that scrolls, not one that grows. Growing
+ * was fine in a desktop column and wrong on a phone, where seven bubbles at
+ * that width ran past 1,400px and the section ate three screens. A real chat
+ * window is a viewport onto a thread anyway, so it also reads truer: new
+ * messages scroll into view as they arrive.
  */
 export function ChatDemo({
   chat,
   className,
-  bodyMinHeight = "min-h-[360px]",
+  bodyHeight = "h-[340px] sm:h-[380px]",
   location = "corpi_page",
 }: {
   chat: CorpiChat;
   /** Applied to the outer card — e.g. `max-w-sm` on the home tabs. */
   className?: string;
-  /** Tailwind min-height for the message area (taller on /corpi). */
-  bodyMinHeight?: string;
+  /** Tailwind height for the message area (taller on /corpi). */
+  bodyHeight?: string;
   /** Which surface this instance sits on, reported with demo_engaged. */
   location?: "corpi_page" | "home_tabs";
 }) {
@@ -60,6 +66,12 @@ export function ChatDemo({
     }
   }, [start, location]);
 
+  // Keep the newest message in view as the script plays out.
+  const endRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ block: "end", behavior: "smooth" });
+  }, [shown]);
+
   const visible = chat.script.slice(0, shown);
   const next = chat.script[shown];
   const typing = next?.from === "corpi";
@@ -85,7 +97,7 @@ export function ChatDemo({
           Replay
         </button>
       </div>
-      <div className={cn("flex flex-col gap-2.5 p-4", bodyMinHeight)}>
+      <div className={cn("flex flex-col gap-2.5 overflow-y-auto p-4", bodyHeight)}>
         {visible.map((m, i) =>
           m.from === "system" ? (
             <p
@@ -119,6 +131,7 @@ export function ChatDemo({
             ))}
           </span>
         )}
+        <div ref={endRef} />
       </div>
     </div>
   );

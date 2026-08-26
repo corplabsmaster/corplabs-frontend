@@ -92,7 +92,7 @@ export default function CorpiPage() {
           </Reveal>
 
           <Reveal delay={0.1} className="flex flex-col gap-3.5">
-            <ChatDemo chat={corpiChat} bodyMinHeight="min-h-[430px]" />
+            <ChatDemo chat={corpiChat} bodyHeight="h-[360px] sm:h-[420px] lg:h-[440px]" />
             <p className="text-center text-xs text-zinc-400">{hero.chatCaption}</p>
 
             {/*
@@ -277,41 +277,45 @@ export default function CorpiPage() {
       {/* 6 · Closing CTA ────────────────────────────────────────────── */}
       <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
         <Reveal>
-          <div className="gradient-border flex flex-col gap-8 rounded-2xl p-8 sm:p-14 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                {finalCta.title}
-              </h2>
-              <p className="mt-3 max-w-xl text-base leading-relaxed text-zinc-200">
-                {finalCta.body}
-              </p>
-            </div>
-            <div className="flex flex-none flex-wrap gap-3">
-              <WhatsAppDemoButton
-                starterId={finalCta.primaryCta.starterId}
-                label={finalCta.primaryCta.label}
-                placement="corpi_final_cta"
-                className="uppercase tracking-widest"
-              />
-              <Button
-                href={finalCta.secondaryCta.href}
-                variant="secondary"
-                className="font-display uppercase tracking-widest"
-              >
-                {finalCta.secondaryCta.label}
-              </Button>
-              <p className="w-full text-[13px] text-zinc-500">
-                {finalCta.micrositeNote.pre}
-                <a
-                  href={finalCta.micrositeNote.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-mono text-brand-300 underline underline-offset-4 transition-colors hover:text-white"
+          <div className="gradient-border rounded-2xl p-8 sm:p-14">
+            <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+              <div>
+                <h2 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                  {finalCta.title}
+                </h2>
+                <p className="mt-3 max-w-xl text-base leading-relaxed text-zinc-200">
+                  {finalCta.body}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <WhatsAppDemoButton
+                  starterId={finalCta.primaryCta.starterId}
+                  label={finalCta.primaryCta.label}
+                  placement="corpi_final_cta"
+                  className="uppercase tracking-widest"
+                />
+                <Button
+                  href={finalCta.secondaryCta.href}
+                  variant="secondary"
+                  className="font-display uppercase tracking-widest"
                 >
-                  {finalCta.micrositeNote.label}
-                </a>
-              </p>
+                  {finalCta.secondaryCta.label}
+                </Button>
+              </div>
             </div>
+            {/* A footnote, not a third button — inside the button row its
+                w-full forced the row to max-content and burst the page. */}
+            <p className="mt-6 text-[13px] text-zinc-400">
+              {finalCta.micrositeNote.pre}
+              <a
+                href={finalCta.micrositeNote.href}
+                target="_blank"
+                rel="noreferrer"
+                className="font-mono text-brand-300 underline underline-offset-4 transition-colors hover:text-white"
+              >
+                {finalCta.micrositeNote.label}
+              </a>
+            </p>
           </div>
         </Reveal>
       </section>
