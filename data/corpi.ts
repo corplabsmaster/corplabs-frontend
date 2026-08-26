@@ -241,12 +241,62 @@ export const faqs = [
   },
 ];
 
+// ─── Live WhatsApp demo ──────────────────────────────────────────────────────
+
+export interface DemoStarter {
+  /** Short, low-cardinality id — this is the GA4 dimension value. */
+  id: string;
+  /** What the button says. */
+  label: string;
+  /** Prefilled first message. */
+  text: string;
+}
+
+/**
+ * The number below is Corplabs' own WhatsApp line, and Corpi is what answers
+ * it. That is the demo: rather than watch a scripted replay, a visitor messages
+ * the same agent we sell and sees it reply.
+ *
+ * The starters are deliberately in three languages. The page claims Corpi
+ * answers in whatever language it is written to; a visitor who taps the Bahasa
+ * one is testing that claim rather than taking our word for it.
+ */
+export const liveDemo = {
+  /** International format, digits only — what wa.me expects. */
+  number: "60166727208",
+  numberDisplay: "+60 16-672 7208",
+  eyebrow: "Try it for real",
+  title: "This number is answered by Corpi",
+  body:
+    "Not a recording and not a form — our own WhatsApp line, running the same agent we build for clients. Ask it anything. It hands you to a human the moment you ask for one.",
+  starters: [
+    {
+      id: "en_pricing",
+      label: "English",
+      text: "Hi Corpi — I found you on corplabs.co. What would an agent like you cost for my business?",
+    },
+    {
+      id: "ms_explain",
+      label: "Bahasa Malaysia",
+      text: "Hai Corpi, saya jumpa anda di corplabs.co. Boleh terangkan Corpi ni untuk kedai saya?",
+    },
+    {
+      id: "zh_explain",
+      label: "中文",
+      text: "你好 Corpi，我在 corplabs.co 看到你。可以介绍一下 Corpi 吗？",
+    },
+  ] as DemoStarter[],
+  /** Shown under the buttons. */
+  note: "Opens WhatsApp with the message ready — send it and watch the reply come back in the language you wrote in.",
+};
+
 // ─── Closing CTA ─────────────────────────────────────────────────────────────
 
 export const finalCta = {
   title: "Ready to stop losing 11pm leads?",
   body: "Book a discovery call and we'll have your agent live in under two weeks.",
-  primaryCta: { label: "WhatsApp us", href: "https://wa.me/60166727208" },
+  /** Rendered by WhatsAppDemo so the click is tracked like the hero one. */
+  primaryCta: { label: "Message Corpi", starterId: "en_pricing" },
   secondaryCta: { label: "Email us", href: "mailto:contact@corplabs.co" },
   micrositeNote: {
     pre: "Prefer the full product experience? ",

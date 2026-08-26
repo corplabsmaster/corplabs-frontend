@@ -80,6 +80,18 @@ export function trackTrialSignupClick(placement: "corpi_hero" | "corpi_pricing")
   track("trial_signup_click", { placement });
 }
 
+/**
+ * A visitor opened WhatsApp to message the live Corpi agent — the shortest
+ * conversion path on /corpi, and invisible without this: the visitor leaves for
+ * WhatsApp, so nothing else on our side records that it happened.
+ *
+ * `starter` is the conversation opener they chose, which doubles as a read on
+ * which language visitors actually reach for.
+ */
+export function trackWhatsAppDemo(starter: string, placement: string): void {
+  track("whatsapp_demo_click", { starter, placement });
+}
+
 /** The Corpi chat demo was actually driven, not just scrolled past. */
 export function trackDemoEngaged(location: "corpi_page" | "home_tabs"): void {
   track("demo_engaged", { location });

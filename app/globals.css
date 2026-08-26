@@ -118,10 +118,10 @@ html[data-theme="light"] {
 
 /*
  * Bands that carry their own dark artwork stay dark in both themes — the
- * footer's negative logo and the HiTerra band's navy gradient are baked into
- * assets we don't recolour. Re-declaring the dark tokens on the element turns
- * it back into a dark island: everything inside keeps using the same utility
- * classes and resolves against dark values again.
+ * HiTerra band's navy gradient is that product's own brand, not a site
+ * surface. Re-declaring the dark tokens on the element turns it back into a
+ * dark island: everything inside keeps using the same utility classes and
+ * resolves against dark values again.
  */
 .dark-island {
   color-scheme: dark;

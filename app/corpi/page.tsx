@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ChatDemo } from "@/components/corpi/ChatDemo";
 import { TrialCta } from "@/components/corpi/TrialCta";
+import { WhatsAppDemo, WhatsAppDemoButton } from "@/components/corpi/WhatsAppDemo";
 import { Price } from "@/components/currency/price";
 import { PillarStrip } from "@/components/pillar-strip";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ import {
   featuresHeading,
   featuresHint,
   finalCta,
+  liveDemo,
   hero,
   onboarding,
   pillars,
@@ -91,6 +93,25 @@ export default function CorpiPage() {
           <Reveal delay={0.1} className="flex flex-col gap-3.5">
             <ChatDemo chat={corpiChat} bodyMinHeight="min-h-[430px]" />
             <p className="text-center text-xs text-zinc-500">{hero.chatCaption}</p>
+
+            {/*
+              * The replay above is the illustration; this is the demo. Same
+              * agent, our own number, and the visitor picks the language.
+              */}
+            <div className="rounded-2xl border border-line bg-surface-raised p-5">
+              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-300">
+                {liveDemo.eyebrow}
+              </p>
+              <h2 className="mt-2 font-display text-lg font-semibold tracking-tight text-white">
+                {liveDemo.title}
+              </h2>
+              <p className="mt-2 text-[13.5px] leading-relaxed text-zinc-200">{liveDemo.body}</p>
+              <WhatsAppDemo placement="corpi_hero" className="mt-4" />
+              <p className="mt-3 text-[11.5px] leading-snug text-zinc-500">
+                {liveDemo.note}{" "}
+                <span className="font-mono text-zinc-400">{liveDemo.numberDisplay}</span>
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -264,12 +285,12 @@ export default function CorpiPage() {
               </p>
             </div>
             <div className="flex flex-none flex-wrap gap-3">
-              <Button
-                href={finalCta.primaryCta.href}
-                className="font-display uppercase tracking-widest"
-              >
-                {finalCta.primaryCta.label}
-              </Button>
+              <WhatsAppDemoButton
+                starterId={finalCta.primaryCta.starterId}
+                label={finalCta.primaryCta.label}
+                placement="corpi_final_cta"
+                className="uppercase tracking-widest"
+              />
               <Button
                 href={finalCta.secondaryCta.href}
                 variant="secondary"

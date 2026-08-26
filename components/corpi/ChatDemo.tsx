@@ -99,10 +99,10 @@ export function ChatDemo({
             <p
               key={i}
               className={cn(
-                "max-w-[82%] px-3.5 py-2.5 text-[13.5px] leading-relaxed text-white [animation:msg-in_.3s_ease-out]",
+                "max-w-[82%] px-3.5 py-2.5 text-[13.5px] leading-relaxed [animation:msg-in_.3s_ease-out]",
                 m.from === "corpi"
-                  ? "self-end rounded-[14px_14px_4px_14px] border border-brand-700 bg-brand-800"
-                  : "self-start rounded-[14px_14px_14px_4px] border border-line bg-surface"
+                  ? "self-end rounded-[14px_14px_4px_14px] border border-brand-700 bg-brand-800 text-on-brand"
+                  : "self-start rounded-[14px_14px_14px_4px] border border-line bg-surface text-white"
               )}
             >
               {m.text}
@@ -114,7 +114,7 @@ export function ChatDemo({
             {[0, 0.2, 0.4].map((delay) => (
               <span
                 key={delay}
-                className="h-1.5 w-1.5 rounded-full bg-white"
+                className="h-1.5 w-1.5 rounded-full bg-on-brand"
                 style={{ animation: `pulse-dot 1s ${delay}s infinite` }}
               />
             ))}
