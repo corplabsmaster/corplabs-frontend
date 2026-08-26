@@ -107,9 +107,10 @@ export default function CorpiPage() {
               </h2>
               <p className="mt-2 text-[13.5px] leading-relaxed text-zinc-200">{liveDemo.body}</p>
               <WhatsAppDemo placement="corpi_hero" className="mt-4" />
-              <p className="mt-3 text-[11.5px] leading-snug text-zinc-500">
+              {/* zinc-500 falls under AA on the dark surfaces; zinc-400 clears it. */}
+              <p className="mt-3 text-[11.5px] leading-snug text-zinc-400">
                 {liveDemo.note}{" "}
-                <span className="font-mono text-zinc-400">{liveDemo.numberDisplay}</span>
+                <span className="font-mono text-zinc-300">{liveDemo.numberDisplay}</span>
               </p>
             </div>
           </Reveal>

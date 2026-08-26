@@ -92,6 +92,25 @@ export function trackWhatsAppDemo(starter: string, placement: string): void {
   track("whatsapp_demo_click", { starter, placement });
 }
 
+/**
+ * The site-wide enquiry widget. `opened` is cheap curiosity, `sent` is the
+ * conversion — the ratio between them is the only read on whether the widget
+ * earns its place, and neither is visible any other way because the
+ * conversation continues on WhatsApp.
+ */
+export function trackChatOpen(page: string): void {
+  track("chat_open", { entry_page: page });
+}
+
+export function trackChatSend(intent: string, page: string): void {
+  track("chat_send", { intent, entry_page: page });
+}
+
+/** The visitor fell back to copying the message — WhatsApp Web likely blocked. */
+export function trackChatFallback(action: "copy" | "email"): void {
+  track("chat_fallback", { action });
+}
+
 /** The Corpi chat demo was actually driven, not just scrolled past. */
 export function trackDemoEngaged(location: "corpi_page" | "home_tabs"): void {
   track("demo_engaged", { location });
