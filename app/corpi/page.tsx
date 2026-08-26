@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ChatDemo } from "@/components/corpi/ChatDemo";
+import { CorpiLockup } from "@/components/corpi/CorpiMark";
 import { TrialCta } from "@/components/corpi/TrialCta";
 import { WhatsAppDemo, WhatsAppDemoButton } from "@/components/corpi/WhatsAppDemo";
 import { Price } from "@/components/currency/price";
@@ -42,9 +43,9 @@ export default function CorpiPage() {
         />
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-12 pt-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 lg:pt-24">
           <Reveal>
-            <p className="font-display text-xs font-semibold uppercase tracking-widest text-brand-300">
-              {hero.eyebrow}
-            </p>
+            {/* The product's own mark leads its page — the eyebrow explains
+                whose product it is, which is a different job. */}
+            <CorpiLockup px={38} tagline={hero.eyebrow} />
             <h1 className="mt-4 font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl">
               {hero.headline.plain}
               <span className="gradient-text">{hero.headline.gradient}</span>

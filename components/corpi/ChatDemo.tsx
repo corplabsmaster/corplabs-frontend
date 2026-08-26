@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { CorpiMark } from "@/components/corpi/CorpiMark";
 import type { CorpiChat } from "@/data/corpi";
 import { trackDemoEngaged } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
@@ -71,9 +72,7 @@ export function ChatDemo({
       )}
     >
       <div className="flex items-center gap-3 border-b border-white/10 bg-brand-950 px-4 py-3.5">
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-500 font-display text-sm font-semibold text-on-brand">
-          C
-        </span>
+        <CorpiMark px={36} />
         <div className="flex-1">
           <p className="font-display text-sm font-semibold text-white">{chat.shopName}</p>
           <p className="text-[11px] text-gradient-1">{chat.status}</p>

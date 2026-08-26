@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { chatHandoffUrl } from "@/components/chat/whatsapp-link";
+import { CorpiMark } from "@/components/corpi/CorpiMark";
 import { chat, type QuickReply } from "@/data/chat";
 import { trackChatFallback, trackChatOpen, trackChatSend } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
@@ -187,7 +188,9 @@ export function ChatWidget() {
           </svg>
         ) : (
           <>
-            <WhatsAppMark className="h-6 w-6" />
+            {/* Corpi's own mark, not WhatsApp's — this is the agent, and the
+                channel is disclosed on the send button instead. */}
+            <CorpiMark px={30} className="bg-on-brand/20 ring-1 ring-on-brand/30" />
             <span className="hidden sm:inline">{chat.launcherLabel}</span>
           </>
         )}
@@ -203,9 +206,7 @@ export function ChatWidget() {
           className="fixed bottom-24 right-3 z-[60] flex max-h-[min(560px,calc(100dvh-8rem))] w-[calc(100vw-1.5rem)] flex-col overflow-hidden rounded-2xl border border-line bg-surface-raised shadow-2xl sm:right-6 sm:w-[380px]"
         >
           <div className="flex items-center gap-3 border-b border-line bg-brand-950 px-4 py-3.5">
-            <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-brand-500 font-display text-sm font-semibold text-on-brand">
-              C
-            </span>
+            <CorpiMark px={36} />
             <div className="min-w-0 flex-1">
               <p className="font-display text-sm font-semibold text-white">{chat.agentName}</p>
               <p className="truncate text-[11px] text-gradient-1">{chat.status}</p>
@@ -311,14 +312,7 @@ export function ChatWidget() {
                 !ready && "pointer-events-none opacity-40"
               )}
             >
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden>
-                <path
-                  d="M3 10.2 16.5 4l-4.3 12.6-2.5-5.3L3 10.2Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <WhatsAppMark className="h-[19px] w-[19px]" />
             </a>
           </form>
         </div>
