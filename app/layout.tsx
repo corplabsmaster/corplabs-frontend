@@ -4,6 +4,7 @@ import { Inter, Work_Sans } from "next/font/google";
 import { CurrencyProvider } from "@/components/currency/currency-context";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
+import { SiteChrome } from "@/components/layout/site-chrome";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -57,9 +58,9 @@ export default function RootLayout({
     <html lang="en" className={`${workSans.variable} ${inter.variable}`}>
       <body className="bg-surface font-sans text-zinc-200 antialiased">
         <CurrencyProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <SiteChrome header={<Header />} footer={<Footer />}>
+            {children}
+          </SiteChrome>
         </CurrencyProvider>
       </body>
       {gaId && <GoogleAnalytics gaId={gaId} />}

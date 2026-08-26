@@ -5,15 +5,23 @@ import { collection, config, fields } from "@keystatic/core";
  * content/posts/ as Markdoc + YAML frontmatter, so posts ship as fully
  * static pages (good for SEO) and every edit is a commit.
  *
- * Storage: `local` writes to the filesystem — use it in dev (`npm run dev`,
- * then open /keystatic). To let teammates edit from the deployed site,
- * switch to GitHub mode:
- *   storage: { kind: "github", repo: "corplabs-co/corplabs-frontend" }
- * and follow https://keystatic.com/docs/github-mode (creates a GitHub App;
- * writers get auth'd edits in production, each save is a commit/PR).
+ * Storage: `github` — the admin at /keystatic authenticates against GitHub and
+ * writes through the API, so it works on the deployed site (a serverless
+ * filesystem is read-only, which is why `local` mode showed an empty
+ * collection in production). Needs four env vars; see .env.example for the
+ * one-time setup wizard.
+ *
+ * Note this only affects *editing*. Rendering still reads the checked-out
+ * files at build time via createReader in lib/posts.ts, so /blog is unchanged.
+ *
+ * To edit offline against the filesystem instead, swap the storage block for
+ * `{ kind: "local" }` and run `npm run dev` — no credentials needed.
  */
 export default config({
-  storage: { kind: "local" },
+  storage: {
+    kind: "github",
+    repo: { owner: "corplabs-co", name: "corplabs-frontend" },
+  },
   ui: {
     brand: { name: "Corplabs Blog" },
   },
