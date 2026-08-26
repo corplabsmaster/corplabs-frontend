@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ChatDemo } from "@/components/corpi/ChatDemo";
+import { TrialCta } from "@/components/corpi/TrialCta";
 import { Price } from "@/components/currency/price";
 import { PillarStrip } from "@/components/pillar-strip";
 import { Button } from "@/components/ui/button";
@@ -50,12 +51,13 @@ export default function CorpiPage() {
               {hero.lede}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button
+              <TrialCta
                 href={hero.primaryCta.href}
+                placement="corpi_hero"
                 className="font-display uppercase tracking-widest"
               >
                 {hero.primaryCta.label}
-              </Button>
+              </TrialCta>
               <Button
                 href={hero.secondaryCta.href}
                 variant="secondary"
@@ -209,6 +211,27 @@ export default function CorpiPage() {
                 </div>
               </Reveal>
             ))}
+
+            <Reveal delay={0.24} className="sm:col-span-3">
+              <div className="gradient-border flex flex-col gap-4 rounded-xl p-6 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-display text-base font-semibold text-white">
+                    {pricing.trial.lead}
+                  </p>
+                  <p className="mt-1.5 text-[13.5px] leading-relaxed text-zinc-200">
+                    {pricing.trial.body}
+                  </p>
+                </div>
+                <TrialCta
+                  href={pricing.trial.cta.href}
+                  placement="corpi_pricing"
+                  size="sm"
+                  className="flex-none font-display uppercase tracking-widest"
+                >
+                  {pricing.trial.cta.label}
+                </TrialCta>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>

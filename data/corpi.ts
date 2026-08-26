@@ -44,7 +44,10 @@ export const hero = {
   eyebrow: "A Corplabs Product · Powered by Claude",
   headline: { plain: "Your business, ", gradient: "always on." },
   lede: "A customer messages at 11pm. Nobody's there. They move on — and that sale is gone. Corpi answers on your own WhatsApp number in seconds, in the language they wrote in, and files the lead before you wake up.",
-  primaryCta: { label: "See pricing", href: "#pricing" },
+  primaryCta: {
+    label: "Start a 7-day free trial",
+    href: "https://corpi.corplabs.co/signup",
+  },
   secondaryCta: { label: "Book a discovery call", href: "/contact" },
   stats: [
     { stat: "11pm", label: "When most Malaysian leads actually message" },
@@ -192,6 +195,11 @@ export const pricing = {
   ] satisfies CorpiPlan[],
   ctaLabel: "Get started",
   ctaHref: "/contact",
+  trial: {
+    lead: "Every plan starts with a 7-day free trial.",
+    body: "Try Corpi on your own number before committing to setup — no card, cancel any time.",
+    cta: { label: "Start the free trial", href: "https://corpi.corplabs.co/signup" },
+  },
 };
 
 // ─── FAQ ─────────────────────────────────────────────────────────────────────

@@ -75,6 +75,11 @@ export function trackApplyClick(role: string, placement: "top" | "bottom"): void
   track("apply_click", { role, placement });
 }
 
+/** A visitor left for the Corpi microsite to start the 7-day trial. */
+export function trackTrialSignupClick(placement: "corpi_hero" | "corpi_pricing"): void {
+  track("trial_signup_click", { placement });
+}
+
 /** The Corpi chat demo was actually driven, not just scrolled past. */
 export function trackDemoEngaged(location: "corpi_page" | "home_tabs"): void {
   track("demo_engaged", { location });
