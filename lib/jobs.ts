@@ -1,5 +1,6 @@
 import "server-only";
 import { jobs as staticJobs } from "@/data/home";
+import { getBlocks, type NotionBlock } from "@/lib/notion-blocks";
 
 /**
  * Job postings pulled live from Notion — the modern version of the legacy
@@ -10,9 +11,14 @@ import { jobs as staticJobs } from "@/data/home";
  * Works with either jobs board schema:
  *  - the original "Available Job Positions" database (5d1bdd35676d4c7aaa78d0e29a17dcde):
  *    Status (status type, "open"), Team (select), Location (multi-select),
- *    Priority (checkbox); the apply link is each row's public posting page.
+ *    Priority (checkbox), Job Posted (date).
  *  - the newer "Job Vacancies" database: Status (select, "Open"), Type,
  *    Location (text), Tags (multi-select), Apply URL, Order.
+ *
+ * Each Notion-backed role gets its own /careers/<slug> page rendering the JD
+ * from the Notion page body, so candidates read the role on corplabs.co and
+ * the text is indexable. An optional "Apply URL" column becomes the apply
+ * button; without one it points at the careers contact route.
  *
  * Setup (see README): share the jobs database with the same internal
  * integration as the contact form, then set NOTION_API_KEY and
@@ -29,6 +35,12 @@ export interface Job {
   monogram: string;
   tags: string[];
   href: string;
+  /** set only for Notion-backed roles, which get a /careers/<slug> page */
+  slug?: string;
+  pageId?: string;
+  /** the row's "Apply URL" column, if the board has one */
+  applyUrl?: string;
+  postedAt?: string;
 }
 
 const NOTION_VERSION = "2022-06-28";
@@ -49,11 +61,20 @@ function monogram(title: string): string {
   return (words[0][0] + words[1][0]).toUpperCase();
 }
 
+/** "Senior Java Backend" -> "senior-java-backend". */
+export function slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 interface RichText {
   plain_text?: string;
 }
 
 interface NotionPage {
+  id?: string;
   created_time?: string;
   /** set when the row's page is published to the web (corplabs.notion.site) */
   public_url?: string | null;
@@ -69,6 +90,7 @@ interface NotionPage {
     Status?: { select?: { name?: string }; status?: { name?: string } };
     Priority?: { checkbox?: boolean };
     Order?: { number?: number | null };
+    "Job Posted"?: { date?: { start?: string | null } | null };
   };
 }
 
@@ -139,15 +161,31 @@ export async function getJobs(): Promise<Job[]> {
             .map(t => t.name ?? "")
             .filter(Boolean)
             .slice(0, 4),
-          // Apply URL column wins; otherwise the row's public posting page
-          // (corplabs.notion.site/...), matching how the legacy site linked.
-          href: p["Apply URL"]?.url || page.public_url || FALLBACK_HREF,
+          // The card opens our own JD page; the Apply URL column (when the
+          // board has one) becomes the apply button there.
+          href: `/careers/${slugify(title)}`,
+          slug: slugify(title),
+          pageId: page.id,
+          applyUrl: p["Apply URL"]?.url ?? undefined,
+          postedAt: p["Job Posted"]?.date?.start ?? page.created_time,
           monogram: monogram(title),
           thumb: THUMBS[i % THUMBS.length],
         };
       })
-      .filter((j): j is Job => j !== null)
-      .slice(0, 9);
+      .filter((j): j is Job => j !== null);
+
+    // Two rows can share a title (the board has repeats across years); keep
+    // the first at the clean slug and disambiguate the rest so every role
+    // still resolves to exactly one page.
+    const seen = new Set<string>();
+    for (const job of jobs) {
+      if (!job.slug) continue;
+      if (seen.has(job.slug)) {
+        job.slug = `${job.slug}-${(job.pageId ?? "").replace(/-/g, "").slice(0, 6)}`;
+        job.href = `/careers/${job.slug}`;
+      }
+      seen.add(job.slug);
+    }
 
     // An empty board usually means misconfiguration, not zero openings —
     // keep showing something rather than an empty section.
@@ -156,4 +194,20 @@ export async function getJobs(): Promise<Job[]> {
     console.error("Notion jobs fetch errored:", err);
     return staticJobs;
   }
+}
+
+/**
+ * One open role with its JD body, or null when the slug is unknown (a closed
+ * role, or a board that isn't configured — the static fallback has no pages).
+ */
+export async function getJob(
+  slug: string
+): Promise<{ job: Job; blocks: NotionBlock[] } | null> {
+  const apiKey = process.env.NOTION_API_KEY;
+  if (!apiKey) return null;
+
+  const job = (await getJobs()).find(j => j.slug === slug);
+  if (!job?.pageId) return null;
+
+  return { job, blocks: await getBlocks(job.pageId, apiKey) };
 }

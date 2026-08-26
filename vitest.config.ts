@@ -9,6 +9,9 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "."),
+      // server-only throws outside the react-server condition; tests of
+      // server modules resolve it to its no-op build instead.
+      "server-only": path.resolve(__dirname, "node_modules/server-only/empty.js"),
     },
   },
 });
