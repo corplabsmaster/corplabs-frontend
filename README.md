@@ -74,6 +74,12 @@ notion.so/profile/integrations, share each database with it, set the env vars):
   without one they point at `/contact?intent=careers`. Note that any row set
   to `Open` is published — stale rows are visible roles.
 
+  Edits show up within 30 minutes on their own. To publish one immediately,
+  open `/api/revalidate?secret=…` (`REVALIDATE_SECRET`): it clears the
+  `notion-jobs` cache tag so the next request rebuilds from Notion. Both the
+  board query and the JD bodies carry that tag, so one call covers the
+  homepage, `/careers` and every role page.
+
 ## Blog (Keystatic)
 
 Posts live in `content/posts/` as Markdoc files — every edit is a commit, and
