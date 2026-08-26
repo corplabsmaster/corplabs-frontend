@@ -42,10 +42,14 @@ const columns = [
   },
 ];
 
-/** Deep-violet footer (DS: footer sits on primary-950, not black). */
+/**
+ * Deep-violet footer (DS: footer sits on primary-950, not black). Stays dark in
+ * the light theme — logo-neg.png is a negative mark with the navy baked in, so
+ * a light footer would need a second asset we don't have.
+ */
 export default function Footer() {
   return (
-    <footer className="bg-brand-950">
+    <footer className="dark-island bg-brand-950">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-6 pt-14 sm:px-6 lg:grid-cols-[1fr_3fr]">
         <div>
           <img src="/logo-neg.png" alt={site.name} className="mb-5 block h-9 w-auto" />

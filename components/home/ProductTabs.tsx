@@ -45,7 +45,7 @@ function MiniFinder({ kind }: { kind: Exclude<PillarKind, "corpi"> }) {
                     className={cn(
                       "rounded-full border px-3.5 py-2 font-display text-[12.5px] transition-colors",
                       active
-                        ? "border-brand-500 bg-brand-500 font-medium text-white"
+                        ? "border-brand-500 bg-brand-500 font-medium text-on-brand"
                         : "border-line bg-surface font-light text-zinc-200 hover:border-brand-500/60"
                     )}
                   >
@@ -126,7 +126,7 @@ export default function ProductTabs() {
             <span className="font-mono text-[11px] tracking-wide opacity-60">{p.index}</span>
             <span>{p.name}</span>
             {p.isNew && (
-              <span className="rounded-full bg-[#424DE2] px-2 py-0.5 font-display text-[10px] font-semibold text-white">
+              <span className="rounded-full bg-[#424DE2] px-2 py-0.5 font-display text-[10px] font-semibold text-on-brand">
                 New
               </span>
             )}

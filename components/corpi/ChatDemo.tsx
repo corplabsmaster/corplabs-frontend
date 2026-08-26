@@ -71,7 +71,7 @@ export function ChatDemo({
       )}
     >
       <div className="flex items-center gap-3 border-b border-white/10 bg-brand-950 px-4 py-3.5">
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-500 font-display text-sm font-semibold text-white">
+        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-500 font-display text-sm font-semibold text-on-brand">
           C
         </span>
         <div className="flex-1">

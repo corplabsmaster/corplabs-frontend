@@ -194,7 +194,7 @@ export default function CorprisePage() {
             <Reveal key={step.n} delay={i * 0.08} className="h-full">
               <div className="flex h-full flex-col rounded-xl border border-line bg-surface-raised p-6">
                 <div className="mb-4 flex items-center justify-between">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-600 font-display text-[13px] font-semibold text-white">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-600 font-display text-[13px] font-semibold text-on-brand">
                     {step.n}
                   </span>
                   <span className="font-mono text-[11.5px] text-brand-300">{step.duration}</span>
