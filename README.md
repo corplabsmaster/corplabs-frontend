@@ -52,7 +52,28 @@ branch).
 ## Analytics
 
 Google Analytics 4 loads only when `NEXT_PUBLIC_GA_ID` is set (see
-`.env.example`). Leave it unset for local/dev builds.
+`.env.example`). Leave it unset for local/dev builds — `lib/analytics.ts`
+checks the same variable, so no events are sent (and no console warnings
+appear) when it is absent.
+
+The tracking plan lives in `lib/analytics.ts`; every event name and parameter
+is defined there rather than as strings in components:
+
+| Event | Fires when | Parameters |
+| ----- | ---------- | ---------- |
+| `contact_submit` | An inquiry reaches Notion | `intent` |
+| `contact_error` | An inquiry fails | `reason`, `status` |
+| `wizard_complete` | A finder settles on a recommendation | `tool`, `result` |
+| `currency_change` | Display currency switched | `currency`, `source` |
+| `apply_click` | Apply pressed on a job description | `role`, `placement` |
+| `demo_engaged` | Corpi chat demo replayed deliberately | `location` |
+
+Mark `contact_submit` as a key event in GA4 — it is the site's conversion.
+
+Two of the finders (problem router, Corpcode and Corprise tier finders) have no
+submit step; `lib/use-settled-once.ts` reports them once the answers stop
+changing. It watches the *answers*, not the recommendation, so a visitor whose
+clicks land back on the default tier is still counted.
 
 ## Notion integrations
 

@@ -169,7 +169,7 @@ export default function ProductTabs() {
 
         <div className="min-h-[420px]">
           {pillar.kind === "corpi" ? (
-            <ChatDemo key={tab} chat={corpiChat} className="max-w-sm" />
+            <ChatDemo key={tab} chat={corpiChat} className="max-w-sm" location="home_tabs" />
           ) : (
             <MiniFinder key={pillar.kind} kind={pillar.kind} />
           )}

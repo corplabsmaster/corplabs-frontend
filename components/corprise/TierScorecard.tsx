@@ -4,13 +4,19 @@ import { useState } from "react";
 import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
 import { scorecard, shortScorecardQuestions } from "@/data/corprise-content";
+import { trackWizardComplete } from "@/lib/analytics";
 import { scoreShortScorecard, shortScorecardDefaults } from "@/lib/corpriseScore";
+import { useSettledOnce } from "@/lib/use-settled-once";
 import { cn } from "@/lib/utils";
 
 /** Three-question quick finder — same scoring as the full wizard, one answer per row. */
 export default function TierScorecard() {
   const [answers, setAnswers] = useState<number[]>(() => [...shortScorecardDefaults]);
   const tier = scoreShortScorecard(answers).tierData;
+
+  useSettledOnce(answers.join(","), () =>
+    trackWizardComplete("corprise_scorecard", tier.name)
+  );
 
   return (
     <div className="grid overflow-hidden rounded-2xl border border-line bg-surface-raised lg:grid-cols-[minmax(0,1.1fr)_minmax(0,420px)]">

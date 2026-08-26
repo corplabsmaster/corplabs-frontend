@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useCurrency } from "@/components/currency/currency-context";
 import { CURRENCIES, CURRENCY_ORDER } from "@/lib/currency";
 import { cn } from "@/lib/utils";
+import { trackCurrencyChange } from "@/lib/analytics";
 
 /**
  * Full-width one-tap currency selector for the mobile menu — no nested
@@ -26,7 +27,10 @@ export function CurrencySegments({ className }: { className?: string }) {
               type="button"
               role="radio"
               aria-checked={active}
-              onClick={() => setCurrency(code)}
+              onClick={() => {
+                setCurrency(code);
+                trackCurrencyChange(code, "mobile");
+              }}
               className={cn(
                 "min-h-11 rounded-full font-mono text-[13px] transition-colors",
                 active
@@ -98,6 +102,7 @@ export function CurrencySwitcher({ className }: { className?: string }) {
                   type="button"
                   onClick={() => {
                     setCurrency(code);
+                    trackCurrencyChange(code, "desktop");
                     setOpen(false);
                   }}
                   className={cn(

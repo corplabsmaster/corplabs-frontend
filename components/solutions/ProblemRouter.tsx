@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
+import { trackWizardComplete } from "@/lib/analytics";
+import { useSettledOnce } from "@/lib/use-settled-once";
 import { cn } from "@/lib/utils";
 import { routerIntro, routerPicks } from "@/data/solutions";
 
@@ -13,6 +15,8 @@ import { routerIntro, routerPicks } from "@/data/solutions";
 export default function ProblemRouter() {
   const [picked, setPicked] = useState(0);
   const pick = routerPicks[picked];
+
+  useSettledOnce(picked, () => trackWizardComplete("problem_router", pick.id));
 
   return (
     <div className="gradient-border grid overflow-hidden rounded-2xl md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">

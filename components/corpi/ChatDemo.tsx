@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { CorpiChat } from "@/data/corpi";
+import { trackDemoEngaged } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 /**
@@ -13,12 +14,15 @@ export function ChatDemo({
   chat,
   className,
   bodyMinHeight = "min-h-[360px]",
+  location = "corpi_page",
 }: {
   chat: CorpiChat;
   /** Applied to the outer card — e.g. `max-w-sm` on the home tabs. */
   className?: string;
   /** Tailwind min-height for the message area (taller on /corpi). */
   bodyMinHeight?: string;
+  /** Which surface this instance sits on, reported with demo_engaged. */
+  location?: "corpi_page" | "home_tabs";
 }) {
   const [shown, setShown] = useState(0);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -44,6 +48,17 @@ export function ChatDemo({
     };
   }, [start]);
 
+  // The demo autoplays on mount, so only a deliberate Replay counts as
+  // engagement — and only the first one, so repeat taps do not inflate it.
+  const reported = useRef(false);
+  const replay = useCallback(() => {
+    start();
+    if (!reported.current) {
+      reported.current = true;
+      trackDemoEngaged(location);
+    }
+  }, [start, location]);
+
   const visible = chat.script.slice(0, shown);
   const next = chat.script[shown];
   const typing = next?.from === "corpi";
@@ -65,7 +80,7 @@ export function ChatDemo({
         </div>
         <button
           type="button"
-          onClick={start}
+          onClick={replay}
           className="rounded-full border border-line px-3 py-1.5 font-display text-[11px] tracking-wide text-zinc-300 transition-colors hover:border-brand-500"
         >
           Replay

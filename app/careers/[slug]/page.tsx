@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ApplyButton } from "@/components/careers/ApplyButton";
 import { JobBody } from "@/components/careers/JobBody";
-import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { site } from "@/data/site";
 import { getJob, getJobs } from "@/lib/jobs";
@@ -58,10 +58,6 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
 
   const { job, blocks } = found;
   const applyHref = job.applyUrl || APPLY_FALLBACK;
-  // Button renders an <a> for http(s) hrefs on its own; these just open it safely.
-  const applyProps = applyHref.startsWith("http")
-    ? { target: "_blank", rel: "noreferrer" }
-    : {};
   const plain = blocksToPlainText(blocks);
 
   // JobPosting structured data — this is what puts the role into Google Jobs.
@@ -117,13 +113,14 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
           </div>
 
           <div className="mt-7">
-            <Button
+            <ApplyButton
               href={applyHref}
-              {...applyProps}
+              role={job.title}
+              placement="top"
               className="font-display uppercase tracking-widest"
             >
               Apply for this role
-            </Button>
+            </ApplyButton>
           </div>
         </Reveal>
 
@@ -141,13 +138,14 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
                 Send us your CV and a line about what you&apos;ve built.
               </p>
             </div>
-            <Button
+            <ApplyButton
               href={applyHref}
-              {...applyProps}
+              role={job.title}
+              placement="bottom"
               className="flex-none font-display uppercase tracking-widest"
             >
               Apply now
-            </Button>
+            </ApplyButton>
           </div>
         </Reveal>
       </article>

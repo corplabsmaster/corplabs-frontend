@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
+import { trackContactError, trackContactSubmit } from "@/lib/analytics";
 import { contactSection as copy } from "@/data/home";
 import { cn } from "@/lib/utils";
 
@@ -37,14 +38,17 @@ export default function ContactSection() {
       if (res.ok) {
         form.reset();
         setStatus("sent");
+        trackContactSubmit(copy.intents[intent]);
       } else {
         const body = (await res.json().catch(() => null)) as { error?: string } | null;
         setError(body?.error ?? "Something went wrong — please email us instead.");
         setStatus("error");
+        trackContactError("server", res.status);
       }
     } catch {
       setError("Network error — please email us instead.");
       setStatus("error");
+      trackContactError("network");
     }
   }
 
