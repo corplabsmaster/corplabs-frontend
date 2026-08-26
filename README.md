@@ -70,9 +70,19 @@ notion.so/profile/integrations, share each database with it, set the env vars):
 ## Blog (Keystatic)
 
 Posts live in `content/posts/` as Markdoc files — every edit is a commit, and
-posts ship as fully static pages. To write: `npm run dev`, open
-`http://localhost:3000/keystatic`, and use the editor (local mode writes to
-the filesystem). To let teammates edit from the deployed site, switch
-`keystatic.config.ts` to GitHub mode (see the comment there). The blog
-surfaces at `/blog`, with per-post Article JSON-LD, RSS at `/blog/rss.xml`,
-and sitemap entries generated automatically.
+posts ship as fully static pages. The blog surfaces at `/blog`, with per-post
+Article JSON-LD, RSS at `/blog/rss.xml`, and sitemap entries generated
+automatically.
+
+The admin is at `/keystatic` and runs in **GitHub mode**: editors sign in with
+GitHub and each save commits to this repo, so it works on the deployed site as
+well as locally. It needs the four `KEYSTATIC_*` env vars — `.env.example` has
+the one-time setup wizard, which must be run locally because GitHub App
+creation is deliberately dev-only. Only people with write access to the repo
+can publish.
+
+Editing and rendering are independent: the admin talks to the GitHub API, while
+pages are built from the checked-out files via `createReader` in `lib/posts.ts`.
+So you can also just edit the `.mdoc` files in your editor and push — or swap
+`keystatic.config.ts` to `storage: { kind: "local" }` to run the editor against
+the filesystem with no credentials.
