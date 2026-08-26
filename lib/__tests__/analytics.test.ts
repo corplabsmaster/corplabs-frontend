@@ -66,6 +66,20 @@ describe("analytics", () => {
     });
   });
 
+  it("avoids GA4's reserved parameter names, which cannot become dimensions", async () => {
+    const { trackCurrencyChange } = await loadAnalytics("G-TEST");
+
+    trackCurrencyChange("USD", "desktop");
+
+    // `currency` (ecommerce) and `source` (traffic attribution) are reserved:
+    // GA4 refuses to register them as custom dimensions, so an event using
+    // them can never be broken down in a report.
+    expect(sendGAEvent).toHaveBeenCalledWith("event", "currency_change", {
+      display_currency: "USD",
+      surface: "desktop",
+    });
+  });
+
   it("names every wizard event consistently for reporting", async () => {
     const { trackWizardComplete } = await loadAnalytics("G-TEST");
 

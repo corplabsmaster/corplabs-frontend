@@ -9,8 +9,11 @@ import { sendGAEvent } from "@next/third-parties/google";
  * NEXT_PUBLIC_GA_ID is unset, which keeps local and preview runs silent
  * (sendGAEvent otherwise warns to the console on every call).
  *
- * GA4 rules these obey: snake_case names under 40 chars, and parameter values
- * kept short and low-cardinality so they are usable as report dimensions.
+ * GA4 rules these obey: snake_case names under 40 chars, parameter values kept
+ * short and low-cardinality so they work as report dimensions, and no reserved
+ * parameter names (`currency`, `source`, `medium`, `campaign`, `value`, `term`,
+ * `content`, the `page_*` set) — GA4 blocks those from becoming custom
+ * dimensions, so an event using one can never be broken down.
  */
 
 const GA_ENABLED = Boolean(process.env.NEXT_PUBLIC_GA_ID);
@@ -55,9 +58,16 @@ export function trackWizardComplete(tool: WizardTool, result: string): void {
   track("wizard_complete", { tool, result });
 }
 
-/** Display currency switched — the signal behind offering USD/EUR/SGD at all. */
-export function trackCurrencyChange(currency: string, source: "desktop" | "mobile"): void {
-  track("currency_change", { currency, source });
+/**
+ * Display currency switched — the signal behind offering USD/EUR/SGD at all.
+ *
+ * Sent as `display_currency` and `surface`, not `currency` and `source`: GA4
+ * reserves both of those (ecommerce and traffic-source attribution) and refuses
+ * to register a reserved name as a custom dimension, which would leave the
+ * event uncountable in reports.
+ */
+export function trackCurrencyChange(currency: string, surface: "desktop" | "mobile"): void {
+  track("currency_change", { display_currency: currency, surface });
 }
 
 /** An apply button on a job description was clicked. */
