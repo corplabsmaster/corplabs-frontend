@@ -59,7 +59,7 @@ export function ChatWidget() {
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const sendRef = useRef<HTMLAnchorElement>(null);
-  const endRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const openedOnce = useRef(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
@@ -114,8 +114,11 @@ export function ChatWidget() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // Not scrollIntoView: it walks up and scrolls every scrollable ancestor,
+  // the document included, so each new message would drag the page with it.
   useEffect(() => {
-    endRef.current?.scrollIntoView({ block: "end", behavior: "smooth" });
+    const body = bodyRef.current;
+    if (body) body.scrollTo({ top: body.scrollHeight, behavior: "smooth" });
   }, [thread, typing, sent]);
 
   /**
@@ -190,7 +193,7 @@ export function ChatWidget() {
           <>
             {/* Corpi's own mark, not WhatsApp's — this is the agent, and the
                 channel is disclosed on the send button instead. */}
-            <CorpiMark px={30} className="bg-on-brand/20 ring-1 ring-on-brand/30" />
+            <CorpiMark px={30} />
             <span className="hidden sm:inline">{chat.launcherLabel}</span>
           </>
         )}
@@ -213,7 +216,7 @@ export function ChatWidget() {
             </div>
           </div>
 
-          <div className="flex flex-1 flex-col gap-2.5 overflow-y-auto p-4">
+          <div ref={bodyRef} className="flex flex-1 flex-col gap-2.5 overflow-y-auto p-4">
             {thread.map((m, i) => (
               <p
                 key={i}
@@ -265,7 +268,6 @@ export function ChatWidget() {
                 <span className="text-zinc-400">.</span>
               </div>
             )}
-            <div ref={endRef} />
           </div>
 
           <form

@@ -41,7 +41,7 @@ export default function CorpiPage() {
           aria-hidden
           className="pointer-events-none absolute -top-40 left-0 h-96 w-96 rounded-full bg-brand-600/20 blur-3xl"
         />
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-12 pt-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 lg:pt-24">
+        <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 pb-12 pt-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 lg:pt-24">
           <Reveal>
             {/* The product's own mark leads its page — the eyebrow explains
                 whose product it is, which is a different job. */}
@@ -208,17 +208,29 @@ export default function CorpiPage() {
                       : "border border-line"
                   )}
                 >
-                  {plan.recommended && (
-                    <span className="mb-3 self-start rounded-full bg-[linear-gradient(90deg,var(--color-gradient-1),var(--color-gradient-2))] px-2.5 py-1 font-display text-[10px] font-semibold uppercase tracking-wide text-surface">
-                      Most Popular
-                    </span>
-                  )}
+                  {/* The badge row is reserved in every card, so the three
+                      names — and everything under them — share a baseline. */}
+                  <div className="mb-3 h-[26px]">
+                    {plan.recommended && (
+                      <span className="inline-block rounded-full bg-[linear-gradient(90deg,var(--color-gradient-1),var(--color-gradient-2))] px-2.5 py-1 font-display text-[10px] font-semibold uppercase tracking-wide text-surface">
+                        Most Popular
+                      </span>
+                    )}
+                  </div>
                   <p className="font-display text-lg font-semibold text-white">{plan.name}</p>
-                  <p className="mb-3 mt-2.5 flex items-baseline gap-1">
-                    <span className="font-display text-4xl font-bold tracking-tight text-white">
+                  {/*
+                    * The amount never breaks: at three-across the card is ~200px
+                    * and "USD 320 /month" does not fit on one line, so the price
+                    * was splitting after the currency. It stays whole and the
+                    * period drops beneath it instead.
+                    */}
+                  <p className="mb-3 mt-2.5 flex flex-wrap items-baseline gap-x-1.5">
+                    <span className="whitespace-nowrap font-display text-[32px] font-bold leading-tight tracking-tight text-white">
                       <Price rm={plan.price} />
                     </span>
-                    <span className="text-[13px] text-zinc-200">{plan.period}</span>
+                    <span className="whitespace-nowrap text-[13px] text-zinc-200">
+                      {plan.period}
+                    </span>
                   </p>
                   <p className="mb-5 flex-1 text-[13.5px] leading-relaxed text-zinc-200">
                     {plan.desc}

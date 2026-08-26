@@ -66,10 +66,13 @@ export function ChatDemo({
     }
   }, [start, location]);
 
-  // Keep the newest message in view as the script plays out.
-  const endRef = useRef<HTMLDivElement>(null);
+  // Keep the newest message in view as the script plays out — by scrolling the
+  // message area itself. scrollIntoView walks up and scrolls every scrollable
+  // ancestor, so on the page it kept yanking the reader back to the demo.
+  const bodyRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    endRef.current?.scrollIntoView({ block: "end", behavior: "smooth" });
+    const body = bodyRef.current;
+    if (body) body.scrollTo({ top: body.scrollHeight, behavior: "smooth" });
   }, [shown]);
 
   const visible = chat.script.slice(0, shown);
@@ -97,7 +100,7 @@ export function ChatDemo({
           Replay
         </button>
       </div>
-      <div className={cn("flex flex-col gap-2.5 overflow-y-auto p-4", bodyHeight)}>
+      <div ref={bodyRef} className={cn("flex flex-col gap-2.5 overflow-y-auto p-4", bodyHeight)}>
         {visible.map((m, i) =>
           m.from === "system" ? (
             <p
@@ -131,7 +134,6 @@ export function ChatDemo({
             ))}
           </span>
         )}
-        <div ref={endRef} />
       </div>
     </div>
   );
