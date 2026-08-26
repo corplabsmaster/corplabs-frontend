@@ -16,6 +16,14 @@ const NOTION_API = "https://api.notion.com/v1";
 /** Notion signs file URLs for ~1 hour, so pages holding them refresh sooner. */
 export const JOB_PAGE_REVALIDATE = 1800;
 
+/**
+ * Cache tag on every jobs-related Notion fetch. POST /api/revalidate clears it
+ * so an edit in Notion can be published immediately instead of waiting out the
+ * window — invalidating the pages alone would not help, since they would just
+ * re-render against the still-cached Notion response.
+ */
+export const JOBS_CACHE_TAG = "notion-jobs";
+
 export interface RichTextItem {
   plain_text?: string;
   href?: string | null;
@@ -86,7 +94,7 @@ async function fetchChildren(
         Authorization: `Bearer ${apiKey}`,
         "Notion-Version": NOTION_VERSION,
       },
-      next: { revalidate: JOB_PAGE_REVALIDATE },
+      next: { revalidate: JOB_PAGE_REVALIDATE, tags: [JOBS_CACHE_TAG] },
     });
     if (!res.ok) {
       console.error("Notion blocks fetch failed:", res.status);

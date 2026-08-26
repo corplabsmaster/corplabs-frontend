@@ -1,6 +1,6 @@
 import "server-only";
 import { jobs as staticJobs } from "@/data/home";
-import { getBlocks, type NotionBlock } from "@/lib/notion-blocks";
+import { getBlocks, JOBS_CACHE_TAG, type NotionBlock } from "@/lib/notion-blocks";
 
 /**
  * Job postings pulled live from Notion — the modern version of the legacy
@@ -127,7 +127,7 @@ export async function getJobs(): Promise<Job[]> {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ page_size: 50 }),
-      next: { revalidate: JOBS_REVALIDATE },
+      next: { revalidate: JOBS_REVALIDATE, tags: [JOBS_CACHE_TAG] },
     });
     if (!res.ok) {
       console.error("Notion jobs fetch failed:", res.status);
