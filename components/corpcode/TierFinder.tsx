@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
 import { finder, finderQuestions, tiers } from "@/data/corpcode-content";
+import { trackWizardComplete } from "@/lib/analytics";
+import { useSettledOnce } from "@/lib/use-settled-once";
 import { cn } from "@/lib/utils";
 
 /** Default: every question answered at its lowest option (index 0). */
@@ -14,6 +16,10 @@ export default function TierFinder() {
 
   // Highest answer wins — the recommended tier is the max option index.
   const recommended = tiers[Math.max(...answers)];
+
+  useSettledOnce(answers.join(","), () =>
+    trackWizardComplete("corpcode_tier_finder", recommended.name)
+  );
 
   const select = (questionIndex: number, optionIndex: number) =>
     setAnswers((prev) =>

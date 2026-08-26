@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
 import { WizardProgress } from "@/components/ui/wizard";
+import { trackWizardComplete } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import {
   NGO_GOAL_INDEX,
@@ -89,6 +90,11 @@ export default function PlanSelector() {
       : selectorCopy.nextLabel;
 
   const { tier, note } = recommendSiteTier(answers);
+
+  const shownTier = result ? tier.name : undefined;
+  useEffect(() => {
+    if (shownTier) trackWizardComplete("corpsite_plan_selector", shownTier);
+  }, [shownTier]);
 
   return (
     <div className="gradient-border rounded-2xl p-6 sm:p-10">
