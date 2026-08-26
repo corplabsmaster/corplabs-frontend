@@ -159,5 +159,5 @@ export const closingCta = {
   title: "Want to build with us?",
   body: "Tell us about the idea — we'll bring the team that ships it. Or come work here: we're hiring engineers and a product lead.",
   primary: { label: "Talk to us", href: "/contact" },
-  secondary: { label: "See open roles", href: "/#careers" },
+  secondary: { label: "See open roles", href: "/careers" },
 };
