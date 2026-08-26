@@ -8,6 +8,43 @@ import { cn } from "@/lib/utils";
 
 const icons = [PlanIcon, ExecuteIcon, MaintainIcon];
 
+function ArrowButton({
+  direction,
+  disabled,
+  onClick,
+  label,
+}: {
+  direction: "prev" | "next";
+  disabled: boolean;
+  onClick: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={label}
+      className={cn(
+        "flex h-11 w-11 flex-none items-center justify-center rounded-full border border-line text-zinc-300 transition-colors",
+        disabled
+          ? "opacity-30"
+          : "hover:border-brand-500 hover:text-white active:bg-surface-raised"
+      )}
+    >
+      <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden>
+        <path
+          d={direction === "prev" ? "M12.5 4 6.5 10l6 6" : "M7.5 4l6 6-6 6"}
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
+  );
+}
+
 /**
  * The three steps: a row on desktop, a swipeable one-at-a-time slider below md.
  *
@@ -45,8 +82,12 @@ export function ProcessSteps() {
   const goTo = useCallback((i: number) => {
     const track = trackRef.current;
     if (!track) return;
-    track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" });
+    const clamped = Math.max(0, Math.min(i, processSteps.length - 1));
+    track.scrollTo({ left: clamped * track.clientWidth, behavior: "smooth" });
   }, []);
+
+  const atStart = active === 0;
+  const atEnd = active === processSteps.length - 1;
 
   return (
     <>
@@ -88,21 +129,41 @@ export function ProcessSteps() {
         </div>
       </div>
 
-      {/* Dots — the slider's only affordance, so they are taps as well as state. */}
-      <div className="mt-7 flex justify-center gap-2.5 md:hidden">
-        {processSteps.map((step, i) => (
-          <button
-            key={step.n}
-            type="button"
-            onClick={() => goTo(i)}
-            aria-label={`Show step ${step.n}: ${step.name}`}
-            aria-current={i === active}
-            className={cn(
-              "h-2.5 rounded-full transition-all",
-              i === active ? "w-7 bg-brand-500" : "w-2.5 bg-zinc-600 hover:bg-brand-300"
-            )}
-          />
-        ))}
+      {/*
+        * Arrows as well as dots. Dots alone read as a position indicator rather
+        * than a control, so nothing on screen says the panel moves — the arrows
+        * are the part that says "there is more this way".
+        */}
+      <div className="mt-7 flex items-center justify-center gap-4 md:hidden">
+        <ArrowButton
+          direction="prev"
+          disabled={atStart}
+          onClick={() => goTo(active - 1)}
+          label={atStart ? "Previous step" : `Previous step: ${processSteps[active - 1].name}`}
+        />
+
+        <div className="flex gap-2.5">
+          {processSteps.map((step, i) => (
+            <button
+              key={step.n}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-label={`Show step ${step.n}: ${step.name}`}
+              aria-current={i === active}
+              className={cn(
+                "h-2.5 rounded-full transition-all",
+                i === active ? "w-7 bg-brand-500" : "w-2.5 bg-zinc-600 hover:bg-brand-300"
+              )}
+            />
+          ))}
+        </div>
+
+        <ArrowButton
+          direction="next"
+          disabled={atEnd}
+          onClick={() => goTo(active + 1)}
+          label={atEnd ? "Next step" : `Next step: ${processSteps[active + 1].name}`}
+        />
       </div>
     </>
   );
