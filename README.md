@@ -62,10 +62,17 @@ notion.so/profile/integrations, share each database with it, set the env vars):
 - **Contact form** → `POST /api/contact` writes to the *Website Inquiries*
   database (`NOTION_API_KEY` + `NOTION_INQUIRIES_DB_ID`). Falls back to a
   polite "email us" message until configured.
-- **Careers** → the homepage `#careers` section pulls the *Job Vacancies*
-  database (`NOTION_JOBS_DB_ID`), rows where `Status = Open`, refreshed
-  hourly. Post or close a role in Notion — no deploy. Falls back to the
-  static list in `data/home.ts` until configured.
+- **Careers** → the homepage `#careers` section and `/careers` pull the jobs
+  database (`NOTION_JOBS_DB_ID`), rows where `Status = Open`. Post or close a
+  role in Notion — no deploy. Falls back to the static list in `data/home.ts`
+  until configured.
+
+  Each open role also gets `/careers/<slug>`, rendering the JD from the Notion
+  page body with `JobPosting` structured data, so the role is readable on
+  corplabs.co and eligible for Google Jobs. Roles added after a deploy render
+  on first request. An optional `Apply URL` column drives the apply buttons;
+  without one they point at `/contact?intent=careers`. Note that any row set
+  to `Open` is published — stale rows are visible roles.
 
 ## Blog (Keystatic)
 
