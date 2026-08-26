@@ -64,11 +64,15 @@ is defined there rather than as strings in components:
 | `contact_submit` | An inquiry reaches Notion | `intent` |
 | `contact_error` | An inquiry fails | `reason`, `status` |
 | `wizard_complete` | A finder settles on a recommendation | `tool`, `result` |
-| `currency_change` | Display currency switched | `currency`, `source` |
+| `currency_change` | Display currency switched | `display_currency`, `surface` |
 | `apply_click` | Apply pressed on a job description | `role`, `placement` |
 | `demo_engaged` | Corpi chat demo replayed deliberately | `location` |
 
 Mark `contact_submit` as a key event in GA4 — it is the site's conversion.
+Each parameter needs registering as an event-scoped custom dimension before it
+can be reported on, and none may use a GA4 reserved name (`currency`, `source`,
+`medium`, `campaign`, `value`, the `page_*` set): GA4 rejects those, leaving the
+event uncountable.
 
 Two of the finders (problem router, Corpcode and Corprise tier finders) have no
 submit step; `lib/use-settled-once.ts` reports them once the answers stop
