@@ -92,7 +92,7 @@ export default function CorpiPage() {
 
           <Reveal delay={0.1} className="flex flex-col gap-3.5">
             <ChatDemo chat={corpiChat} bodyMinHeight="min-h-[430px]" />
-            <p className="text-center text-xs text-zinc-500">{hero.chatCaption}</p>
+            <p className="text-center text-xs text-zinc-400">{hero.chatCaption}</p>
 
             {/*
               * The replay above is the illustration; this is the demo. Same

@@ -16,23 +16,26 @@ export interface CorpiChat {
 }
 
 export const corpiChat: CorpiChat = {
-  shopName: "Kedai Hardware Maju",
+  shopName: "Amber Table Catering",
   status: "Corpi · online",
   script: [
-    { from: "cust", text: "Hi, do you have the 20L storage box? Need 50 units for my shop" },
     {
-      from: "corpi",
-      text: "Hi! Yes — the 20L stackable is in stock. For 50 units the bulk price is RM 12.50/unit, RM 625 total. Want me to reserve them?",
+      from: "cust",
+      text: "Hi, do you do corporate lunches? I need 80 sets for next Thursday at our office in Bangsar.",
     },
-    { from: "cust", text: "boleh dapat discount tak kalau ambil 100?" },
     {
       from: "corpi",
-      text: "Boleh! 100 units masuk tier borong — RM 11/unit, jadi RM 1,100. Nak saya sediakan quotation sekali?",
+      text: "We do — Thursday the 4th is still open. For 80 sets the corporate menu is RM 18/set, so RM 1,440 including delivery and setup in Bangsar. Shall I hold the date?",
     },
-    { from: "cust", text: "ok send quote" },
+    { from: "cust", text: "What if it goes up to 150?" },
     {
       from: "corpi",
-      text: "Done — quotation #Q-1042 sent to this chat. Delivery to Puchong is free above RM 800. Anything else?",
+      text: "150 crosses into the bulk tier — RM 15.50/set, so RM 2,325, and two servers are included at that size. Want me to draft the quote?",
+    },
+    { from: "cust", text: "Yes please, send it over" },
+    {
+      from: "corpi",
+      text: "Done — quote #Q-1042 is in this chat. It holds Thursday the 4th for 48 hours. Anything you'd like swapped on the menu?",
     },
     { from: "system", text: "→ lead qualified · handed to Sarah (Sales) with full context" },
   ],
@@ -54,7 +57,7 @@ export const hero = {
     { stat: "24/7", label: "Corpi replies, every day of the year" },
     { stat: "< 2 wks", label: "From discovery call to live agent" },
   ],
-  chatCaption: "A real Corpi conversation, replayed. Language switches mid-thread.",
+  chatCaption: "How a Corpi thread runs end to end — availability, tier pricing, quote, handoff.",
   microsite: {
     label: "Visit the Corpi microsite",
     href: "https://corpi.corplabs.co",
