@@ -288,7 +288,7 @@ export const jobs = [
     location: "Kuala Lumpur",
     monogram: "SB",
     tags: ["Java", "Spring Boot", "PostgreSQL"],
-    href: "https://corplabs.notion.site/Senior-Java-Backend-e8dc9233206842ab9048106bbcc2d833",
+    href: "/contact?intent=careers",
   },
   {
     team: "Engineering",
