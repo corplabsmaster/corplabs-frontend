@@ -122,14 +122,17 @@ export function ChatWidget() {
   }, [thread, typing, sent]);
 
   /**
-   * Runs on the send anchor's own click, so the browser performs the handoff as
-   * an ordinary link navigation. window.open would have been the obvious way to
-   * do this and the wrong one: it is what popup blockers exist to stop, and it
-   * breaks cmd-click and middle-click.
+   * Updates the thread after the send anchor has been clicked. Takes the
+   * message rather than reading the draft, because by the time this runs the
+   * draft is about to be cleared — see the anchor's onClick for why that has to
+   * happen a tick late.
+   *
+   * The handoff itself is the anchor's own navigation. window.open would have
+   * been the obvious way and the wrong one: it is what popup blockers exist to
+   * stop, and it breaks cmd-click and middle-click.
    */
   const send = useCallback(
-    (intent: string) => {
-      const message = draft.trim();
+    (message: string, intent: string) => {
       if (!message) return;
 
       setThread(t => [...t, { from: "visitor", text: message }]);
@@ -143,7 +146,7 @@ export function ChatWidget() {
         setSent({ url: chatHandoffUrl(message, pathname), text: message });
       }, 800);
     },
-    [draft, later, pathname]
+    [later, pathname]
   );
 
   const applyQuickReply = useCallback((q: QuickReply) => {
@@ -306,7 +309,14 @@ export function ChatWidget() {
                   e.preventDefault();
                   return;
                 }
-                send("typed");
+                const message = draft.trim();
+                // Deferred deliberately. React flushes state from a click
+                // synchronously, before the browser runs the link's default
+                // action — so clearing the draft here re-rendered this anchor
+                // without an href and the navigation never happened. Enter
+                // worked only by accident: sendRef.click() performs the default
+                // action inside the keydown handler, ahead of that flush.
+                setTimeout(() => send(message, "typed"), 0);
               }}
               aria-label="Send on WhatsApp"
               className={cn(
