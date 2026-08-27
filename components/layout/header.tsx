@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { CurrencySegments, CurrencySwitcher } from "@/components/currency/currency-switcher";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
@@ -30,7 +31,16 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-white/5 bg-surface/80 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] max-w-6xl items-center gap-5 px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo.svg" alt="" width={28} height={28} />
+          {/* Two marks, one shown per theme — the default is a negative logo
+              whose ring disappears on a light surface. */}
+          <Image src="/logo.svg" alt="" width={28} height={28} className="theme-dark-only" />
+          <Image
+            src="/logo-light.svg"
+            alt=""
+            width={28}
+            height={28}
+            className="theme-light-only"
+          />
           <span className="font-display text-lg font-semibold tracking-tight text-white">
             {site.name}
           </span>
@@ -59,10 +69,11 @@ export default function Header() {
         <div className="flex-1" />
 
         <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle className="hidden sm:flex" />
           <CurrencySwitcher className="hidden sm:block" />
           <Link
             href="/contact"
-            className="rounded-full bg-brand-500 px-3.5 py-2 font-display text-[11px] font-medium uppercase tracking-[0.06em] text-white transition-colors hover:bg-brand-600 sm:px-5 sm:py-2.5 sm:text-xs sm:tracking-[0.08em]"
+            className="rounded-full bg-brand-500 px-3.5 py-2 font-display text-[11px] font-medium uppercase tracking-[0.06em] text-on-brand transition-colors hover:bg-brand-600 sm:px-5 sm:py-2.5 sm:text-xs sm:tracking-[0.08em]"
           >
             Get a Quote
           </Link>
@@ -102,6 +113,13 @@ export default function Header() {
             ))}
           </ul>
           <div className="mt-3 border-t border-line px-3 pt-4 pb-1">
+            {/* sm+ shows the toggle in the bar itself — don't offer two. */}
+            <div className="mb-4 flex items-center justify-between sm:hidden">
+              <p className="font-display text-[11px] uppercase tracking-[0.08em] text-zinc-500">
+                Appearance
+              </p>
+              <ThemeToggle />
+            </div>
             <p className="mb-2 font-display text-[11px] uppercase tracking-[0.08em] text-zinc-500">
               Currency
             </p>

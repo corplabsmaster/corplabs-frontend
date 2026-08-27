@@ -6,6 +6,7 @@ import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import { SiteChrome } from "@/components/layout/site-chrome";
 import { site } from "@/data/site";
+import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
@@ -55,7 +56,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${workSans.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${workSans.variable} ${inter.variable}`}
+      suppressHydrationWarning /* themeInitScript sets data-theme before React sees it */
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="bg-surface font-sans text-zinc-200 antialiased">
         <CurrencyProvider>
           <SiteChrome header={<Header />} footer={<Footer />}>

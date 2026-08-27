@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ChatDemo } from "@/components/corpi/ChatDemo";
+import { CorpiMark } from "@/components/corpi/CorpiMark";
 import { Price } from "@/components/currency/price";
 import { Button } from "@/components/ui/button";
 import { corpiChat } from "@/data/corpi";
@@ -45,7 +46,7 @@ function MiniFinder({ kind }: { kind: Exclude<PillarKind, "corpi"> }) {
                     className={cn(
                       "rounded-full border px-3.5 py-2 font-display text-[12.5px] transition-colors",
                       active
-                        ? "border-brand-500 bg-brand-500 font-medium text-white"
+                        ? "border-brand-500 bg-brand-500 font-medium text-on-brand"
                         : "border-line bg-surface font-light text-zinc-200 hover:border-brand-500/60"
                     )}
                   >
@@ -126,7 +127,7 @@ export default function ProductTabs() {
             <span className="font-mono text-[11px] tracking-wide opacity-60">{p.index}</span>
             <span>{p.name}</span>
             {p.isNew && (
-              <span className="rounded-full bg-[#424DE2] px-2 py-0.5 font-display text-[10px] font-semibold text-white">
+              <span className="rounded-full bg-[#424DE2] px-2 py-0.5 font-display text-[10px] font-semibold text-on-brand">
                 New
               </span>
             )}
@@ -136,9 +137,12 @@ export default function ProductTabs() {
 
       <div className="grid items-start gap-10 pt-10 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
         <div>
-          <h3 className="mb-1.5 font-display text-2xl font-bold text-white sm:text-3xl">
-            {pillar.title}
-          </h3>
+          <div className="mb-1.5 flex items-center gap-3">
+            {pillar.kind === "corpi" && <CorpiMark px={32} />}
+            <h3 className="font-display text-2xl font-bold text-white sm:text-3xl">
+              {pillar.title}
+            </h3>
+          </div>
           <p className="mb-4 font-mono text-[12.5px] text-brand-300"><Price rm={pillar.price} /></p>
           <p className="mb-6 max-w-md text-[15px] leading-relaxed text-zinc-200">
             {pillar.blurb}

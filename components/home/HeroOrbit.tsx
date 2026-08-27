@@ -91,7 +91,7 @@ function Word({ paths, cx, cy, g }: { paths: string[]; cx: number; cy: number; g
       }}
     >
       {paths.map((d, i) => (
-        <path key={i} d={d} fill="#FFFFFF" />
+        <path key={i} d={d} fill="var(--color-white)" />
       ))}
     </g>
   );
@@ -202,7 +202,7 @@ export default function HeroOrbit() {
             ry={496.3}
             transform="translate(-17.78 653.66) rotate(-64.21)"
             fill="none"
-            stroke="#FFFFFF"
+            stroke="var(--color-white)"
             strokeOpacity="0.08"
             strokeWidth={1.2}
           />

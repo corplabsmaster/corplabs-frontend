@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { ChatDemo } from "@/components/corpi/ChatDemo";
+import { CorpiLockup } from "@/components/corpi/CorpiMark";
+import { TrialCta } from "@/components/corpi/TrialCta";
+import { WhatsAppDemo, WhatsAppDemoButton } from "@/components/corpi/WhatsAppDemo";
 import { Price } from "@/components/currency/price";
 import { PillarStrip } from "@/components/pillar-strip";
 import { Button } from "@/components/ui/button";
@@ -14,6 +17,7 @@ import {
   featuresHeading,
   featuresHint,
   finalCta,
+  liveDemo,
   hero,
   onboarding,
   pillars,
@@ -37,11 +41,11 @@ export default function CorpiPage() {
           aria-hidden
           className="pointer-events-none absolute -top-40 left-0 h-96 w-96 rounded-full bg-brand-600/20 blur-3xl"
         />
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-12 pt-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 lg:pt-24">
+        <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 pb-12 pt-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 lg:pt-24">
           <Reveal>
-            <p className="font-display text-xs font-semibold uppercase tracking-widest text-brand-300">
-              {hero.eyebrow}
-            </p>
+            {/* The product's own mark leads its page — the eyebrow explains
+                whose product it is, which is a different job. */}
+            <CorpiLockup px={38} tagline={hero.eyebrow} />
             <h1 className="mt-4 font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl">
               {hero.headline.plain}
               <span className="gradient-text">{hero.headline.gradient}</span>
@@ -50,12 +54,13 @@ export default function CorpiPage() {
               {hero.lede}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button
+              <TrialCta
                 href={hero.primaryCta.href}
+                placement="corpi_hero"
                 className="font-display uppercase tracking-widest"
               >
                 {hero.primaryCta.label}
-              </Button>
+              </TrialCta>
               <Button
                 href={hero.secondaryCta.href}
                 variant="secondary"
@@ -87,10 +92,37 @@ export default function CorpiPage() {
           </Reveal>
 
           <Reveal delay={0.1} className="flex flex-col gap-3.5">
-            <ChatDemo chat={corpiChat} bodyMinHeight="min-h-[430px]" />
-            <p className="text-center text-xs text-zinc-500">{hero.chatCaption}</p>
+            <ChatDemo chat={corpiChat} bodyHeight="h-[360px] sm:h-[420px] lg:h-[440px]" />
+            <p className="text-center text-xs text-zinc-400">{hero.chatCaption}</p>
           </Reveal>
         </div>
+      </section>
+
+      {/* 1b · Live demo ─────────────────────────────────────────────── */}
+      <section className="mx-auto max-w-6xl px-4 sm:px-6">
+        <Reveal>
+          <div className="gradient-border flex flex-col gap-6 rounded-2xl p-6 sm:p-8 lg:flex-row lg:items-center lg:gap-10">
+            <div className="lg:flex-1">
+              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-300">
+                {liveDemo.eyebrow}
+              </p>
+              <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                {liveDemo.title}
+              </h2>
+              <p className="mt-2.5 max-w-xl text-[14px] leading-relaxed text-zinc-200">
+                {liveDemo.body}
+              </p>
+            </div>
+            <div className="lg:flex-none">
+              <WhatsAppDemo placement="corpi_hero" />
+              {/* zinc-500 falls under AA on the dark surfaces; zinc-400 clears it. */}
+              <p className="mt-3 max-w-sm text-[11.5px] leading-snug text-zinc-400">
+                {liveDemo.note}{" "}
+                <span className="font-mono text-zinc-300">{liveDemo.numberDisplay}</span>
+              </p>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* 2 · What Corpi Does ────────────────────────────────────────── */}
@@ -183,17 +215,29 @@ export default function CorpiPage() {
                       : "border border-line"
                   )}
                 >
-                  {plan.recommended && (
-                    <span className="mb-3 self-start rounded-full bg-[linear-gradient(90deg,var(--color-gradient-1),var(--color-gradient-2))] px-2.5 py-1 font-display text-[10px] font-semibold uppercase tracking-wide text-surface">
-                      Most Popular
-                    </span>
-                  )}
+                  {/* The badge row is reserved in every card, so the three
+                      names — and everything under them — share a baseline. */}
+                  <div className="mb-3 h-[26px]">
+                    {plan.recommended && (
+                      <span className="inline-block rounded-full bg-[linear-gradient(90deg,var(--color-gradient-1),var(--color-gradient-2))] px-2.5 py-1 font-display text-[10px] font-semibold uppercase tracking-wide text-surface">
+                        Most Popular
+                      </span>
+                    )}
+                  </div>
                   <p className="font-display text-lg font-semibold text-white">{plan.name}</p>
-                  <p className="mb-3 mt-2.5 flex items-baseline gap-1">
-                    <span className="font-display text-4xl font-bold tracking-tight text-white">
+                  {/*
+                    * The amount never breaks: at three-across the card is ~200px
+                    * and "USD 320 /month" does not fit on one line, so the price
+                    * was splitting after the currency. It stays whole and the
+                    * period drops beneath it instead.
+                    */}
+                  <p className="mb-3 mt-2.5 flex flex-wrap items-baseline gap-x-1.5">
+                    <span className="whitespace-nowrap font-display text-[32px] font-bold leading-tight tracking-tight text-white">
                       <Price rm={plan.price} />
                     </span>
-                    <span className="text-[13px] text-zinc-200">{plan.period}</span>
+                    <span className="whitespace-nowrap text-[13px] text-zinc-200">
+                      {plan.period}
+                    </span>
                   </p>
                   <p className="mb-5 flex-1 text-[13.5px] leading-relaxed text-zinc-200">
                     {plan.desc}
@@ -209,6 +253,27 @@ export default function CorpiPage() {
                 </div>
               </Reveal>
             ))}
+
+            <Reveal delay={0.24} className="sm:col-span-3">
+              <div className="gradient-border flex flex-col gap-4 rounded-xl p-6 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-display text-base font-semibold text-white">
+                    {pricing.trial.lead}
+                  </p>
+                  <p className="mt-1.5 text-[13.5px] leading-relaxed text-zinc-200">
+                    {pricing.trial.body}
+                  </p>
+                </div>
+                <TrialCta
+                  href={pricing.trial.cta.href}
+                  placement="corpi_pricing"
+                  size="sm"
+                  className="flex-none font-display uppercase tracking-widest"
+                >
+                  {pricing.trial.cta.label}
+                </TrialCta>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -231,41 +296,45 @@ export default function CorpiPage() {
       {/* 6 · Closing CTA ────────────────────────────────────────────── */}
       <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
         <Reveal>
-          <div className="gradient-border flex flex-col gap-8 rounded-2xl p-8 sm:p-14 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                {finalCta.title}
-              </h2>
-              <p className="mt-3 max-w-xl text-base leading-relaxed text-zinc-200">
-                {finalCta.body}
-              </p>
-            </div>
-            <div className="flex flex-none flex-wrap gap-3">
-              <Button
-                href={finalCta.primaryCta.href}
-                className="font-display uppercase tracking-widest"
-              >
-                {finalCta.primaryCta.label}
-              </Button>
-              <Button
-                href={finalCta.secondaryCta.href}
-                variant="secondary"
-                className="font-display uppercase tracking-widest"
-              >
-                {finalCta.secondaryCta.label}
-              </Button>
-              <p className="w-full text-[13px] text-zinc-500">
-                {finalCta.micrositeNote.pre}
-                <a
-                  href={finalCta.micrositeNote.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-mono text-brand-300 underline underline-offset-4 transition-colors hover:text-white"
+          <div className="gradient-border rounded-2xl p-8 sm:p-14">
+            <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+              <div>
+                <h2 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                  {finalCta.title}
+                </h2>
+                <p className="mt-3 max-w-xl text-base leading-relaxed text-zinc-200">
+                  {finalCta.body}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <WhatsAppDemoButton
+                  starterId={finalCta.primaryCta.starterId}
+                  label={finalCta.primaryCta.label}
+                  placement="corpi_final_cta"
+                  className="uppercase tracking-widest"
+                />
+                <Button
+                  href={finalCta.secondaryCta.href}
+                  variant="secondary"
+                  className="font-display uppercase tracking-widest"
                 >
-                  {finalCta.micrositeNote.label}
-                </a>
-              </p>
+                  {finalCta.secondaryCta.label}
+                </Button>
+              </div>
             </div>
+            {/* A footnote, not a third button — inside the button row its
+                w-full forced the row to max-content and burst the page. */}
+            <p className="mt-6 text-[13px] text-zinc-400">
+              {finalCta.micrositeNote.pre}
+              <a
+                href={finalCta.micrositeNote.href}
+                target="_blank"
+                rel="noreferrer"
+                className="font-mono text-brand-300 underline underline-offset-4 transition-colors hover:text-white"
+              >
+                {finalCta.micrositeNote.label}
+              </a>
+            </p>
           </div>
         </Reveal>
       </section>

@@ -34,7 +34,7 @@ export function CurrencySegments({ className }: { className?: string }) {
               className={cn(
                 "min-h-11 rounded-full font-mono text-[13px] transition-colors",
                 active
-                  ? "bg-brand-500 font-medium text-white"
+                  ? "bg-brand-500 font-medium text-on-brand"
                   : "text-zinc-200 active:bg-surface"
               )}
             >

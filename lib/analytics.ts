@@ -75,6 +75,42 @@ export function trackApplyClick(role: string, placement: "top" | "bottom"): void
   track("apply_click", { role, placement });
 }
 
+/** A visitor left for the Corpi microsite to start the 7-day trial. */
+export function trackTrialSignupClick(placement: "corpi_hero" | "corpi_pricing"): void {
+  track("trial_signup_click", { placement });
+}
+
+/**
+ * A visitor opened WhatsApp to message the live Corpi agent — the shortest
+ * conversion path on /corpi, and invisible without this: the visitor leaves for
+ * WhatsApp, so nothing else on our side records that it happened.
+ *
+ * `starter` is the conversation opener they chose, which doubles as a read on
+ * which language visitors actually reach for.
+ */
+export function trackWhatsAppDemo(starter: string, placement: string): void {
+  track("whatsapp_demo_click", { starter, placement });
+}
+
+/**
+ * The site-wide enquiry widget. `opened` is cheap curiosity, `sent` is the
+ * conversion — the ratio between them is the only read on whether the widget
+ * earns its place, and neither is visible any other way because the
+ * conversation continues on WhatsApp.
+ */
+export function trackChatOpen(page: string): void {
+  track("chat_open", { entry_page: page });
+}
+
+export function trackChatSend(intent: string, page: string): void {
+  track("chat_send", { intent, entry_page: page });
+}
+
+/** The visitor fell back to copying the message — WhatsApp Web likely blocked. */
+export function trackChatFallback(action: "copy" | "email"): void {
+  track("chat_fallback", { action });
+}
+
 /** The Corpi chat demo was actually driven, not just scrolled past. */
 export function trackDemoEngaged(location: "corpi_page" | "home_tabs"): void {
   track("demo_engaged", { location });

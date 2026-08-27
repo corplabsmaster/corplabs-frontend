@@ -19,7 +19,7 @@ export default function CollabCulture() {
               key={b.label}
               className="flex items-center gap-2.5 rounded-full border border-line bg-surface-raised py-2.5 pl-3 pr-4"
             >
-              <img src={b.icon} alt="" className="h-6 w-6" />
+              <img src={b.icon} alt="" className="theme-ink-icon h-6 w-6" />
               <span className="font-display text-[13px] font-medium text-white">{b.label}</span>
             </span>
           ))}

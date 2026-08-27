@@ -187,7 +187,7 @@ export default function AboutPage() {
 
       {/* 6 — HiTerra flagship band */}
       <section id="flagship" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-24 sm:px-6">
-        <div className="grid gap-10 rounded-2xl bg-[linear-gradient(180deg,#000B42,#001F52)] p-8 sm:p-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-center lg:gap-14">
+        <div className="dark-island grid gap-10 rounded-2xl bg-[linear-gradient(180deg,#000B42,#001F52)] p-8 sm:p-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-center lg:gap-14">
           <Reveal>
             <span className="inline-block rounded-full bg-hiterra/10 px-3.5 py-1 font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-hiterra">
               {flagship.badge}

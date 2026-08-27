@@ -48,11 +48,23 @@ export default function Footer() {
     <footer className="bg-brand-950">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-6 pt-14 sm:px-6 lg:grid-cols-[1fr_3fr]">
         <div>
-          <img src="/logo-neg.png" alt={site.name} className="mb-5 block h-9 w-auto" />
+          {/*
+            * The mark, not logo-neg.png: that file is an opaque 600x600 export
+            * whose navy background drew a visible square against the footer in
+            * both themes. Two SVG variants, swapped by CSS like the header's.
+            */}
+          <div className="mb-5 flex items-center gap-2.5">
+            <img src="/logo.svg" alt="" className="theme-dark-only h-9 w-9" />
+            <img src="/logo-light.svg" alt="" className="theme-light-only h-9 w-9" />
+            <span className="font-display text-lg font-semibold tracking-tight text-white">
+              {site.name}
+            </span>
+          </div>
           <div className="flex gap-4">
             {socials.map(s => (
               <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label}>
-                <img src={s.icon} alt="" className="h-[22px] w-[22px]" />
+                {/* Pale lavender glyphs, drawn for the dark footer. */}
+                <img src={s.icon} alt="" className="theme-ink-icon h-[22px] w-[22px]" />
               </a>
             ))}
           </div>

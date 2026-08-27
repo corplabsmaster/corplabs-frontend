@@ -68,7 +68,7 @@ export default function TierFinder() {
                         className={cn(
                           "rounded-full border px-3.5 py-2 font-display text-[12.5px] transition-colors",
                           active
-                            ? "border-brand-500 bg-brand-500 font-medium text-white"
+                            ? "border-brand-500 bg-brand-500 font-medium text-on-brand"
                             : "border-line bg-surface font-light text-zinc-200 hover:border-brand-500/60",
                         )}
                       >

@@ -16,23 +16,26 @@ export interface CorpiChat {
 }
 
 export const corpiChat: CorpiChat = {
-  shopName: "Kedai Hardware Maju",
+  shopName: "Amber Table Catering",
   status: "Corpi · online",
   script: [
-    { from: "cust", text: "Hi, do you have the 20L storage box? Need 50 units for my shop" },
     {
-      from: "corpi",
-      text: "Hi! Yes — the 20L stackable is in stock. For 50 units the bulk price is RM 12.50/unit, RM 625 total. Want me to reserve them?",
+      from: "cust",
+      text: "Hi, do you do corporate lunches? I need 80 sets for next Thursday at our office in Bangsar.",
     },
-    { from: "cust", text: "boleh dapat discount tak kalau ambil 100?" },
     {
       from: "corpi",
-      text: "Boleh! 100 units masuk tier borong — RM 11/unit, jadi RM 1,100. Nak saya sediakan quotation sekali?",
+      text: "We do — Thursday the 4th is still open. For 80 sets the corporate menu is RM 18/set, so RM 1,440 including delivery and setup in Bangsar. Shall I hold the date?",
     },
-    { from: "cust", text: "ok send quote" },
+    { from: "cust", text: "What if it goes up to 150?" },
     {
       from: "corpi",
-      text: "Done — quotation #Q-1042 sent to this chat. Delivery to Puchong is free above RM 800. Anything else?",
+      text: "150 crosses into the bulk tier — RM 15.50/set, so RM 2,325, and two servers are included at that size. Want me to draft the quote?",
+    },
+    { from: "cust", text: "Yes please, send it over" },
+    {
+      from: "corpi",
+      text: "Done — quote #Q-1042 is in this chat. It holds Thursday the 4th for 48 hours. Anything you'd like swapped on the menu?",
     },
     { from: "system", text: "→ lead qualified · handed to Sarah (Sales) with full context" },
   ],
@@ -44,14 +47,17 @@ export const hero = {
   eyebrow: "A Corplabs Product · Powered by Claude",
   headline: { plain: "Your business, ", gradient: "always on." },
   lede: "A customer messages at 11pm. Nobody's there. They move on — and that sale is gone. Corpi answers on your own WhatsApp number in seconds, in the language they wrote in, and files the lead before you wake up.",
-  primaryCta: { label: "See pricing", href: "#pricing" },
+  primaryCta: {
+    label: "Start a 7-day free trial",
+    href: "https://corpi.corplabs.co/signup",
+  },
   secondaryCta: { label: "Book a discovery call", href: "/contact" },
   stats: [
     { stat: "11pm", label: "When most Malaysian leads actually message" },
     { stat: "24/7", label: "Corpi replies, every day of the year" },
     { stat: "< 2 wks", label: "From discovery call to live agent" },
   ],
-  chatCaption: "A real Corpi conversation, replayed. Language switches mid-thread.",
+  chatCaption: "How a Corpi thread runs end to end — availability, tier pricing, quote, handoff.",
   microsite: {
     label: "Visit the Corpi microsite",
     href: "https://corpi.corplabs.co",
@@ -192,6 +198,11 @@ export const pricing = {
   ] satisfies CorpiPlan[],
   ctaLabel: "Get started",
   ctaHref: "/contact",
+  trial: {
+    lead: "Every plan starts with a 7-day free trial.",
+    body: "Try Corpi on your own number before committing to setup — no card, cancel any time.",
+    cta: { label: "Start the free trial", href: "https://corpi.corplabs.co/signup" },
+  },
 };
 
 // ─── FAQ ─────────────────────────────────────────────────────────────────────
@@ -233,12 +244,62 @@ export const faqs = [
   },
 ];
 
+// ─── Live WhatsApp demo ──────────────────────────────────────────────────────
+
+export interface DemoStarter {
+  /** Short, low-cardinality id — this is the GA4 dimension value. */
+  id: string;
+  /** What the button says. */
+  label: string;
+  /** Prefilled first message. */
+  text: string;
+}
+
+/**
+ * The number below is Corplabs' own WhatsApp line, and Corpi is what answers
+ * it. That is the demo: rather than watch a scripted replay, a visitor messages
+ * the same agent we sell and sees it reply.
+ *
+ * The starters are deliberately in three languages. The page claims Corpi
+ * answers in whatever language it is written to; a visitor who taps the Bahasa
+ * one is testing that claim rather than taking our word for it.
+ */
+export const liveDemo = {
+  /** International format, digits only — what wa.me expects. */
+  number: "60166727208",
+  numberDisplay: "+60 16-672 7208",
+  eyebrow: "Try it for real",
+  title: "This number is answered by Corpi",
+  body:
+    "Not a recording and not a form — our own WhatsApp line, running the same agent we build for clients. Ask it anything. It hands you to a human the moment you ask for one.",
+  starters: [
+    {
+      id: "en_pricing",
+      label: "English",
+      text: "Hi Corpi — I found you on corplabs.co. What would an agent like you cost for my business?",
+    },
+    {
+      id: "ms_explain",
+      label: "Bahasa Malaysia",
+      text: "Hai Corpi, saya jumpa anda di corplabs.co. Boleh terangkan Corpi ni untuk kedai saya?",
+    },
+    {
+      id: "zh_explain",
+      label: "中文",
+      text: "你好 Corpi，我在 corplabs.co 看到你。可以介绍一下 Corpi 吗？",
+    },
+  ] as DemoStarter[],
+  /** Shown under the buttons. */
+  note: "Opens WhatsApp with the message ready — send it and watch the reply come back in the language you wrote in.",
+};
+
 // ─── Closing CTA ─────────────────────────────────────────────────────────────
 
 export const finalCta = {
   title: "Ready to stop losing 11pm leads?",
   body: "Book a discovery call and we'll have your agent live in under two weeks.",
-  primaryCta: { label: "WhatsApp us", href: "https://wa.me/60166727208" },
+  /** Rendered by WhatsAppDemo so the click is tracked like the hero one. */
+  primaryCta: { label: "Message Corpi", starterId: "en_pricing" },
   secondaryCta: { label: "Email us", href: "mailto:contact@corplabs.co" },
   micrositeNote: {
     pre: "Prefer the full product experience? ",

@@ -18,12 +18,12 @@ export function JobCard({ job }: { job: Job }) {
         style={{ background: job.thumb }}
       >
         <div className="flex items-center justify-between">
-          <span className="rounded-full bg-black/30 px-2.5 py-1 font-display text-[10px] font-semibold uppercase tracking-wide text-white">
+          <span className="rounded-full bg-black/30 px-2.5 py-1 font-display text-[10px] font-semibold uppercase tracking-wide text-on-brand">
             {job.type}
           </span>
-          <span className="font-mono text-[11px] text-white/90">{job.location}</span>
+          <span className="font-mono text-[11px] text-on-brand/90">{job.location}</span>
         </div>
-        <span className="font-display text-3xl font-bold tracking-tight text-white/90">
+        <span className="font-display text-3xl font-bold tracking-tight text-on-brand/90">
           {job.monogram}
         </span>
       </div>
