@@ -182,7 +182,13 @@ export default function CorpcodePage() {
               key={step.n}
               className="grid gap-x-8 gap-y-3 bg-surface p-7 sm:p-9 md:grid-cols-[88px_minmax(0,220px)_minmax(0,1fr)] md:items-start"
             >
-              <div className="font-display text-4xl font-bold leading-none text-white/10 sm:text-5xl">
+              {/* Ghost ordinal — decoration only, the step order is already
+                  carried by the list itself, so it stays at 10% and is hidden
+                  from assistive tech rather than lifted to a readable weight. */}
+              <div
+                aria-hidden
+                className="font-display text-4xl font-bold leading-none text-white/10 sm:text-5xl"
+              >
                 {step.n}
               </div>
               <div>

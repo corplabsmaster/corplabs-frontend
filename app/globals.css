@@ -42,12 +42,20 @@
   /*
    * Indigo-tinted neutral scale from the DS, mapped onto the zinc utility
    * names the codebase already uses — retheming every page in one place.
+   *
+   * 400/500/600 are lifted off the raw DS values to clear WCAG on the four
+   * dark surfaces (surface, raised, overlay, brand-950). The binding case for
+   * each: zinc-500 is body-adjacent copy, so it needs 4.5:1 on brand-950 (the
+   * darkest ink on the lightest dark panel) — 6c71b1 gave 3.68 there. zinc-400
+   * then moves with it to keep a visible step between the two. zinc-600 is
+   * never text — it is the unselected wizard radio ring and the inactive
+   * process dot, both on --color-surface — so it answers to 1.4.11's 3:1.
    */
   --color-zinc-200: #a6acd1; /* gray-200 — body copy on dark */
   --color-zinc-300: #c9cce4; /* gray-100 */
-  --color-zinc-400: #858bbe; /* gray-300 */
-  --color-zinc-500: #6c71b1; /* gray-400 */
-  --color-zinc-600: #4e519a; /* gray-600 */
+  --color-zinc-400: #9095cc; /* gray-300 — 5.84:1 on brand-950 */
+  --color-zinc-500: #8085c4; /* gray-400 — 4.82:1 on brand-950 */
+  --color-zinc-600: #5c60ad; /* gray-600 — non-text only, 3.57:1 on surface */
 
   --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -133,9 +141,9 @@ html[data-theme="light"] {
   --color-line: rgba(255, 255, 255, 0.14);
   --color-zinc-200: #a6acd1;
   --color-zinc-300: #c9cce4;
-  --color-zinc-400: #858bbe;
-  --color-zinc-500: #6c71b1;
-  --color-zinc-600: #4e519a;
+  --color-zinc-400: #9095cc;
+  --color-zinc-500: #8085c4;
+  --color-zinc-600: #5c60ad;
   --color-brand-200: #aa97ff;
   --color-brand-300: #9273ff;
   --color-brand-950: #220066;
