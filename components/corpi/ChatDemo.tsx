@@ -16,7 +16,23 @@ import { cn } from "@/lib/utils";
  * that width ran past 1,400px and the section ate three screens. A real chat
  * window is a viewport onto a thread anyway, so it also reads truer: new
  * messages scroll into view as they arrive.
+ *
+ * When the thread finishes it rests, then types, then starts over. The typing
+ * beat is the point: an idle indicator that never produces a message is a
+ * tease, so here it is what it looks like — the thing that happens just before
+ * messages arrive.
+ *
+ * Two things the loop owes the reader. It stops while the card is off screen,
+ * because an animation nobody can see should not be scheduling renders. And it
+ * does not run at all under prefers-reduced-motion, which gets the finished
+ * thread immediately instead.
  */
+
+const REVEAL_MS = 1100;
+/** How long the finished thread sits before the loop restarts it. */
+const REST_MS = 4200;
+/** Typing beat between the rest and the replay. */
+const TYPING_MS = 1500;
 export function ChatDemo({
   chat,
   className,
@@ -31,40 +47,70 @@ export function ChatDemo({
   /** Which surface this instance sits on, reported with demo_engaged. */
   location?: "corpi_page" | "home_tabs";
 }) {
+  const total = chat.script.length;
   const [shown, setShown] = useState(0);
-  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const start = useCallback(() => {
-    if (timer.current) clearInterval(timer.current);
-    setShown(0);
-    timer.current = setInterval(() => {
-      setShown((s) => {
-        if (s >= chat.script.length) {
-          if (timer.current) clearInterval(timer.current);
-          return s;
-        }
-        return s + 1;
-      });
-    }, 1100);
-  }, [chat.script.length]);
+  const [idleTyping, setIdleTyping] = useState(false);
+  const [reduced, setReduced] = useState(false);
+  const [onScreen, setOnScreen] = useState(true);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    start();
-    return () => {
-      if (timer.current) clearInterval(timer.current);
-    };
-  }, [start]);
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    const io = new IntersectionObserver(([e]) => setOnScreen(e.isIntersecting), {
+      rootMargin: "120px",
+    });
+    io.observe(card);
+    return () => io.disconnect();
+  }, []);
+
+  // Reduced motion gets the whole thread at once, and no loop.
+  useEffect(() => {
+    if (reduced) {
+      setIdleTyping(false);
+      setShown(total);
+    }
+  }, [reduced, total]);
+
+  // One timer per phase, each cleaned up by its own effect: reveal the next
+  // message, or — at the end — rest before the typing beat.
+  useEffect(() => {
+    if (reduced || !onScreen || idleTyping) return;
+    const next = setTimeout(
+      () => (shown < total ? setShown(s => s + 1) : setIdleTyping(true)),
+      shown < total ? REVEAL_MS : REST_MS
+    );
+    return () => clearTimeout(next);
+  }, [shown, total, reduced, onScreen, idleTyping]);
+
+  useEffect(() => {
+    if (!idleTyping || reduced || !onScreen) return;
+    const restart = setTimeout(() => {
+      setIdleTyping(false);
+      setShown(0);
+    }, TYPING_MS);
+    return () => clearTimeout(restart);
+  }, [idleTyping, reduced, onScreen]);
 
   // The demo autoplays on mount, so only a deliberate Replay counts as
   // engagement — and only the first one, so repeat taps do not inflate it.
   const reported = useRef(false);
   const replay = useCallback(() => {
-    start();
+    setIdleTyping(false);
+    setShown(0);
     if (!reported.current) {
       reported.current = true;
       trackDemoEngaged(location);
     }
-  }, [start, location]);
+  }, [location]);
 
   // Keep the newest message in view as the script plays out — by scrolling the
   // message area itself. scrollIntoView walks up and scrolls every scrollable
@@ -73,14 +119,15 @@ export function ChatDemo({
   useEffect(() => {
     const body = bodyRef.current;
     if (body) body.scrollTo({ top: body.scrollHeight, behavior: "smooth" });
-  }, [shown]);
+  }, [shown, idleTyping]);
 
   const visible = chat.script.slice(0, shown);
   const next = chat.script[shown];
-  const typing = next?.from === "corpi";
+  const typing = idleTyping || next?.from === "corpi";
 
   return (
     <div
+      ref={cardRef}
       className={cn(
         "overflow-hidden rounded-2xl border border-line bg-surface-raised shadow-2xl",
         className
