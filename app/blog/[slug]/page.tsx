@@ -61,6 +61,9 @@ export default async function BlogPostPage({
     author: { "@type": "Organization", name: post.author, url: site.url },
     publisher: { "@type": "Organization", name: site.name, url: site.url },
     mainEntityOfPage: `${site.url}/blog/${slug}`,
+    // The generated share card. Article rich results want an image, and
+    // Discover eligibility effectively requires one.
+    image: `${site.url}/blog/${slug}/opengraph-image`,
   };
 
   return (
