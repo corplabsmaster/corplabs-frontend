@@ -94,28 +94,35 @@ export default function CorpiPage() {
           <Reveal delay={0.1} className="flex flex-col gap-3.5">
             <ChatDemo chat={corpiChat} bodyHeight="h-[360px] sm:h-[420px] lg:h-[440px]" />
             <p className="text-center text-xs text-zinc-400">{hero.chatCaption}</p>
+          </Reveal>
+        </div>
+      </section>
 
-            {/*
-              * The replay above is the illustration; this is the demo. Same
-              * agent, our own number, and the visitor picks the language.
-              */}
-            <div className="rounded-2xl border border-line bg-surface-raised p-5">
+      {/* 1b · Live demo ─────────────────────────────────────────────── */}
+      <section className="mx-auto max-w-6xl px-4 sm:px-6">
+        <Reveal>
+          <div className="gradient-border flex flex-col gap-6 rounded-2xl p-6 sm:p-8 lg:flex-row lg:items-center lg:gap-10">
+            <div className="lg:flex-1">
               <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-300">
                 {liveDemo.eyebrow}
               </p>
-              <h2 className="mt-2 font-display text-lg font-semibold tracking-tight text-white">
+              <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
                 {liveDemo.title}
               </h2>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-zinc-200">{liveDemo.body}</p>
-              <WhatsAppDemo placement="corpi_hero" className="mt-4" />
+              <p className="mt-2.5 max-w-xl text-[14px] leading-relaxed text-zinc-200">
+                {liveDemo.body}
+              </p>
+            </div>
+            <div className="lg:flex-none">
+              <WhatsAppDemo placement="corpi_hero" />
               {/* zinc-500 falls under AA on the dark surfaces; zinc-400 clears it. */}
-              <p className="mt-3 text-[11.5px] leading-snug text-zinc-400">
+              <p className="mt-3 max-w-sm text-[11.5px] leading-snug text-zinc-400">
                 {liveDemo.note}{" "}
                 <span className="font-mono text-zinc-300">{liveDemo.numberDisplay}</span>
               </p>
             </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* 2 · What Corpi Does ────────────────────────────────────────── */}
