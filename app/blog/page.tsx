@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
 import { getAllPosts, formatPostDate } from "@/lib/posts";
@@ -39,32 +40,50 @@ export default async function BlogIndexPage() {
             {posts.map((post, i) => (
               <Reveal key={post.slug} delay={Math.min(i, 4) * 0.06}>
                 <article className="py-8 first:pt-0">
-                  <Link href={`/blog/${post.slug}`} className="group block">
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-zinc-500">
-                      <time dateTime={post.publishedDate}>
-                        {formatPostDate(post.publishedDate)}
-                      </time>
-                      <span aria-hidden>·</span>
-                      <span>{post.readingMinutes} min read</span>
-                    </div>
-                    <h2 className="mt-2.5 font-display text-2xl font-bold tracking-tight text-white transition-colors group-hover:text-brand-200 sm:text-[28px]">
-                      {post.title}
-                    </h2>
-                    <p className="mt-2.5 max-w-2xl text-[15px] leading-relaxed text-zinc-200">
-                      {post.excerpt}
-                    </p>
-                    {post.tags.length > 0 && (
-                      <div className="mt-4 flex flex-wrap gap-1.5">
-                        {post.tags.map(tag => (
-                          <span
-                            key={tag}
-                            className="rounded-full border border-line px-2.5 py-1 font-display text-[11px] font-medium text-brand-200"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="group flex flex-col gap-5 sm:flex-row-reverse sm:items-start sm:gap-7"
+                  >
+                    {/*
+                      * The post's own share card, reused as the thumbnail — the
+                      * same asset LinkedIn and WhatsApp show, so the listing and
+                      * a shared link never disagree about what a post looks like.
+                      */}
+                    <Image
+                      src={`/blog/${post.slug}/opengraph-image`}
+                      alt=""
+                      width={1200}
+                      height={630}
+                      sizes="(min-width: 640px) 260px, 100vw"
+                      className="w-full flex-none rounded-lg border border-line object-cover transition-opacity group-hover:opacity-90 sm:w-[260px]"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-zinc-500">
+                        <time dateTime={post.publishedDate}>
+                          {formatPostDate(post.publishedDate)}
+                        </time>
+                        <span aria-hidden>·</span>
+                        <span>{post.readingMinutes} min read</span>
                       </div>
-                    )}
+                      <h2 className="mt-2.5 font-display text-2xl font-bold tracking-tight text-white transition-colors group-hover:text-brand-200 sm:text-[28px]">
+                        {post.title}
+                      </h2>
+                      <p className="mt-2.5 max-w-2xl text-[15px] leading-relaxed text-zinc-200">
+                        {post.excerpt}
+                      </p>
+                      {post.tags.length > 0 && (
+                        <div className="mt-4 flex flex-wrap gap-1.5">
+                          {post.tags.map(tag => (
+                            <span
+                              key={tag}
+                              className="rounded-full border border-line px-2.5 py-1 font-display text-[11px] font-medium text-brand-200"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </Link>
                 </article>
               </Reveal>
