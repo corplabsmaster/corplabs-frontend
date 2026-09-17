@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { projects } from "@/data/portfolio";
 import { site } from "@/data/site";
 import { getJobs } from "@/lib/jobs";
 import { getAllPosts } from "@/lib/posts";
@@ -7,6 +8,7 @@ import { getAllPosts } from "@/lib/posts";
 const paths = [
   "",
   "/solutions",
+  "/portfolio",
   "/corpi",
   "/corpcode",
   "/corprise",
@@ -32,6 +34,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: `${post.publishedDate}T00:00:00.000Z`,
       changeFrequency: "yearly" as const,
       priority: 0.6,
+    })),
+    ...projects.map((project) => ({
+      url: `${site.url}/portfolio/${project.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
     // Open roles only exist as pages when the Notion pipeline is configured.
     ...jobs

@@ -6,6 +6,7 @@ import PlanSelector from "@/components/corpsite/PlanSelector";
 import TierTable from "@/components/corpsite/TierTable";
 import { Price } from "@/components/currency/price";
 import { PillarStrip } from "@/components/pillar-strip";
+import { PortfolioThumb } from "@/components/portfolio/PortfolioThumb";
 import { Button } from "@/components/ui/button";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { Reveal } from "@/components/ui/reveal";
@@ -20,6 +21,7 @@ import {
   siteTiers,
   tiersSection,
 } from "@/data/corpsite";
+import { projects as portfolioProjects } from "@/data/portfolio";
 
 export const metadata: Metadata = {
   title: "Corpsite — Websites, Built Like Software",
@@ -98,6 +100,40 @@ export default function CorpsitePage() {
           </div>
         </Reveal>
       </section>
+
+      {/* 1.5 — Proof strip: a few shipped Corpsite projects, linking to the full portfolio */}
+      {portfolioProjects.filter((p) => p.pillar === "corpsite").length > 0 && (
+        <section className="mx-auto max-w-6xl px-4 pt-4 sm:px-6">
+          <Reveal>
+            <div className="flex flex-col gap-6 rounded-2xl border border-line bg-surface-raised p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+              <div className="flex -space-x-3">
+                {portfolioProjects
+                  .filter((p) => p.pillar === "corpsite")
+                  .slice(0, 3)
+                  .map((p) => (
+                    <PortfolioThumb
+                      key={p.slug}
+                      image={p.image}
+                      name={p.name}
+                      className="aspect-square w-16 shrink-0 rounded-full border-2 border-surface-raised sm:w-20"
+                    />
+                  ))}
+              </div>
+              <div className="flex-1">
+                <p className="font-display text-sm font-semibold text-white">
+                  Not sure what a Corpsite build actually looks like?
+                </p>
+                <p className="mt-1 text-[13px] text-zinc-400">
+                  See real sites we&apos;ve shipped — click through to the live pages.
+                </p>
+              </div>
+              <Button href="/portfolio?pillar=corpsite" variant="secondary" size="sm">
+                See our work
+              </Button>
+            </div>
+          </Reveal>
+        </section>
+      )}
 
       {/* 2 — Plan selector */}
       <section id="selector" className="mx-auto max-w-3xl scroll-mt-24 px-4 pt-16 sm:px-6">
