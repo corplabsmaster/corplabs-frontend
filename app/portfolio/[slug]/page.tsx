@@ -67,11 +67,26 @@ export default async function PortfolioProjectPage({
           <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-200">
             {project.summary}
           </p>
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {project.styleTags.map(tag => (
+              <span
+                key={tag}
+                className="rounded-full bg-surface-raised px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wider text-zinc-400"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </header>
       </Reveal>
 
       <Reveal className="mt-10">
         <PortfolioThumb image={project.image} name={project.name} className="aspect-[16/10]" />
+      </Reveal>
+
+      <Reveal className="mt-10">
+        <h2 className="font-display text-lg font-semibold text-white">The business</h2>
+        <p className="mt-3 text-[15px] leading-relaxed text-zinc-200">{project.business}</p>
       </Reveal>
 
       <Reveal className="mt-10">
@@ -86,6 +101,32 @@ export default async function PortfolioProjectPage({
           {portfolioCaseStudyCopy.liveSiteLabel}
         </Button>
       </Reveal>
+
+      <Reveal className="mt-10">
+        <h2 className="font-display text-lg font-semibold text-white">What's different</h2>
+        <p className="mt-3 text-[15px] leading-relaxed text-zinc-200">{project.whatsDifferent}</p>
+      </Reveal>
+
+      <Reveal className="mt-10">
+        <h2 className="font-display text-lg font-semibold text-white">Design style</h2>
+        <p className="mt-3 text-[15px] leading-relaxed text-zinc-200">{project.styleNotes}</p>
+      </Reveal>
+
+      {project.gallery && project.gallery.length > 0 && (
+        <Reveal className="mt-10">
+          <h2 className="font-display text-lg font-semibold text-white">More screens</h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {project.gallery.map(src => (
+              <PortfolioThumb
+                key={src}
+                image={src}
+                name={project.name}
+                className="aspect-[16/10]"
+              />
+            ))}
+          </div>
+        </Reveal>
+      )}
 
       {related.length > 0 && (
         <footer className="mt-16 border-t border-line pt-10">
