@@ -2,16 +2,22 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "dev",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["next", "dev", "-p", "3010"],
-      "port": 3010
+      "name": "develop",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["develop"],
+      "port": 8000
     },
     {
-      "name": "start",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["next", "start", "-p", "3010"],
-      "port": 3010
+      "name": "develop:prod",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["develop:prod"],
+      "port": 8000
+    },
+    {
+      "name": "serve",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["serve"],
+      "port": 9000
     }
   ]
 }
