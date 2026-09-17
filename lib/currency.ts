@@ -13,7 +13,7 @@
 
 export type Currency = "USD" | "MYR" | "EUR" | "SGD";
 
-export const DEFAULT_CURRENCY: Currency = "USD";
+export const DEFAULT_CURRENCY: Currency = "MYR";
 
 /** The cookie the edge middleware sets from the visitor's country. */
 export const CURRENCY_COOKIE = "cl_currency";

@@ -6,6 +6,10 @@ import { CURRENCY_COOKIE } from "@/lib/currency";
  * else sees USD. Runs at the edge and only SETS a cookie the client reads — it
  * never rewrites the response, so statically prerendered pages stay static. A
  * manual choice (localStorage) always overrides this on the client.
+ *
+ * Vercel's geo headers only exist in production — local dev and non-Vercel
+ * previews always see an empty `country`. Since the business is MY-first,
+ * unresolved geo defaults to MYR rather than guessing USD.
  */
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
@@ -15,7 +19,7 @@ export function middleware(request: NextRequest) {
       // @ts-expect-error `geo` is populated on Vercel's edge runtime
       request.geo?.country ??
       "";
-    const currency = country === "MY" ? "MYR" : "USD";
+    const currency = country === "" || country === "MY" ? "MYR" : "USD";
     response.cookies.set(CURRENCY_COOKIE, currency, {
       path: "/",
       maxAge: 60 * 60 * 24 * 365,

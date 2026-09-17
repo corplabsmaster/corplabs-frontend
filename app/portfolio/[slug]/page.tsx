@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortfolioThumb } from "@/components/portfolio/PortfolioThumb";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { portfolioCaseStudyCopy, projects } from "@/data/portfolio";
@@ -67,26 +68,36 @@ export default async function PortfolioProjectPage({
           <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-200">
             {project.summary}
           </p>
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {project.styleTags.map(tag => (
-              <span
-                key={tag}
-                className="rounded-full bg-surface-raised px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wider text-zinc-400"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
         </header>
       </Reveal>
 
+      {/* Hero + gallery sit together as one visual block — the extra screens
+          are the point, not an afterthought scrolled away from the hero. */}
       <Reveal className="mt-10">
         <PortfolioThumb image={project.image} name={project.name} className="aspect-[16/10]" />
+        {project.gallery && project.gallery.length > 0 && (
+          <div className="mt-3 grid grid-cols-2 gap-3">
+            {project.gallery.map(src => (
+              <PortfolioThumb key={src} image={src} name={project.name} className="aspect-video" />
+            ))}
+          </div>
+        )}
       </Reveal>
 
       <Reveal className="mt-10">
-        <h2 className="font-display text-lg font-semibold text-white">The business</h2>
-        <p className="mt-3 text-[15px] leading-relaxed text-zinc-200">{project.business}</p>
+        <h2 className="font-display text-lg font-semibold text-white">At a glance</h2>
+        <Card className="mt-3 grid grid-cols-2 gap-x-6 gap-y-4 p-5 sm:p-6">
+          {project.vitals.map(({ label, value }) => (
+            <div key={label}>
+              <dt className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">
+                {label}
+              </dt>
+              <dd className="mt-1 text-[13.5px] font-medium leading-snug text-zinc-100">
+                {value}
+              </dd>
+            </div>
+          ))}
+        </Card>
       </Reveal>
 
       <Reveal className="mt-10">
@@ -103,30 +114,55 @@ export default async function PortfolioProjectPage({
       </Reveal>
 
       <Reveal className="mt-10">
-        <h2 className="font-display text-lg font-semibold text-white">What's different</h2>
-        <p className="mt-3 text-[15px] leading-relaxed text-zinc-200">{project.whatsDifferent}</p>
+        <h2 className="font-display text-lg font-semibold text-white">
+          The road not taken
+        </h2>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          <Card className="p-5 opacity-70">
+            <p className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">
+              The obvious move
+            </p>
+            <p className="mt-2 text-[14px] leading-relaxed text-zinc-300 line-through decoration-zinc-600">
+              {project.expectedMove}
+            </p>
+          </Card>
+          <Card className="border-brand-500/40 bg-brand-500/[0.06] p-5">
+            <p className="font-mono text-[10.5px] uppercase tracking-wider text-brand-300">
+              What we shipped
+            </p>
+            <p className="mt-2 text-[14px] leading-relaxed text-zinc-100">
+              {project.actualMove}
+            </p>
+          </Card>
+        </div>
       </Reveal>
 
       <Reveal className="mt-10">
-        <h2 className="font-display text-lg font-semibold text-white">Design style</h2>
-        <p className="mt-3 text-[15px] leading-relaxed text-zinc-200">{project.styleNotes}</p>
+        <h2 className="font-display text-lg font-semibold text-white">Design DNA</h2>
+        <Card className="mt-3 divide-y divide-line p-0">
+          {project.designTokens.map(({ label, value }) => (
+            <div
+              key={label}
+              className="grid grid-cols-[100px_1fr] gap-4 px-5 py-3 sm:grid-cols-[130px_1fr] sm:px-6"
+            >
+              <dt className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">
+                {label}
+              </dt>
+              <dd className="text-[13.5px] leading-snug text-zinc-200">{value}</dd>
+            </div>
+          ))}
+        </Card>
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {project.styleTags.map(tag => (
+            <span
+              key={tag}
+              className="rounded-full bg-surface-raised px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wider text-zinc-400"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </Reveal>
-
-      {project.gallery && project.gallery.length > 0 && (
-        <Reveal className="mt-10">
-          <h2 className="font-display text-lg font-semibold text-white">More screens</h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            {project.gallery.map(src => (
-              <PortfolioThumb
-                key={src}
-                image={src}
-                name={project.name}
-                className="aspect-[16/10]"
-              />
-            ))}
-          </div>
-        </Reveal>
-      )}
 
       {related.length > 0 && (
         <footer className="mt-16 border-t border-line pt-10">

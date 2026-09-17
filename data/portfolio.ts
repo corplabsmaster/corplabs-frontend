@@ -12,6 +12,11 @@ export type ProjectPillarId = "corpi" | "corpcode" | "corprise" | "corpsite";
 
 export type ProjectKind = "build" | "revamp";
 
+export interface StatPair {
+  label: string;
+  value: string;
+}
+
 export interface PortfolioProject {
   slug: string;
   /** Project/client name shown as the card and detail-page title. */
@@ -22,27 +27,29 @@ export interface PortfolioProject {
   kind: ProjectKind;
   /** One sentence shown on the grid card. */
   summary: string;
-  /** What the client's business actually does — case-study page only. */
-  business: string;
+  /** The business, as a scannable fact table (3–4 rows) — not prose. */
+  vitals: StatPair[];
   /** 2–4 sentences shown on the case-study page — the "where we came in" story. */
   brief: string;
-  /** What sets this site/brand apart from others in its category. */
-  whatsDifferent: string;
-  /** The visual/design language in plain language — palette, type, layout mood. */
-  styleNotes: string;
+  /** The generic move most competitors make in this category. */
+  expectedMove: string;
+  /** What this site does instead. Paired with `expectedMove` as a comparison. */
+  actualMove: string;
+  /** The visual language as label/value tokens — palette, type, mood, signature move. */
+  designTokens: StatPair[];
   /** Short chips summarising the design style, e.g. "Dark-mode SaaS". */
   styleTags: string[];
   /** The deployed site prospects can click through to. */
   liveUrl: string;
   /** Path under /public/portfolio, e.g. "/portfolio/montesofa.jpg". Falls back to a placeholder tile when unset. */
   image?: string;
-  /** Extra screenshots shown in a gallery on the case-study page only. */
+  /** Extra screenshots shown right under the hero image on the case-study page. */
   gallery?: string[];
   featured?: boolean;
 }
 
-// NOTE: brief copy below is a first draft written from what the live sites
-// show (layout, copy, industry) — not confirmed engagement details (scope,
+// NOTE: copy below is a first draft written from what the live sites show
+// (layout, copy, stats, industry) — not confirmed engagement details (scope,
 // timeline, budget). Sahira: please fact-check before this goes live.
 export const projects: PortfolioProject[] = [
   {
@@ -53,14 +60,24 @@ export const projects: PortfolioProject[] = [
     kind: "revamp",
     summary:
       "A revamp for a Malaysian luxury sofa maker — from a dated storefront to an editorial, product-led site.",
-    business:
-      "Monte is the premium sofa line of FUTURE Group, a Selangor manufacturer that's built sofas by hand since 1997 — grown from a four-person, 1,500 sq ft workshop to a 150-person, 8,000 sq ft facility, selling direct through its Neo and Incliner collections.",
+    vitals: [
+      { label: "Founded", value: "1997" },
+      { label: "Team", value: "4 → 150 makers" },
+      { label: "Facility", value: "8,000 sq ft, Selangor" },
+      { label: "Collections", value: "Neo & Incliner" },
+    ],
     brief:
       "Monte makes handmade luxury sofas out of Selangor, and their old site undersold the craft. We rebuilt it around full-bleed product photography and a quieter, editorial layout, so the leatherwork and the copy do the selling instead of busy page furniture.",
-    whatsDifferent:
-      "Most furniture sites in this price bracket default to a catalogue: grids, filters, side-by-side spec comparisons. Monte's site refuses all of that — no price-sorting, no \"compare\" buttons — and instead spends its homepage on a heritage story (1997, four founders, 150 makers) and macro leather photography. It reads as a design house's site, not a retailer's.",
-    styleNotes:
-      "Full-bleed macro leather photography, a warm cream/off-white canvas, and a serif display headline (\"The quiet authority of a room, made by hand\") set against restrained sans-serif labels. Dark charcoal sections break up the page for brand-story moments. Generous negative space, thin hairline dividers, small-caps eyebrow labels — the visual grammar of quiet luxury, not e-commerce.",
+    expectedMove:
+      "A price-sorted catalogue — grids, filters, side-by-side spec comparisons.",
+    actualMove:
+      "No price-sort, no \"compare\" button. Just a heritage story (1997, four founders, 150 makers) and macro leather photography doing the selling.",
+    designTokens: [
+      { label: "Palette", value: "Warm cream canvas, charcoal accent sections" },
+      { label: "Type", value: "Serif display headlines, small-caps sans labels" },
+      { label: "Layout mood", value: "Quiet luxury — whitespace, hairline dividers" },
+      { label: "Signature move", value: "Full-bleed macro leather photography" },
+    ],
     styleTags: ["Editorial", "Full-bleed photography", "Quiet luxury", "Heritage storytelling"],
     liveUrl: "https://monte-web-xi.vercel.app/",
     image: "/portfolio/montesofa.jpg",
@@ -75,14 +92,24 @@ export const projects: PortfolioProject[] = [
     kind: "build",
     summary:
       "A dark-mode platform site for HiTerra's field-to-harvest agritech product, explaining four connected modules at a glance.",
-    business:
-      "HiTerra is a Malaysia/Indonesia agritech platform that turns soil samples, field tasks and lab results into guidance a farm team can act on — by its own numbers, 2,840+ habitats monitored through 38 partner labs across 2 markets.",
+    vitals: [
+      { label: "Coverage", value: "Malaysia & Indonesia" },
+      { label: "Habitats monitored", value: "2,840+" },
+      { label: "Partner labs", value: "38" },
+      { label: "Sub-products", value: "HiTerra · TerraCarbon · TerraBrain · TerraMarket" },
+    ],
     brief:
       "HiTerra turns soil samples and field data into guidance farms can act on. The site had to make four distinct modules — HiTerra, TerraCarbon, TerraBrain, TerraMarket — legible to three different audiences (farmers, estates, partners) without turning into a wall of SaaS jargon.",
-    whatsDifferent:
-      "Most agritech marketing sites write to one buyer — usually the estate manager with a budget. HiTerra's homepage instead splits into three explicit funnels with their own CTA: Farmers get \"Get the App\", Enterprises & Estates get \"Request a Demo\", Partners get \"Partner With Us\". The four sub-products (HiTerra, TerraCarbon, TerraBrain, TerraMarket) are presented as one connected system via a shared \"TerraLink\" data layer, not a bundle of upsells.",
-    styleNotes:
-      "A dark navy hero that fades into an aerial crop-field photo, with a single lime-green accent carried through every primary button and data highlight. Live dashboard mockups — block-level pH/N/P/K readouts, a carbon-tracking map — do the proof-of-product work instead of stock illustration. Typography is a dense, clean grotesque sans; the overall feel is B2B SaaS, deliberately avoiding rustic or \"agriculture\" visual cliché.",
+    expectedMove:
+      "One homepage pitching the enterprise buyer, with features listed underneath.",
+    actualMove:
+      "Three explicit funnels — Farmers, Enterprises & Estates, Partners — each with its own CTA and its own product story, tied together by a shared \"TerraLink\" data layer.",
+    designTokens: [
+      { label: "Palette", value: "Navy hero fading to aerial field photo, lime accent" },
+      { label: "Type", value: "Dense, clean grotesque sans" },
+      { label: "Layout mood", value: "B2B SaaS — data as proof, not illustration" },
+      { label: "Signature move", value: "Live dashboard mockups (pH/N/P/K, carbon map)" },
+    ],
     styleTags: ["Dark-mode SaaS", "Lime accent", "Data-forward", "Multi-persona"],
     liveUrl: "https://www.hiterra.co/",
     image: "/portfolio/hiterra.jpg",
@@ -97,14 +124,24 @@ export const projects: PortfolioProject[] = [
     kind: "build",
     summary:
       "A bold, orange-and-black storefront for EvenMall's furniture and home-essentials marketplace.",
-    business:
-      "EvenMall is a Malaysian e-commerce marketplace covering furniture, home & living, pet and fitness categories — positioned as a one-stop store with the trust levers shoppers expect from a marketplace: secure checkout, fast delivery, and a 30-day return policy.",
+    vitals: [
+      { label: "Categories", value: "Furniture · Home & Living · Pet · Fitness" },
+      { label: "Customers", value: "100,000+ across Malaysia" },
+      { label: "Returns", value: "30-day policy" },
+      { label: "Structure", value: "Hero → trending grid → promo → trust badges" },
+    ],
     brief:
       "EvenMall needed a storefront that could carry categories as different as furniture and fitness gear under one confident identity. We leaned into a bold black-and-orange system and big display type instead of the generic marketplace template look.",
-    whatsDifferent:
-      "The structure is a familiar one — hero banner, trending-products grid, promo strip, trust badges — because shoppers already know how to use it. The differentiation is tonal: a fully black header, saturated orange run consistently through badges, CTAs and sale banners, and bold condensed headlines that push more retail-sale energy than the average furniture marketplace, which tends to hide behind white backgrounds and blue links.",
-    styleNotes:
-      "High-contrast black-and-orange palette used everywhere — nav, buttons, promo banners, wishlist icons on hover. Bold, heavy sans-serif display type on headlines (\"Even More Choices, Even Better Deals\"). Dense product grids with prices and quick-add carts, and gradient orange promo bands (\"Weekend Special — Up to 25% off\") built for urgency.",
+    expectedMove:
+      "White background, blue links — the generic marketplace template look.",
+    actualMove:
+      "A fully black header with saturated orange run through every CTA and sale banner, and bold condensed headlines that push more retail-sale energy than the average furniture marketplace.",
+    designTokens: [
+      { label: "Palette", value: "High-contrast black + saturated orange" },
+      { label: "Type", value: "Bold, heavy sans-serif display" },
+      { label: "Layout mood", value: "Dense product grids, promo urgency" },
+      { label: "Signature move", value: "Gradient orange \"Weekend Special\" bands" },
+    ],
     styleTags: ["Bold retail", "High-contrast", "Promo-driven", "Product-grid dense"],
     liveUrl: "https://evenmall.com/",
     image: "/portfolio/evenmall.jpg",
