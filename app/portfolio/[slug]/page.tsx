@@ -92,7 +92,7 @@ export default async function PortfolioProjectPage({
               <dt className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">
                 {label}
               </dt>
-              <dd className="mt-1 text-[13.5px] font-medium leading-snug text-zinc-100">
+              <dd className="mt-1 text-[13.5px] font-medium leading-snug text-white">
                 {value}
               </dd>
             </div>
@@ -130,7 +130,7 @@ export default async function PortfolioProjectPage({
             <p className="font-mono text-[10.5px] uppercase tracking-wider text-brand-300">
               What we shipped
             </p>
-            <p className="mt-2 text-[14px] leading-relaxed text-zinc-100">
+            <p className="mt-2 text-[14px] leading-relaxed text-white">
               {project.actualMove}
             </p>
           </Card>
