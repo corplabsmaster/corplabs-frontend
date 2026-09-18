@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { DeviceFrame, type DeviceKind } from "@/components/portfolio/DeviceFrame";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -14,31 +14,25 @@ export interface Screenshot {
 
 const deviceOrder: DeviceKind[] = ["desktop", "tablet", "mobile"];
 
-/**
- * Peek carousel geometry, in px. `main` is the current shot's rendered
- * width; `peek` is the neighbor frames' width. Desktop's `window` is
- * deliberately narrower than a full row so the neighbors get cropped to a
- * recognizable browser-chrome sliver either side. Tablet and mobile instead
- * size `peek` down and give `window` enough room for the whole row — their
- * bezels (rounded corners, notch) only read as "a phone" or "a tablet" when
- * the full frame is visible, so those two never get clipped.
- */
-const carousel: Record<
-  DeviceKind,
-  { main: number; peek: number; window: number; sizes: string; peekSizes: string }
-> = {
-  desktop: { main: 680, peek: 680, window: 1088, sizes: "680px", peekSizes: "680px" },
-  tablet: { main: 360, peek: 200, window: 850, sizes: "360px", peekSizes: "200px" },
-  mobile: { main: 300, peek: 170, window: 720, sizes: "300px", peekSizes: "170px" },
-};
+const GAP = 24; // px — matches the track's flex gap below
 
-/** Slide-and-fade variants for the row when Next/Previous is pressed — the
- * direction (1 = forward, -1 = back) decides which side old/new content
- * moves to, so the swap reads as a continuous motion, not a jump-cut. */
-const slideVariants = {
-  enter: (dir: 1 | -1) => ({ x: dir * 40, opacity: 0 }),
-  center: { x: 0, opacity: 1 },
-  exit: (dir: 1 | -1) => ({ x: dir * -40, opacity: 0 }),
+/**
+ * Track carousel geometry, in px. Every shot for a device sits in a fixed
+ * `peek`-wide slot in one continuous strip; the current slot scales up to
+ * `main` width in place. Stepping just re-targets the strip's x offset and
+ * the scale/opacity of each slot, so the same DOM node visibly slides from
+ * the peek position into the center instead of one screenshot being swapped
+ * for another. Desktop keeps peek === main (no scale-up) with a `window`
+ * narrower than a full row, so neighbors crop to a browser-chrome sliver —
+ * that read fine and nobody asked to change it. Tablet and mobile instead
+ * scale up from a smaller peek and give `window` room for the whole row, so
+ * their bezel (rounded corners, notch) always shows whole — a partial phone
+ * doesn't read as "a phone".
+ */
+const carousel: Record<DeviceKind, { main: number; peek: number; window: number; sizes: string }> = {
+  desktop: { main: 680, peek: 680, window: 1088, sizes: "680px" },
+  tablet: { main: 360, peek: 200, window: 850, sizes: "360px" },
+  mobile: { main: 300, peek: 170, window: 720, sizes: "300px" },
 };
 
 const lightboxWidthByDevice: Record<DeviceKind, string> = {
@@ -66,12 +60,96 @@ export function cycleIndex(current: number, direction: 1 | -1, length: number): 
   return (current + direction + length) % length;
 }
 
+/** One device's carousel — a single persistent strip of every shot for that
+ * device, translated so the current one centers and scales up. Nothing
+ * unmounts on step, so the slide is a real transform on real elements, not a
+ * cut between two images. */
+function DeviceCarousel({
+  device,
+  items,
+  name,
+  onOpen,
+}: {
+  device: DeviceKind;
+  items: Screenshot[];
+  name: string;
+  onOpen: (shot: Screenshot, e: React.MouseEvent<HTMLButtonElement>) => void;
+}) {
+  const geo = carousel[device];
+  const [index, setIndex] = useState(0);
+  const windowRef = useRef<HTMLDivElement>(null);
+  const [windowWidth, setWindowWidth] = useState(geo.window);
+
+  useEffect(() => {
+    const el = windowRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) => setWindowWidth(entry.contentRect.width));
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const step = geo.peek + GAP;
+  const trackX = windowWidth / 2 - geo.peek / 2 - index * step;
+
+  return (
+    <>
+      <div ref={windowRef} className="relative mx-auto overflow-hidden" style={{ maxWidth: geo.window, width: "100%" }}>
+        <motion.div
+          className="flex items-center"
+          style={{ gap: GAP }}
+          animate={{ x: trackX }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {items.map((shot, i) => {
+            const isCurrent = i === index;
+            return (
+              <motion.button
+                key={shot.src}
+                type="button"
+                aria-label={isCurrent ? undefined : `Jump to screenshot ${i + 1}`}
+                onClick={e => (isCurrent ? onOpen(shot, e) : setIndex(i))}
+                className="relative shrink-0"
+                style={{ width: geo.peek, zIndex: isCurrent ? 10 : 1 }}
+                animate={{ scale: isCurrent ? geo.main / geo.peek : 1, opacity: isCurrent ? 1 : 0.4 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <DeviceFrame device={device} src={shot.src} alt={altFor(name, shot)} sizes={geo.sizes} />
+              </motion.button>
+            );
+          })}
+        </motion.div>
+      </div>
+
+      {items.length > 1 && (
+        <div className="mt-4 flex items-center justify-center gap-5">
+          <button
+            type="button"
+            onClick={() => setIndex(i => cycleIndex(i, -1, items.length))}
+            className="font-display text-[13px] text-zinc-400 transition-colors hover:text-white"
+          >
+            ← Previous
+          </button>
+          <span className="font-mono text-[11px] text-zinc-500">
+            {index + 1} / {items.length}
+          </span>
+          <button
+            type="button"
+            onClick={() => setIndex(i => cycleIndex(i, 1, items.length))}
+            className="font-display text-[13px] text-zinc-400 transition-colors hover:text-white"
+          >
+            Next →
+          </button>
+        </div>
+      )}
+    </>
+  );
+}
+
 /**
  * One big screenshot at a time per device (desktop/tablet/mobile), each
  * framed in its own browser/tablet/phone chrome. A device with more than one
- * shot (typically desktop, when the page is long) shows a crop of the
- * previous/next shot peeking in on either side, at the same frame size as
- * the current one — click a peek (or Previous/Next) to step the drawer.
+ * shot shows the rest of that device's shots peeking either side — click a
+ * peek, Previous/Next, or step through and the strip physically slides.
  * Each device group reveals on its own, well apart, as the reader scrolls
  * to it. Clicking the current shot opens a full-size lightbox that steps
  * through every shot across every device.
@@ -80,14 +158,6 @@ export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: 
   const groups = deviceOrder
     .map(device => ({ device, items: shots.filter(s => s.device === device) }))
     .filter(g => g.items.length > 0);
-
-  const [slidePos, setSlidePos] = useState<Partial<Record<DeviceKind, number>>>({});
-  const [slideDir, setSlideDir] = useState<Partial<Record<DeviceKind, 1 | -1>>>({});
-  const slideFor = (device: DeviceKind) => slidePos[device] ?? 0;
-  const stepSlide = (device: DeviceKind, direction: 1 | -1, length: number) => {
-    setSlideDir(prev => ({ ...prev, [device]: direction }));
-    setSlidePos(prev => ({ ...prev, [device]: cycleIndex(prev[device] ?? 0, direction, length) }));
-  };
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
@@ -134,93 +204,11 @@ export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: 
   return (
     <>
       <div className="space-y-32 sm:space-y-40">
-        {groups.map(({ device, items }) => {
-          const index = slideFor(device);
-          const direction = slideDir[device] ?? 1;
-          const shot = items[index];
-          const prevShot = items.length > 1 ? items[cycleIndex(index, -1, items.length)] : null;
-          const nextShot = items.length > 1 ? items[cycleIndex(index, 1, items.length)] : null;
-          const geo = carousel[device];
-
-          return (
-            <Reveal key={device}>
-              <div
-                className="relative mx-auto overflow-hidden"
-                style={{ maxWidth: geo.window, width: "100%" }}
-              >
-                <AnimatePresence mode="popLayout" initial={false} custom={direction}>
-                  <motion.div
-                    key={index}
-                    custom={direction}
-                    variants={slideVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{ duration: 0.55, ease: "easeInOut" }}
-                    className="flex items-center justify-center gap-6"
-                  >
-                    {prevShot && (
-                      <button
-                        type="button"
-                        aria-label="Previous screenshot"
-                        onClick={() => stepSlide(device, -1, items.length)}
-                        className="shrink-0 opacity-40 transition-opacity hover:opacity-70"
-                        style={{ width: geo.peek }}
-                      >
-                        <DeviceFrame device={device} src={prevShot.src} alt="" sizes={geo.peekSizes} />
-                      </button>
-                    )}
-
-                    <div className="shrink-0" style={{ width: geo.main }}>
-                      <button type="button" onClick={e => openLightbox(shot, e)} className="block w-full">
-                        <DeviceFrame
-                          device={device}
-                          src={shot.src}
-                          alt={altFor(name, shot)}
-                          sizes={geo.sizes}
-                        />
-                      </button>
-                    </div>
-
-                    {nextShot && (
-                      <button
-                        type="button"
-                        aria-label="Next screenshot"
-                        onClick={() => stepSlide(device, 1, items.length)}
-                        className="shrink-0 opacity-40 transition-opacity hover:opacity-70"
-                        style={{ width: geo.peek }}
-                      >
-                        <DeviceFrame device={device} src={nextShot.src} alt="" sizes={geo.peekSizes} />
-                      </button>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {items.length > 1 && (
-                <div className="mt-4 flex items-center justify-center gap-5">
-                  <button
-                    type="button"
-                    onClick={() => stepSlide(device, -1, items.length)}
-                    className="font-display text-[13px] text-zinc-400 transition-colors hover:text-white"
-                  >
-                    ← Previous
-                  </button>
-                  <span className="font-mono text-[11px] text-zinc-500">
-                    {index + 1} / {items.length}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => stepSlide(device, 1, items.length)}
-                    className="font-display text-[13px] text-zinc-400 transition-colors hover:text-white"
-                  >
-                    Next →
-                  </button>
-                </div>
-              )}
-            </Reveal>
-          );
-        })}
+        {groups.map(({ device, items }) => (
+          <Reveal key={device}>
+            <DeviceCarousel device={device} items={items} name={name} onOpen={openLightbox} />
+          </Reveal>
+        ))}
       </div>
 
       {activeShot && (
