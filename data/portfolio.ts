@@ -128,10 +128,10 @@ export const projects: PortfolioProject[] = [
       "We split the homepage into three explicit paths, each with its own CTA, and used live dashboard mockups instead of another feature list.",
     stack: [
       { label: "Platform", value: "Next.js" },
-      { label: "CMS", value: "Strapi (blog & insights)" },
+      { label: "CMS", value: "Keystatic (site content) + Strapi (blog & insights)" },
       { label: "Notable", value: "English-only marketing site, kept as its own repo separate from the HiTerra app" },
     ],
-    stackTags: ["Next.js", "Strapi", "Marketing site"],
+    stackTags: ["Next.js", "Keystatic", "Strapi"],
     liveUrl: "https://www.hiterra.co/",
     cardImage: "/portfolio/hiterra-card.jpg",
     heroImage: "/portfolio/hiterra-wide.jpg",
