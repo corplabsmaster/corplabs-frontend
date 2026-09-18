@@ -20,8 +20,8 @@ export interface StatPair {
 export interface ProjectScreenshot {
   src: string;
   label: string;
-  /** "portrait" = a mobile-viewport shot; "wide" = a full-width desktop section. */
-  orientation?: "wide" | "portrait";
+  /** Which device chrome the gallery frames this shot in. */
+  device: "desktop" | "tablet" | "mobile";
 }
 
 export interface PortfolioProject {
@@ -91,10 +91,13 @@ export const projects: PortfolioProject[] = [
     heroVideo: "/portfolio/montesofa-hero.mp4",
     heroPoster: "/portfolio/montesofa-hero-poster.jpg",
     screenshots: [
-      { src: "/portfolio/montesofa.jpg", label: "Homepage", orientation: "wide" },
-      { src: "/portfolio/montesofa-2.jpg", label: "Collections", orientation: "wide" },
-      { src: "/portfolio/montesofa-3.jpg", label: "In your space", orientation: "wide" },
-      { src: "/portfolio/montesofa-mobile.jpg", label: "Mobile", orientation: "portrait" },
+      { src: "/portfolio/montesofa.jpg", label: "Homepage", device: "desktop" },
+      { src: "/portfolio/montesofa-collections.jpg", label: "Collections page", device: "desktop" },
+      { src: "/portfolio/montesofa-about.jpg", label: "About — The Maison", device: "desktop" },
+      { src: "/portfolio/montesofa-2.jpg", label: "Collections teaser", device: "desktop" },
+      { src: "/portfolio/montesofa-3.jpg", label: "In your space", device: "desktop" },
+      { src: "/portfolio/montesofa-tablet.jpg", label: "Homepage", device: "tablet" },
+      { src: "/portfolio/montesofa-mobile.jpg", label: "Homepage", device: "mobile" },
     ],
     featured: true,
   },
@@ -123,9 +126,13 @@ export const projects: PortfolioProject[] = [
     cardImage: "/portfolio/hiterra-card.jpg",
     heroImage: "/portfolio/hiterra-wide.jpg",
     screenshots: [
-      { src: "/portfolio/hiterra-2.jpg", label: "The four modules", orientation: "wide" },
-      { src: "/portfolio/hiterra-3.jpg", label: "Built for every audience", orientation: "wide" },
-      { src: "/portfolio/hiterra-mobile.jpg", label: "Mobile", orientation: "portrait" },
+      { src: "/portfolio/hiterra-2.jpg", label: "The four modules", device: "desktop" },
+      { src: "/portfolio/hiterra-3.jpg", label: "Built for every audience", device: "desktop" },
+      { src: "/portfolio/hiterra-product.jpg", label: "Product — modules explained", device: "desktop" },
+      { src: "/portfolio/hiterra-about.jpg", label: "About — the founders", device: "desktop" },
+      { src: "/portfolio/hiterra-blog.jpg", label: "Blog", device: "desktop" },
+      { src: "/portfolio/hiterra-tablet.jpg", label: "Homepage", device: "tablet" },
+      { src: "/portfolio/hiterra-mobile.jpg", label: "Homepage", device: "mobile" },
     ],
     featured: true,
   },
@@ -154,9 +161,12 @@ export const projects: PortfolioProject[] = [
     cardImage: "/portfolio/evenmall-card.jpg",
     heroImage: "/portfolio/evenmall-wide.jpg",
     screenshots: [
-      { src: "/portfolio/evenmall-2.jpg", label: "Trending this week", orientation: "wide" },
-      { src: "/portfolio/evenmall-3.jpg", label: "Why shop with EvenMall", orientation: "wide" },
-      { src: "/portfolio/evenmall-mobile.jpg", label: "Mobile", orientation: "portrait" },
+      { src: "/portfolio/evenmall-2.jpg", label: "Trending this week", device: "desktop" },
+      { src: "/portfolio/evenmall-3.jpg", label: "Why shop with EvenMall", device: "desktop" },
+      { src: "/portfolio/evenmall-shopall.jpg", label: "Shop all — with filters", device: "desktop" },
+      { src: "/portfolio/evenmall-product.jpg", label: "Product page", device: "desktop" },
+      { src: "/portfolio/evenmall-tablet.jpg", label: "Homepage", device: "tablet" },
+      { src: "/portfolio/evenmall-mobile.jpg", label: "Homepage", device: "mobile" },
     ],
   },
 ];
