@@ -29,9 +29,15 @@ export function PortfolioGrid() {
 
   const filtered = useMemo(() => filterProjects(active), [active]);
 
+  // Only show a chip for pillars that actually have shipped work — hide the
+  // rest until they do, rather than offering a filter that always dead-ends.
+  const pillarsWithProjects = pillars.filter(p =>
+    projects.some(project => project.pillar === p.id)
+  );
+
   const chips: { label: string; value: FilterValue }[] = [
     { label: portfolioFilterCopy.all, value: "all" },
-    ...pillars.map(p => ({ label: p.name, value: p.id })),
+    ...pillarsWithProjects.map(p => ({ label: p.name, value: p.id })),
   ];
 
   return (

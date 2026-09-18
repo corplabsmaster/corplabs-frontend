@@ -101,45 +101,6 @@ export default function CorpsitePage() {
         </Reveal>
       </section>
 
-      {/* 1.5 — Proof banner: real Corpsite builds, linking to the full portfolio */}
-      {portfolioProjects.filter((p) => p.pillar === "corpsite").length > 0 && (
-        <section className="mx-auto max-w-6xl px-4 pt-4 sm:px-6">
-          <Reveal>
-            <div className="relative overflow-hidden rounded-3xl border border-line bg-surface-raised px-6 py-16 text-center sm:px-16">
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-48 max-w-lg rounded-full bg-brand-600/30 blur-3xl"
-              />
-              <div className="relative flex justify-center -space-x-4">
-                {portfolioProjects
-                  .filter((p) => p.pillar === "corpsite")
-                  .slice(0, 3)
-                  .map((p) => (
-                    <PortfolioThumb
-                      key={p.slug}
-                      image={p.cardImage}
-                      name={p.name}
-                      className="aspect-square w-20 shrink-0 rounded-full border-4 border-surface-raised sm:w-24"
-                      sizes="96px"
-                    />
-                  ))}
-              </div>
-              <h2 className="relative mx-auto mt-6 max-w-2xl font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Not sure what a Corpsite build actually looks like?
-              </h2>
-              <p className="relative mx-auto mt-4 max-w-xl text-lg text-zinc-400">
-                See real sites we&apos;ve shipped — no mockups, click straight through to the live pages.
-              </p>
-              <div className="relative mt-8 flex justify-center">
-                <Button href="/portfolio?pillar=corpsite" className="font-display uppercase tracking-[0.08em]">
-                  See our work
-                </Button>
-              </div>
-            </div>
-          </Reveal>
-        </section>
-      )}
-
       {/* 2 — Plan selector */}
       <section id="selector" className="mx-auto max-w-3xl scroll-mt-24 px-4 pt-16 sm:px-6">
         <Reveal>
@@ -176,6 +137,45 @@ export default function CorpsitePage() {
           <AddonsGrid />
         </Reveal>
       </section>
+
+      {/* 4.5 — Proof banner: real Corpsite builds, linking to the full portfolio */}
+      {portfolioProjects.filter((p) => p.pillar === "corpsite").length > 0 && (
+        <section className="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
+          <Reveal>
+            <div className="relative overflow-hidden rounded-3xl border border-line bg-surface-raised px-6 py-16 text-center sm:px-16">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-48 max-w-lg rounded-full bg-brand-600/30 blur-3xl"
+              />
+              <div className="relative flex justify-center -space-x-4">
+                {portfolioProjects
+                  .filter((p) => p.pillar === "corpsite")
+                  .slice(0, 3)
+                  .map((p) => (
+                    <PortfolioThumb
+                      key={p.slug}
+                      image={p.cardImage}
+                      name={p.name}
+                      className="aspect-square w-20 shrink-0 rounded-full border-4 border-surface-raised sm:w-24"
+                      sizes="96px"
+                    />
+                  ))}
+              </div>
+              <h2 className="relative mx-auto mt-6 max-w-2xl font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Not sure what a Corpsite build actually looks like?
+              </h2>
+              <p className="relative mx-auto mt-4 max-w-xl text-lg text-zinc-400">
+                See real sites we&apos;ve shipped — no mockups, click straight through to the live pages.
+              </p>
+              <div className="relative mt-8 flex justify-center">
+                <Button href="/portfolio?pillar=corpsite" className="font-display uppercase tracking-[0.08em]">
+                  See our work
+                </Button>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+      )}
 
       {/* 5 — NGO programme band */}
       <section id="ngo" className="mx-auto max-w-6xl scroll-mt-24 px-4 pt-24 sm:px-6">
