@@ -29,10 +29,22 @@ const GAP = 24; // px — matches the track's flex gap below
  * their bezel (rounded corners, notch) always shows whole — a partial phone
  * doesn't read as "a phone".
  */
-const carousel: Record<DeviceKind, { main: number; peek: number; window: number; sizes: string }> = {
-  desktop: { main: 720, peek: 720, window: 1152, sizes: "720px" },
-  tablet: { main: 380, peek: 160, window: 760, sizes: "380px" },
-  mobile: { main: 320, peek: 140, window: 640, sizes: "320px" },
+/** DeviceFrame's rendered height for a given rendered width, matching its
+ * chrome (browser dot-bar + border, or bezel border) plus the screenshot's
+ * own aspect ratio. A scaled-up peek keeps its *unscaled* layout height
+ * (CSS transform doesn't affect layout), so the carousel window needs this
+ * explicit height — sized for the current shot at `main` width — or its
+ * `overflow-hidden` clips the scaled-up frame's top and bottom. */
+function frameHeight(device: DeviceKind, width: number): number {
+  if (device === "desktop") return 28 + (width - 2) * (10 / 16); // dot-bar + border, then 16:10
+  if (device === "tablet") return 14 + (width - 14) * (4 / 3); // bezel border, then 3:4
+  return 14 + (width - 14) * (19 / 9); // mobile — bezel border, then 9:19
+}
+
+const carousel: Record<DeviceKind, { main: number; peek: number; window: number; sizes: string; height: number }> = {
+  desktop: { main: 720, peek: 720, window: 1152, sizes: "720px", height: frameHeight("desktop", 720) },
+  tablet: { main: 380, peek: 160, window: 760, sizes: "380px", height: frameHeight("tablet", 380) },
+  mobile: { main: 320, peek: 140, window: 640, sizes: "320px", height: frameHeight("mobile", 320) },
 };
 
 const lightboxWidthByDevice: Record<DeviceKind, string> = {
@@ -93,9 +105,13 @@ function DeviceCarousel({
 
   return (
     <>
-      <div ref={windowRef} className="relative mx-auto overflow-hidden" style={{ maxWidth: geo.window, width: "100%" }}>
+      <div
+        ref={windowRef}
+        className="relative mx-auto overflow-hidden"
+        style={{ maxWidth: geo.window, width: "100%", height: geo.height }}
+      >
         <motion.div
-          className="flex items-center"
+          className="flex h-full items-center"
           style={{ gap: GAP }}
           animate={{ x: trackX }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
