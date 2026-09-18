@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PortfolioThumb } from "@/components/portfolio/PortfolioThumb";
+import { HeroMedia } from "@/components/portfolio/HeroMedia";
+import { ScreenshotGallery } from "@/components/portfolio/ScreenshotGallery";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -30,7 +31,7 @@ export async function generateMetadata({
   };
 }
 
-const kindLabel = { build: "New build", revamp: "Revamp" } as const;
+const kindLabel = { build: "New website build", revamp: "Website revamp" } as const;
 
 export default async function PortfolioProjectPage({
   params,
@@ -44,7 +45,7 @@ export default async function PortfolioProjectPage({
   const related = projects.filter(p => p.slug !== project.slug).slice(0, 2);
 
   return (
-    <article className="mx-auto max-w-3xl px-4 pb-24 pt-20 sm:px-6">
+    <article className="mx-auto max-w-5xl px-4 pb-24 pt-20 sm:px-6">
       <Link
         href="/portfolio"
         className="font-display text-[13px] font-medium text-brand-300 transition-colors hover:text-white"
@@ -53,54 +54,44 @@ export default async function PortfolioProjectPage({
       </Link>
 
       <Reveal>
-        <header className="mt-6">
-          <div className="flex flex-wrap items-center gap-2.5">
-            <span className="rounded-full border border-line px-2.5 py-0.5 font-display text-[11px] font-medium uppercase tracking-wider text-zinc-400">
-              {kindLabel[project.kind]}
-            </span>
-            <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-500">
-              {project.industry}
-            </span>
-          </div>
-          <h1 className="mt-3 font-display text-3xl font-bold leading-tight tracking-tight text-balance text-white sm:text-[40px]">
+        <header className="mt-6 max-w-2xl">
+          <h1 className="font-display text-3xl font-bold leading-tight tracking-tight text-balance text-white sm:text-[40px]">
             {project.name}
           </h1>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-200">
-            {project.summary}
-          </p>
+          <p className="mt-4 text-base leading-relaxed text-zinc-200">{project.summary}</p>
         </header>
       </Reveal>
 
-      {/* Hero + gallery sit together as one visual block — the extra screens
-          are the point, not an afterthought scrolled away from the hero. */}
+      {/* Full-width hero — the client's own site video when it has one, else a large screenshot. */}
       <Reveal className="mt-10">
-        <PortfolioThumb image={project.image} name={project.name} className="aspect-[16/10]" />
-        {project.gallery && project.gallery.length > 0 && (
-          <div className="mt-3 grid grid-cols-2 gap-3">
-            {project.gallery.map(src => (
-              <PortfolioThumb key={src} image={src} name={project.name} className="aspect-video" />
-            ))}
-          </div>
-        )}
+        <HeroMedia
+          name={project.name}
+          video={project.heroVideo}
+          poster={project.heroPoster}
+          image={project.heroImage}
+        />
       </Reveal>
 
-      <Reveal className="mt-10">
-        <h2 className="font-display text-lg font-semibold text-white">At a glance</h2>
-        <Card className="mt-3 grid grid-cols-2 gap-x-6 gap-y-4 p-5 sm:p-6">
-          {project.vitals.map(({ label, value }) => (
-            <div key={label}>
+      {/* Intro narrative + a compact fact box, side by side on desktop. */}
+      <Reveal className="mt-10 grid gap-6 lg:grid-cols-[1fr_260px]">
+        <p className="text-[15.5px] leading-relaxed text-zinc-200">{project.intro}</p>
+        <Card className="h-fit divide-y divide-line p-0">
+          {[
+            { label: "Industry", value: project.industry },
+            { label: "Company type", value: project.companyType },
+            { label: "Engagement", value: kindLabel[project.kind] },
+          ].map(({ label, value }) => (
+            <div key={label} className="px-5 py-3">
               <dt className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">
                 {label}
               </dt>
-              <dd className="mt-1 text-[13.5px] font-medium leading-snug text-white">
-                {value}
-              </dd>
+              <dd className="mt-1 text-[13.5px] font-medium leading-snug text-white">{value}</dd>
             </div>
           ))}
         </Card>
       </Reveal>
 
-      <Reveal className="mt-10">
+      <Reveal className="mt-10 max-w-2xl">
         <h2 className="font-display text-lg font-semibold text-white">Where we came in</h2>
         <p className="mt-3 text-[15px] leading-relaxed text-zinc-200">{project.brief}</p>
         <Button
@@ -113,32 +104,18 @@ export default async function PortfolioProjectPage({
         </Button>
       </Reveal>
 
-      <Reveal className="mt-10">
-        <h2 className="font-display text-lg font-semibold text-white">
-          The road not taken
-        </h2>
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          <Card className="p-5 opacity-70">
-            <p className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">
-              The obvious move
-            </p>
-            <p className="mt-2 text-[14px] leading-relaxed text-zinc-300 line-through decoration-zinc-600">
-              {project.expectedMove}
-            </p>
-          </Card>
-          <Card className="border-brand-500/40 bg-brand-500/[0.06] p-5">
-            <p className="font-mono text-[10.5px] uppercase tracking-wider text-brand-300">
-              What we shipped
-            </p>
-            <p className="mt-2 text-[14px] leading-relaxed text-white">
-              {project.actualMove}
-            </p>
-          </Card>
+      <Reveal className="mt-14">
+        <h2 className="font-display text-lg font-semibold text-white">More of the site</h2>
+        <p className="mt-1.5 text-[13.5px] text-zinc-400">
+          Click through for a closer look — desktop and mobile.
+        </p>
+        <div className="mt-4">
+          <ScreenshotGallery shots={project.screenshots} name={project.name} />
         </div>
       </Reveal>
 
-      <Reveal className="mt-10">
-        <h2 className="font-display text-lg font-semibold text-white">Design DNA</h2>
+      <Reveal className="mt-14 max-w-2xl">
+        <h2 className="font-display text-lg font-semibold text-white">Our design</h2>
         <Card className="mt-3 divide-y divide-line p-0">
           {project.designTokens.map(({ label, value }) => (
             <div
@@ -165,7 +142,7 @@ export default async function PortfolioProjectPage({
       </Reveal>
 
       {related.length > 0 && (
-        <footer className="mt-16 border-t border-line pt-10">
+        <footer className="mt-16 max-w-2xl border-t border-line pt-10">
           <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-zinc-500">
             {portfolioCaseStudyCopy.relatedLabel}
           </h2>
@@ -184,7 +161,7 @@ export default async function PortfolioProjectPage({
         </footer>
       )}
 
-      <p className="mt-10 text-xs text-zinc-500">
+      <p className="mt-10 max-w-2xl text-xs text-zinc-500">
         Want to see your business here?{" "}
         <Link href="/contact" className="text-brand-300 hover:text-white">
           Get a free demo →

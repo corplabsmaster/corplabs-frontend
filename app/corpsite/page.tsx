@@ -113,9 +113,10 @@ export default function CorpsitePage() {
                   .map((p) => (
                     <PortfolioThumb
                       key={p.slug}
-                      image={p.image}
+                      image={p.cardImage}
                       name={p.name}
                       className="aspect-square w-16 shrink-0 rounded-full border-2 border-surface-raised sm:w-20"
+                      sizes="80px"
                     />
                   ))}
               </div>

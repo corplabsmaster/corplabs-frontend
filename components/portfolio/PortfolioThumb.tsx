@@ -10,10 +10,13 @@ export function PortfolioThumb({
   image,
   name,
   className,
+  sizes = "(min-width: 1024px) 33vw, 100vw",
 }: {
   image?: string;
   name: string;
   className?: string;
+  /** Override when the rendered size differs from the default grid-card estimate (e.g. a small avatar). */
+  sizes?: string;
 }) {
   if (image) {
     return (
@@ -22,7 +25,7 @@ export function PortfolioThumb({
           src={image}
           alt={`${name} — preview`}
           fill
-          sizes="(min-width: 1024px) 33vw, 100vw"
+          sizes={sizes}
           className="object-cover object-top"
         />
       </div>
