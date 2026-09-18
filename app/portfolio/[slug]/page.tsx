@@ -33,6 +33,10 @@ export async function generateMetadata({
 
 const kindLabel = { build: "New website build", revamp: "Website revamp" } as const;
 
+function hostname(url: string) {
+  return new URL(url).hostname.replace(/^www\./, "");
+}
+
 export default async function PortfolioProjectPage({
   params,
 }: {
@@ -58,6 +62,14 @@ export default async function PortfolioProjectPage({
           <h1 className="font-display text-3xl font-bold leading-tight tracking-tight text-balance text-white sm:text-[40px]">
             {project.name}
           </h1>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <span className="rounded-full border border-line bg-surface-raised px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-zinc-400">
+              {project.industry}
+            </span>
+            <span className="rounded-full border border-line bg-surface-raised px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-zinc-400">
+              {kindLabel[project.kind]}
+            </span>
+          </div>
           <p className="mt-4 text-base leading-relaxed text-zinc-200">{project.summary}</p>
         </header>
       </Reveal>
@@ -88,6 +100,19 @@ export default async function PortfolioProjectPage({
               <dd className="mt-1 text-[13.5px] font-medium leading-snug text-white">{value}</dd>
             </div>
           ))}
+          <div className="px-5 py-3">
+            <dt className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">Live site</dt>
+            <dd className="mt-1 text-[13.5px] font-medium leading-snug">
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-brand-300 transition-colors hover:text-white"
+              >
+                {hostname(project.liveUrl)} ↗
+              </a>
+            </dd>
+          </div>
         </Card>
       </Reveal>
 
@@ -101,10 +126,7 @@ export default async function PortfolioProjectPage({
         />
 
         <Reveal className="relative max-w-2xl pb-10">
-          <span
-            aria-hidden
-            className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-gradient-1 bg-surface sm:-left-[30px]"
-          />
+          <span aria-hidden className="absolute -left-[26px] top-1 h-3 w-3 rounded-full bg-brand-500 sm:-left-[30px]" />
           <span className="mb-1 block font-mono text-xs text-zinc-500">Step 01</span>
           <h2 className="font-display text-base font-semibold text-white">The challenge</h2>
           <p className="mt-2 text-[14px] leading-relaxed text-zinc-200">{project.challenge}</p>
@@ -116,24 +138,6 @@ export default async function PortfolioProjectPage({
             className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-gradient-1 bg-surface sm:-left-[30px]"
           />
           <span className="mb-1 block font-mono text-xs text-zinc-500">Step 02</span>
-          <h2 className="font-display text-base font-semibold text-white">The solution</h2>
-          <p className="mt-2 text-[14px] leading-relaxed text-white">{project.solution}</p>
-          <Button
-            href={project.liveUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-6 font-display uppercase tracking-[0.08em]"
-          >
-            {portfolioCaseStudyCopy.liveSiteLabel}
-          </Button>
-        </Reveal>
-
-        <Reveal className="relative max-w-2xl pb-12">
-          <span
-            aria-hidden
-            className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-gradient-1 bg-surface sm:-left-[30px]"
-          />
-          <span className="mb-1 block font-mono text-xs text-zinc-500">Step 03</span>
           <h2 className="font-display text-lg font-semibold text-white">The stack</h2>
           <Card className="mt-3 divide-y divide-line p-0">
             {project.stack.map(({ label, value }) => (
@@ -160,12 +164,29 @@ export default async function PortfolioProjectPage({
           </div>
         </Reveal>
 
+        <Reveal className="relative max-w-2xl pb-12">
+          <span
+            aria-hidden
+            className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-gradient-1 bg-surface sm:-left-[30px]"
+          />
+          <span className="mb-1 block font-mono text-xs text-zinc-500">Step 03</span>
+          <h2 className="font-display text-base font-semibold text-white">The solution</h2>
+          <p className="mt-2 text-[14px] leading-relaxed text-white">{project.solution}</p>
+          <Button
+            href={project.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 font-display uppercase tracking-[0.08em]"
+          >
+            {portfolioCaseStudyCopy.liveSiteLabel}
+          </Button>
+        </Reveal>
+
         <Reveal className="relative">
           <span
             aria-hidden
             className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-gradient-1 bg-surface sm:-left-[30px]"
           />
-          <span className="mb-1 block font-mono text-xs text-zinc-500">Step 04</span>
           <div className="mt-5">
             <ScreenshotGallery shots={project.screenshots} name={project.name} />
           </div>
