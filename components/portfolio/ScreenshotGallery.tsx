@@ -30,9 +30,9 @@ const GAP = 24; // px — matches the track's flex gap below
  * doesn't read as "a phone".
  */
 const carousel: Record<DeviceKind, { main: number; peek: number; window: number; sizes: string }> = {
-  desktop: { main: 680, peek: 680, window: 1088, sizes: "680px" },
-  tablet: { main: 360, peek: 200, window: 850, sizes: "360px" },
-  mobile: { main: 300, peek: 170, window: 720, sizes: "300px" },
+  desktop: { main: 720, peek: 720, window: 1152, sizes: "720px" },
+  tablet: { main: 380, peek: 160, window: 760, sizes: "380px" },
+  mobile: { main: 320, peek: 140, window: 640, sizes: "320px" },
 };
 
 const lightboxWidthByDevice: Record<DeviceKind, string> = {
@@ -98,7 +98,7 @@ function DeviceCarousel({
           className="flex items-center"
           style={{ gap: GAP }}
           animate={{ x: trackX }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
           {items.map((shot, i) => {
             const isCurrent = i === index;
@@ -111,7 +111,7 @@ function DeviceCarousel({
                 className="relative shrink-0"
                 style={{ width: geo.peek, zIndex: isCurrent ? 10 : 1 }}
                 animate={{ scale: isCurrent ? geo.main / geo.peek : 1, opacity: isCurrent ? 1 : 0.4 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               >
                 <DeviceFrame device={device} src={shot.src} alt={altFor(name, shot)} sizes={geo.sizes} />
               </motion.button>
@@ -203,7 +203,7 @@ export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: 
 
   return (
     <>
-      <div className="space-y-32 sm:space-y-40">
+      <div className="space-y-40 sm:space-y-48">
         {groups.map(({ device, items }) => (
           <Reveal key={device}>
             <DeviceCarousel device={device} items={items} name={name} onOpen={openLightbox} />
