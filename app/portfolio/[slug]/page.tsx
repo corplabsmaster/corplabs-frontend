@@ -125,7 +125,7 @@ export default async function PortfolioProjectPage({
 
         <Reveal className="relative max-w-2xl pb-10">
           <span aria-hidden className="absolute -left-[26px] top-1 h-3 w-3 rounded-full bg-brand-500 sm:-left-[30px]" />
-          <span className="mb-1 block font-mono text-xs text-zinc-500">Step 01</span>
+          <span className="mb-1 block font-mono text-xs text-zinc-500">01</span>
           <h2 className="font-display text-base font-semibold text-white">The challenge</h2>
           <p className="mt-2 text-[14px] leading-relaxed text-zinc-200">{project.challenge}</p>
         </Reveal>
@@ -135,7 +135,7 @@ export default async function PortfolioProjectPage({
             aria-hidden
             className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-gradient-1 bg-surface sm:-left-[30px]"
           />
-          <span className="mb-1 block font-mono text-xs text-zinc-500">Step 02</span>
+          <span className="mb-1 block font-mono text-xs text-zinc-500">02</span>
           <h2 className="font-display text-lg font-semibold text-white">The stack</h2>
           <Card className="mt-3 divide-y divide-line p-0">
             {project.stack.map(({ label, value }) => (
@@ -167,7 +167,7 @@ export default async function PortfolioProjectPage({
             aria-hidden
             className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-gradient-1 bg-surface sm:-left-[30px]"
           />
-          <span className="mb-1 block font-mono text-xs text-zinc-500">Step 03</span>
+          <span className="mb-1 block font-mono text-xs text-zinc-500">03</span>
           <h2 className="font-display text-base font-semibold text-white">The solution</h2>
           <p className="mt-2 text-[14px] leading-relaxed text-white">{project.solution}</p>
           <Button

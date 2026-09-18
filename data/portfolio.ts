@@ -170,9 +170,14 @@ export const projects: PortfolioProject[] = [
     stack: [
       { label: "Platform", value: "Next.js (App Router) + Medusa.js v2" },
       { label: "Payments", value: "Xendit — split payments & seller payouts" },
-      { label: "Notable", value: "pnpm/Turborepo monorepo; localized for Malaysia (RM, SST, FPX, e-wallets, BNPL, COD)" },
+      { label: "Admin", value: "Medusa admin — products, categories, and the homepage all edit live, no redeploy" },
+      {
+        label: "Notable",
+        value:
+          "pnpm/Turborepo monorepo; localized for Malaysia (RM, SST, FPX, e-wallets, BNPL, COD); dynamic sitemap + OpenGraph",
+      },
     ],
-    stackTags: ["Next.js", "Medusa.js", "Xendit"],
+    stackTags: ["Next.js", "Medusa.js", "Xendit", "SEO-ready"],
     liveUrl: "https://evenmall.com/",
     cardImage: "/portfolio/evenmall-card.jpg",
     heroImage: "/portfolio/evenmall-wide.jpg",
