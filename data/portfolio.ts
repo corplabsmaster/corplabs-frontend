@@ -38,8 +38,10 @@ export interface PortfolioProject {
   summary: string;
   /** The lead narrative — client's situation, the challenge, what we did. Case-study page only. */
   intro: string;
-  /** Short "scope of engagement" line under the Where We Came In heading. */
-  brief: string;
+  /** The specific problem to solve — concrete, not a restatement of `intro`. */
+  challenge: string;
+  /** What we actually did about it — concrete actions, not a restatement of `intro`. */
+  solution: string;
   /** The visual language as label/value tokens — palette, type, mood, signature move. */
   designTokens: StatPair[];
   /** Short chips summarising the design style, e.g. "Dark-mode SaaS". */
@@ -74,8 +76,10 @@ export const projects: PortfolioProject[] = [
       "A revamp for a Malaysian luxury sofa maker — from a dated storefront to an editorial, product-led site.",
     intro:
       "Monte has been building handmade leather sofas in Selangor since 1997 — from a four-person workshop to a 150-person atelier. But their site still read like a catalogue, and catalogues don't sell craftsmanship. We rebuilt it around full-bleed leather photography, a slower editorial pace, and the same looping hero film that greets visitors on the real showroom floor. Fewer clicks, more looking — the sofa does the convincing.",
-    brief:
-      "A full revamp, not a patch — new information architecture, a new photography direction, and a rebuild on a modern stack, keeping only the products themselves unchanged.",
+    challenge:
+      "Sell handmade craftsmanship through a site that looked like every other furniture catalogue.",
+    solution:
+      "We rebuilt the site around full-bleed leather photography and the brand's own hero film, cut the catalogue UI, and let the product carry the page.",
     designTokens: [
       { label: "Palette", value: "Warm cream canvas, charcoal accent sections" },
       { label: "Type", value: "Serif display headlines, small-caps sans labels" },
@@ -106,8 +110,10 @@ export const projects: PortfolioProject[] = [
       "A dark-mode platform site for HiTerra's field-to-harvest agritech product, explaining four connected modules at a glance.",
     intro:
       "HiTerra turns soil samples and field data into decisions a farm team can actually act on, across Malaysia and Indonesia. The challenge wasn't proving the tech worked — it was explaining four connected products to three completely different audiences without burying anyone in jargon. We built a dark, data-forward site that splits the homepage into explicit paths for farmers, estates, and partners, with live dashboard mockups doing the convincing instead of another feature list.",
-    brief:
-      "A from-scratch build — positioning, information architecture, and every screen designed around three audiences instead of one generic pitch.",
+    challenge:
+      "Explain four connected products to three different audiences — farmers, estates, partners — without burying anyone in jargon.",
+    solution:
+      "We split the homepage into three explicit paths, each with its own CTA, and used live dashboard mockups instead of another feature list.",
     designTokens: [
       { label: "Palette", value: "Navy hero fading to aerial field photo, lime accent" },
       { label: "Type", value: "Dense, clean grotesque sans" },
@@ -136,8 +142,10 @@ export const projects: PortfolioProject[] = [
       "A bold, orange-and-black storefront for EvenMall's furniture and home-essentials marketplace.",
     intro:
       "EvenMall sells everything from Italian sofas to fitness gear under one roof, and needed a storefront confident enough to hold that range together. Rather than default to the white background and blue links most furniture marketplaces settle for, we built a bold black-and-orange identity carried through every banner, badge, and call to action — closer to a fashion outlet's energy than a generic catalogue.",
-    brief:
-      "A from-scratch storefront — brand system, page templates, and the product-grid experience, replacing what would otherwise have been an off-the-shelf marketplace theme.",
+    challenge:
+      "Hold furniture, home goods, pet, and fitness categories together under one storefront without it reading like a generic marketplace theme.",
+    solution:
+      "We built a bold black-and-orange identity and carried it through every banner, badge, and call to action, instead of the default white-background template.",
     designTokens: [
       { label: "Palette", value: "High-contrast black + saturated orange" },
       { label: "Type", value: "Bold, heavy sans-serif display" },
@@ -160,7 +168,7 @@ export const portfolioHero = {
   eyebrow: "Our Work",
   headlineLead: "Real sites, built by",
   headlineGradient: "the same team.",
-  lede: "The projects we're proudest of — shipped, live, and doing real work for real businesses. Click through from the story to the site itself; no mockups, nothing staged.",
+  lede: "Some of our projects we are proud of, shipped, live and doing real work.",
 };
 
 export const portfolioFilterCopy = {

@@ -91,31 +91,42 @@ export default async function PortfolioProjectPage({
         </Card>
       </Reveal>
 
+      {/* The journey — challenge then solution, as timeline steps down the left edge. */}
       <Reveal className="mt-10 max-w-2xl">
-        <h2 className="font-display text-lg font-semibold text-white">Where we came in</h2>
-        <p className="mt-3 text-[15px] leading-relaxed text-zinc-200">{project.brief}</p>
-        <Button
-          href={project.liveUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-7 font-display uppercase tracking-[0.08em]"
-        >
-          {portfolioCaseStudyCopy.liveSiteLabel}
-        </Button>
-      </Reveal>
+        <h2 className="font-display text-lg font-semibold text-white">The journey</h2>
+        <Card className="mt-3 p-0">
+          <div className="relative space-y-7 py-6 pl-9 pr-5 sm:pl-11 sm:pr-6">
+            <div className="absolute left-[15px] top-8 bottom-8 w-px bg-line sm:left-[19px]" />
 
-      <Reveal className="mt-14">
-        <h2 className="font-display text-lg font-semibold text-white">More of the site</h2>
-        <p className="mt-1.5 text-[13.5px] text-zinc-400">
-          Click through for a closer look — desktop and mobile.
-        </p>
-        <div className="mt-4">
-          <ScreenshotGallery shots={project.screenshots} name={project.name} />
-        </div>
+            <div className="relative">
+              <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-zinc-500 sm:-left-[26px]" />
+              <p className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">
+                The challenge
+              </p>
+              <p className="mt-2 text-[14px] leading-relaxed text-zinc-200">{project.challenge}</p>
+            </div>
+
+            <div className="relative">
+              <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-brand-500 sm:-left-[26px]" />
+              <p className="font-mono text-[10.5px] uppercase tracking-wider text-brand-300">
+                The solution
+              </p>
+              <p className="mt-2 text-[14px] leading-relaxed text-white">{project.solution}</p>
+              <Button
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-6 font-display uppercase tracking-[0.08em]"
+              >
+                {portfolioCaseStudyCopy.liveSiteLabel}
+              </Button>
+            </div>
+          </div>
+        </Card>
       </Reveal>
 
       <Reveal className="mt-14 max-w-2xl">
-        <h2 className="font-display text-lg font-semibold text-white">Our design</h2>
+        <h2 className="font-display text-lg font-semibold text-white">Design</h2>
         <Card className="mt-3 divide-y divide-line p-0">
           {project.designTokens.map(({ label, value }) => (
             <div
@@ -138,6 +149,13 @@ export default async function PortfolioProjectPage({
               {tag}
             </span>
           ))}
+        </div>
+      </Reveal>
+
+      <Reveal className="mt-14">
+        <h2 className="font-display text-lg font-semibold text-white">More of the site</h2>
+        <div className="mt-4">
+          <ScreenshotGallery shots={project.screenshots} name={project.name} />
         </div>
       </Reveal>
 
