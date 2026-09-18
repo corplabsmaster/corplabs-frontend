@@ -168,7 +168,7 @@ export default function CorpsitePage() {
                 See real sites we&apos;ve shipped — no mockups, click straight through to the live pages.
               </p>
               <div className="relative mt-8 flex justify-center">
-                <Button href="/portfolio?pillar=corpsite" className="font-display uppercase tracking-[0.08em]">
+                <Button href="/portfolio" className="font-display uppercase tracking-[0.08em]">
                   See our work
                 </Button>
               </div>

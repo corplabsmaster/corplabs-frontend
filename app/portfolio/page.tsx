@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { PortfolioGrid } from "@/components/portfolio/PortfolioGrid";
 import { CtaBand } from "@/components/ui/cta-band";
 import { Reveal } from "@/components/ui/reveal";
@@ -33,11 +32,7 @@ export default function PortfolioPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
-        {/* useSearchParams (for the ?pillar= deep link) needs a Suspense
-            boundary so this page keeps statically rendering. */}
-        <Suspense fallback={<div className="h-10" />}>
-          <PortfolioGrid />
-        </Suspense>
+        <PortfolioGrid />
       </section>
 
       <CtaBand

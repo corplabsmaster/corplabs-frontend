@@ -6,6 +6,7 @@ import { Reveal } from "@/components/ui/reveal";
 
 export interface Screenshot {
   src: string;
+  /** Not shown in the UI — kept only so alt text can be more specific than "{name} — {device} view". */
   label?: string;
   device: DeviceKind;
 }
@@ -22,6 +23,14 @@ const inlineSizes: Record<DeviceKind, string> = {
   desktop: "(min-width: 1024px) 768px, 100vw",
   tablet: "(min-width: 640px) 384px, 90vw",
   mobile: "(min-width: 640px) 320px, 80vw",
+};
+
+/** Width of a peeking neighbor tile — narrow enough that it reads as "there's
+ * more" rather than a second full slide. */
+const peekWidth: Record<DeviceKind, string> = {
+  desktop: "w-16 sm:w-24",
+  tablet: "w-10 sm:w-14",
+  mobile: "w-8 sm:w-12",
 };
 
 const lightboxWidthByDevice: Record<DeviceKind, string> = {
@@ -52,11 +61,11 @@ export function cycleIndex(current: number, direction: 1 | -1, length: number): 
 /**
  * One big screenshot at a time per device (desktop/tablet/mobile), each
  * framed in its own browser/tablet/phone chrome. A device with more than one
- * shot (typically desktop, when the page is long) gets Previous/Next
- * controls to step through them, like a drawer — instead of cramming every
- * shot into a row of small thumbnails. Each device group reveals on its own
- * as the reader scrolls to it. Clicking the current shot opens a full-size
- * lightbox that steps through every shot across every device.
+ * shot (typically desktop, when the page is long) shows a sliver of the
+ * previous/next shot peeking in on either side — click a peek (or Previous/
+ * Next) to step the drawer. Each device group reveals on its own as the
+ * reader scrolls to it. Clicking the current shot opens a full-size lightbox
+ * that steps through every shot across every device.
  */
 export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: string }) {
   const groups = deviceOrder
@@ -116,24 +125,52 @@ export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: 
         {groups.map(({ device, items }) => {
           const index = slideFor(device);
           const shot = items[index];
+          const prevShot = items.length > 1 ? items[cycleIndex(index, -1, items.length)] : null;
+          const nextShot = items.length > 1 ? items[cycleIndex(index, 1, items.length)] : null;
+
           return (
-            <Reveal key={device} className={`mx-auto ${inlineMaxWidth[device]}`}>
-              <button type="button" onClick={e => openLightbox(shot, e)} className="group block w-full">
-                <DeviceFrame
-                  device={device}
-                  src={shot.src}
-                  alt={altFor(name, shot)}
-                  sizes={inlineSizes[device]}
-                />
-              </button>
-              {shot.label && (
-                <p className="mt-3 text-center text-[13px] text-zinc-400">{shot.label}</p>
-              )}
+            <Reveal key={device} className="mx-auto max-w-3xl">
+              <div className="relative overflow-hidden">
+                <div className="flex items-center justify-center gap-3 sm:gap-4">
+                  {prevShot && (
+                    <button
+                      type="button"
+                      aria-label="Previous screenshot"
+                      onClick={() => stepSlide(device, -1, items.length)}
+                      className={`shrink-0 opacity-40 transition-opacity hover:opacity-70 ${peekWidth[device]}`}
+                    >
+                      <DeviceFrame device={device} src={prevShot.src} alt="" sizes="96px" />
+                    </button>
+                  )}
+
+                  <div className={`min-w-0 shrink-0 ${inlineMaxWidth[device]}`} style={{ flexBasis: "70%" }}>
+                    <button type="button" onClick={e => openLightbox(shot, e)} className="block w-full">
+                      <DeviceFrame
+                        device={device}
+                        src={shot.src}
+                        alt={altFor(name, shot)}
+                        sizes={inlineSizes[device]}
+                      />
+                    </button>
+                  </div>
+
+                  {nextShot && (
+                    <button
+                      type="button"
+                      aria-label="Next screenshot"
+                      onClick={() => stepSlide(device, 1, items.length)}
+                      className={`shrink-0 opacity-40 transition-opacity hover:opacity-70 ${peekWidth[device]}`}
+                    >
+                      <DeviceFrame device={device} src={nextShot.src} alt="" sizes="96px" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
               {items.length > 1 && (
                 <div className="mt-4 flex items-center justify-center gap-5">
                   <button
                     type="button"
-                    aria-label="Previous"
                     onClick={() => stepSlide(device, -1, items.length)}
                     className="font-display text-[13px] text-zinc-400 transition-colors hover:text-white"
                   >
@@ -144,7 +181,6 @@ export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: 
                   </span>
                   <button
                     type="button"
-                    aria-label="Next"
                     onClick={() => stepSlide(device, 1, items.length)}
                     className="font-display text-[13px] text-zinc-400 transition-colors hover:text-white"
                   >

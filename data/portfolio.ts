@@ -10,9 +10,6 @@
 
 import type { PillarId } from "@/data/site";
 
-/** @deprecated use PillarId from data/site.ts — kept as an alias so existing imports don't break. */
-export type ProjectPillarId = PillarId;
-
 export type ProjectKind = "build" | "revamp";
 
 export interface StatPair {
@@ -100,7 +97,11 @@ export const projects: PortfolioProject[] = [
       { src: "/portfolio/montesofa-2.jpg", label: "Collections teaser", device: "desktop" },
       { src: "/portfolio/montesofa-3.jpg", label: "In your space", device: "desktop" },
       { src: "/portfolio/montesofa-tablet.jpg", device: "tablet" },
+      { src: "/portfolio/montesofa-collections-tablet.jpg", label: "Collections page", device: "tablet" },
+      { src: "/portfolio/montesofa-about-tablet.jpg", label: "About — The Maison", device: "tablet" },
       { src: "/portfolio/montesofa-mobile.jpg", device: "mobile" },
+      { src: "/portfolio/montesofa-collections-mobile.jpg", label: "Collections page", device: "mobile" },
+      { src: "/portfolio/montesofa-about-mobile.jpg", label: "About — The Maison", device: "mobile" },
     ],
     featured: true,
   },
@@ -135,7 +136,13 @@ export const projects: PortfolioProject[] = [
       { src: "/portfolio/hiterra-about.jpg", label: "About — the founders", device: "desktop" },
       { src: "/portfolio/hiterra-blog.jpg", label: "Blog", device: "desktop" },
       { src: "/portfolio/hiterra-tablet.jpg", device: "tablet" },
+      { src: "/portfolio/hiterra-product-tablet.jpg", label: "Product — modules explained", device: "tablet" },
+      { src: "/portfolio/hiterra-about-tablet.jpg", label: "About — the founders", device: "tablet" },
+      { src: "/portfolio/hiterra-blog-tablet.jpg", label: "Blog", device: "tablet" },
       { src: "/portfolio/hiterra-mobile.jpg", device: "mobile" },
+      { src: "/portfolio/hiterra-product-mobile.jpg", label: "Product — modules explained", device: "mobile" },
+      { src: "/portfolio/hiterra-about-mobile.jpg", label: "About — the founders", device: "mobile" },
+      { src: "/portfolio/hiterra-blog-mobile.jpg", label: "Blog", device: "mobile" },
     ],
     featured: true,
   },
@@ -169,7 +176,11 @@ export const projects: PortfolioProject[] = [
       { src: "/portfolio/evenmall-shopall.jpg", label: "Shop all — with filters", device: "desktop" },
       { src: "/portfolio/evenmall-product.jpg", label: "Product page", device: "desktop" },
       { src: "/portfolio/evenmall-tablet.jpg", device: "tablet" },
+      { src: "/portfolio/evenmall-shopall-tablet.jpg", label: "Shop all — with filters", device: "tablet" },
+      { src: "/portfolio/evenmall-product-tablet.jpg", label: "Product page", device: "tablet" },
       { src: "/portfolio/evenmall-mobile.jpg", device: "mobile" },
+      { src: "/portfolio/evenmall-shopall-mobile.jpg", label: "Shop all — with filters", device: "mobile" },
+      { src: "/portfolio/evenmall-product-mobile.jpg", label: "Product page", device: "mobile" },
     ],
   },
 ];
@@ -179,10 +190,6 @@ export const portfolioHero = {
   headlineLead: "Real sites, built by",
   headlineGradient: "the same team.",
   lede: "Some of our projects we are proud of, shipped, live and doing real work.",
-};
-
-export const portfolioFilterCopy = {
-  all: "All",
 };
 
 export const portfolioCaseStudyCopy = {
