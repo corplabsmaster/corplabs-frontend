@@ -119,9 +119,9 @@ export default async function PortfolioProjectPage({
 
           <div className="relative max-w-2xl pb-12">
             <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-zinc-500 sm:-left-[26px]" />
-            <h2 className="font-display text-lg font-semibold text-white">Design</h2>
+            <h2 className="font-display text-lg font-semibold text-white">The stack</h2>
             <Card className="mt-3 divide-y divide-line p-0">
-              {project.designTokens.map(({ label, value }) => (
+              {project.stack.map(({ label, value }) => (
                 <div
                   key={label}
                   className="grid grid-cols-[100px_1fr] gap-4 px-5 py-3 sm:grid-cols-[130px_1fr] sm:px-6"
@@ -134,7 +134,7 @@ export default async function PortfolioProjectPage({
               ))}
             </Card>
             <div className="mt-3 flex flex-wrap gap-1.5">
-              {project.styleTags.map(tag => (
+              {project.stackTags.map(tag => (
                 <span
                   key={tag}
                   className="rounded-full bg-surface-raised px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wider text-zinc-400"

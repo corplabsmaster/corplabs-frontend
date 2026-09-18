@@ -42,10 +42,10 @@ export interface PortfolioProject {
   challenge: string;
   /** What we actually did about it — concrete actions, not a restatement of `intro`. */
   solution: string;
-  /** The visual language as label/value tokens — palette, type, mood, signature move. */
-  designTokens: StatPair[];
-  /** Short chips summarising the design style, e.g. "Dark-mode SaaS". */
-  styleTags: string[];
+  /** What it's actually built on — platform, hosting, one notable technical detail. */
+  stack: StatPair[];
+  /** Short chips for the stack, e.g. "Next.js", "Payload CMS". */
+  stackTags: string[];
   /** The deployed site prospects can click through to. */
   liveUrl: string;
   /** Grid-card thumbnail — the client's logo or a business/product photo, never a UI screenshot. */
@@ -80,13 +80,12 @@ export const projects: PortfolioProject[] = [
       "Sell handmade craftsmanship through a site that looked like every other furniture catalogue.",
     solution:
       "We rebuilt the site around full-bleed leather photography and the brand's own hero film, cut the catalogue UI, and let the product carry the page.",
-    designTokens: [
-      { label: "Palette", value: "Warm cream canvas, charcoal accent sections" },
-      { label: "Type", value: "Serif display headlines, small-caps sans labels" },
-      { label: "Layout mood", value: "Quiet luxury — whitespace, hairline dividers" },
-      { label: "Signature move", value: "Full-bleed macro leather photography + film" },
+    stack: [
+      { label: "Platform", value: "Next.js + Payload CMS" },
+      { label: "Hosting", value: "Vercel" },
+      { label: "Notable", value: "Custom media CMS for product photography and the hero film" },
     ],
-    styleTags: ["Editorial", "Full-bleed photography", "Quiet luxury", "Heritage storytelling"],
+    stackTags: ["Next.js", "Payload CMS", "Vercel"],
     liveUrl: "https://monte-web-xi.vercel.app/",
     cardImage: "/portfolio/montesofa-card.jpg",
     heroVideo: "/portfolio/montesofa-hero.mp4",
@@ -114,13 +113,12 @@ export const projects: PortfolioProject[] = [
       "Explain four connected products to three different audiences — farmers, estates, partners — without burying anyone in jargon.",
     solution:
       "We split the homepage into three explicit paths, each with its own CTA, and used live dashboard mockups instead of another feature list.",
-    designTokens: [
-      { label: "Palette", value: "Navy hero fading to aerial field photo, lime accent" },
-      { label: "Type", value: "Dense, clean grotesque sans" },
-      { label: "Layout mood", value: "B2B SaaS — data as proof, not illustration" },
-      { label: "Signature move", value: "Live dashboard mockups (pH/N/P/K, carbon map)" },
+    stack: [
+      { label: "Platform", value: "Next.js" },
+      { label: "Hosting", value: "Vercel" },
+      { label: "Notable", value: "Trilingual (EN/BM/中文) with a WhatsApp chat integration" },
     ],
-    styleTags: ["Dark-mode SaaS", "Lime accent", "Data-forward", "Multi-persona"],
+    stackTags: ["Next.js", "Vercel", "Multi-language"],
     liveUrl: "https://www.hiterra.co/",
     cardImage: "/portfolio/hiterra-card.jpg",
     heroImage: "/portfolio/hiterra-wide.jpg",
@@ -146,13 +144,12 @@ export const projects: PortfolioProject[] = [
       "Hold furniture, home goods, pet, and fitness categories together under one storefront without it reading like a generic marketplace theme.",
     solution:
       "We built a bold black-and-orange identity and carried it through every banner, badge, and call to action, instead of the default white-background template.",
-    designTokens: [
-      { label: "Palette", value: "High-contrast black + saturated orange" },
-      { label: "Type", value: "Bold, heavy sans-serif display" },
-      { label: "Layout mood", value: "Dense product grids, promo urgency" },
-      { label: "Signature move", value: "Gradient orange \"Weekend Special\" bands" },
+    stack: [
+      { label: "Platform", value: "Next.js" },
+      { label: "Hosting", value: "Cloudflare" },
+      { label: "Notable", value: "Custom cart & wishlist, trilingual (EN/BM/中文) storefront" },
     ],
-    styleTags: ["Bold retail", "High-contrast", "Promo-driven", "Product-grid dense"],
+    stackTags: ["Next.js", "Cloudflare", "Custom commerce"],
     liveUrl: "https://evenmall.com/",
     cardImage: "/portfolio/evenmall-card.jpg",
     heroImage: "/portfolio/evenmall-wide.jpg",
