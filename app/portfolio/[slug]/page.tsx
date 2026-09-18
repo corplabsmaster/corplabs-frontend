@@ -91,26 +91,21 @@ export default async function PortfolioProjectPage({
         </Card>
       </Reveal>
 
-      {/* The journey — challenge then solution, as timeline steps down the left edge. */}
+      {/* Challenge then solution, as timeline steps down the left edge. */}
       <Reveal className="mt-10 max-w-2xl">
-        <h2 className="font-display text-lg font-semibold text-white">The journey</h2>
-        <Card className="mt-3 p-0">
+        <Card className="p-0">
           <div className="relative space-y-7 py-6 pl-9 pr-5 sm:pl-11 sm:pr-6">
-            <div className="absolute left-[15px] top-8 bottom-8 w-px bg-line sm:left-[19px]" />
+            <div className="absolute left-[15px] top-0 bottom-0 w-px bg-line sm:left-[19px]" />
 
             <div className="relative">
               <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-zinc-500 sm:-left-[26px]" />
-              <p className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">
-                The challenge
-              </p>
+              <h2 className="font-display text-base font-semibold text-white">The challenge</h2>
               <p className="mt-2 text-[14px] leading-relaxed text-zinc-200">{project.challenge}</p>
             </div>
 
             <div className="relative">
               <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-brand-500 sm:-left-[26px]" />
-              <p className="font-mono text-[10.5px] uppercase tracking-wider text-brand-300">
-                The solution
-              </p>
+              <h2 className="font-display text-base font-semibold text-white">The solution</h2>
               <p className="mt-2 text-[14px] leading-relaxed text-white">{project.solution}</p>
               <Button
                 href={project.liveUrl}
