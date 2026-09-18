@@ -91,10 +91,9 @@ export default async function PortfolioProjectPage({
         </Card>
       </Reveal>
 
-      {/* The timeline — challenge, solution, then the stack — down the left
-          edge. Each step reveals on its own as the reader scrolls to it;
-          only the connecting rail is static. "More of the site" below is
-          deliberately outside this rail — it's evidence, not a step. */}
+      {/* The timeline — challenge, solution, stack, and the site itself —
+          down the left edge. Each step reveals on its own as the reader
+          scrolls to it; only the connecting rail is static. */}
       <div className="relative mt-10 pl-9 sm:pl-11">
         <div className="absolute left-[15px] top-2 bottom-2 w-px bg-line sm:left-[19px]" />
 
@@ -145,14 +144,15 @@ export default async function PortfolioProjectPage({
             ))}
           </div>
         </Reveal>
-      </div>
 
-      <Reveal className="mt-16">
-        <h2 className="font-display text-lg font-semibold text-white">More of the site</h2>
-        <div className="mt-6">
-          <ScreenshotGallery shots={project.screenshots} name={project.name} />
-        </div>
-      </Reveal>
+        <Reveal className="relative">
+          <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-zinc-500 sm:-left-[26px]" />
+          <h2 className="font-display text-lg font-semibold text-white">More of the site</h2>
+          <div className="mt-6">
+            <ScreenshotGallery shots={project.screenshots} name={project.name} />
+          </div>
+        </Reveal>
+      </div>
 
       {related.length > 0 && (
         <footer className="mt-16 max-w-2xl border-t border-line pt-10">

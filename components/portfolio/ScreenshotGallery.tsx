@@ -13,24 +13,19 @@ export interface Screenshot {
 
 const deviceOrder: DeviceKind[] = ["desktop", "tablet", "mobile"];
 
-const inlineMaxWidth: Record<DeviceKind, string> = {
-  desktop: "max-w-3xl",
-  tablet: "max-w-sm",
-  mobile: "max-w-xs",
-};
-
-const inlineSizes: Record<DeviceKind, string> = {
-  desktop: "(min-width: 1024px) 768px, 100vw",
-  tablet: "(min-width: 640px) 384px, 90vw",
-  mobile: "(min-width: 640px) 320px, 80vw",
-};
-
-/** Width of a peeking neighbor tile — narrow enough that it reads as "there's
- * more" rather than a second full slide. */
-const peekWidth: Record<DeviceKind, string> = {
-  desktop: "w-16 sm:w-24",
-  tablet: "w-10 sm:w-14",
-  mobile: "w-8 sm:w-12",
+/**
+ * Peek carousel geometry, in px. `main` is the current shot's rendered
+ * width; `window` is the visible viewport around it — since `window` is
+ * narrower than `main` + two neighbors + gaps, centering the row clips the
+ * neighbors down to a `(window - main) / 2` sliver on each side. The peek
+ * is the same frame at the same size as the main shot, not a separate small
+ * thumbnail — cropping is what makes it read as "smaller", not a shrunk,
+ * disproportionate bezel.
+ */
+const carousel: Record<DeviceKind, { main: number; window: number; sizes: string }> = {
+  desktop: { main: 600, window: 960, sizes: "600px" },
+  tablet: { main: 300, window: 520, sizes: "300px" },
+  mobile: { main: 240, window: 420, sizes: "240px" },
 };
 
 const lightboxWidthByDevice: Record<DeviceKind, string> = {
@@ -61,11 +56,12 @@ export function cycleIndex(current: number, direction: 1 | -1, length: number): 
 /**
  * One big screenshot at a time per device (desktop/tablet/mobile), each
  * framed in its own browser/tablet/phone chrome. A device with more than one
- * shot (typically desktop, when the page is long) shows a sliver of the
- * previous/next shot peeking in on either side — click a peek (or Previous/
- * Next) to step the drawer. Each device group reveals on its own as the
- * reader scrolls to it. Clicking the current shot opens a full-size lightbox
- * that steps through every shot across every device.
+ * shot (typically desktop, when the page is long) shows a crop of the
+ * previous/next shot peeking in on either side, at the same frame size as
+ * the current one — click a peek (or Previous/Next) to step the drawer.
+ * Each device group reveals on its own, well apart, as the reader scrolls
+ * to it. Clicking the current shot opens a full-size lightbox that steps
+ * through every shot across every device.
  */
 export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: string }) {
   const groups = deviceOrder
@@ -121,35 +117,40 @@ export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: 
 
   return (
     <>
-      <div className="space-y-10">
+      <div className="space-y-24">
         {groups.map(({ device, items }) => {
           const index = slideFor(device);
           const shot = items[index];
           const prevShot = items.length > 1 ? items[cycleIndex(index, -1, items.length)] : null;
           const nextShot = items.length > 1 ? items[cycleIndex(index, 1, items.length)] : null;
+          const geo = carousel[device];
 
           return (
-            <Reveal key={device} className="mx-auto max-w-3xl">
-              <div className="relative overflow-hidden">
-                <div className="flex items-center justify-center gap-3 sm:gap-4">
+            <Reveal key={device}>
+              <div
+                className="relative mx-auto overflow-hidden"
+                style={{ maxWidth: geo.window, width: "100%" }}
+              >
+                <div className="flex items-center justify-center gap-6">
                   {prevShot && (
                     <button
                       type="button"
                       aria-label="Previous screenshot"
                       onClick={() => stepSlide(device, -1, items.length)}
-                      className={`shrink-0 opacity-40 transition-opacity hover:opacity-70 ${peekWidth[device]}`}
+                      className="shrink-0 opacity-40 transition-opacity hover:opacity-70"
+                      style={{ width: geo.main }}
                     >
-                      <DeviceFrame device={device} src={prevShot.src} alt="" sizes="96px" />
+                      <DeviceFrame device={device} src={prevShot.src} alt="" sizes={geo.sizes} />
                     </button>
                   )}
 
-                  <div className={`min-w-0 shrink-0 ${inlineMaxWidth[device]}`} style={{ flexBasis: "70%" }}>
+                  <div className="shrink-0" style={{ width: geo.main }}>
                     <button type="button" onClick={e => openLightbox(shot, e)} className="block w-full">
                       <DeviceFrame
                         device={device}
                         src={shot.src}
                         alt={altFor(name, shot)}
-                        sizes={inlineSizes[device]}
+                        sizes={geo.sizes}
                       />
                     </button>
                   </div>
@@ -159,9 +160,10 @@ export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: 
                       type="button"
                       aria-label="Next screenshot"
                       onClick={() => stepSlide(device, 1, items.length)}
-                      className={`shrink-0 opacity-40 transition-opacity hover:opacity-70 ${peekWidth[device]}`}
+                      className="shrink-0 opacity-40 transition-opacity hover:opacity-70"
+                      style={{ width: geo.main }}
                     >
-                      <DeviceFrame device={device} src={nextShot.src} alt="" sizes="96px" />
+                      <DeviceFrame device={device} src={nextShot.src} alt="" sizes={geo.sizes} />
                     </button>
                   )}
                 </div>
