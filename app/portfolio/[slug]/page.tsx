@@ -91,66 +91,67 @@ export default async function PortfolioProjectPage({
         </Card>
       </Reveal>
 
-      {/* Challenge then solution, as timeline steps down the left edge. */}
-      <Reveal className="mt-10 max-w-2xl">
-        <Card className="p-0">
-          <div className="relative space-y-7 py-6 pl-9 pr-5 sm:pl-11 sm:pr-6">
-            <div className="absolute left-[15px] top-0 bottom-0 w-px bg-line sm:left-[19px]" />
+      {/* One continuous timeline — challenge, solution, design, and the site
+          itself — down the left edge, instead of four disconnected sections. */}
+      <Reveal className="mt-10">
+        <div className="relative pl-9 sm:pl-11">
+          <div className="absolute left-[15px] top-2 bottom-2 w-px bg-line sm:left-[19px]" />
 
-            <div className="relative">
-              <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-zinc-500 sm:-left-[26px]" />
-              <h2 className="font-display text-base font-semibold text-white">The challenge</h2>
-              <p className="mt-2 text-[14px] leading-relaxed text-zinc-200">{project.challenge}</p>
-            </div>
+          <div className="relative max-w-2xl pb-10">
+            <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-zinc-500 sm:-left-[26px]" />
+            <h2 className="font-display text-base font-semibold text-white">The challenge</h2>
+            <p className="mt-2 text-[14px] leading-relaxed text-zinc-200">{project.challenge}</p>
+          </div>
 
-            <div className="relative">
-              <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-brand-500 sm:-left-[26px]" />
-              <h2 className="font-display text-base font-semibold text-white">The solution</h2>
-              <p className="mt-2 text-[14px] leading-relaxed text-white">{project.solution}</p>
-              <Button
-                href={project.liveUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 font-display uppercase tracking-[0.08em]"
-              >
-                {portfolioCaseStudyCopy.liveSiteLabel}
-              </Button>
+          <div className="relative max-w-2xl pb-12">
+            <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-brand-500 sm:-left-[26px]" />
+            <h2 className="font-display text-base font-semibold text-white">The solution</h2>
+            <p className="mt-2 text-[14px] leading-relaxed text-white">{project.solution}</p>
+            <Button
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 font-display uppercase tracking-[0.08em]"
+            >
+              {portfolioCaseStudyCopy.liveSiteLabel}
+            </Button>
+          </div>
+
+          <div className="relative max-w-2xl pb-12">
+            <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-zinc-500 sm:-left-[26px]" />
+            <h2 className="font-display text-lg font-semibold text-white">Design</h2>
+            <Card className="mt-3 divide-y divide-line p-0">
+              {project.designTokens.map(({ label, value }) => (
+                <div
+                  key={label}
+                  className="grid grid-cols-[100px_1fr] gap-4 px-5 py-3 sm:grid-cols-[130px_1fr] sm:px-6"
+                >
+                  <dt className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">
+                    {label}
+                  </dt>
+                  <dd className="text-[13.5px] leading-snug text-zinc-200">{value}</dd>
+                </div>
+              ))}
+            </Card>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {project.styleTags.map(tag => (
+                <span
+                  key={tag}
+                  className="rounded-full bg-surface-raised px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wider text-zinc-400"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
-        </Card>
-      </Reveal>
 
-      <Reveal className="mt-14 max-w-2xl">
-        <h2 className="font-display text-lg font-semibold text-white">Design</h2>
-        <Card className="mt-3 divide-y divide-line p-0">
-          {project.designTokens.map(({ label, value }) => (
-            <div
-              key={label}
-              className="grid grid-cols-[100px_1fr] gap-4 px-5 py-3 sm:grid-cols-[130px_1fr] sm:px-6"
-            >
-              <dt className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">
-                {label}
-              </dt>
-              <dd className="text-[13.5px] leading-snug text-zinc-200">{value}</dd>
+          <div className="relative">
+            <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-zinc-500 sm:-left-[26px]" />
+            <h2 className="font-display text-lg font-semibold text-white">More of the site</h2>
+            <div className="mt-4">
+              <ScreenshotGallery shots={project.screenshots} name={project.name} />
             </div>
-          ))}
-        </Card>
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {project.styleTags.map(tag => (
-            <span
-              key={tag}
-              className="rounded-full bg-surface-raised px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wider text-zinc-400"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </Reveal>
-
-      <Reveal className="mt-14">
-        <h2 className="font-display text-lg font-semibold text-white">More of the site</h2>
-        <div className="mt-4">
-          <ScreenshotGallery shots={project.screenshots} name={project.name} />
+          </div>
         </div>
       </Reveal>
 
