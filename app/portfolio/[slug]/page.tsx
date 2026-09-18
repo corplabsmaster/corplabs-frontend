@@ -6,7 +6,7 @@ import { ScreenshotGallery } from "@/components/portfolio/ScreenshotGallery";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
-import { portfolioCaseStudyCopy, projects } from "@/data/portfolio";
+import { kindLabel, portfolioCaseStudyCopy, projects } from "@/data/portfolio";
 
 export async function generateStaticParams() {
   return projects.map(project => ({ slug: project.slug }));
@@ -30,8 +30,6 @@ export async function generateMetadata({
     alternates: { canonical: `/portfolio/${slug}` },
   };
 }
-
-const kindLabel = { build: "New website build", revamp: "Website revamp" } as const;
 
 function hostname(url: string) {
   return new URL(url).hostname.replace(/^www\./, "");
@@ -63,10 +61,10 @@ export default async function PortfolioProjectPage({
             {project.name}
           </h1>
           <div className="mt-3 flex flex-wrap gap-2">
-            <span className="rounded-full border border-line bg-surface-raised px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-zinc-400">
+            <span className="rounded-full border border-brand-600 bg-brand-950/60 px-3 py-0.5 font-mono text-xs uppercase tracking-wider text-brand-200">
               {project.industry}
             </span>
-            <span className="rounded-full border border-line bg-surface-raised px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-zinc-400">
+            <span className="rounded-full border border-brand-600 bg-brand-950/60 px-3 py-0.5 font-mono text-xs uppercase tracking-wider text-brand-200">
               {kindLabel[project.kind]}
             </span>
           </div>

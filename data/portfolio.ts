@@ -12,6 +12,12 @@ import type { PillarId } from "@/data/site";
 
 export type ProjectKind = "build" | "revamp";
 
+/** Shared between the case-study header and the grid card's tag badges. */
+export const kindLabel: Record<ProjectKind, string> = {
+  build: "New website build",
+  revamp: "Website revamp",
+};
+
 export interface StatPair {
   label: string;
   value: string;
