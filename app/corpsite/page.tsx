@@ -101,12 +101,16 @@ export default function CorpsitePage() {
         </Reveal>
       </section>
 
-      {/* 1.5 — Proof strip: a few shipped Corpsite projects, linking to the full portfolio */}
+      {/* 1.5 — Proof banner: real Corpsite builds, linking to the full portfolio */}
       {portfolioProjects.filter((p) => p.pillar === "corpsite").length > 0 && (
         <section className="mx-auto max-w-6xl px-4 pt-4 sm:px-6">
           <Reveal>
-            <div className="flex flex-col gap-6 rounded-2xl border border-line bg-surface-raised p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-              <div className="flex -space-x-3">
+            <div className="relative overflow-hidden rounded-3xl border border-line bg-surface-raised px-6 py-16 text-center sm:px-16">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-48 max-w-lg rounded-full bg-brand-600/30 blur-3xl"
+              />
+              <div className="relative flex justify-center -space-x-4">
                 {portfolioProjects
                   .filter((p) => p.pillar === "corpsite")
                   .slice(0, 3)
@@ -115,22 +119,22 @@ export default function CorpsitePage() {
                       key={p.slug}
                       image={p.cardImage}
                       name={p.name}
-                      className="aspect-square w-16 shrink-0 rounded-full border-2 border-surface-raised sm:w-20"
-                      sizes="80px"
+                      className="aspect-square w-20 shrink-0 rounded-full border-4 border-surface-raised sm:w-24"
+                      sizes="96px"
                     />
                   ))}
               </div>
-              <div className="flex-1">
-                <p className="font-display text-sm font-semibold text-white">
-                  Not sure what a Corpsite build actually looks like?
-                </p>
-                <p className="mt-1 text-[13px] text-zinc-400">
-                  See real sites we&apos;ve shipped — click through to the live pages.
-                </p>
+              <h2 className="relative mx-auto mt-6 max-w-2xl font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Not sure what a Corpsite build actually looks like?
+              </h2>
+              <p className="relative mx-auto mt-4 max-w-xl text-lg text-zinc-400">
+                See real sites we&apos;ve shipped — no mockups, click straight through to the live pages.
+              </p>
+              <div className="relative mt-8 flex justify-center">
+                <Button href="/portfolio?pillar=corpsite" className="font-display uppercase tracking-[0.08em]">
+                  See our work
+                </Button>
               </div>
-              <Button href="/portfolio?pillar=corpsite" variant="secondary" size="sm">
-                See our work
-              </Button>
             </div>
           </Reveal>
         </section>

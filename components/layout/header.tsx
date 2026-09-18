@@ -12,10 +12,6 @@ import { cn } from "@/lib/utils";
 const capsuleNav = [
   { label: "Home", href: "/", divider: true },
   { label: "Solutions", href: "/solutions" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Corpi", href: "/corpi" },
-  { label: "Corpcode", href: "/corpcode" },
-  { label: "Corprise", href: "/corprise" },
   { label: "Corpsite", href: "/corpsite" },
   { label: "About", href: "/about" },
 ];
