@@ -1,7 +1,14 @@
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 
 export type DeviceKind = "desktop" | "tablet" | "mobile";
+
+/** Matches the grid-thumbnail widths in ScreenshotGallery's `widthByDevice`.
+ * Callers rendering at a different size (e.g. the lightbox) pass their own `sizes`. */
+const defaultSizes: Record<DeviceKind, string> = {
+  desktop: "(min-width: 640px) 360px, 280px",
+  tablet: "(min-width: 640px) 192px, 160px",
+  mobile: "(min-width: 640px) 160px, 128px",
+};
 
 /**
  * Wraps a screenshot in a device chrome (browser bar, tablet or phone
@@ -13,13 +20,14 @@ export function DeviceFrame({
   device,
   src,
   alt,
-  sizes,
+  sizes = defaultSizes[device],
   priority,
 }: {
   device: DeviceKind;
   src: string;
   alt: string;
-  sizes: string;
+  /** Defaults to this device's grid-thumbnail width; override for other contexts (e.g. the lightbox). */
+  sizes?: string;
   priority?: boolean;
 }) {
   if (device === "desktop") {

@@ -31,7 +31,7 @@ export function PortfolioGrid() {
 
   const chips: { label: string; value: FilterValue }[] = [
     { label: portfolioFilterCopy.all, value: "all" },
-    ...pillars.map(p => ({ label: p.name, value: p.id as FilterValue })),
+    ...pillars.map(p => ({ label: p.name, value: p.id })),
   ];
 
   return (

@@ -8,7 +8,10 @@
  * entries and Sahira wants to add projects without a PR.
  */
 
-export type ProjectPillarId = "corpi" | "corpcode" | "corprise" | "corpsite";
+import type { PillarId } from "@/data/site";
+
+/** @deprecated use PillarId from data/site.ts — kept as an alias so existing imports don't break. */
+export type ProjectPillarId = PillarId;
 
 export type ProjectKind = "build" | "revamp";
 
@@ -19,16 +22,22 @@ export interface StatPair {
 
 export interface ProjectScreenshot {
   src: string;
-  label: string;
+  /** Shown as a caption on hover/below the frame. Omit for a shot that's self-explanatory (e.g. the plain homepage on a device). */
+  label?: string;
   /** Which device chrome the gallery frames this shot in. */
   device: "desktop" | "tablet" | "mobile";
 }
 
-export interface PortfolioProject {
+/** Exactly one hero medium — never both, never neither. */
+export type ProjectHero =
+  | { heroVideo: string; heroPoster?: string; heroImage?: undefined }
+  | { heroVideo?: undefined; heroPoster?: undefined; heroImage: string };
+
+export type PortfolioProject = {
   slug: string;
   /** Project/client name shown as the card and detail-page title. */
   name: string;
-  pillar: ProjectPillarId;
+  pillar: PillarId;
   /** Standardised business type — one plain term, no "/" or "&", no tech-jargon suffixes. */
   industry: string;
   /** How the client operates, for the info box next to the intro. */
@@ -50,16 +59,10 @@ export interface PortfolioProject {
   liveUrl: string;
   /** Grid-card thumbnail — the client's logo or a business/product photo, never a UI screenshot. */
   cardImage: string;
-  /** Full-width case-study hero screenshot. Omit when `heroVideo` is set. */
-  heroImage?: string;
-  /** Full-width case-study hero video (the client's own site video, if it has one). */
-  heroVideo?: string;
-  /** Poster frame shown before `heroVideo` loads. */
-  heroPoster?: string;
   /** Extra screenshots — multiple views (sections, mobile) for the gallery. */
   screenshots: ProjectScreenshot[];
   featured?: boolean;
-}
+} & ProjectHero;
 
 // NOTE: copy below is a first draft written from what the live sites show
 // (layout, copy, stats, industry) — not confirmed engagement details (scope,
@@ -91,13 +94,13 @@ export const projects: PortfolioProject[] = [
     heroVideo: "/portfolio/montesofa-hero.mp4",
     heroPoster: "/portfolio/montesofa-hero-poster.jpg",
     screenshots: [
-      { src: "/portfolio/montesofa.jpg", label: "Homepage", device: "desktop" },
+      { src: "/portfolio/montesofa.jpg", device: "desktop" },
       { src: "/portfolio/montesofa-collections.jpg", label: "Collections page", device: "desktop" },
       { src: "/portfolio/montesofa-about.jpg", label: "About — The Maison", device: "desktop" },
       { src: "/portfolio/montesofa-2.jpg", label: "Collections teaser", device: "desktop" },
       { src: "/portfolio/montesofa-3.jpg", label: "In your space", device: "desktop" },
-      { src: "/portfolio/montesofa-tablet.jpg", label: "Homepage", device: "tablet" },
-      { src: "/portfolio/montesofa-mobile.jpg", label: "Homepage", device: "mobile" },
+      { src: "/portfolio/montesofa-tablet.jpg", device: "tablet" },
+      { src: "/portfolio/montesofa-mobile.jpg", device: "mobile" },
     ],
     featured: true,
   },
@@ -131,8 +134,8 @@ export const projects: PortfolioProject[] = [
       { src: "/portfolio/hiterra-product.jpg", label: "Product — modules explained", device: "desktop" },
       { src: "/portfolio/hiterra-about.jpg", label: "About — the founders", device: "desktop" },
       { src: "/portfolio/hiterra-blog.jpg", label: "Blog", device: "desktop" },
-      { src: "/portfolio/hiterra-tablet.jpg", label: "Homepage", device: "tablet" },
-      { src: "/portfolio/hiterra-mobile.jpg", label: "Homepage", device: "mobile" },
+      { src: "/portfolio/hiterra-tablet.jpg", device: "tablet" },
+      { src: "/portfolio/hiterra-mobile.jpg", device: "mobile" },
     ],
     featured: true,
   },
@@ -165,8 +168,8 @@ export const projects: PortfolioProject[] = [
       { src: "/portfolio/evenmall-3.jpg", label: "Why shop with EvenMall", device: "desktop" },
       { src: "/portfolio/evenmall-shopall.jpg", label: "Shop all — with filters", device: "desktop" },
       { src: "/portfolio/evenmall-product.jpg", label: "Product page", device: "desktop" },
-      { src: "/portfolio/evenmall-tablet.jpg", label: "Homepage", device: "tablet" },
-      { src: "/portfolio/evenmall-mobile.jpg", label: "Homepage", device: "mobile" },
+      { src: "/portfolio/evenmall-tablet.jpg", device: "tablet" },
+      { src: "/portfolio/evenmall-mobile.jpg", device: "mobile" },
     ],
   },
 ];

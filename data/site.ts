@@ -19,8 +19,12 @@ export const site = {
   },
 } as const;
 
+/** The canonical set of pillar ids — shared with data/portfolio.ts's ProjectPillarId
+ * so a project can never be tagged with a pillar that doesn't exist here. */
+export type PillarId = "corpi" | "corpcode" | "corprise" | "corpsite";
+
 export interface Pillar {
-  id: string;
+  id: PillarId;
   name: string;
   href: string;
   tagline: string;
