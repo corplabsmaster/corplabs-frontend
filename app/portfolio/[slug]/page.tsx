@@ -95,16 +95,27 @@ export default async function PortfolioProjectPage({
           down the left edge. Each step reveals on its own as the reader
           scrolls to it; only the connecting rail is static. */}
       <div className="relative mt-10 pl-9 sm:pl-11">
-        <div className="absolute left-[15px] top-2 bottom-2 w-px bg-line sm:left-[19px]" />
+        <div
+          aria-hidden
+          className="absolute bottom-2 left-[15px] top-2 w-px bg-[linear-gradient(180deg,var(--color-gradient-1),var(--color-gradient-2))] opacity-40 sm:left-[19px]"
+        />
 
         <Reveal className="relative max-w-2xl pb-10">
-          <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-zinc-500 sm:-left-[26px]" />
+          <span
+            aria-hidden
+            className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-gradient-1 bg-surface sm:-left-[30px]"
+          />
+          <span className="mb-1 block font-mono text-xs text-zinc-500">Step 01</span>
           <h2 className="font-display text-base font-semibold text-white">The challenge</h2>
           <p className="mt-2 text-[14px] leading-relaxed text-zinc-200">{project.challenge}</p>
         </Reveal>
 
         <Reveal className="relative max-w-2xl pb-12">
-          <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-brand-500 sm:-left-[26px]" />
+          <span
+            aria-hidden
+            className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-gradient-1 bg-surface sm:-left-[30px]"
+          />
+          <span className="mb-1 block font-mono text-xs text-zinc-500">Step 02</span>
           <h2 className="font-display text-base font-semibold text-white">The solution</h2>
           <p className="mt-2 text-[14px] leading-relaxed text-white">{project.solution}</p>
           <Button
@@ -118,7 +129,11 @@ export default async function PortfolioProjectPage({
         </Reveal>
 
         <Reveal className="relative max-w-2xl pb-12">
-          <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-zinc-500 sm:-left-[26px]" />
+          <span
+            aria-hidden
+            className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-gradient-1 bg-surface sm:-left-[30px]"
+          />
+          <span className="mb-1 block font-mono text-xs text-zinc-500">Step 03</span>
           <h2 className="font-display text-lg font-semibold text-white">The stack</h2>
           <Card className="mt-3 divide-y divide-line p-0">
             {project.stack.map(({ label, value }) => (
@@ -146,9 +161,12 @@ export default async function PortfolioProjectPage({
         </Reveal>
 
         <Reveal className="relative">
-          <span className="absolute -left-[22px] top-1 h-2.5 w-2.5 rounded-full bg-zinc-500 sm:-left-[26px]" />
-          <h2 className="font-display text-lg font-semibold text-white">More of the site</h2>
-          <div className="mt-6">
+          <span
+            aria-hidden
+            className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-gradient-1 bg-surface sm:-left-[30px]"
+          />
+          <span className="mb-1 block font-mono text-xs text-zinc-500">Step 04</span>
+          <div className="mt-5">
             <ScreenshotGallery shots={project.screenshots} name={project.name} />
           </div>
         </Reveal>
