@@ -70,7 +70,7 @@ export function DeviceFrame({
   }
 
   return (
-    <div className="mx-auto w-full max-w-[220px] rounded-[28px] border-[7px] border-[#1c1c1e] bg-[#1c1c1e] shadow-lg">
+    <div className="mx-auto w-full rounded-[28px] border-[7px] border-[#1c1c1e] bg-[#1c1c1e] shadow-lg">
       <div className="relative aspect-[9/19] overflow-hidden rounded-[20px] bg-black">
         <div className="absolute left-1/2 top-0 z-10 h-4 w-16 -translate-x-1/2 rounded-b-xl bg-[#1c1c1e]" />
         <Image

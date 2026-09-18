@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { DeviceFrame, type DeviceKind } from "@/components/portfolio/DeviceFrame";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -15,17 +16,29 @@ const deviceOrder: DeviceKind[] = ["desktop", "tablet", "mobile"];
 
 /**
  * Peek carousel geometry, in px. `main` is the current shot's rendered
- * width; `window` is the visible viewport around it — since `window` is
- * narrower than `main` + two neighbors + gaps, centering the row clips the
- * neighbors down to a `(window - main) / 2` sliver on each side. The peek
- * is the same frame at the same size as the main shot, not a separate small
- * thumbnail — cropping is what makes it read as "smaller", not a shrunk,
- * disproportionate bezel.
+ * width; `peek` is the neighbor frames' width. Desktop's `window` is
+ * deliberately narrower than a full row so the neighbors get cropped to a
+ * recognizable browser-chrome sliver either side. Tablet and mobile instead
+ * size `peek` down and give `window` enough room for the whole row — their
+ * bezels (rounded corners, notch) only read as "a phone" or "a tablet" when
+ * the full frame is visible, so those two never get clipped.
  */
-const carousel: Record<DeviceKind, { main: number; window: number; sizes: string }> = {
-  desktop: { main: 600, window: 960, sizes: "600px" },
-  tablet: { main: 300, window: 520, sizes: "300px" },
-  mobile: { main: 240, window: 420, sizes: "240px" },
+const carousel: Record<
+  DeviceKind,
+  { main: number; peek: number; window: number; sizes: string; peekSizes: string }
+> = {
+  desktop: { main: 680, peek: 680, window: 1088, sizes: "680px", peekSizes: "680px" },
+  tablet: { main: 360, peek: 200, window: 850, sizes: "360px", peekSizes: "200px" },
+  mobile: { main: 300, peek: 170, window: 720, sizes: "300px", peekSizes: "170px" },
+};
+
+/** Slide-and-fade variants for the row when Next/Previous is pressed — the
+ * direction (1 = forward, -1 = back) decides which side old/new content
+ * moves to, so the swap reads as a continuous motion, not a jump-cut. */
+const slideVariants = {
+  enter: (dir: 1 | -1) => ({ x: dir * 40, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (dir: 1 | -1) => ({ x: dir * -40, opacity: 0 }),
 };
 
 const lightboxWidthByDevice: Record<DeviceKind, string> = {
@@ -69,9 +82,12 @@ export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: 
     .filter(g => g.items.length > 0);
 
   const [slidePos, setSlidePos] = useState<Partial<Record<DeviceKind, number>>>({});
+  const [slideDir, setSlideDir] = useState<Partial<Record<DeviceKind, 1 | -1>>>({});
   const slideFor = (device: DeviceKind) => slidePos[device] ?? 0;
-  const stepSlide = (device: DeviceKind, direction: 1 | -1, length: number) =>
+  const stepSlide = (device: DeviceKind, direction: 1 | -1, length: number) => {
+    setSlideDir(prev => ({ ...prev, [device]: direction }));
     setSlidePos(prev => ({ ...prev, [device]: cycleIndex(prev[device] ?? 0, direction, length) }));
+  };
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
@@ -117,9 +133,10 @@ export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: 
 
   return (
     <>
-      <div className="space-y-24">
+      <div className="space-y-32 sm:space-y-40">
         {groups.map(({ device, items }) => {
           const index = slideFor(device);
+          const direction = slideDir[device] ?? 1;
           const shot = items[index];
           const prevShot = items.length > 1 ? items[cycleIndex(index, -1, items.length)] : null;
           const nextShot = items.length > 1 ? items[cycleIndex(index, 1, items.length)] : null;
@@ -131,42 +148,53 @@ export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: 
                 className="relative mx-auto overflow-hidden"
                 style={{ maxWidth: geo.window, width: "100%" }}
               >
-                <div className="flex items-center justify-center gap-6">
-                  {prevShot && (
-                    <button
-                      type="button"
-                      aria-label="Previous screenshot"
-                      onClick={() => stepSlide(device, -1, items.length)}
-                      className="shrink-0 opacity-40 transition-opacity hover:opacity-70"
-                      style={{ width: geo.main }}
-                    >
-                      <DeviceFrame device={device} src={prevShot.src} alt="" sizes={geo.sizes} />
-                    </button>
-                  )}
+                <AnimatePresence mode="popLayout" initial={false} custom={direction}>
+                  <motion.div
+                    key={index}
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.55, ease: "easeInOut" }}
+                    className="flex items-center justify-center gap-6"
+                  >
+                    {prevShot && (
+                      <button
+                        type="button"
+                        aria-label="Previous screenshot"
+                        onClick={() => stepSlide(device, -1, items.length)}
+                        className="shrink-0 opacity-40 transition-opacity hover:opacity-70"
+                        style={{ width: geo.peek }}
+                      >
+                        <DeviceFrame device={device} src={prevShot.src} alt="" sizes={geo.peekSizes} />
+                      </button>
+                    )}
 
-                  <div className="shrink-0" style={{ width: geo.main }}>
-                    <button type="button" onClick={e => openLightbox(shot, e)} className="block w-full">
-                      <DeviceFrame
-                        device={device}
-                        src={shot.src}
-                        alt={altFor(name, shot)}
-                        sizes={geo.sizes}
-                      />
-                    </button>
-                  </div>
+                    <div className="shrink-0" style={{ width: geo.main }}>
+                      <button type="button" onClick={e => openLightbox(shot, e)} className="block w-full">
+                        <DeviceFrame
+                          device={device}
+                          src={shot.src}
+                          alt={altFor(name, shot)}
+                          sizes={geo.sizes}
+                        />
+                      </button>
+                    </div>
 
-                  {nextShot && (
-                    <button
-                      type="button"
-                      aria-label="Next screenshot"
-                      onClick={() => stepSlide(device, 1, items.length)}
-                      className="shrink-0 opacity-40 transition-opacity hover:opacity-70"
-                      style={{ width: geo.main }}
-                    >
-                      <DeviceFrame device={device} src={nextShot.src} alt="" sizes={geo.sizes} />
-                    </button>
-                  )}
-                </div>
+                    {nextShot && (
+                      <button
+                        type="button"
+                        aria-label="Next screenshot"
+                        onClick={() => stepSlide(device, 1, items.length)}
+                        className="shrink-0 opacity-40 transition-opacity hover:opacity-70"
+                        style={{ width: geo.peek }}
+                      >
+                        <DeviceFrame device={device} src={nextShot.src} alt="" sizes={geo.peekSizes} />
+                      </button>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
               {items.length > 1 && (
