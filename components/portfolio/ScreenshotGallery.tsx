@@ -41,10 +41,15 @@ function frameHeight(device: DeviceKind, width: number): number {
   return 14 + (width - 14) * (19 / 9); // mobile — bezel border, then 9:19
 }
 
-const carousel: Record<DeviceKind, { main: number; peek: number; window: number; sizes: string; height: number }> = {
-  desktop: { main: 720, peek: 720, window: 1152, sizes: "720px", height: frameHeight("desktop", 720) },
-  tablet: { main: 380, peek: 160, window: 760, sizes: "380px", height: frameHeight("tablet", 380) },
-  mobile: { main: 320, peek: 140, window: 640, sizes: "320px", height: frameHeight("mobile", 320) },
+/** Ideal geometry, in px, for a viewport wide enough to fit it. `window` is
+ * also the ceiling `windowWidth` starts at before the first real measurement.
+ * The carousel scales `main`/`peek` down together (see `DeviceCarousel`) to
+ * whatever width it actually gets, so neither ever overflows a narrow/mobile
+ * container — only the desktop-sized ideal lives here. */
+const carousel: Record<DeviceKind, { main: number; peek: number; window: number }> = {
+  desktop: { main: 720, peek: 720, window: 1152 },
+  tablet: { main: 380, peek: 160, window: 760 },
+  mobile: { main: 320, peek: 140, window: 640 },
 };
 
 const lightboxWidthByDevice: Record<DeviceKind, string> = {
@@ -100,19 +105,39 @@ function DeviceCarousel({
     return () => observer.disconnect();
   }, []);
 
-  const step = geo.peek + GAP;
-  const trackX = windowWidth / 2 - geo.peek / 2 - index * step;
+  // Scale main/peek/gap down together to whatever width the container
+  // actually got — on a phone that's far less than the desktop-ideal
+  // `geo.window`, and without this the "current" shot (not just the peeks)
+  // renders wider than the screen and gets clipped.
+  const fit = Math.min(1, windowWidth / geo.main);
+  const main = geo.main * fit;
+  const peek = geo.peek * fit;
+  const gap = GAP * fit;
+  const height = frameHeight(device, main);
+
+  const step = peek + gap;
+  const trackX = windowWidth / 2 - peek / 2 - index * step;
+  const stepBy = (direction: 1 | -1) => setIndex(i => cycleIndex(i, direction, items.length));
 
   return (
     <>
       <div
         ref={windowRef}
         className="relative mx-auto overflow-hidden"
-        style={{ maxWidth: geo.window, width: "100%", height: geo.height }}
+        style={{ maxWidth: geo.window, width: "100%", height }}
       >
         <motion.div
           className="flex h-full items-center"
-          style={{ gap: GAP }}
+          style={{ gap }}
+          drag={items.length > 1 ? "x" : false}
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          dragMomentum={false}
+          onDragEnd={(_, info) => {
+            const threshold = peek / 4;
+            if (info.offset.x < -threshold) stepBy(1);
+            else if (info.offset.x > threshold) stepBy(-1);
+          }}
           animate={{ x: trackX }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
@@ -125,11 +150,11 @@ function DeviceCarousel({
                 aria-label={isCurrent ? undefined : `Jump to screenshot ${i + 1}`}
                 onClick={e => (isCurrent ? onOpen(shot, e) : setIndex(i))}
                 className="relative shrink-0"
-                style={{ width: geo.peek, zIndex: isCurrent ? 10 : 1 }}
-                animate={{ scale: isCurrent ? geo.main / geo.peek : 1, opacity: isCurrent ? 1 : 0.4 }}
+                style={{ width: peek, zIndex: isCurrent ? 10 : 1 }}
+                animate={{ scale: isCurrent ? main / peek : 1, opacity: isCurrent ? 1 : 0.4 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               >
-                <DeviceFrame device={device} src={shot.src} alt={altFor(name, shot)} sizes={geo.sizes} />
+                <DeviceFrame device={device} src={shot.src} alt={altFor(name, shot)} sizes={`${Math.round(main)}px`} />
               </motion.button>
             );
           })}
@@ -140,7 +165,7 @@ function DeviceCarousel({
         <div className="mt-4 flex items-center justify-center gap-5">
           <button
             type="button"
-            onClick={() => setIndex(i => cycleIndex(i, -1, items.length))}
+            onClick={() => stepBy(-1)}
             className="font-display text-[13px] text-zinc-400 transition-colors hover:text-white"
           >
             ← Previous
@@ -150,7 +175,7 @@ function DeviceCarousel({
           </span>
           <button
             type="button"
-            onClick={() => setIndex(i => cycleIndex(i, 1, items.length))}
+            onClick={() => stepBy(1)}
             className="font-display text-[13px] text-zinc-400 transition-colors hover:text-white"
           >
             Next →

@@ -73,7 +73,7 @@ export type PortfolioProject = {
 export const projects: PortfolioProject[] = [
   {
     slug: "montesofa",
-    name: "Monte",
+    name: "Montesofa",
     pillar: "corpsite",
     industry: "Furniture",
     companyType: "Furniture Manufacturer",
@@ -81,7 +81,7 @@ export const projects: PortfolioProject[] = [
     summary:
       "A revamp for a Malaysian luxury sofa maker — from a dated storefront to an editorial, product-led site.",
     intro:
-      "Monte has been building handmade leather sofas in Selangor since 1997 — from a four-person workshop to a 150-person atelier. But their site still read like a catalogue, and catalogues don't sell craftsmanship. We rebuilt it around full-bleed leather photography, a slower editorial pace, and the same looping hero film that greets visitors on the real showroom floor. Fewer clicks, more looking — the sofa does the convincing.",
+      "Montesofa has been building handmade leather sofas in Selangor since 1997 — from a four-person workshop to a 150-person atelier. But their site still read like a catalogue, and catalogues don't sell craftsmanship. We rebuilt it around full-bleed leather photography, a slower editorial pace, and the same looping hero film that greets visitors on the real showroom floor. Fewer clicks, more looking — the sofa does the convincing.",
     challenge:
       "Sell handmade craftsmanship through a site that looked like every other furniture catalogue.",
     solution:
