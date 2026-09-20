@@ -1,0 +1,66 @@
+name: "HiTerra"
+order: 2
+pillar: "corpsite"
+industry: "AgriTech"
+companyType: "Software Platform"
+kind: "build"
+summary: "A dark-mode platform site for HiTerra's field-to-harvest agritech product, explaining four connected modules at a glance."
+intro: "HiTerra turns soil samples and field data into decisions a farm team can actually act on, across Malaysia and Indonesia. The challenge wasn't proving the tech worked — it was explaining four connected products to three completely different audiences without burying anyone in jargon. We built a dark, data-forward site that splits the homepage into explicit paths for farmers, estates, and partners, with live dashboard mockups doing the convincing instead of another feature list."
+challenge: "Explain four connected products to three different audiences — farmers, estates, partners — without burying anyone in jargon."
+solution: "We split the homepage into three explicit paths, each with its own CTA, and used live dashboard mockups instead of another feature list."
+stack:
+  - label: "Platform"
+    value: "Next.js"
+  - label: "CMS"
+    value: "Keystatic (site content) + Strapi (blog & insights)"
+  - label: "Notable"
+    value: "English-only marketing site, kept as its own repo separate from the HiTerra app"
+stackTags:
+  - "Next.js"
+  - "Keystatic"
+  - "Strapi"
+liveUrl: "https://www.hiterra.co/"
+cardImage: hiterra-card.jpg
+hero:
+  discriminant: "image"
+  value:
+    heroImage: hiterra-wide.jpg
+screenshots:
+  - src: hiterra-2.jpg
+    label: "The four modules"
+    device: "desktop"
+  - src: hiterra-3.jpg
+    label: "Built for every audience"
+    device: "desktop"
+  - src: hiterra-product.jpg
+    label: "Product — modules explained"
+    device: "desktop"
+  - src: hiterra-about.jpg
+    label: "About — the founders"
+    device: "desktop"
+  - src: hiterra-blog.jpg
+    label: "Blog"
+    device: "desktop"
+  - src: hiterra-tablet.jpg
+    device: "tablet"
+  - src: hiterra-product-tablet.jpg
+    label: "Product — modules explained"
+    device: "tablet"
+  - src: hiterra-about-tablet.jpg
+    label: "About — the founders"
+    device: "tablet"
+  - src: hiterra-blog-tablet.jpg
+    label: "Blog"
+    device: "tablet"
+  - src: hiterra-mobile.jpg
+    device: "mobile"
+  - src: hiterra-product-mobile.jpg
+    label: "Product — modules explained"
+    device: "mobile"
+  - src: hiterra-about-mobile.jpg
+    label: "About — the founders"
+    device: "mobile"
+  - src: hiterra-blog-mobile.jpg
+    label: "Blog"
+    device: "mobile"
+featured: true

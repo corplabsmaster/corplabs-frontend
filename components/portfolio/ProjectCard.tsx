@@ -1,6 +1,7 @@
 import { LinkCard } from "@/components/ui/card";
 import { PortfolioThumb } from "@/components/portfolio/PortfolioThumb";
-import { kindLabel, type PortfolioProject } from "@/data/portfolio";
+import { kindLabel } from "@/data/portfolio";
+import type { PortfolioProject } from "@/lib/portfolio";
 
 export function ProjectCard({ project }: { project: PortfolioProject }) {
   return (

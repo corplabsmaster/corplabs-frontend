@@ -3,6 +3,7 @@ import { PortfolioGrid } from "@/components/portfolio/PortfolioGrid";
 import { CtaBand } from "@/components/ui/cta-band";
 import { Reveal } from "@/components/ui/reveal";
 import { portfolioHero } from "@/data/portfolio";
+import { getAllProjects } from "@/lib/portfolio";
 
 export const metadata: Metadata = {
   title: "Our Work — Corplabs Portfolio",
@@ -11,7 +12,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/portfolio" },
 };
 
-export default function PortfolioPage() {
+export default async function PortfolioPage() {
+  const projects = await getAllProjects();
+
   return (
     <>
       <section className="relative overflow-hidden">
@@ -32,7 +35,7 @@ export default function PortfolioPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
-        <PortfolioGrid />
+        <PortfolioGrid projects={projects} />
       </section>
 
       <CtaBand

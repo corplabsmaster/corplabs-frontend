@@ -6,14 +6,12 @@ import { ScreenshotGallery } from "@/components/portfolio/ScreenshotGallery";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
-import { kindLabel, portfolioCaseStudyCopy, projects } from "@/data/portfolio";
+import { kindLabel, portfolioCaseStudyCopy } from "@/data/portfolio";
+import { getAllProjects, getProject } from "@/lib/portfolio";
 
 export async function generateStaticParams() {
+  const projects = await getAllProjects();
   return projects.map(project => ({ slug: project.slug }));
-}
-
-function getProject(slug: string) {
-  return projects.find(p => p.slug === slug);
 }
 
 export async function generateMetadata({
@@ -22,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) return {};
   return {
     title: `${project.name} — Corplabs Portfolio`,
@@ -41,10 +39,10 @@ export default async function PortfolioProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const [project, allProjects] = await Promise.all([getProject(slug), getAllProjects()]);
   if (!project) notFound();
 
-  const related = projects.filter(p => p.slug !== project.slug).slice(0, 2);
+  const related = allProjects.filter(p => p.slug !== project.slug).slice(0, 2);
 
   return (
     <article className="mx-auto max-w-5xl px-4 pb-24 pt-20 sm:px-6">

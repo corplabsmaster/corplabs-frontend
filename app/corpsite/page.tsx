@@ -21,7 +21,7 @@ import {
   siteTiers,
   tiersSection,
 } from "@/data/corpsite";
-import { projects as portfolioProjects } from "@/data/portfolio";
+import { getAllProjects } from "@/lib/portfolio";
 
 export const metadata: Metadata = {
   title: "Corpsite — Websites, Built Like Software",
@@ -30,7 +30,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/corpsite" },
 };
 
-export default function CorpsitePage() {
+export default async function CorpsitePage() {
+  const portfolioProjects = await getAllProjects();
+
   return (
     <>
       {/* 1 — Hero split: copy + the ladder */}

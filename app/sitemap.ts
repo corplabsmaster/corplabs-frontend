@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
-import { projects } from "@/data/portfolio";
 import { site } from "@/data/site";
 import { getJobs } from "@/lib/jobs";
+import { getAllProjects } from "@/lib/portfolio";
 import { getAllPosts } from "@/lib/posts";
 
 /** Every statically-rendered route, mirroring the old gatsby-plugin-sitemap. */
@@ -22,7 +22,7 @@ const paths = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, jobs] = await Promise.all([getAllPosts(), getJobs()]);
+  const [posts, jobs, projects] = await Promise.all([getAllPosts(), getJobs(), getAllProjects()]);
   return [
     ...paths.map((path) => ({
       url: `${site.url}${path}`,
