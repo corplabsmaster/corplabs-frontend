@@ -23,8 +23,7 @@ liveUrl: "https://www.hiterra.co/"
 cardImage: hiterra-card.jpg
 hero:
   discriminant: "image"
-  value:
-    heroImage: hiterra-wide.jpg
+  value: hiterra-wide.jpg
 screenshots:
   - src: hiterra-2.jpg
     label: "The four modules"

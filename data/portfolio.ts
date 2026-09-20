@@ -5,11 +5,15 @@
  * or edit one without a PR — this file is just the surrounding UI strings.
  */
 
-/** Shared between the case-study header and the grid card's tag badges. */
-export const kindLabel: Record<"build" | "revamp", string> = {
-  build: "New website build",
-  revamp: "Website revamp",
-};
+import { projectKinds } from "@/keystatic.config";
+import type { ProjectKind } from "@/lib/portfolio";
+
+/** Shared between the case-study header and the grid card's tag badges.
+ * Derived from keystatic.config.ts's `kind` select options — the single
+ * place those two labels are actually written — instead of retyping them. */
+export const kindLabel: Record<ProjectKind, string> = Object.fromEntries(
+  projectKinds.map(({ value, label }) => [value, label])
+) as Record<ProjectKind, string>;
 
 export const portfolioHero = {
   eyebrow: "Our Work",

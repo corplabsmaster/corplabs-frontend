@@ -1,4 +1,12 @@
 import { collection, config, fields } from "@keystatic/core";
+import { pillars } from "@/data/site";
+
+/** The two portfolio engagement kinds — also the source for data/portfolio.ts's
+ * kindLabel, so the CMS option label and the site's display label can't drift. */
+export const projectKinds = [
+  { label: "New website build", value: "build" },
+  { label: "Website revamp", value: "revamp" },
+] as const;
 
 /**
  * Keystatic — git-based CMS for the blog and the portfolio. Content lives in
@@ -91,12 +99,7 @@ export default config({
         }),
         pillar: fields.select({
           label: "Pillar",
-          options: [
-            { label: "Corpi", value: "corpi" },
-            { label: "Corpcode", value: "corpcode" },
-            { label: "Corprise", value: "corprise" },
-            { label: "Corpsite", value: "corpsite" },
-          ],
+          options: pillars.map(p => ({ label: p.name, value: p.id })),
           defaultValue: "corpsite",
         }),
         industry: fields.text({
@@ -111,10 +114,7 @@ export default config({
         }),
         kind: fields.select({
           label: "Engagement",
-          options: [
-            { label: "New website build", value: "build" },
-            { label: "Website revamp", value: "revamp" },
-          ],
+          options: projectKinds,
           defaultValue: "build",
         }),
         summary: fields.text({
@@ -143,8 +143,16 @@ export default config({
         }),
         stack: fields.array(
           fields.object({
-            label: fields.text({ label: "Label", description: 'e.g. "Platform"' }),
-            value: fields.text({ label: "Value", description: 'e.g. "Next.js + Payload CMS"' }),
+            label: fields.text({
+              label: "Label",
+              description: 'e.g. "Platform"',
+              validation: { isRequired: true },
+            }),
+            value: fields.text({
+              label: "Value",
+              description: 'e.g. "Next.js + Payload CMS"',
+              validation: { isRequired: true },
+            }),
           }),
           {
             label: "Stack",
@@ -152,7 +160,7 @@ export default config({
             itemLabel: props => props.fields.label.value || "Stack row",
           }
         ),
-        stackTags: fields.array(fields.text({ label: "Tag" }), {
+        stackTags: fields.array(fields.text({ label: "Tag", validation: { isRequired: true } }), {
           label: "Stack tags",
           description: 'Short chips, e.g. "Next.js".',
           itemLabel: props => props.value || "Tag",
@@ -191,13 +199,11 @@ export default config({
                 publicPath: "/portfolio/",
               }),
             }),
-            image: fields.object({
-              heroImage: fields.image({
-                label: "Hero image",
-                directory: "public/portfolio",
-                publicPath: "/portfolio/",
-                validation: { isRequired: true },
-              }),
+            image: fields.image({
+              label: "Hero image",
+              directory: "public/portfolio",
+              publicPath: "/portfolio/",
+              validation: { isRequired: true },
             }),
           }
         ),

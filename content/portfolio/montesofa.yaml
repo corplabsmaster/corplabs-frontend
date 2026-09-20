@@ -1,3 +1,8 @@
+# TODO(Sahira): this entry's copy was written from what the live site shows
+# (layout, stats, industry), not confirmed engagement details (scope,
+# timeline, budget, stack). Fact-check before this goes fully live — see
+# how hiterra.yaml/evenmall.yaml's `stack` were verified against real
+# Notion project docs for the standard to match.
 name: "Montesofa"
 order: 1
 pillar: "corpsite"

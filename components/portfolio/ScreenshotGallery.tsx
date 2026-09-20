@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { animate as animateValue, motion, useMotionValue } from "motion/react";
 import { DeviceFrame, type DeviceKind } from "@/components/portfolio/DeviceFrame";
 import { Reveal } from "@/components/ui/reveal";
+import type { ProjectScreenshot } from "@/lib/portfolio";
 
-export interface Screenshot {
-  src: string;
-  /** Not shown in the UI — kept only so alt text can be more specific than "{name} — {device} view". */
-  label?: string;
-  device: DeviceKind;
-}
+/** Re-exported under this file's existing name rather than importing
+ * ProjectScreenshot directly everywhere below, to keep this diff small —
+ * the point is there's one canonical shape now, not a second hand-copied
+ * interface that can silently drift from it. */
+export type Screenshot = ProjectScreenshot;
 
 const deviceOrder: DeviceKind[] = ["desktop", "tablet", "mobile"];
 
@@ -88,22 +88,19 @@ function DeviceCarousel({
   onOpen,
 }: {
   device: DeviceKind;
-  items: Screenshot[];
+  /** Each shot paired with its index in the full (all-devices) `shots` array,
+   * so opening the lightbox doesn't need to re-find it by `src` — two shots
+   * that happen to share an image file would otherwise resolve to whichever
+   * one comes first, opening the wrong one. */
+  items: Array<{ shot: Screenshot; globalIndex: number }>;
   name: string;
-  onOpen: (shot: Screenshot, e: React.MouseEvent<HTMLButtonElement>) => void;
+  onOpen: (globalIndex: number, e: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
   const geo = carousel[device];
   const [index, setIndex] = useState(0);
   const windowRef = useRef<HTMLDivElement>(null);
   const [windowWidth, setWindowWidth] = useState(geo.window);
-
-  useEffect(() => {
-    const el = windowRef.current;
-    if (!el) return;
-    const observer = new ResizeObserver(([entry]) => setWindowWidth(entry.contentRect.width));
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const measuredOnce = useRef(false);
 
   // Scale main/peek/gap down together to whatever width the container
   // actually got — on a phone that's far less than the desktop-ideal
@@ -119,6 +116,43 @@ function DeviceCarousel({
   const trackX = windowWidth / 2 - peek / 2 - index * step;
   const stepBy = (direction: 1 | -1) => setIndex(i => cycleIndex(i, direction, items.length));
 
+  // The track's x lives in one MotionValue, read/written by both `drag` and
+  // the snap animation below. Driving position through the `animate` prop
+  // *and* `drag` at once (as this used to) makes Framer resolve drag's
+  // elastic constraints against the element's undragged layout position,
+  // not wherever `animate` last moved it — the track visibly snaps toward
+  // ~20% of its position the instant a real drag starts. Sharing one
+  // MotionValue removes the second, conflicting source of truth.
+  const x = useMotionValue(trackX);
+
+  useLayoutEffect(() => {
+    const el = windowRef.current;
+    if (!el) return;
+    const measure = (width: number) => {
+      setWindowWidth(width);
+      if (!measuredOnce.current) {
+        // First real measurement (replacing the desktop-ideal guess
+        // `windowWidth` started at): snap the track instantly instead of
+        // animating into place, since that guess was never actually shown.
+        const initialFit = Math.min(1, width / geo.main);
+        const initialPeek = geo.peek * initialFit;
+        const initialStep = initialPeek + GAP * initialFit;
+        x.set(width / 2 - initialPeek / 2 - index * initialStep);
+        measuredOnce.current = true;
+      }
+    };
+    measure(el.getBoundingClientRect().width);
+    const observer = new ResizeObserver(([entry]) => measure(entry.contentRect.width));
+    observer.observe(el);
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- geo/x are stable for this device; only measuring on mount + resize
+  }, []);
+
+  useEffect(() => {
+    const controls = animateValue(x, trackX, { duration: 0.9, ease: [0.16, 1, 0.3, 1] });
+    return () => controls.stop();
+  }, [trackX, x]);
+
   return (
     <>
       <div
@@ -128,7 +162,7 @@ function DeviceCarousel({
       >
         <motion.div
           className="flex h-full items-center"
-          style={{ gap }}
+          style={{ gap, x }}
           drag={items.length > 1 ? "x" : false}
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.2}
@@ -138,17 +172,15 @@ function DeviceCarousel({
             if (info.offset.x < -threshold) stepBy(1);
             else if (info.offset.x > threshold) stepBy(-1);
           }}
-          animate={{ x: trackX }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          {items.map((shot, i) => {
+          {items.map(({ shot, globalIndex }, i) => {
             const isCurrent = i === index;
             return (
               <motion.button
-                key={shot.src}
+                key={globalIndex}
                 type="button"
                 aria-label={isCurrent ? undefined : `Jump to screenshot ${i + 1}`}
-                onClick={e => (isCurrent ? onOpen(shot, e) : setIndex(i))}
+                onClick={e => (isCurrent ? onOpen(globalIndex, e) : setIndex(i))}
                 className="relative shrink-0"
                 style={{ width: peek, zIndex: isCurrent ? 10 : 1 }}
                 animate={{ scale: isCurrent ? main / peek : 1, opacity: isCurrent ? 1 : 0.4 }}
@@ -196,8 +228,9 @@ function DeviceCarousel({
  * through every shot across every device.
  */
 export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: string }) {
+  const indexed = shots.map((shot, globalIndex) => ({ shot, globalIndex }));
   const groups = deviceOrder
-    .map(device => ({ device, items: shots.filter(s => s.device === device) }))
+    .map(device => ({ device, items: indexed.filter(({ shot }) => shot.device === device) }))
     .filter(g => g.items.length > 0);
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -209,9 +242,9 @@ export function ScreenshotGallery({ shots, name }: { shots: Screenshot[]; name: 
     triggerRef.current = null;
   };
 
-  const openLightbox = (shot: Screenshot, e: React.MouseEvent<HTMLButtonElement>) => {
+  const openLightbox = (globalIndex: number, e: React.MouseEvent<HTMLButtonElement>) => {
     triggerRef.current = e.currentTarget;
-    setActiveIndex(shots.findIndex(s => s.src === shot.src));
+    setActiveIndex(globalIndex);
   };
 
   // Lock background scroll while the lightbox covers the viewport.

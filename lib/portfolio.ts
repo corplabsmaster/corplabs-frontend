@@ -1,11 +1,14 @@
 import "server-only";
+import { cache } from "react";
 import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "@/keystatic.config";
+import keystaticConfig, { projectKinds } from "@/keystatic.config";
 import type { PillarId } from "@/data/site";
+import type { DeviceKind } from "@/components/portfolio/DeviceFrame";
 
 /** Server-side access to the Keystatic portfolio content (content/portfolio/*). */
 
-export type ProjectKind = "build" | "revamp";
+/** Derived from keystatic.config.ts's `kind` select options, so the two can't drift. */
+export type ProjectKind = (typeof projectKinds)[number]["value"];
 
 export interface StatPair {
   label: string;
@@ -17,7 +20,7 @@ export interface ProjectScreenshot {
   /** Not shown in the UI — kept only so alt text can be more specific than "{name} — {device} view". */
   label?: string;
   /** Which device chrome the gallery frames this shot in. */
-  device: "desktop" | "tablet" | "mobile";
+  device: DeviceKind;
 }
 
 /** Exactly one hero medium — never both, never neither. */
@@ -73,15 +76,15 @@ function toProject(slug: string, entry: NonNullable<PortfolioEntry>): PortfolioP
           heroVideo: ASSET_BASE + entry.hero.value.heroVideo,
           heroPoster: entry.hero.value.heroPoster ? ASSET_BASE + entry.hero.value.heroPoster : undefined,
         }
-      : { heroImage: ASSET_BASE + entry.hero.value.heroImage };
+      : { heroImage: ASSET_BASE + entry.hero.value };
 
   return {
     slug,
     name: entry.name,
-    pillar: entry.pillar as PillarId,
+    pillar: entry.pillar,
     industry: entry.industry,
     companyType: entry.companyType,
-    kind: entry.kind as ProjectKind,
+    kind: entry.kind,
     summary: entry.summary,
     intro: entry.intro,
     challenge: entry.challenge,
@@ -93,25 +96,28 @@ function toProject(slug: string, entry: NonNullable<PortfolioEntry>): PortfolioP
     screenshots: entry.screenshots.map(({ src, label, device }) => ({
       src: ASSET_BASE + src,
       label: label || undefined,
-      device: device as ProjectScreenshot["device"],
+      device,
     })),
     featured: entry.featured,
     ...hero,
   };
 }
 
-/** All portfolio projects, in editor-defined order (the `order` field, lowest first). */
-export async function getAllProjects(): Promise<PortfolioProject[]> {
+/** All portfolio projects, in editor-defined order (the `order` field, lowest first).
+ * Cached per request so a page that reads this and `getProject` for the same
+ * slug (e.g. the case-study page building its "related" list) doesn't re-read
+ * and re-parse that project's file twice. */
+export const getAllProjects = cache(async (): Promise<PortfolioProject[]> => {
   const entries = await reader.collections.portfolio.all();
   return entries
     .map(({ slug, entry }) => ({ slug, entry, order: entry.order ?? 0 }))
     .sort((a, b) => a.order - b.order)
     .map(({ slug, entry }) => toProject(slug, entry));
-}
+});
 
-/** One project, or null if the slug doesn't exist. */
-export async function getProject(slug: string): Promise<PortfolioProject | null> {
+/** One project, or null if the slug doesn't exist. Cached per request/slug. */
+export const getProject = cache(async (slug: string): Promise<PortfolioProject | null> => {
   const entry = await reader.collections.portfolio.read(slug);
   if (!entry) return null;
   return toProject(slug, entry);
-}
+});

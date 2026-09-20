@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CorpsitePage() {
-  const portfolioProjects = await getAllProjects();
+  const corpsiteProjects = (await getAllProjects()).filter(p => p.pillar === "corpsite");
 
   return (
     <>
@@ -141,7 +141,7 @@ export default async function CorpsitePage() {
       </section>
 
       {/* 4.5 — Proof banner: real Corpsite builds, linking to the full portfolio */}
-      {portfolioProjects.filter((p) => p.pillar === "corpsite").length > 0 && (
+      {corpsiteProjects.length > 0 && (
         <section className="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
           <Reveal>
             <div className="relative overflow-hidden rounded-3xl border border-line bg-surface-raised px-6 py-16 text-center sm:px-16">
@@ -150,8 +150,7 @@ export default async function CorpsitePage() {
                 className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-48 max-w-lg rounded-full bg-brand-600/30 blur-3xl"
               />
               <div className="relative flex justify-center -space-x-4">
-                {portfolioProjects
-                  .filter((p) => p.pillar === "corpsite")
+                {corpsiteProjects
                   .slice(0, 3)
                   .map((p) => (
                     <PortfolioThumb

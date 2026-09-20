@@ -29,8 +29,15 @@ export async function generateMetadata({
   };
 }
 
+/** Falls back to the raw URL for a blank/schemeless value instead of
+ * throwing — `liveUrl` is required in the Keystatic admin form, but that
+ * validation doesn't run against a hand-edited YAML file. */
 function hostname(url: string) {
-  return new URL(url).hostname.replace(/^www\./, "");
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
 }
 
 export default async function PortfolioProjectPage({
@@ -39,7 +46,10 @@ export default async function PortfolioProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [project, allProjects] = await Promise.all([getProject(slug), getAllProjects()]);
+  // One read instead of two — getProject(slug) would re-read this exact
+  // file a second time right after getAllProjects() already parsed it.
+  const allProjects = await getAllProjects();
+  const project = allProjects.find(p => p.slug === slug) ?? null;
   if (!project) notFound();
 
   const related = allProjects.filter(p => p.slug !== project.slug).slice(0, 2);
@@ -72,12 +82,7 @@ export default async function PortfolioProjectPage({
 
       {/* Full-width hero — the client's own site video when it has one, else a large screenshot. */}
       <Reveal className="mt-10">
-        <HeroMedia
-          name={project.name}
-          video={project.heroVideo}
-          poster={project.heroPoster}
-          image={project.heroImage}
-        />
+        <HeroMedia name={project.name} hero={project} />
       </Reveal>
 
       {/* Intro narrative + a compact fact box, side by side on desktop. */}
@@ -88,6 +93,19 @@ export default async function PortfolioProjectPage({
             { label: "Industry", value: project.industry },
             { label: "Company type", value: project.companyType },
             { label: "Engagement", value: kindLabel[project.kind] },
+            {
+              label: "Live site",
+              value: (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-brand-300 transition-colors hover:text-white"
+                >
+                  {hostname(project.liveUrl)} ↗
+                </a>
+              ),
+            },
           ].map(({ label, value }) => (
             <div key={label} className="px-5 py-3">
               <dt className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">
@@ -96,19 +114,6 @@ export default async function PortfolioProjectPage({
               <dd className="mt-1 text-[13.5px] font-medium leading-snug text-white">{value}</dd>
             </div>
           ))}
-          <div className="px-5 py-3">
-            <dt className="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">Live site</dt>
-            <dd className="mt-1 text-[13.5px] font-medium leading-snug">
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-brand-300 transition-colors hover:text-white"
-              >
-                {hostname(project.liveUrl)} ↗
-              </a>
-            </dd>
-          </div>
         </Card>
       </Reveal>
 

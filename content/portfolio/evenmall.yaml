@@ -26,8 +26,7 @@ liveUrl: "https://evenmall.com/"
 cardImage: evenmall-card.jpg
 hero:
   discriminant: "image"
-  value:
-    heroImage: evenmall-wide.jpg
+  value: evenmall-wide.jpg
 screenshots:
   - src: evenmall-2.jpg
     label: "Trending this week"
