@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/data/site";
 import { getJobs } from "@/lib/jobs";
+import { getAllProjects } from "@/lib/portfolio";
 import { getAllPosts } from "@/lib/posts";
 
 /** Every statically-rendered route, mirroring the old gatsby-plugin-sitemap. */
 const paths = [
   "",
   "/solutions",
+  "/portfolio",
   "/corpi",
   "/corpcode",
   "/corprise",
@@ -20,7 +22,7 @@ const paths = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, jobs] = await Promise.all([getAllPosts(), getJobs()]);
+  const [posts, jobs, projects] = await Promise.all([getAllPosts(), getJobs(), getAllProjects()]);
   return [
     ...paths.map((path) => ({
       url: `${site.url}${path}`,
@@ -32,6 +34,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: `${post.publishedDate}T00:00:00.000Z`,
       changeFrequency: "yearly" as const,
       priority: 0.6,
+    })),
+    ...projects.map((project) => ({
+      url: `${site.url}/portfolio/${project.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
     // Open roles only exist as pages when the Notion pipeline is configured.
     ...jobs

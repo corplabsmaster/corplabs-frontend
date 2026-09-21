@@ -6,6 +6,7 @@ import PlanSelector from "@/components/corpsite/PlanSelector";
 import TierTable from "@/components/corpsite/TierTable";
 import { Price } from "@/components/currency/price";
 import { PillarStrip } from "@/components/pillar-strip";
+import { PortfolioThumb } from "@/components/portfolio/PortfolioThumb";
 import { Button } from "@/components/ui/button";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { Reveal } from "@/components/ui/reveal";
@@ -20,6 +21,7 @@ import {
   siteTiers,
   tiersSection,
 } from "@/data/corpsite";
+import { getAllProjects } from "@/lib/portfolio";
 
 export const metadata: Metadata = {
   title: "Corpsite — Websites, Built Like Software",
@@ -28,7 +30,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/corpsite" },
 };
 
-export default function CorpsitePage() {
+export default async function CorpsitePage() {
+  const corpsiteProjects = (await getAllProjects()).filter(p => p.pillar === "corpsite");
+
   return (
     <>
       {/* 1 — Hero split: copy + the ladder */}
@@ -135,6 +139,44 @@ export default function CorpsitePage() {
           <AddonsGrid />
         </Reveal>
       </section>
+
+      {/* 4.5 — Proof banner: real Corpsite builds, linking to the full portfolio */}
+      {corpsiteProjects.length > 0 && (
+        <section className="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
+          <Reveal>
+            <div className="relative overflow-hidden rounded-3xl border border-line bg-surface-raised px-6 py-16 text-center sm:px-16">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-48 max-w-lg rounded-full bg-brand-600/30 blur-3xl"
+              />
+              <div className="relative flex justify-center -space-x-4">
+                {corpsiteProjects
+                  .slice(0, 3)
+                  .map((p) => (
+                    <PortfolioThumb
+                      key={p.slug}
+                      image={p.cardImage}
+                      name={p.name}
+                      className="aspect-square w-20 shrink-0 rounded-full border-4 border-surface-raised sm:w-24"
+                      sizes="96px"
+                    />
+                  ))}
+              </div>
+              <h2 className="relative mx-auto mt-6 max-w-2xl font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Not sure what a Corpsite build actually looks like?
+              </h2>
+              <p className="relative mx-auto mt-4 max-w-xl text-lg text-zinc-400">
+                See real sites we&apos;ve shipped — no mockups, click straight through to the live pages.
+              </p>
+              <div className="relative mt-8 flex justify-center">
+                <Button href="/portfolio" className="font-display uppercase tracking-[0.08em]">
+                  See our work
+                </Button>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+      )}
 
       {/* 5 — NGO programme band */}
       <section id="ngo" className="mx-auto max-w-6xl scroll-mt-24 px-4 pt-24 sm:px-6">

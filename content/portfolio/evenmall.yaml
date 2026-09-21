@@ -1,0 +1,59 @@
+name: "EvenMall"
+order: 3
+pillar: "corpsite"
+industry: "E-commerce"
+companyType: "Online Marketplace"
+kind: "build"
+summary: "A bold, orange-and-black storefront for EvenMall's furniture and home-essentials marketplace."
+intro: "EvenMall sells everything from Italian sofas to fitness gear under one roof, and needed a storefront confident enough to hold that range together. Rather than default to the white background and blue links most furniture marketplaces settle for, we built a bold black-and-orange identity carried through every banner, badge, and call to action — closer to a fashion outlet's energy than a generic catalogue."
+challenge: "Hold furniture, home goods, pet, and fitness categories together under one storefront without it reading like a generic marketplace theme."
+solution: "We built a bold black-and-orange identity and carried it through every banner, badge, and call to action, instead of the default white-background template."
+stack:
+  - label: "Platform"
+    value: "Next.js (App Router) + Medusa.js v2"
+  - label: "Payments"
+    value: "Xendit — split payments & seller payouts"
+  - label: "Admin"
+    value: "Medusa admin — products, categories, and the homepage all edit live, no redeploy"
+  - label: "Notable"
+    value: "pnpm/Turborepo monorepo; localized for Malaysia (RM, SST, FPX, e-wallets, BNPL, COD); dynamic sitemap + OpenGraph"
+stackTags:
+  - "Next.js"
+  - "Medusa.js"
+  - "Xendit"
+  - "SEO-ready"
+liveUrl: "https://evenmall.com/"
+cardImage: evenmall-card.jpg
+hero:
+  discriminant: "image"
+  value: evenmall-wide.jpg
+screenshots:
+  - src: evenmall-2.jpg
+    label: "Trending this week"
+    device: "desktop"
+  - src: evenmall-3.jpg
+    label: "Why shop with EvenMall"
+    device: "desktop"
+  - src: evenmall-shopall.jpg
+    label: "Shop all — with filters"
+    device: "desktop"
+  - src: evenmall-product.jpg
+    label: "Product page"
+    device: "desktop"
+  - src: evenmall-tablet.jpg
+    device: "tablet"
+  - src: evenmall-shopall-tablet.jpg
+    label: "Shop all — with filters"
+    device: "tablet"
+  - src: evenmall-product-tablet.jpg
+    label: "Product page"
+    device: "tablet"
+  - src: evenmall-mobile.jpg
+    device: "mobile"
+  - src: evenmall-shopall-mobile.jpg
+    label: "Shop all — with filters"
+    device: "mobile"
+  - src: evenmall-product-mobile.jpg
+    label: "Product page"
+    device: "mobile"
+featured: false
