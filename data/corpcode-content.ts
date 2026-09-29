@@ -43,7 +43,7 @@ export interface CorpcodeTier {
 export const tiersHeading = {
   title: "Four tiers, one process",
   lede: "Public price floors and what each tier actually ships.",
-  note: "excl. 6% SST",
+  note: "excl. 8% SST",
 };
 
 export const tiers: CorpcodeTier[] = [
@@ -87,7 +87,7 @@ export const tiers: CorpcodeTier[] = [
 ];
 
 export const tierDisclaimer =
-  "All prices exclude 6% SST and pass-through costs (hosting, third-party APIs, premium licenses). Final quotes follow paid discovery.";
+  "All prices exclude 8% SST and pass-through costs (hosting, third-party APIs, premium licenses). Final quotes follow paid discovery.";
 
 /* ── Tier finder (five questions, highest answer wins) ─────────────────── */
 
@@ -203,7 +203,7 @@ export const faqs: FaqItem[] = [
   {
     question: "How much does a project cost?",
     answer:
-      "Lite from RM 30,000. Standard from RM 60,000. Advanced from RM 150,000. Enterprise RM 300,000+. Discovery starts at RM 5,000. All figures exclude 6% SST and pass-through costs, and are fixed after paid discovery.",
+      "Lite from RM 30,000. Standard from RM 60,000. Advanced from RM 150,000. Enterprise RM 300,000+. Discovery starts at RM 5,000. All figures exclude 8% SST and pass-through costs, and are fixed after paid discovery.",
   },
   {
     question: "Do we own the source code?",

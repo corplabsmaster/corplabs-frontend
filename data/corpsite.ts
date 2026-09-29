@@ -392,7 +392,7 @@ export const tiersSection = {
   note: "retainer covers hosting, monitoring, minor edits",
   head: ["Tier", "Build", "Retainer", "Pages", "What you get"] as const,
   finePrint:
-    "All prices exclude 6% SST. Domains, premium licenses, and stock media are passed through at cost.",
+    "All prices exclude 8% SST. Domains, premium licenses, and stock media are passed through at cost.",
 };
 
 export const addonsSection = {
