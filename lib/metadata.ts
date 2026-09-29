@@ -33,6 +33,10 @@ export const OG_IMAGE = {
  * two can't drift apart. og:title and og:description are left unset unless a
  * page passes them — Next fills them from `title` and `description`.
  *
+ * hreflang: the site has one language, so each page names itself as the
+ * English version and the default. That is valid on its own and gives a
+ * translated edition an obvious place to slot in later.
+ *
  * The site-wide card is spelled out rather than inherited: a file-based
  * opengraph-image only attaches at its own segment, and a page's `openGraph`
  * replaces whatever it resolved to. A route with its own opengraph-image file
@@ -55,7 +59,7 @@ export function pageMetadata({
   return {
     title,
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: path, languages: { en: path, "x-default": path } },
     openGraph: {
       ...ogDefaults,
       ...(ownImage ? {} : { images: [OG_IMAGE] }),
