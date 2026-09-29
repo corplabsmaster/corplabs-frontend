@@ -8,7 +8,7 @@ export const site = {
   name: "Corplabs",
   tagline: "Idea to Reality",
   description:
-    "Corplabs builds custom software, AI WhatsApp agents, Odoo ERP and websites for businesses in Malaysia and Southeast Asia — one team, scope to support.",
+    "Corplabs builds custom software, AI WhatsApp agents, Odoo ERP and websites in Malaysia — one team from scope to support.",
   // Must match the primary domain on Vercel: corplabs.co redirects to www, so
   // an apex value here puts every canonical, sitemap entry and JSON-LD url
   // on a redirect.
