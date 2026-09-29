@@ -26,7 +26,7 @@ export const metadata = pageMetadata({
   path: "/corpcode",
   title: "Corpcode — Custom Software Builds",
   description:
-    "Custom software from RM 30,000, from internal tools to full ERPs. Paid discovery, a fixed quote, demos every two weeks, and a 60-day warranty.",
+    "Custom software from RM 30,000, internal tools to full ERPs. Paid discovery, a fixed quote, demos every two weeks, 60-day warranty.",
 });
 
 const GRADIENT_PILL =

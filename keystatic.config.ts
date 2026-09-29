@@ -61,7 +61,7 @@ export default config({
         excerpt: fields.text({
           label: "Excerpt",
           description:
-            "1–2 sentences shown on the blog index and used as the meta description (aim for under 160 characters).",
+            "1–2 sentences shown on the blog index and used as the meta description. Keep it to 135 characters or fewer, main point first.",
           multiline: true,
           validation: { isRequired: true },
         }),

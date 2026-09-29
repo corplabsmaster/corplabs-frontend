@@ -25,7 +25,8 @@ export async function generateStaticParams() {
 
 const APPLY_FALLBACK = "/contact?intent=careers";
 
-function summarize(text: string, max = 155): string {
+/** Meta descriptions stay within 135 chars; the trailing "…" is the 135th. */
+function summarize(text: string, max = 134): string {
   const flat = text.replace(/\s+/g, " ").trim();
   if (flat.length <= max) return flat;
   return `${flat.slice(0, flat.lastIndexOf(" ", max))}…`;

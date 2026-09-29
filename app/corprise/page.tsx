@@ -26,7 +26,7 @@ export const metadata = pageMetadata({
   path: "/corprise",
   title: "Corprise — Monthly Odoo ERP for Malaysian SMEs",
   description:
-    "Odoo ERP for Malaysian SMEs from RM 1,000 a month — implementation, hosting, MyInvois and ongoing refinements in one subscription. Live in 4–8 weeks.",
+    "Odoo ERP for Malaysian SMEs from RM 1,000 a month — implementation, hosting, MyInvois and refinements included. Live in 4–8 weeks.",
 });
 
 function RouteCard({ card, tone }: { card: ComparisonCard; tone: "muted" | "accent" }) {
