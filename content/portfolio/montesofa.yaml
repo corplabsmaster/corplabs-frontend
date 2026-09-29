@@ -1,0 +1,65 @@
+# TODO(Sahira): this entry's copy was written from what the live site shows
+# (layout, stats, industry), not confirmed engagement details (scope,
+# timeline, budget, stack). Fact-check before this goes fully live — see
+# how hiterra.yaml/evenmall.yaml's `stack` were verified against real
+# Notion project docs for the standard to match.
+name: "Montesofa"
+order: 1
+pillar: "corpsite"
+industry: "Furniture"
+companyType: "Furniture Manufacturer"
+kind: "revamp"
+summary: "A revamp for a Malaysian luxury sofa maker — from a dated storefront to an editorial, product-led site."
+intro: "Montesofa has been building handmade leather sofas in Selangor since 1997 — from a four-person workshop to a 150-person atelier. But their site still read like a catalogue, and catalogues don't sell craftsmanship. We rebuilt it around full-bleed leather photography, a slower editorial pace, and the same looping hero film that greets visitors on the real showroom floor. Fewer clicks, more looking — the sofa does the convincing."
+challenge: "Sell handmade craftsmanship through a site that looked like every other furniture catalogue."
+solution: "We rebuilt the site around full-bleed leather photography and the brand's own hero film, cut the catalogue UI, and let the product carry the page."
+stack:
+  - label: "Platform"
+    value: "Next.js + Payload CMS"
+  - label: "Hosting"
+    value: "Vercel"
+  - label: "Notable"
+    value: "Custom media CMS for product photography and the hero film"
+stackTags:
+  - "Next.js"
+  - "Payload CMS"
+  - "Vercel"
+liveUrl: "https://monte-web-xi.vercel.app/"
+cardImage: montesofa-card.jpg
+hero:
+  discriminant: "video"
+  value:
+    heroVideo: montesofa-hero.mp4
+    heroPoster: montesofa-hero-poster.jpg
+screenshots:
+  - src: montesofa.jpg
+    device: "desktop"
+  - src: montesofa-collections.jpg
+    label: "Collections page"
+    device: "desktop"
+  - src: montesofa-about.jpg
+    label: "About — The Maison"
+    device: "desktop"
+  - src: montesofa-2.jpg
+    label: "Collections teaser"
+    device: "desktop"
+  - src: montesofa-3.jpg
+    label: "In your space"
+    device: "desktop"
+  - src: montesofa-tablet.jpg
+    device: "tablet"
+  - src: montesofa-collections-tablet.jpg
+    label: "Collections page"
+    device: "tablet"
+  - src: montesofa-about-tablet.jpg
+    label: "About — The Maison"
+    device: "tablet"
+  - src: montesofa-mobile.jpg
+    device: "mobile"
+  - src: montesofa-collections-mobile.jpg
+    label: "Collections page"
+    device: "mobile"
+  - src: montesofa-about-mobile.jpg
+    label: "About — The Maison"
+    device: "mobile"
+featured: true

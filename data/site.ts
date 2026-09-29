@@ -19,8 +19,14 @@ export const site = {
   },
 } as const;
 
+/** The canonical set of pillar ids — shared with lib/portfolio.ts's
+ * PortfolioProject.pillar (via keystatic.config.ts's `pillar` select, whose
+ * options are derived from `pillars` below) so a project can never be
+ * tagged with a pillar that doesn't exist here. */
+export type PillarId = "corpi" | "corpcode" | "corprise" | "corpsite";
+
 export interface Pillar {
-  id: string;
+  id: PillarId;
   name: string;
   href: string;
   tagline: string;
