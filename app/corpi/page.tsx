@@ -29,7 +29,7 @@ export const metadata = pageMetadata({
   path: "/corpi",
   title: "Corpi Intelligence — AI WhatsApp Sales Bot",
   description:
-    "Corpi Intelligence by Corplabs is a done-for-you AI WhatsApp sales agent. Captures leads 24/7, replies in BM/EN/Chinese, and saves to your CRM automatically.",
+    "Corpi is a done-for-you AI WhatsApp sales agent: captures leads 24/7, replies in BM, English and Chinese, and files them in your CRM.",
 });
 
 export default function CorpiPage() {

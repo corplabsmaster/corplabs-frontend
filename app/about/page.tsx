@@ -21,7 +21,7 @@ export const metadata = pageMetadata({
   path: "/about",
   title: "About — A Kuala Lumpur Software Team Since 2015",
   description:
-    "A Kuala Lumpur software team since 2015 — four products of our own, client work across Southeast Asia, and the same people from scoping to support.",
+    "A Kuala Lumpur software team since 2015 — four products of our own, client work across Southeast Asia, one team from scope to support.",
 });
 
 export default function AboutPage() {

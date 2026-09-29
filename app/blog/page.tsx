@@ -8,7 +8,7 @@ export const metadata = pageMetadata({
   path: "/blog",
   title: "Blog — Guides on ERP, MyInvois & WhatsApp AI",
   description:
-    "Practical guides from the Corplabs team — MyInvois e-invoicing, Odoo ERP, WhatsApp AI agents, and building software for Southeast Asian businesses.",
+    "Practical guides from Corplabs on MyInvois e-invoicing, Odoo ERP, WhatsApp AI agents and software for Southeast Asian businesses.",
 });
 
 export default async function BlogIndexPage() {

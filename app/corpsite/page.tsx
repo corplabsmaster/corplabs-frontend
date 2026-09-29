@@ -27,7 +27,7 @@ export const metadata = pageMetadata({
   path: "/corpsite",
   title: "Corpsite — Websites, Built Like Software",
   description:
-    "Websites built like software — six tiers from RM 2,000, hosted on Cloudflare, with a monthly retainer that covers hosting, monitoring and edits.",
+    "Websites built like software — six tiers from RM 2,000 on Cloudflare, with a monthly retainer covering hosting, monitoring and edits.",
 });
 
 export default async function CorpsitePage() {

@@ -21,7 +21,7 @@ export const metadata = pageMetadata({
   path: "/solutions",
   title: "Solutions — The Corplabs Lineup",
   description:
-    "Compare Corplabs’ four offerings — AI WhatsApp agents, custom software, subscription Odoo ERP and websites — and find the one that fits your business.",
+    "Compare Corplabs’ four offerings — AI WhatsApp agents, custom software, Odoo ERP and websites — and find the one that fits.",
 });
 
 /** Shared column template for the Side-by-Side ledger header and rows. */

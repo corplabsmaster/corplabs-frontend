@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
   path: "/careers",
   title: "Careers — Jobs & Internships in Kuala Lumpur",
   description:
-    "Open roles at Corplabs — engineering, product and design, in Kuala Lumpur or remote across Malaysia. We build AI agents, custom software, ERP and websites.",
+    "Jobs and internships at Corplabs, in Kuala Lumpur or remote across Malaysia — building AI agents, custom software, ERP and websites.",
 });
 
 export default async function CareersPage() {
