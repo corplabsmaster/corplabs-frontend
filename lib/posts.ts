@@ -61,6 +61,7 @@ export async function getPost(slug: string) {
   return {
     slug,
     title: entry.title,
+    seoTitle: entry.seoTitle,
     publishedDate: entry.publishedDate ?? "1970-01-01",
     excerpt: entry.excerpt,
     tags: [...entry.tags],

@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { site } from "@/data/site";
+import { fitTitle, pageMetadata } from "@/lib/metadata";
 import { formatPostDate, getAllPosts, getPost } from "@/lib/posts";
 
 export async function generateStaticParams() {
@@ -20,19 +21,20 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) return {};
-  return {
-    title: post.title,
+  return pageMetadata({
+    path: `/blog/${slug}`,
+    title: fitTitle(post.seoTitle || post.title),
     description: post.excerpt,
-    alternates: { canonical: `/blog/${slug}` },
+    ownImage: true, // ./opengraph-image.tsx
     openGraph: {
       type: "article",
+      // Social cards have room for the full headline; search results don't.
       title: post.title,
-      description: post.excerpt,
       publishedTime: post.publishedDate,
       authors: [post.author],
       tags: post.tags,
     },
-  };
+  });
 }
 
 /** Markdoc → styled HTML. Long-form typography tuned to the design system. */

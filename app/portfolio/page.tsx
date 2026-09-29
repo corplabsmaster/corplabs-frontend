@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
 import { PortfolioGrid } from "@/components/portfolio/PortfolioGrid";
 import { CtaBand } from "@/components/ui/cta-band";
 import { Reveal } from "@/components/ui/reveal";
 import { portfolioHero } from "@/data/portfolio";
+import { pageMetadata } from "@/lib/metadata";
 import { getAllProjects } from "@/lib/portfolio";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/portfolio",
   title: "Our Work — Corplabs Portfolio",
   description:
     "Real sites Corplabs has designed and built, across every pillar — click through from the case study to the live site.",
-  alternates: { canonical: "/portfolio" },
-};
+});
 
 export default async function PortfolioPage() {
   const projects = await getAllProjects();

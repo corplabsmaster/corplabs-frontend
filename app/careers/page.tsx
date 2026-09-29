@@ -1,18 +1,18 @@
-import type { Metadata } from "next";
 import { JobCard } from "@/components/careers/JobCard";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { getJobs } from "@/lib/jobs";
+import { pageMetadata } from "@/lib/metadata";
 
 // Literal required by Next's segment config analysis; matches the JD pages.
 export const revalidate = 1800;
 
-export const metadata: Metadata = {
-  title: "Careers",
+export const metadata = pageMetadata({
+  path: "/careers",
+  title: "Careers — Jobs & Internships in Kuala Lumpur",
   description:
-    "Open roles at Corplabs — engineering, product and design, based in Kuala Lumpur and remote across Malaysia. We build AI agents, custom software, ERP and websites.",
-  alternates: { canonical: "/careers" },
-};
+    "Open roles at Corplabs — engineering, product and design, in Kuala Lumpur or remote across Malaysia. We build AI agents, custom software, ERP and websites.",
+});
 
 export default async function CareersPage() {
   const jobs = await getJobs();
@@ -46,7 +46,7 @@ export default async function CareersPage() {
           <div className="grid gap-6 md:grid-cols-3">
             {jobs.map((job, i) => (
               <Reveal key={job.slug ?? job.title} delay={i * 0.06}>
-                <JobCard job={job} />
+                <JobCard job={job} headingAs="h2" />
               </Reveal>
             ))}
           </div>

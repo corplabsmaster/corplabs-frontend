@@ -106,9 +106,9 @@ export default function PlanSelector() {
 
           <div className="mt-6 rounded-xl border border-brand-500 bg-surface p-6 sm:p-8">
             <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-              <h3 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
                 {tier.name}
-              </h3>
+              </h2>
               <div className="flex-none sm:text-right">
                 <p className="font-display text-lg font-bold text-white">
                   <Price rm={tier.oneTime} />
@@ -175,9 +175,9 @@ export default function PlanSelector() {
             total={siteSteps.length}
             pct={pct}
           />
-          <h3 className="font-display text-2xl font-bold leading-snug text-white">
+          <h2 className="font-display text-2xl font-bold leading-snug text-white">
             {current.prompt}
-          </h3>
+          </h2>
           <p className="mt-1.5 text-sm text-zinc-500">{current.help}</p>
 
           <div

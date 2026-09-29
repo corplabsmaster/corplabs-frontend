@@ -63,9 +63,11 @@ export default function Footer() {
           </div>
           <div className="flex gap-4">
             {socials.map(s => (
-              <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label}>
-                {/* Pale lavender glyphs, drawn for the dark footer. */}
-                <img src={s.icon} alt="" className="theme-ink-icon h-[22px] w-[22px]" />
+              <a key={s.label} href={s.href} target="_blank" rel="noreferrer">
+                {/* Pale lavender glyphs, drawn for the dark footer. The network's
+                    name is the image's alt rather than an aria-label on the link:
+                    same accessible name, and crawlers read alt as anchor text. */}
+                <img src={s.icon} alt={s.label} className="theme-ink-icon h-[22px] w-[22px]" />
               </a>
             ))}
           </div>
@@ -73,9 +75,11 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
           {columns.map(col => (
             <div key={col.name}>
-              <h4 className="mb-3.5 font-display text-[13px] font-semibold text-white">
+              {/* h2: these head the footer's own sections. As h4 they skipped
+                  two levels under whatever the page's last h2 happened to be. */}
+              <h2 className="mb-3.5 font-display text-[13px] font-semibold text-white">
                 {col.name}
-              </h4>
+              </h2>
               {col.links.map(l =>
                 l.href.includes(":") ? (
                   <a

@@ -18,9 +18,9 @@ export function ProjectCard({ project }: { project: PortfolioProject }) {
         </div>
       </div>
       <div className="flex flex-col gap-1.5 px-1 pb-1">
-        <h3 className="font-display text-base font-semibold text-white group-hover:text-brand-200">
+        <h2 className="font-display text-base font-semibold text-white group-hover:text-brand-200">
           {project.name}
-        </h3>
+        </h2>
         <p className="text-[13.5px] leading-relaxed text-zinc-200">
           {project.summary}
         </p>

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import TierFinder from "@/components/corpcode/TierFinder";
 import { Price } from "@/components/currency/price";
 import { PillarStrip } from "@/components/pillar-strip";
@@ -20,14 +19,15 @@ import {
   tiers,
   tiersHeading,
 } from "@/data/corpcode-content";
+import { pageMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/corpcode",
   title: "Corpcode — Custom Software Builds",
   description:
-    "From internal tools to full ERPs — Corpcode designs, builds, and maintains the systems off-the-shelf software can't touch. Paid discovery, fixed milestones, senior craft.",
-  alternates: { canonical: "/corpcode" },
-};
+    "Custom software from RM 30,000, from internal tools to full ERPs. Paid discovery, a fixed quote, demos every two weeks, and a 60-day warranty.",
+});
 
 const GRADIENT_PILL =
   "bg-[linear-gradient(90deg,var(--color-gradient-1),var(--color-gradient-2))]";
@@ -182,7 +182,13 @@ export default function CorpcodePage() {
               key={step.n}
               className="grid gap-x-8 gap-y-3 bg-surface p-7 sm:p-9 md:grid-cols-[88px_minmax(0,220px)_minmax(0,1fr)] md:items-start"
             >
-              <div className="font-display text-4xl font-bold leading-none text-white/10 sm:text-5xl">
+              {/* Ghost ordinal — decoration only, the step order is already
+                  carried by the list itself, so it stays at 10% and is hidden
+                  from assistive tech rather than lifted to a readable weight. */}
+              <div
+                aria-hidden
+                className="font-display text-4xl font-bold leading-none text-white/10 sm:text-5xl"
+              >
                 {step.n}
               </div>
               <div>

@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { changelog, changelogHero } from "@/data/changelog";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Changelog",
+export const metadata = pageMetadata({
+  path: "/changelog",
+  title: "Changelog — How corplabs.co Has Evolved",
   description:
     "How corplabs.co evolved — every major release of the site, with a browsable archive of the original Gatsby-era homepage.",
-  alternates: { canonical: "/changelog" },
-};
+});
 
 export default function ChangelogPage() {
   return (

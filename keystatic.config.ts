@@ -49,6 +49,11 @@ export default config({
             validation: { isRequired: true },
           },
         }),
+        seoTitle: fields.text({
+          label: "SEO title",
+          description:
+            "Optional. Replaces the title in search results only — use it when the title runs past 60 characters. The page heading and social cards keep the full title.",
+        }),
         publishedDate: fields.date({
           label: "Published date",
           validation: { isRequired: true },

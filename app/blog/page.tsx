@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
+import { pageMetadata } from "@/lib/metadata";
 import { getAllPosts, formatPostDate } from "@/lib/posts";
 
-export const metadata: Metadata = {
-  title: "Blog",
+export const metadata = pageMetadata({
+  path: "/blog",
+  title: "Blog — Guides on ERP, MyInvois & WhatsApp AI",
   description:
     "Practical guides from the Corplabs team — MyInvois e-invoicing, Odoo ERP, WhatsApp AI agents, and building software for Southeast Asian businesses.",
-  alternates: { canonical: "/blog" },
-};
+});
 
 export default async function BlogIndexPage() {
   const posts = await getAllPosts();

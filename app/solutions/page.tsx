@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Price } from "@/components/currency/price";
 import ProblemRouter from "@/components/solutions/ProblemRouter";
@@ -16,13 +15,14 @@ import {
   solutionsCta,
   solutionsHero,
 } from "@/data/solutions";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/solutions",
   title: "Solutions — The Corplabs Lineup",
   description:
-    "Corplabs delivers four pillars: Corpi (AI WhatsApp agents), Corpcode (custom software builds), Corprise (subscription-priced ERP), and Corpsite (websites). One team, one playbook.",
-  alternates: { canonical: "/solutions" },
-};
+    "Compare Corplabs’ four offerings — AI WhatsApp agents, custom software, subscription Odoo ERP and websites — and find the one that fits your business.",
+});
 
 /** Shared column template for the Side-by-Side ledger header and rows. */
 const ledgerCols =
