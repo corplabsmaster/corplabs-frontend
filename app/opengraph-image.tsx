@@ -1,13 +1,15 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/data/site";
+import { OG_IMAGE } from "@/lib/metadata";
 
-export const alt = `${site.name} — ${site.tagline}`;
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const alt = OG_IMAGE.alt;
+export const size = { width: OG_IMAGE.width, height: OG_IMAGE.height };
+export const contentType = OG_IMAGE.type;
 
 /**
- * Site-wide OpenGraph/Twitter card, generated at build time. Next cascades
- * this to every route's og:image (and twitter:image) automatically.
+ * Site-wide OpenGraph/Twitter card, generated at build time. Pages don't
+ * inherit it on their own — any page-level openGraph replaces it — so
+ * pageMetadata() in lib/metadata.ts references it explicitly.
  */
 export default function OpengraphImage() {
   return new ImageResponse(

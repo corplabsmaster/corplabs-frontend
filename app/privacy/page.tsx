@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import { privacyPolicy } from "@/data/privacy";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
+export const metadata = pageMetadata({
+  path: "/privacy",
+  title: "Privacy Policy — How We Handle Your Data",
   description:
     "Corplabs Privacy Policy — learn how we collect, use, and protect your personal information.",
-  alternates: { canonical: "/privacy" },
-};
+});
 
 export default function PrivacyPage() {
   return (

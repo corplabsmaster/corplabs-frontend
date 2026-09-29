@@ -8,8 +8,11 @@ export const site = {
   name: "Corplabs",
   tagline: "Idea to Reality",
   description:
-    "Corplabs turns ideas into working software. Four pillars: Corpi (AI WhatsApp agents), Corpcode (custom software builds), Corprise (subscription-priced ERP), and Corpsite (websites). One team, one playbook.",
-  url: "https://corplabs.co",
+    "Corplabs builds custom software, AI WhatsApp agents, Odoo ERP and websites for businesses in Malaysia and Southeast Asia — one team, scope to support.",
+  // Must match the primary domain on Vercel: corplabs.co redirects to www, so
+  // an apex value here puts every canonical, sitemap entry and JSON-LD url
+  // on a redirect.
+  url: "https://www.corplabs.co",
   phone: "+6583937108",
   social: {
     twitter: "https://twitter.com/coprlabs_co",

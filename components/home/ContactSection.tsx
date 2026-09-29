@@ -12,7 +12,9 @@ type Status = "idle" | "sending" | "sent" | "error";
 const inputClass =
   "w-full rounded-md border border-line bg-surface px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-2 focus:outline-brand-500";
 
-export default function ContactSection() {
+/** `headingAs="h1"` where this is the page itself (/contact) rather than a band. */
+export default function ContactSection({ headingAs: Heading = "h2" }: { headingAs?: "h1" | "h2" }) {
+  const Subheading = Heading === "h1" ? "h2" : "h3";
   const [intent, setIntent] = useState(0);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
@@ -61,10 +63,10 @@ export default function ContactSection() {
         <p className="mb-4 font-medium text-xs uppercase tracking-[0.08em] text-brand-300">
           {copy.eyebrow}
         </p>
-        <h2 className="mb-4 font-display text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-[44px]">
+        <Heading className="mb-4 font-display text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-[44px]">
           {copy.title.plain}
           <span className="gradient-text">{copy.title.gradient}</span>
-        </h2>
+        </Heading>
         <p className="mb-8 text-base leading-relaxed text-zinc-200">{copy.lede}</p>
         <div className="flex flex-col gap-4">
           <div>
@@ -97,7 +99,7 @@ export default function ContactSection() {
               <span className="gradient-border flex h-14 w-14 items-center justify-center rounded-full text-[22px] text-gradient-1">
                 ✓
               </span>
-              <h3 className="font-display text-2xl font-bold text-white">{copy.success.title}</h3>
+              <Subheading className="font-display text-2xl font-bold text-white">{copy.success.title}</Subheading>
               <p className="max-w-sm text-sm leading-relaxed text-zinc-200">{copy.success.body}</p>
               <button
                 type="button"

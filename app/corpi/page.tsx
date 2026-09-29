@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ChatDemo } from "@/components/corpi/ChatDemo";
 import { CorpiLockup } from "@/components/corpi/CorpiMark";
 import { TrialCta } from "@/components/corpi/TrialCta";
@@ -23,14 +22,15 @@ import {
   pillars,
   pricing,
 } from "@/data/corpi";
+import { pageMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/corpi",
   title: "Corpi Intelligence — AI WhatsApp Sales Bot",
   description:
     "Corpi Intelligence by Corplabs is a done-for-you AI WhatsApp sales agent. Captures leads 24/7, replies in BM/EN/Chinese, and saves to your CRM automatically.",
-  alternates: { canonical: "/corpi" },
-};
+});
 
 export default function CorpiPage() {
   return (

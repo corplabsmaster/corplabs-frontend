@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import PricingTable from "@/components/corprise/PricingTable";
 import TierScorecard from "@/components/corprise/TierScorecard";
 import { Price } from "@/components/currency/price";
@@ -20,14 +19,15 @@ import {
   usualRoute,
 } from "@/data/corprise-content";
 import { faqs } from "@/data/corprise-faqs";
+import { pageMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "Corprise — Subscription-Priced Odoo ERP for Malaysian SMEs",
+export const metadata = pageMetadata({
+  path: "/corprise",
+  title: "Corprise — Monthly Odoo ERP for Malaysian SMEs",
   description:
-    "Corprise replaces RM 80,000+ Odoo implementations with a predictable monthly subscription from RM 1,000. Go live in weeks, MyInvois and Claude-powered AI automation included.",
-  alternates: { canonical: "/corprise" },
-};
+    "Odoo ERP for Malaysian SMEs from RM 1,000 a month — implementation, hosting, MyInvois and ongoing refinements in one subscription. Live in 4–8 weeks.",
+});
 
 function RouteCard({ card, tone }: { card: ComparisonCard; tone: "muted" | "accent" }) {
   const accent = tone === "accent";

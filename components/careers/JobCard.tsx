@@ -6,7 +6,7 @@ import type { Job } from "@/lib/jobs";
  * Notion-backed roles link to their own JD page; the static fallback roles
  * (rendered only when the Notion pipeline isn't configured) link to contact.
  */
-export function JobCard({ job }: { job: Job }) {
+export function JobCard({ job, headingAs: Heading = "h3" }: { job: Job; headingAs?: "h2" | "h3" }) {
   const external = job.href.startsWith("http");
   const className =
     "block rounded-xl border-[1.5px] border-brand-500 bg-brand-950 p-7 transition-shadow hover:shadow-[0_0_0_1px_rgba(86,5,255,0.35),0_10px_40px_rgba(86,5,255,0.25)]";
@@ -28,7 +28,7 @@ export function JobCard({ job }: { job: Job }) {
         </span>
       </div>
       <p className="mb-1.5 text-[13px] text-brand-200">{job.team}</p>
-      <h3 className="mb-3.5 font-display text-lg font-medium text-white">{job.title}</h3>
+      <Heading className="mb-3.5 font-display text-lg font-medium text-white">{job.title}</Heading>
       <div className="mb-5 flex flex-wrap gap-1.5">
         {job.tags.map(tag => (
           <span

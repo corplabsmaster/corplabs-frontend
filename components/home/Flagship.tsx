@@ -33,7 +33,7 @@ export default function Flagship() {
                 key={t.name}
                 className="rounded-xl border border-hiterra/20 bg-[rgba(0,11,66,0.5)] p-5 transition-colors hover:border-hiterra/45"
               >
-                <h4 className="mb-1.5 font-display text-sm font-medium text-white">{t.name}</h4>
+                <h3 className="mb-1.5 font-display text-sm font-medium text-white">{t.name}</h3>
                 <p className="text-[12.5px] leading-normal text-zinc-200">{t.blurb}</p>
               </div>
             ))}

@@ -6,6 +6,7 @@ import { JobBody } from "@/components/careers/JobBody";
 import { Reveal } from "@/components/ui/reveal";
 import { site } from "@/data/site";
 import { getJob, getJobs } from "@/lib/jobs";
+import { fitTitle, pageMetadata } from "@/lib/metadata";
 import { blocksToPlainText } from "@/lib/notion-blocks";
 
 // Must be a literal — Next statically analyses segment config. Matches
@@ -43,12 +44,12 @@ export async function generateMetadata({
     summarize(blocksToPlainText(blocks)) ||
     `${job.title} at Corplabs — ${job.type}, ${job.location}.`;
 
-  return {
-    title: `${job.title} — Careers`,
+  return pageMetadata({
+    path: `/careers/${slug}`,
+    title: fitTitle(`${job.title} — Careers`),
     description,
-    alternates: { canonical: `/careers/${slug}` },
-    openGraph: { type: "article", title: job.title, description },
-  };
+    openGraph: { type: "article", title: job.title },
+  });
 }
 
 export default async function JobPage({ params }: { params: Promise<{ slug: string }> }) {

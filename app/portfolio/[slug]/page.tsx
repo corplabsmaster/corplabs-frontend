@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { kindLabel, portfolioCaseStudyCopy } from "@/data/portfolio";
+import { fitTitle, pageMetadata } from "@/lib/metadata";
 import { getAllProjects, getProject } from "@/lib/portfolio";
 
 export async function generateStaticParams() {
@@ -22,11 +23,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = await getProject(slug);
   if (!project) return {};
-  return {
-    title: `${project.name} — Corplabs Portfolio`,
+  return pageMetadata({
+    path: `/portfolio/${slug}`,
+    title: fitTitle(`${project.name} — Corplabs Portfolio`),
     description: project.summary,
-    alternates: { canonical: `/portfolio/${slug}` },
-  };
+  });
 }
 
 /** Falls back to the raw URL for a blank/schemeless value instead of

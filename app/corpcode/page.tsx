@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import TierFinder from "@/components/corpcode/TierFinder";
 import { Price } from "@/components/currency/price";
 import { PillarStrip } from "@/components/pillar-strip";
@@ -20,14 +19,15 @@ import {
   tiers,
   tiersHeading,
 } from "@/data/corpcode-content";
+import { pageMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/corpcode",
   title: "Corpcode — Custom Software Builds",
   description:
-    "From internal tools to full ERPs — Corpcode designs, builds, and maintains the systems off-the-shelf software can't touch. Paid discovery, fixed milestones, senior craft.",
-  alternates: { canonical: "/corpcode" },
-};
+    "Custom software from RM 30,000, from internal tools to full ERPs. Paid discovery, a fixed quote, demos every two weeks, and a 60-day warranty.",
+});
 
 const GRADIENT_PILL =
   "bg-[linear-gradient(90deg,var(--color-gradient-1),var(--color-gradient-2))]";

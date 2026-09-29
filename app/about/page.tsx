@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -16,13 +15,14 @@ import {
   values,
   valuesHeading,
 } from "@/data/about";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "About",
+export const metadata = pageMetadata({
+  path: "/about",
+  title: "About — A Kuala Lumpur Software Team Since 2015",
   description:
-    "Corplabs is a dynamic technology company founded by a team of highly motivated and experienced technological enthusiasts, dedicated to transforming the technology industry through innovation and cutting-edge solutions.",
-  alternates: { canonical: "/about" },
-};
+    "A Kuala Lumpur software team since 2015 — four products of our own, client work across Southeast Asia, and the same people from scoping to support.",
+});
 
 export default function AboutPage() {
   return (

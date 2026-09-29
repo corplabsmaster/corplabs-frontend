@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import ContactSection from "@/components/home/ContactSection";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Contact",
+export const metadata = pageMetadata({
+  path: "/contact",
+  title: "Contact — Book a Discovery Call or Get a Quote",
   description:
     "Get in touch with Corplabs — tell us what you're building and we'll come back with a written scope and a fixed quote.",
-  alternates: { canonical: "/contact" },
-};
+});
 
 export default function ContactPage() {
   return (
@@ -15,7 +15,7 @@ export default function ContactPage() {
         aria-hidden
         className="pointer-events-none absolute inset-x-0 -top-40 mx-auto h-96 max-w-3xl rounded-full bg-brand-600/25 blur-3xl"
       />
-      <ContactSection />
+      <ContactSection headingAs="h1" />
     </div>
   );
 }

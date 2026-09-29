@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import AddonsGrid from "@/components/corpsite/AddonsGrid";
 import NgoProgramme from "@/components/corpsite/NgoProgramme";
@@ -21,14 +20,15 @@ import {
   siteTiers,
   tiersSection,
 } from "@/data/corpsite";
+import { pageMetadata } from "@/lib/metadata";
 import { getAllProjects } from "@/lib/portfolio";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/corpsite",
   title: "Corpsite — Websites, Built Like Software",
   description:
-    "Corpsite is how Corplabs delivers websites — modern stack, Cloudflare-native infra, optional AI via Corpi. Six tiers from RM 2,000 starter sites to enterprise platforms, every plan with a transparent monthly retainer.",
-  alternates: { canonical: "/corpsite" },
-};
+    "Websites built like software — six tiers from RM 2,000, hosted on Cloudflare, with a monthly retainer that covers hosting, monitoring and edits.",
+});
 
 export default async function CorpsitePage() {
   const corpsiteProjects = (await getAllProjects()).filter(p => p.pillar === "corpsite");
