@@ -96,7 +96,7 @@ export const shortScorecardQuestions: ShortScorecardQuestion[] = [
 
 export const pricing = {
   title: "Six tiers, one monthly number",
-  note: "no per-user pricing · excl. 6% SST",
+  note: "no per-user pricing · excl. 8% SST",
   tableHead: ["Tier", "Monthly", "Modules included", "Users", "Support"],
 };
 

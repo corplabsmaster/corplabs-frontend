@@ -189,7 +189,7 @@ export const pillarLedger: PillarLedgerRow[] = [
 ];
 
 export const pillarLedgerFinePrint =
-  "All figures exclude 6% SST and pass-through costs. Build quotes are fixed after paid discovery.";
+  "All figures exclude 8% SST and pass-through costs. Build quotes are fixed after paid discovery.";
 
 /** Shown above the ledger on small screens, where it scrolls sideways. */
 export const pillarLedgerScrollHint = "Scroll sideways to compare all five columns.";
