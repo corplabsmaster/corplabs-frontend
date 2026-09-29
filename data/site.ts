@@ -13,9 +13,9 @@ export const site = {
   // an apex value here puts every canonical, sitemap entry and JSON-LD url
   // on a redirect.
   url: "https://www.corplabs.co",
-  phone: "+6583937108",
+  phone: "+60166727208", // E.164 of the 016-672 7208 WhatsApp line
   social: {
-    twitter: "https://twitter.com/coprlabs_co",
+    twitter: "https://twitter.com/corplabs_co",
     instagram: "https://www.instagram.com/corplabs_co/",
     linkedin: "https://www.linkedin.com/company/corplabsco",
     facebook: "https://www.facebook.com/corplabs.co/",
