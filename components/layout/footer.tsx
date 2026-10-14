@@ -55,9 +55,9 @@ export default function Footer() {
             * both themes. Two SVG variants, swapped by CSS like the header's.
             */}
           <div className="mb-5 flex items-center gap-2.5">
-            <img src="/logo.svg" alt="" className="theme-dark-only h-9 w-9" />
-            <img src="/logo-light.svg" alt="" className="theme-light-only h-9 w-9" />
-            <span className="font-display text-lg font-semibold tracking-tight text-white">
+            <img src="/logo.svg" alt={site.name} className="theme-dark-only h-9 w-9" />
+            <img src="/logo-light.svg" alt={site.name} className="theme-light-only h-9 w-9" />
+            <span aria-hidden className="font-display text-lg font-semibold tracking-tight text-white">
               {site.name}
             </span>
           </div>

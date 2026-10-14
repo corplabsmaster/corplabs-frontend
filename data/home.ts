@@ -10,6 +10,8 @@ export const hero = {
     gradient: "One Line of Code at a Time",
   },
   lede: "We design, build, and maintain software for businesses across Southeast Asia — four products of our own, and yours next.",
+  /** The orbit's own SVG carries its label; this describes the astronaut. */
+  artAlt: "An astronaut floating inside the Corplabs orbit",
   primaryCta: { label: "Get a Quote", href: "#contact" },
   secondaryCta: { label: "Our Products", href: "/solutions" },
   corpiRibbon: {

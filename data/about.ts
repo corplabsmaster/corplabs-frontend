@@ -122,6 +122,7 @@ export const culture = {
   title: { plain: "We Look Small, ", gradient: "But Think Big" },
   body: "Corpians work across products, not in silos — the engineer who built HiTerra's sensor pipeline is the one who'll tell you whether your IoT idea holds up. We hire for curiosity and keep the team small enough that everyone can see the whole board.",
   image: "/astronaut.webp",
+  imageAlt: "An astronaut floating in a violet glow",
 };
 
 export interface CultureCard {
