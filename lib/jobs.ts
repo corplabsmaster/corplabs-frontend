@@ -15,6 +15,9 @@ import { getBlocks, JOBS_CACHE_TAG, type NotionBlock } from "@/lib/notion-blocks
  *  - the newer "Job Vacancies" database: Status (select, "Open"), Type,
  *    Location (text), Tags (multi-select), Apply URL, Order.
  *
+ * Optional on either board: "Closing Date" (date) and "Monthly Salary (MYR)"
+ * (number) feed the role's JobPosting validThrough and baseSalary.
+ *
  * Each Notion-backed role gets its own /careers/<slug> page rendering the JD
  * from the Notion page body, so candidates read the role on corplabs.co and
  * the text is indexable. An optional "Apply URL" column becomes the apply
@@ -41,6 +44,10 @@ export interface Job {
   /** the row's "Apply URL" column, if the board has one */
   applyUrl?: string;
   postedAt?: string;
+  /** the row's optional "Closing Date" (a Notion date: YYYY-MM-DD or full ISO) */
+  closesAt?: string;
+  /** the row's optional "Monthly Salary (MYR)" — overrides the default intern rate */
+  monthlySalary?: number;
 }
 
 const NOTION_VERSION = "2022-06-28";
@@ -104,6 +111,8 @@ interface NotionPage {
       created_time?: string;
       date?: { start?: string | null } | null;
     };
+    "Closing Date"?: { date?: { start?: string | null } | null };
+    "Monthly Salary (MYR)"?: { number?: number | null };
   };
 }
 
@@ -184,6 +193,8 @@ export async function getJobs(): Promise<Job[]> {
             p["Job Posted"]?.created_time ??
             p["Job Posted"]?.date?.start ??
             page.created_time,
+          closesAt: p["Closing Date"]?.date?.start ?? undefined,
+          monthlySalary: p["Monthly Salary (MYR)"]?.number ?? undefined,
           monogram: monogram(title),
           thumb: THUMBS[i % THUMBS.length],
         };
