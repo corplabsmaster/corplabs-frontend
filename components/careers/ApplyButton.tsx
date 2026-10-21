@@ -18,7 +18,8 @@ export function ApplyButton({
   href: string;
   /** Job title, reported as the `role` parameter. */
   role: string;
-  placement: "top" | "bottom";
+  /** "body" is the application-form link inside the JD itself. */
+  placement: "top" | "bottom" | "body";
   className?: string;
   children: React.ReactNode;
 }) {
@@ -30,7 +31,7 @@ export function ApplyButton({
       href={href}
       className={className}
       onClick={() => trackApplyClick(role, placement)}
-      {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
       {children}
     </Button>

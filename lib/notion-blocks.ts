@@ -138,6 +138,71 @@ function textOf(block: NotionBlock): RichTextItem[] {
   return payload?.rich_text ?? [];
 }
 
+const PUBLIC_NOTION_HOST = /(^|\.)notion\.(so|site)$/;
+const BARE_URL = /^https?:\/\/\S+$/;
+
+function hostOf(url: string): string | null {
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return null;
+  }
+}
+
+/** A notion.so or *.notion.site URL: the forms of a Notion link anyone can open. */
+export function isPublicNotionUrl(url: string): boolean {
+  const host = hostOf(url);
+  return host !== null && PUBLIC_NOTION_HOST.test(host);
+}
+
+/**
+ * Where a link in a JD should point. When an author pastes a Notion URL, the
+ * API reports the link as app.notion.com/p/<id> (or a bare "/<id>"), which
+ * opens only for workspace members. If the link text is the public URL that
+ * was pasted, keep that; otherwise map the page id back to www.notion.so.
+ * Links outside Notion pass through untouched.
+ */
+export function publicHref(part: RichTextItem): string | undefined {
+  const href = part.href ?? undefined;
+  if (!href) return undefined;
+
+  const text = (part.plain_text ?? "").trim();
+  const internal = href.startsWith("/") || hostOf(href) === "app.notion.com";
+  if (!internal) return href;
+  if (BARE_URL.test(text) && isPublicNotionUrl(text)) return text;
+  if (href.startsWith("/")) return `https://www.notion.so${href}`;
+
+  const url = new URL(href);
+  const path = url.pathname.replace(/^\/p\//, "/");
+  return `https://www.notion.so${path}${url.search}`;
+}
+
+/**
+ * The target of a block that is nothing but a pasted URL (its whole text is
+ * one link whose text is the address), or null. These render as a button
+ * rather than a raw URL.
+ */
+export function bareLink(parts: RichTextItem[]): string | null {
+  const text = parts.map(p => p.plain_text ?? "").join("").trim();
+  if (!BARE_URL.test(text)) return null;
+  const linked = parts.filter(p => (p.plain_text ?? "").trim());
+  if (!linked.every(p => p.href)) return null;
+  return publicHref({ href: linked[0].href, plain_text: text }) ?? null;
+}
+
+/** The first public Notion link in a JD (in practice, its application form). */
+export function firstNotionLink(blocks: NotionBlock[]): string | undefined {
+  for (const block of blocks) {
+    for (const part of textOf(block)) {
+      const href = publicHref(part);
+      if (href && isPublicNotionUrl(href)) return href;
+    }
+    const nested = block.children?.length ? firstNotionLink(block.children) : undefined;
+    if (nested) return nested;
+  }
+  return undefined;
+}
+
 /** Flattened plain text — used for meta descriptions and JobPosting JSON-LD. */
 export function blocksToPlainText(blocks: NotionBlock[]): string {
   const lines: string[] = [];

@@ -1,11 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
 import { Fragment } from "react";
-import { groupBlocks, type NotionBlock, type RichTextItem } from "@/lib/notion-blocks";
+import { ApplyButton } from "@/components/careers/ApplyButton";
+import { applicationFormCta } from "@/data/careers";
+import {
+  bareLink,
+  groupBlocks,
+  publicHref,
+  type NotionBlock,
+  type RichTextItem,
+} from "@/lib/notion-blocks";
 
 /**
  * Renders a Notion page body as the job description. Consecutive list items
  * are grouped into a single <ul>/<ol> so the markup is real lists rather than
  * a run of orphaned <li>s.
+ *
+ * A paragraph or bullet that is only a pasted URL (the application form, in
+ * practice) becomes a button instead of a raw address.
  */
 
 function Text({ parts }: { parts?: RichTextItem[] }) {
@@ -27,12 +38,13 @@ function Text({ parts }: { parts?: RichTextItem[] }) {
         if (a.italic) node = <em>{node}</em>;
         if (a.strikethrough) node = <s>{node}</s>;
         if (a.underline) node = <u>{node}</u>;
-        if (part.href)
+        const href = publicHref(part);
+        if (href)
           node = (
             <a
-              href={part.href}
+              href={href}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="text-brand-300 underline underline-offset-4 transition-colors hover:text-white"
             >
               {node}
@@ -45,11 +57,31 @@ function Text({ parts }: { parts?: RichTextItem[] }) {
   );
 }
 
-function Block({ block }: { block: NotionBlock }) {
+function FormCta({ href, role }: { href: string; role: string }) {
+  return (
+    <ApplyButton
+      href={href}
+      role={role}
+      placement="body"
+      className="font-display uppercase tracking-widest"
+    >
+      {applicationFormCta}
+    </ApplyButton>
+  );
+}
+
+function Block({ block, role }: { block: NotionBlock; role: string }) {
   switch (block.type) {
     case "paragraph": {
       const parts = block.paragraph?.rich_text ?? [];
       if (parts.length === 0) return null;
+      const cta = bareLink(parts);
+      if (cta)
+        return (
+          <p className="mt-6">
+            <FormCta href={cta} role={role} />
+          </p>
+        );
       return (
         <p className="mt-4 text-[15px] leading-relaxed text-zinc-200">
           <Text parts={parts} />
@@ -78,10 +110,17 @@ function Block({ block }: { block: NotionBlock }) {
     case "numbered_list_item": {
       const payload =
         block.type === "bulleted_list_item" ? block.bulleted_list_item : block.numbered_list_item;
+      const cta = bareLink(payload?.rich_text ?? []);
       return (
-        <li className="text-[15px] leading-relaxed text-zinc-200 marker:text-brand-400">
-          <Text parts={payload?.rich_text} />
-          {block.children?.length ? <Blocks blocks={block.children} /> : null}
+        <li
+          className={
+            cta
+              ? "list-none py-2"
+              : "text-[15px] leading-relaxed text-zinc-200 marker:text-brand-400"
+          }
+        >
+          {cta ? <FormCta href={cta} role={role} /> : <Text parts={payload?.rich_text} />}
+          {block.children?.length ? <Blocks blocks={block.children} role={role} /> : null}
         </li>
       );
     }
@@ -121,7 +160,7 @@ function Block({ block }: { block: NotionBlock }) {
           <summary className="cursor-pointer font-display text-[15px] font-medium text-white">
             <Text parts={block.toggle?.rich_text} />
           </summary>
-          {block.children?.length ? <Blocks blocks={block.children} /> : null}
+          {block.children?.length ? <Blocks blocks={block.children} role={role} /> : null}
         </details>
       );
     case "code":
@@ -153,7 +192,7 @@ function Block({ block }: { block: NotionBlock }) {
           <a
             href={url}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="text-brand-300 underline underline-offset-4 transition-colors hover:text-white"
           >
             {url}
@@ -167,12 +206,13 @@ function Block({ block }: { block: NotionBlock }) {
   }
 }
 
-export function Blocks({ blocks }: { blocks: NotionBlock[] }) {
+/** `role` is the job title, reported with clicks on the in-body form button. */
+export function Blocks({ blocks, role }: { blocks: NotionBlock[]; role: string }) {
   return (
     <>
       {groupBlocks(blocks).map(node => {
         if (node.kind === "block") {
-          return <Block key={node.block.id} block={node.block} />;
+          return <Block key={node.block.id} block={node.block} role={role} />;
         }
         const List = node.tag;
         return (
@@ -187,7 +227,7 @@ export function Blocks({ blocks }: { blocks: NotionBlock[] }) {
             }
           >
             {node.items.map(block => (
-              <Block key={block.id} block={block} />
+              <Block key={block.id} block={block} role={role} />
             ))}
           </List>
         );
@@ -196,7 +236,7 @@ export function Blocks({ blocks }: { blocks: NotionBlock[] }) {
   );
 }
 
-export function JobBody({ blocks }: { blocks: NotionBlock[] }) {
+export function JobBody({ blocks, role }: { blocks: NotionBlock[]; role: string }) {
   if (blocks.length === 0) {
     return (
       <p className="mt-4 text-[15px] leading-relaxed text-zinc-300">
@@ -205,5 +245,5 @@ export function JobBody({ blocks }: { blocks: NotionBlock[] }) {
       </p>
     );
   }
-  return <Blocks blocks={blocks} />;
+  return <Blocks blocks={blocks} role={role} />;
 }

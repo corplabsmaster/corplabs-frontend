@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { slugify } from "@/lib/jobs";
-import { blocksToPlainText, groupBlocks, type NotionBlock } from "@/lib/notion-blocks";
+import {
+  bareLink,
+  blocksToPlainText,
+  firstNotionLink,
+  groupBlocks,
+  publicHref,
+  type NotionBlock,
+} from "@/lib/notion-blocks";
 
 /** Shorthand for a text-bearing block in Notion's shape. */
 function block(id: string, type: string, text?: string): NotionBlock {
@@ -90,5 +97,78 @@ describe("slugify", () => {
 
   it("leaves no leading or trailing separators", () => {
     expect(slugify("  Product Manager  ")).toBe("product-manager");
+  });
+});
+
+const FORM_ID = "1eb1f36a70cf80f49e87ef76eaa91a13";
+const FORM_PUBLIC = `https://www.notion.so/${FORM_ID}?source=copy_link`;
+const FORM_API_HREF = `https://app.notion.com/p/${FORM_ID}`;
+
+describe("publicHref", () => {
+  it("keeps the public notion.so URL an author pasted", () => {
+    expect(publicHref({ plain_text: FORM_PUBLIC, href: FORM_API_HREF })).toBe(FORM_PUBLIC);
+  });
+
+  it("maps app.notion.com and relative page links back to www.notion.so", () => {
+    expect(publicHref({ plain_text: "the form", href: FORM_API_HREF })).toBe(
+      `https://www.notion.so/${FORM_ID}`
+    );
+    expect(publicHref({ plain_text: "the form", href: `/${FORM_ID}` })).toBe(
+      `https://www.notion.so/${FORM_ID}`
+    );
+  });
+
+  it("leaves links outside Notion, and public Notion links, untouched", () => {
+    expect(publicHref({ plain_text: "x", href: "https://forms.gle/abc" })).toBe(
+      "https://forms.gle/abc"
+    );
+    expect(publicHref({ plain_text: "x", href: "https://corplabs.notion.site/Jobs" })).toBe(
+      "https://corplabs.notion.site/Jobs"
+    );
+    expect(publicHref({ plain_text: "no link" })).toBeUndefined();
+  });
+});
+
+describe("bareLink", () => {
+  it("finds a block that is only a pasted URL", () => {
+    expect(bareLink([{ plain_text: FORM_PUBLIC, href: FORM_API_HREF }])).toBe(FORM_PUBLIC);
+    expect(bareLink([{ plain_text: " https://forms.gle/abc ", href: "https://forms.gle/abc" }])).toBe(
+      "https://forms.gle/abc"
+    );
+  });
+
+  it("ignores text with words around the link, or a URL that is not linked", () => {
+    expect(
+      bareLink([{ plain_text: "Apply: " }, { plain_text: FORM_PUBLIC, href: FORM_API_HREF }])
+    ).toBeNull();
+    expect(bareLink([{ plain_text: "the form", href: FORM_API_HREF }])).toBeNull();
+    expect(bareLink([{ plain_text: FORM_PUBLIC }])).toBeNull();
+  });
+});
+
+describe("firstNotionLink", () => {
+  it("returns the first public Notion link, searching nested blocks", () => {
+    const blocks: NotionBlock[] = [
+      { id: "a", type: "paragraph", paragraph: { rich_text: [{ plain_text: "Intro" }] } },
+      {
+        id: "b",
+        type: "bulleted_list_item",
+        bulleted_list_item: {
+          rich_text: [{ plain_text: "elsewhere", href: "https://forms.gle/abc" }],
+        },
+        children: [
+          {
+            id: "c",
+            type: "bulleted_list_item",
+            bulleted_list_item: { rich_text: [{ plain_text: FORM_PUBLIC, href: FORM_API_HREF }] },
+          },
+        ],
+      },
+    ];
+    expect(firstNotionLink(blocks)).toBe(FORM_PUBLIC);
+  });
+
+  it("is undefined when the JD links to no Notion page", () => {
+    expect(firstNotionLink([])).toBeUndefined();
   });
 });
