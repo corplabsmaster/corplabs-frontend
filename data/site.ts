@@ -6,6 +6,7 @@
 
 export const site = {
   name: "Corplabs",
+  legalName: "CPLABS SDN BHD",
   tagline: "Idea to Reality",
   description:
     "Corplabs builds custom software, AI WhatsApp agents, Odoo ERP and websites in Malaysia — one team from scope to support.",
@@ -20,6 +21,15 @@ export const site = {
     linkedin: "https://www.linkedin.com/company/corplabsco",
     facebook: "https://www.facebook.com/corplabs.co/",
   },
+} as const;
+
+/** The registered office, as schema.org PostalAddress fields. */
+export const officeAddress = {
+  streetAddress: "RA1006, One Residence, Jalan Chan Sow Lin",
+  addressLocality: "Kuala Lumpur",
+  addressRegion: "Wilayah Persekutuan Kuala Lumpur",
+  postalCode: "55200",
+  addressCountry: "MY",
 } as const;
 
 /** The canonical set of pillar ids — shared with lib/portfolio.ts's
