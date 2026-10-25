@@ -71,7 +71,7 @@ export function trackCurrencyChange(currency: string, surface: "desktop" | "mobi
 }
 
 /** An apply button on a job description was clicked. */
-export function trackApplyClick(role: string, placement: "top" | "bottom"): void {
+export function trackApplyClick(role: string, placement: "top" | "bottom" | "body"): void {
   track("apply_click", { role, placement });
 }
 

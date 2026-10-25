@@ -6,7 +6,7 @@ import { JobBody } from "@/components/careers/JobBody";
 import { Reveal } from "@/components/ui/reveal";
 import { getJob, getJobs } from "@/lib/jobs";
 import { fitTitle, pageMetadata } from "@/lib/metadata";
-import { blocksToPlainText } from "@/lib/notion-blocks";
+import { blocksToPlainText, firstNotionLink } from "@/lib/notion-blocks";
 import { jobPostingJsonLd } from "@/lib/structured-data";
 
 // Must be a literal — Next statically analyses segment config. Matches
@@ -59,7 +59,8 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
   if (!found) notFound();
 
   const { job, blocks } = found;
-  const applyHref = job.applyUrl || APPLY_FALLBACK;
+  // The board's Apply URL column, else the application form linked in the JD.
+  const applyHref = job.applyUrl || firstNotionLink(blocks) || APPLY_FALLBACK;
   const plain = blocksToPlainText(blocks);
 
   // JobPosting structured data — this is what puts the role into Google Jobs.
@@ -112,7 +113,7 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
         </Reveal>
 
         <Reveal className="mt-10 border-t border-line pt-8">
-          <JobBody blocks={blocks} />
+          <JobBody blocks={blocks} role={job.title} />
         </Reveal>
 
         <Reveal className="mt-14">
