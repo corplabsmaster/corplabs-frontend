@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { CurrencySegments, CurrencySwitcher } from "@/components/currency/currency-switcher";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { site } from "@/data/site";
@@ -20,28 +20,35 @@ const capsuleNav = [
 ];
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  // The menu remembers the page it was opened on, so navigating closes it
+  // without an effect that sets state after every route change.
+  const [openOn, setOpenOn] = useState<string | null>(null);
+  const open = openOn === pathname;
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-surface/80 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] max-w-6xl items-center gap-5 px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2">
           {/* Two marks, one shown per theme — the default is a negative logo
-              whose ring disappears on a light surface. */}
-          <Image src="/logo.svg" alt="" width={28} height={28} className="theme-dark-only" />
+              whose ring disappears on a light surface. The visible mark names
+              the link; the wordmark beside it is hidden from screen readers so
+              "Corplabs" isn't announced twice. */}
+          <Image
+            src="/logo.svg"
+            alt={site.name}
+            width={28}
+            height={28}
+            className="theme-dark-only"
+          />
           <Image
             src="/logo-light.svg"
-            alt=""
+            alt={site.name}
             width={28}
             height={28}
             className="theme-light-only"
           />
-          <span className="font-display text-lg font-semibold tracking-tight text-white">
+          <span aria-hidden className="font-display text-lg font-semibold tracking-tight text-white">
             {site.name}
           </span>
         </Link>
@@ -81,7 +88,7 @@ export default function Header() {
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            onClick={() => setOpen(v => !v)}
+            onClick={() => setOpenOn(open ? null : pathname)}
             className="flex h-9 w-9 items-center justify-center rounded-md text-zinc-300 hover:text-white lg:hidden"
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>

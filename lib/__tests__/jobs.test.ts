@@ -131,6 +131,22 @@ describe("getJobs", () => {
     expect(job.href).toBe("/careers/product-manager");
   });
 
+  it("reads the optional Closing Date and Monthly Salary (MYR) columns", async () => {
+    stubNotion([
+      row("aaa", "Growth Marketing Intern", "open", {
+        "Closing Date": { date: { start: "2026-11-30" } },
+        "Monthly Salary (MYR)": { number: 1000 },
+      }),
+      row("bbb", "Tech Developer Intern", "open"),
+    ]);
+
+    const [withCols, without] = await getJobs();
+
+    expect(withCols).toMatchObject({ closesAt: "2026-11-30", monthlySalary: 1000 });
+    expect(without.closesAt).toBeUndefined();
+    expect(without.monthlySalary).toBeUndefined();
+  });
+
   it("sorts priority roles first", async () => {
     stubNotion([
       row("aaa", "Ordinary Role", "open"),

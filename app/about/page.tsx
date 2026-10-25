@@ -174,7 +174,7 @@ export default function AboutPage() {
                 />
                 <Image
                   src={culture.image}
-                  alt=""
+                  alt={culture.imageAlt}
                   width={840}
                   height={560}
                   className="relative block h-auto w-full [mask-image:linear-gradient(180deg,#000_0%,#000_78%,rgba(0,0,0,0.4)_92%,transparent_100%)]"

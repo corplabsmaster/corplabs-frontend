@@ -4,10 +4,10 @@ import { notFound } from "next/navigation";
 import { ApplyButton } from "@/components/careers/ApplyButton";
 import { JobBody } from "@/components/careers/JobBody";
 import { Reveal } from "@/components/ui/reveal";
-import { site } from "@/data/site";
 import { getJob, getJobs } from "@/lib/jobs";
 import { fitTitle, pageMetadata } from "@/lib/metadata";
 import { blocksToPlainText } from "@/lib/notion-blocks";
+import { jobPostingJsonLd } from "@/lib/structured-data";
 
 // Must be a literal — Next statically analyses segment config. Matches
 // JOB_PAGE_REVALIDATE in lib/notion-blocks.ts (Notion signs file URLs for ~1h).
@@ -63,25 +63,10 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
   const plain = blocksToPlainText(blocks);
 
   // JobPosting structured data — this is what puts the role into Google Jobs.
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "JobPosting",
-    title: job.title,
+  const jsonLd = jobPostingJsonLd(job, {
+    slug,
     description: plain || `${job.title} at Corplabs.`,
-    datePosted: job.postedAt,
-    employmentType: job.type.toUpperCase().replace(/[\s-]+/g, "_"),
-    hiringOrganization: {
-      "@type": "Organization",
-      name: site.name,
-      sameAs: site.url,
-    },
-    jobLocation: {
-      "@type": "Place",
-      address: { "@type": "PostalAddress", addressLocality: job.location, addressCountry: "MY" },
-    },
-    directApply: !job.applyUrl,
-    url: `${site.url}/careers/${slug}`,
-  };
+  });
 
   return (
     <>

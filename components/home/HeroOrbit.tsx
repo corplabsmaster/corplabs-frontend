@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { heroLetters } from "@/data/hero-letters";
+import { hero } from "@/data/home";
 
 /**
  * The Corplabs mark orbiting the words "Idea To Reality", with the astronaut
@@ -218,7 +219,7 @@ export default function HeroOrbit() {
           <div className="absolute left-1/2 top-[44%] aspect-square w-[104%] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,rgba(86,5,255,0.34)_0%,rgba(86,5,255,0.12)_48%,rgba(86,5,255,0)_74%)]" />
           <Image
             src="/astronaut.webp"
-            alt=""
+            alt={hero.artAlt}
             width={900}
             height={600}
             priority

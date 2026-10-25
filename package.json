@@ -6,6 +6,9 @@
   "author": "Corplabs Engineering Force",
   "license": "corplabs.co all rights reserved",
   "repository": "https://github.com/corplabs-co/corplabs-frontend",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
