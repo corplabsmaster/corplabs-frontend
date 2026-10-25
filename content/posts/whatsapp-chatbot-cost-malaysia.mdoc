@@ -1,0 +1,199 @@
+---
+title: "What Does a WhatsApp Chatbot Really Cost in Malaysia? (2026)"
+seoTitle: "WhatsApp Chatbot Cost in Malaysia (2026): API vs Flat Fee"
+publishedDate: 2026-10-23
+excerpt: >-
+  What a WhatsApp chatbot really costs a Malaysian SME in 2026: Meta API
+  fees, provider markups, setup, and the flat-fee option.
+tags:
+  - WhatsApp
+  - AI Agents
+  - Pricing
+author: Corplabs Team
+draft: false
+---
+
+Ask a vendor what a WhatsApp chatbot costs and you'll usually get one number:
+their monthly plan. Ask Meta and you'll get a rate card with four decimal
+places. Neither is the figure you actually care about, which is what lands on
+your company card every month once the bot is answering real customers.
+
+That figure changed on **1 October 2026**, when Meta resumed charging for
+service replies, which had been free since November 2024. So it's a good
+moment to do the sums properly: Meta's fees, the provider's markup, the setup,
+and the alternative of a flat monthly fee.
+
+## First: do you need more than the free app?
+
+The free WhatsApp Business app is genuinely good for a small team. You get a
+business profile, a catalogue, quick replies and labels, and you can run it on
+one phone plus up to four linked devices
+([WhatsApp Help Center](https://faq.whatsapp.com/647349420360876)). Broadcasts
+from the app only reach customers who have saved your number
+([WhatsApp Help Center](https://faq.whatsapp.com/653415899610349)).
+
+You've outgrown it when:
+
+- **Enquiries arrive faster than people can answer**, especially in the
+  evening, when
+  [buyers message and nobody's at the desk](/blog/whatsapp-ai-agent-for-business).
+- **Several staff share one number** and you're passing a phone around.
+- **You want replies, lead capture and follow-ups to happen automatically**,
+  written into a CRM rather than someone's memory.
+- **You need to message customers who haven't saved your number**, such as
+  order updates or opted-in promotions.
+
+At that point there are two broad ways to put a chatbot on WhatsApp. You can
+build on Meta's WhatsApp Business Platform (the "API"), usually through a
+provider, and pay per message. Or you can use a product priced as a flat
+monthly fee. Here's what each really costs.
+
+## What Meta charges in Malaysia (from 1 October 2026)
+
+Meta bills per **delivered** message, priced by message category and by the
+recipient's country code. Messages your customers send you are free. These are
+the Malaysia rates on Meta's MYR rate card, effective 1 October 2026
+([Meta pricing docs](https://developers.facebook.com/docs/whatsapp/pricing)):
+
+| Message category | What it's for | Rate per delivered message |
+| --- | --- | --- |
+| Service | Free-form replies within 24 hours of the customer's last message | RM 0.0564, first 1,000 a month free |
+| Utility | Order, booking and payment updates (templates) | RM 0.0564 |
+| Authentication | One-time passcodes (templates) | RM 0.0564 |
+| Marketing | Promotions and broadcasts (templates) | RM 0.3467 |
+
+Four details matter more than the headline rates:
+
+1. **It's per message, not per conversation.** A bot that answers one enquiry
+   in four separate bubbles has sent four service messages.
+2. **The 1,000 free service messages are per phone number, per month**, and
+   don't roll over. Meta charges from the 1,001st.
+3. **Utility messages sent inside the 24-hour window are charged again.** They
+   were free from July 2025 until 30 September 2026.
+4. **Rates can move every quarter.** Meta's pricing calendar allows updates on
+   1 January, 1 April, 1 July and 1 October.
+
+There are ways to pay less. If a customer reaches you from a Click to WhatsApp
+ad and you reply in time, Meta opens a free entry point window of up to seven
+days in which marketing, utility, authentication and service messages aren't
+charged. Meta also now sells its own AI, Meta Business Agent, at US$2.00 per
+million tokens, which Meta estimates at roughly 4–5 US cents per message, with
+no free tier.
+
+## What the provider adds
+
+Few SMEs connect to Meta directly, because it takes developers and hosting.
+Most go through a Business Solution Provider or a chatbot platform that
+charges on top of Meta's fees. Two common pricing shapes:
+
+- **A per-message markup.** Twilio, for example, charges US$0.005 per message,
+  inbound or outbound, and passes Meta's fees through on top
+  ([Twilio WhatsApp pricing](https://www.twilio.com/en-us/whatsapp/pricing)).
+- **A monthly subscription plus Meta's fees.** Wati, for example, lists plans
+  at US$59 and US$119 a month billed annually, with message charges extra and
+  its AI agents sold as a separately priced add-on
+  ([Wati pricing](https://www.wati.io/pricing/)).
+
+Then there's the chatbot itself. Unless the platform's AI is included, you're
+paying for an AI model or a bot builder, plus someone to write the flows,
+connect your CRM and keep the answers current. Some providers include
+onboarding; others charge a one-off fee or an hourly rate.
+
+None of this is a criticism of those providers. The API route is the right
+choice for plenty of businesses, particularly for high-volume broadcasts and
+order notifications. The point is that Meta's rate card is only one line on
+the bill.
+
+## A worked example: 2,000 enquiries a month
+
+**This is an illustrative estimate, not a quote.** Real bills depend on how
+chatty your bot is, your provider, your plan and the exchange rate. We've
+converted US dollars at about RM 4.03, the ratio implied by Meta's own USD and
+MYR rate cards for Malaysia.
+
+The assumptions: a Malaysian SME receives 2,000 WhatsApp enquiries a month,
+and the bot sends an average of four replies per enquiry, so 8,000 service
+messages. The business also sends 300 order confirmations and two promotional
+broadcasts to 500 opted-in customers each, so 1,000 marketing messages.
+
+| Monthly line item | Per-message API route (subscription-style provider) | Flat fee (Corpi Growth) |
+| --- | --- | --- |
+| Meta service messages: (8,000 − 1,000 free) × RM 0.0564 | RM 394.80 | RM 0 |
+| Provider platform | ~RM 480 (US$119 plan, billed annually) | RM 500 (up to 2,000 conversations) |
+| AI for the chatbot | Add-on, priced separately | Included up to tier limits |
+| **Replies, per month** | **~RM 875 + AI** | **RM 500** |
+| Meta utility messages: 300 × RM 0.0564 | RM 16.92 | Not in the published Corpi tiers |
+| Meta marketing messages: 1,000 × RM 0.3467 | RM 346.70 | Not in the published Corpi tiers |
+| One-off setup | Varies: some providers charge none, others charge for onboarding | From RM 1,500 |
+
+Over a first year, replies alone come to roughly **RM 10,500 plus AI** on the
+per-message route, against **RM 7,500** for the flat fee (RM 1,500 setup plus
+12 × RM 500).
+
+Two sensitivities worth noticing. If your bot answers in two messages instead
+of four, Meta's service charge drops from RM 394.80 to RM 169.20. A tighter
+bot is cheaper on a per-message plan. And on a per-message markup model like
+Twilio's, the same 8,000 replies plus a similar number of customer messages
+would add about US$80 (roughly RM 320) in provider fees, before any chatbot
+software.
+
+Marketing is where per-message pricing bites hardest: at RM 0.3467 each, one
+broadcast to 1,000 customers costs about RM 347 in Meta fees alone. Budget it
+as a campaign cost, not an afterthought.
+
+## Where a flat fee fits
+
+The other way to price this is the way we price
+[Corpi](/corpi?utm_source=blog&utm_medium=referral&utm_campaign=corpi-blog-whatsapp-chatbot-cost-malaysia&utm_content=cta-inline-en-a),
+our WhatsApp AI sales agent. It runs on your own WhatsApp Business number,
+which you link by scanning a QR code, much like WhatsApp Web. It isn't billed
+per message by Meta. You pay one setup fee and one monthly fee.
+
+What it does:
+
+- **Replies in English, BM, Mandarin or Manglish**, in whichever language the
+  customer wrote in.
+- **Qualifies through conversation**: need, budget and location, without a
+  form.
+- **Saves every lead into Notion**, with name, phone, objectives, budget and a
+  conversation summary.
+- **Hands off to a human** with the full thread when a customer asks for a
+  person, and says so when it doesn't know an answer rather than inventing one.
+
+The pricing, as published on the
+[Corpi page](/corpi?utm_source=blog&utm_medium=referral&utm_campaign=corpi-blog-whatsapp-chatbot-cost-malaysia&utm_content=cta-inline-en-b):
+
+| Tier | Monthly | Conversations |
+| --- | --- | --- |
+| Starter | RM 300 (US$64) | Up to 500 a month |
+| Growth | RM 500 (US$110) | Up to 2,000 a month |
+| Scale | RM 800 (US$170) | Unlimited |
+
+Setup is from RM 1,500 (US$320), depending on scope. Monthly fees include
+hosting, the dashboard, the Notion CRM and support. AI usage above tier limits
+is billed at cost plus 20%, and there's a three-month minimum, then
+month-to-month.
+
+The honest trade-off: a flat fee buys predictability for the inbound side of
+WhatsApp, the enquiries you have to answer quickly whether it's 3pm or 11pm.
+It isn't a bulk broadcast or notification engine. If outbound templates at
+volume are central to how you sell, budget for per-message pricing for that
+part.
+
+## Five questions to ask any WhatsApp chatbot vendor
+
+Whoever you talk to, including us:
+
+1. On average, how many messages does your bot send per enquiry?
+2. Are Meta's fees passed through at cost, or marked up?
+3. Is the AI included, and what happens when I exceed the limit?
+4. What does setup include, and who updates the bot's answers later?
+5. What's the minimum commitment, and how do I export my leads if I leave?
+
+If a quote can't answer the first two, it isn't the full cost.
+
+Want to see a flat-fee agent at work? The
+[Corpi page](/corpi?utm_source=blog&utm_medium=referral&utm_campaign=corpi-blog-whatsapp-chatbot-cost-malaysia&utm_content=cta-banner-en-a)
+has a replay of a sample conversation and the full pricing. Or
+[WhatsApp us on 016-672 7208](https://wa.me/60166727208?text=Hi%20Corpi%2C%20I%20read%20your%20WhatsApp%20chatbot%20cost%20article%20on%20corplabs.co.%20What%20would%20an%20agent%20cost%20for%20my%20business%3F)
+and Corpi will answer. Ask for a person and it hands you over.
