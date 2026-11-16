@@ -78,6 +78,27 @@ export default config({
           description: "Drafts never appear on the live site.",
           defaultValue: false,
         }),
+        video: fields.object(
+          {
+            src: fields.text({
+              label: "Video URL (mp4)",
+              description: "Site path, e.g. /videos/blog/<slug>/video.mp4. Leave empty for no video.",
+            }),
+            poster: fields.text({
+              label: "Poster URL",
+              description: "Image shown before playback, e.g. /videos/blog/<slug>/poster.jpg.",
+            }),
+            duration: fields.integer({
+              label: "Duration (seconds)",
+              description: "Whole seconds. Used for the VideoObject structured data.",
+            }),
+          },
+          {
+            label: "Video (optional)",
+            description:
+              "A short explainer shown under the post header and added to the post's structured data. Files live in public/videos/blog/<slug>/.",
+          }
+        ),
         content: fields.markdoc({
           label: "Content",
         }),
