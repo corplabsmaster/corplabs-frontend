@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { site } from "@/data/site";
 import { fitTitle, pageMetadata } from "@/lib/metadata";
 import { formatPostDate, getAllPosts, getPost } from "@/lib/posts";
+import { absoluteUrl, videoObjectJsonLd } from "@/lib/structured-data";
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -33,6 +34,9 @@ export async function generateMetadata({
       publishedTime: post.publishedDate,
       authors: [post.author],
       tags: post.tags,
+      ...(post.video && {
+        videos: [{ url: absoluteUrl(post.video.src), type: "video/mp4" }],
+      }),
     },
   });
 }
@@ -53,6 +57,11 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const renderable = Markdoc.transform(post.node, renderOptions);
+  const video = videoObjectJsonLd(post.video, {
+    title: post.title,
+    description: post.excerpt,
+    uploadDate: post.publishedDate,
+  });
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -66,6 +75,7 @@ export default async function BlogPostPage({
     // The generated share card. Article rich results want an image, and
     // Discover eligibility effectively requires one.
     image: `${site.url}/blog/${slug}/opengraph-image`,
+    ...(video && { video }),
   };
 
   return (
@@ -105,6 +115,22 @@ export default async function BlogPostPage({
           </div>
         )}
       </header>
+
+      {post.video && (
+        <figure className="mt-10 overflow-hidden rounded-2xl border border-line bg-surface-raised">
+          <video
+            className="aspect-video h-auto w-full"
+            controls
+            playsInline
+            preload="metadata"
+            poster={post.video.poster || undefined}
+            aria-label={`Video: ${post.title}`}
+            title={post.title}
+          >
+            <source src={post.video.src} type="video/mp4" />
+          </video>
+        </figure>
+      )}
 
       <div className="prose-blog mt-10">
         {Markdoc.renderers.react(renderable, React, { components })}

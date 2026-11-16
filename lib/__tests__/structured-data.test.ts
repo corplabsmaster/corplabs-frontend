@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import type { Job } from "@/lib/jobs";
-import { isInternRole, jobPostingJsonLd } from "@/lib/structured-data";
+import {
+  absoluteUrl,
+  isInternRole,
+  isoDuration,
+  jobPostingJsonLd,
+  videoObjectJsonLd,
+} from "@/lib/structured-data";
 
 const NOW = new Date("2026-10-21T00:00:00.000Z");
 
@@ -86,5 +92,55 @@ describe("isInternRole", () => {
     expect(isInternRole({ title: "Tech Developer Intern", type: "Full-time" })).toBe(true);
     expect(isInternRole({ title: "Designer", type: "Internship" })).toBe(true);
     expect(isInternRole({ title: "Internal Tools Engineer", type: "Full-time" })).toBe(false);
+  });
+});
+
+describe("videoObjectJsonLd", () => {
+  const meta = { title: "Post title", description: "Excerpt.", uploadDate: "2026-11-19" };
+  const video = {
+    src: "/videos/blog/x/video.mp4",
+    poster: "/videos/blog/x/poster.jpg",
+    duration: 30,
+  };
+
+  it("builds a VideoObject with absolute URLs and an ISO 8601 duration", () => {
+    expect(videoObjectJsonLd(video, meta)).toEqual({
+      "@type": "VideoObject",
+      name: "Post title",
+      description: "Excerpt.",
+      thumbnailUrl: "https://www.corplabs.co/videos/blog/x/poster.jpg",
+      uploadDate: "2026-11-19",
+      contentUrl: "https://www.corplabs.co/videos/blog/x/video.mp4",
+      duration: "PT30S",
+    });
+  });
+
+  it("returns null when the post has no video", () => {
+    expect(videoObjectJsonLd(null, meta)).toBeNull();
+  });
+
+  it("returns null without a poster, since Google requires a thumbnail", () => {
+    expect(videoObjectJsonLd({ ...video, poster: "" }, meta)).toBeNull();
+  });
+
+  it("omits duration when it isn't set", () => {
+    expect(videoObjectJsonLd({ ...video, duration: null }, meta)).not.toHaveProperty("duration");
+  });
+});
+
+describe("isoDuration", () => {
+  it("formats whole seconds as ISO 8601", () => {
+    expect(isoDuration(30)).toBe("PT30S");
+    expect(isoDuration(95)).toBe("PT1M35S");
+    expect(isoDuration(120)).toBe("PT2M");
+    expect(isoDuration(3661)).toBe("PT1H1M1S");
+    expect(isoDuration(0)).toBe("PT0S");
+  });
+});
+
+describe("absoluteUrl", () => {
+  it("prefixes site paths with the primary domain and leaves URLs alone", () => {
+    expect(absoluteUrl("/a.mp4")).toBe("https://www.corplabs.co/a.mp4");
+    expect(absoluteUrl("https://cdn.example.com/a.mp4")).toBe("https://cdn.example.com/a.mp4");
   });
 });

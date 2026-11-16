@@ -14,6 +14,33 @@ export interface PostMeta {
   readingMinutes: number;
 }
 
+/** An optional explainer video, from the post's `video` frontmatter. */
+export interface PostVideo {
+  /** Site path or absolute URL of the mp4. */
+  src: string;
+  /** Site path or absolute URL of the poster image; empty when not set. */
+  poster: string;
+  /** Whole seconds, when the editor filled it in. */
+  duration: number | null;
+}
+
+/**
+ * The frontmatter `video` object → a PostVideo, or null when there's no
+ * video. Posts without a `video` key read back as an object of empty fields
+ * (src "", duration null) rather than undefined, so "no src" is the signal.
+ */
+export function toPostVideo(
+  raw: { src?: string | null; poster?: string | null; duration?: number | null } | null | undefined
+): PostVideo | null {
+  const src = raw?.src?.trim();
+  if (!src) return null;
+  return {
+    src,
+    poster: raw?.poster?.trim() ?? "",
+    duration: typeof raw?.duration === "number" && raw.duration > 0 ? raw.duration : null,
+  };
+}
+
 const reader = createReader(process.cwd(), keystaticConfig);
 
 const WORDS_PER_MINUTE = 220;
@@ -67,6 +94,7 @@ export async function getPost(slug: string) {
     tags: [...entry.tags],
     author: entry.author,
     readingMinutes: Math.max(1, Math.round(words / WORDS_PER_MINUTE)),
+    video: toPostVideo(entry.video),
     node: content.node,
   };
 }

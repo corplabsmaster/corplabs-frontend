@@ -1,5 +1,6 @@
 import { officeAddress, site } from "@/data/site";
 import type { Job } from "@/lib/jobs";
+import type { PostVideo } from "@/lib/posts";
 
 /**
  * Organization JSON-LD for the homepage. Mirrors the schema the old Gatsby
@@ -97,5 +98,41 @@ export function jobPostingJsonLd(
     }),
     directApply: false,
     url: `${site.url}/careers/${slug}`,
+  };
+}
+
+/** A site path ("/videos/…") → an absolute URL on the primary domain. */
+export function absoluteUrl(pathOrUrl: string): string {
+  return /^https?:\/\//i.test(pathOrUrl) ? pathOrUrl : `${site.url}${pathOrUrl.startsWith("/") ? "" : "/"}${pathOrUrl}`;
+}
+
+/** Whole seconds → ISO 8601 duration: 30 → "PT30S", 95 → "PT1M35S". */
+export function isoDuration(seconds: number): string {
+  const s = Math.max(0, Math.round(seconds));
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const rest = s % 60;
+  return `PT${h ? `${h}H` : ""}${m ? `${m}M` : ""}${rest || (!h && !m) ? `${rest}S` : ""}`;
+}
+
+/**
+ * VideoObject JSON-LD for a blog post's explainer video, nested as the
+ * Article's `video`. Google's video rich results need name, description,
+ * thumbnailUrl and uploadDate; contentUrl and duration make it indexable.
+ * A video without a poster has no thumbnail, so it isn't marked up at all.
+ */
+export function videoObjectJsonLd(
+  video: PostVideo | null,
+  { title, description, uploadDate }: { title: string; description: string; uploadDate: string }
+) {
+  if (!video || !video.poster) return null;
+  return {
+    "@type": "VideoObject",
+    name: title,
+    description,
+    thumbnailUrl: absoluteUrl(video.poster),
+    uploadDate,
+    contentUrl: absoluteUrl(video.src),
+    ...(video.duration !== null && { duration: isoDuration(video.duration) }),
   };
 }
